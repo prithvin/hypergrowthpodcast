@@ -8,7 +8,7 @@ module.exports = {
         video.fnExtractFrameToJPG('./videos', {
           frame_rate : 1,
           file_name : 'my_frame_%t_%s',
-          every_n_seconds: 1,
+          every_n_seconds: 5,
         }, 
         function (error, files) {
           if (!error)
