@@ -4,15 +4,18 @@ var deletecmd = 'rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 
 ffmpegLogic.extraImagesFromVideo('cse100.mp4', function (fileNames) {
-  recursivelyExtractWithTesseract(0, fileNames);
-  exec(deletecmd, function(error, stdout, stderr) {
-    console.log(stdout);
-    console.log(error);
-    console.log(stderr);
+  recursivelyExtractWithTesseract(0, fileNames, function () {
+    exec(deletecmd, function(error, stdout, stderr) {
+      console.log(stdout);
+      console.log(error);
+      console.log(stderr);
+    });
   });
 });
 
-function recursivelyExtractWithTesseract (index, fileNameArrays) {
+function recursivelyExtractWithTesseract (index, fileNameArrays, callback) {
+  if (index == fileNameArrays.length)
+    callback();
   normalize.normalizeImage(fileNameArrays[index], index, function(parsedString, text) {
     console.log(parsedString);
     console.log(text);
