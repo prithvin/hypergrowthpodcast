@@ -6,7 +6,6 @@ module.exports = {
       var process = new ffmpeg(videoURL);
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
-          frame_rate : 1,
           file_name : 'my_frame_%t_%s',
           every_n_seconds: 5,
         }, 
