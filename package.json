@@ -7,7 +7,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "node-tesseract": "0.2.7"
+  },
   "devDependencies": {},
   "description": ""
 }
