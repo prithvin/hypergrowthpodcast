@@ -8,8 +8,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "check-word": "^1.1.0",
     "ffmpeg": "0.0.4",
     "node-tesseract": "0.2.7",
+    "retext-keywords": "^3.1.0",
+    "worder": "^1.0.7",
     "wordnet": "0.1.2"
   },
   "devDependencies": {},
