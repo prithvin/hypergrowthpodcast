@@ -8,10 +8,13 @@ module.exports = {
         video.fnExtractFrameToJPG('./videos', {
           file_name : 'my_frame_%t_%s',
           every_n_seconds: 5,
+          size: '2560x1600'
         }, 
         function (error, files) {
           if (!error)
             callback(files);
+          else
+            console.log(error);
         });
       }, 
       function (err) {
