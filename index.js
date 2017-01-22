@@ -10,8 +10,6 @@ function recursivelyExtractWithTesseract (index, fileNameArrays) {
   console.log(fileNameArrays[index]);
   tesseractLogic.extractWithTesseract(fileNameArrays[index], function (text) {
     console.log(text);
-    recursivelyExtractWithTesseract(index + 1, fileNameArrays);
+    // recursivelyExtractWithTesseract(index + 1, fileNameArrays);
   });
 }
-
-
