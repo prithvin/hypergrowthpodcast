@@ -8,7 +8,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-tesseract": "0.2.7"
+    "ffmpeg": "0.0.4",
+    "node-tesseract": "0.2.7",
+    "wordnet": "0.1.2"
   },
   "devDependencies": {},
   "description": ""
