@@ -4,16 +4,20 @@ var fs = require('fs');
 
 module.exports = {
 	writeToFile: function(url, filename) {
-    if(url.indexOf('http:') >= 0) {
-      var file = fs.createWriteStream("podcast.mp4");
+    if(url.indexOf('https') >= 0) {
+      var file = fs.createWriteStream(filename);
+      var request = https.get(videoURL, function(response) {
+          response.pipe(file);
+      });
+    } else if(url.indexOf('http') >= 0) {
+      var file = fs.createWriteStream(filename);
       var request = http.get(videoURL, function(response) {
           response.pipe(file);
       });
-    } else if(url.indexOf('https:') >= 0) {
-      var file = fs.createWriteStream("podcast.mp4");
-      var request = http.get(videoURL, function(response) {
-          response.pipe(file);
-      });
+    } else {
+      return false;
     }
+
+    return true;
 	}
 }

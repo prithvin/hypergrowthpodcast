@@ -5,9 +5,13 @@ module.exports = {
   extraImagesFromVideo: function(videoURL, callback) {
     try {
       var filename = 'podcast.mp4';
-      url_reader.writeToFile(videoURL, filename);
+      var process;
+      if(url_reader.writeToFile(videoURL, filename)) {
+        process = new ffmpeg(filename);
+      } else {
+        process = new ffmpeg(videoURL);
+      }
 
-      var process = new ffmpeg(filename);
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
           file_name : 'my_frame_%t_%s',
