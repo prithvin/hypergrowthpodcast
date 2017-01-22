@@ -1,15 +1,11 @@
-var tesseract = require("tesseract")
-  , tess = new tesseract.BaseApi()
-  , pix;
+var tesseract = require('node-tesseract');
  
-// set language 
-tess.init("eng");
-// set image 
-tess.setImage("some-image.png");
-// run recognition 
-tess.recognize();
-// get recognized text 
-console.log(tess.getText());
+// Recognize text of any language in any format
+tesseract.process(__dirname + '/screenshot.png',function(err, text) {
+    if(err) {
+        console.error(err);
+    } else {
+        console.log(text);
+    }
+});
  
-// clear results 
-tess.clear();
