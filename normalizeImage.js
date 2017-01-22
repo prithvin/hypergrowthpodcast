@@ -33,7 +33,7 @@ module.exports = {
         console.log(error);
 
       tesseractLogic.extractWithTesseract(newStr, function (text) {
-        callback(parseText.parseText(text), text);
+        callback(text);
       })
     });
   }
