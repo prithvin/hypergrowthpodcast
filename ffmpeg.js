@@ -3,6 +3,7 @@ var ffmpeg = require('ffmpeg');
 module.exports = {
   extraImagesFromVideo: function(videoURL, callback) {
     try {
+      var process = new ffmpeg(videoURL);
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
           file_name : '%t',
