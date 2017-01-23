@@ -14,7 +14,7 @@ module.exports = {
 
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
-          file_name : 'my_frame_%t_%s',
+          file_name : '%t',
           every_n_seconds: 5,
           size: '2560x1600'
         }, 

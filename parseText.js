@@ -7,7 +7,7 @@ var checker = checkWord('en');
 
 module.exports = {
     parseText: function(text) {
-        console.log("---------------------OCR Text Result--------------------------")
+       /* console.log("---------------------OCR Text Result--------------------------")
         console.log(text);
 
         console.log();
@@ -44,6 +44,6 @@ module.exports = {
               console.log(phrase.matches[0].nodes.map(nlcstToString).join(''));
             });
           }
-        );
+        );*/
     } 
 }
