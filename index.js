@@ -15,6 +15,8 @@ parseVideo('video.mp4');
 
 function parseVideo (videoFile) {
   console.log("Converting " + videoFile + " to pictures ");
+
+  var filename = 'podcast.mp4';
   
   url_reader.writeToFile(videoFile, filename, function (name) {
     ffmpegLogic.extraImagesFromVideo(name, function (fileNames) {
