@@ -32,22 +32,30 @@ function parseVideo (videoFile) {
   });
 }
 
-function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
-  if (index == numFiles + 1)
-    callback();
 
+function extractTextWithTesseract (index, prefix, numFiles, callback) {
   var fileName = prefix + "_" + index + ".jpg";
+
   normalize.normalizeImage(fileName , index, function(text) {
     console.log("Slide " + index + " normalized");
 
     textAutocorrector.spellCorrect(text, function (autocorrectedString) {
       console.log("Slide " + index + " autocorrected");
-
-      fs.appendFile('message.txt', "Slide " + index + ":\n" + autocorrectedString + "\n\n", 'utf8', function () {
-
-        console.log("Slide " + index + " written and saved");
-        recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
-      });
+      callback(autocorrectedString);
     });
   })
+}
+
+
+
+function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
+  if (index == numFiles + 1)
+    callback();     
+
+  extractTextWithTesseract(index, prefix, numFiles, function (text) {
+    fs.appendFile('message.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
+      console.log("Slide " + index + " written and saved");
+      recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
+    });
+  });
 }
