@@ -1,17 +1,8 @@
 var ffmpeg = require('ffmpeg');
-var url_reader = require('./url-reader.js');
 
 module.exports = {
   extraImagesFromVideo: function(videoURL, callback) {
     try {
-      var filename = 'podcast.mp4';
-      var process;
-      if(url_reader.writeToFile(videoURL, filename)) {
-        process = new ffmpeg(filename);
-      } else {
-        process = new ffmpeg(videoURL);
-      }
-
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
           file_name : '%t',
