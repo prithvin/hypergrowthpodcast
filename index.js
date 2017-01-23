@@ -3,11 +3,14 @@ var ffmpegLogic = require("./ffmpeg.js");
 var deletecmd = 'rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 var textAutocorrector = require("./spellCorrect.js");
+var levenshtein = require("./levenshteinDistance.js");
 
 var fs = require('fs')
 
+console.log(levenshtein.levenshteinDistance('designing justice does law alone create justice war of all against all in urban colombia construction ofjustice in bogota and medellin remaking the culture remaking the built environment evidence broken window theory of norm compliance medellin data'
+  , 'designing justice does law alone create justice war of all against all in urban colombia construction ofjustice in bogota and medellin remaking the culture remaking the built environment evidence broken window theory of norm compliance medellin data'));
 
-parseVideo('video.mp4');
+//parseVideo('video.mp4');
 
 function parseVideo (videoFile) {
   console.log("Converting " + videoFile + " to pictures ");
@@ -43,17 +46,3 @@ function recursivelyExtractWithTesseract (index, fileNameArrays, callback) {
     });
   })
 }
-
-
-
-// var exec =
-// tesseractLogic.extractWithTesseract('./o1.png', function(text) {
-//   console.log('1');
-// 	console.log(text);
-// });
-
-// tesseractLogic.extractWithTesseract('./o5.png', function(text) {
-//     console.log('5');
-
-//   console.log(text);
-// });
