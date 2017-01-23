@@ -1,6 +1,6 @@
 var exec = require("child_process").exec;
 var ffmpegLogic = require("./ffmpeg.js");
-var url_reader = require("./url-require.js");
+var url_reader = require("./url-reader.js");
 var deletecmd = 'rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 var textAutocorrector = require("./spellCorrect.js");
