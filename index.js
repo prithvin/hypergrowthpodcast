@@ -18,7 +18,13 @@ function parseVideo (videoFile) {
 
     fs.writeFile('message.txt', "", 'utf8', function() {});
 
-    recursivelyExtractWithTesseract(0, fileNames, function () {
+    if (fileNames.length == 0)
+      return;
+
+    var prefix = fileNames[0].substring(0, fileNames[0].indexOf("_"));
+    console.log(prefix);
+    console.log("The prefix is " + prefix);
+    recursivelyExtractWithTesseract(1, prefix , fileNames.length,  function () {
       exec(deletecmd, function(error, stdout, stderr) {
         console.log("Files are deleted. Script complete");
       });
@@ -26,11 +32,12 @@ function parseVideo (videoFile) {
   });
 }
 
-function recursivelyExtractWithTesseract (index, fileNameArrays, callback) {
-  if (index == fileNameArrays.length)
+function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
+  if (index == numFiles + 1)
     callback();
 
-  normalize.normalizeImage(fileNameArrays[index], index, function(text) {
+  var fileName = prefix + "_" + index + ".jpg";
+  normalize.normalizeImage(fileName , index, function(text) {
     console.log("Slide " + index + " normalized");
 
     textAutocorrector.spellCorrect(text, function (autocorrectedString) {
@@ -39,7 +46,7 @@ function recursivelyExtractWithTesseract (index, fileNameArrays, callback) {
       fs.appendFile('message.txt', "Slide " + index + ":\n" + autocorrectedString + "\n\n", 'utf8', function () {
 
         console.log("Slide " + index + " written and saved");
-        recursivelyExtractWithTesseract(index + 1, fileNameArrays);
+        recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
       });
     });
   })
