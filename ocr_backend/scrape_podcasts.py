@@ -33,4 +33,4 @@ for course in courses:
             pass
 
     for video in videos:
-        print(URL + video)
+        print(URL + 'Podcasts//' + video)
