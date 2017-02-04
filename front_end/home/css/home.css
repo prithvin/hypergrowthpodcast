@@ -151,10 +151,10 @@ input#search-bar:focus:-ms-placeholder {
 }
 
 footer {
-  height: 100px;
-  background: transparent;
+  height: 30px;
+  background: #F0F5F9;
   color: #333;
-  padding-top: 40px;
+  padding-top: 0px;
 }
 
 /* Table */
@@ -169,14 +169,14 @@ footer {
   font-size: 18px;
   color: #333;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
-  padding-top: 250px;
+  padding-top: 90px;
   margin: auto auto;
   padding: auto auto;
 }
 
 caption
 {
-  font-size: 64px;
+  font-size: 45px;
   margin: 25px;
   color: #222;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
@@ -186,8 +186,8 @@ table
 {
   position: fixed;
   text-align: left;
-  right: 0;
-  width: 625px;
+  right: 2%;
+  width: 45%;
   border-collapse:collapse;
   margin: 0 auto;
   max-width: 625px;
@@ -226,7 +226,7 @@ tbody
 {
   width: 100%;
   overflow: auto;
-  height: 200px;
+  height: 300px;
   display: block;
 }
 
