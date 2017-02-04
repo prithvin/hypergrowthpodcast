@@ -3,18 +3,18 @@ var mongoose = require('mongoose');
 var SlideModel = new mongoose.Schema({
 	TimeStart: Number,
 	TimeEnd: String,
-	OCRTranscription: ,
+	OCRTranscription: String,
 	OCRKeywordsForSlide: [
 		{
-		Word:
-		Frequency:
+		Word:String
+		Frequency:Number
 		}
   ],
 	RecommendedVideos: [
 		{
-			PodcastID
-			PodcastImage:
-			PodcastTitle
+			PodcastId: Number,
+			PodcastImage: String,
+			PodcastTitle: String
 		}
 	],
 	SlidePost: [],
