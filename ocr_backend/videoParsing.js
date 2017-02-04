@@ -3,14 +3,16 @@ var http = require('http');
 var fs = require('fs');
 var ffmpegLogic = require("./ffmpeg.js");
 var url_reader = require("./url-reader.js");
-var deletecmd = 'rm -rf ./videos';
+var deletecmd = 'cp ./videos/*.txt . && rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 var textAutocorrector = require("./spellCorrect.js");
 var levenshtein = require("./levenshteinDistance.js");
 var fs = require('fs')
 
 module.exports = {
-  parseVideo: function(videoFile) {
+  parseVideo: function(videoFiles, index) {
+    var parseVideoLater = this.parseVideo.bind(this);
+    var videoFile = videoFiles[index];
     console.log("Converting " + videoFile + " to pictures ");
 
     var filename = 'podcast.mp4';
@@ -19,7 +21,9 @@ module.exports = {
       ffmpegLogic.extraImagesFromVideo(name, function (fileNames) {
         console.log("Images are extracted from video.");
 
-        var prefix = fileNames[0].substring(0, fileNames[0].indexOf("_"));
+        console.log("filenames is");
+        console.log(fileNames);
+        var prefix = fileNames[0].substring(0, fileNames[0].lastIndexOf("_"));
         fs.writeFile(prefix + '.txt', "", 'utf8', function() {});
 
         if (fileNames.length == 0)
@@ -28,8 +32,13 @@ module.exports = {
         console.log(prefix);
         console.log("The prefix is " + prefix);
         recursivelyExtractWithTesseract(1, prefix , fileNames.length,  function () {
+            // need to put the text in db here!
           exec(deletecmd, function(error, stdout, stderr) {
             console.log("Files are deleted. Script complete");
+            index = index + 1;
+            if (index != videoFiles.length) {
+                parseVideoLater(videoFiles, index);
+            }
           });
         });
       });
@@ -55,8 +64,10 @@ function extractTextWithTesseract (index, prefix, numFiles, callback) {
 
 
 function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
-  if (index == numFiles + 1)
-    callback();     
+  if (index == numFiles + 1) {
+    callback();
+    return;
+  }
 
   extractTextWithTesseract(index, prefix, numFiles, function (text) {
     fs.appendFile(prefix + '.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
