@@ -184,7 +184,7 @@ caption
 
 table
 {
-  position: absolute;
+  position: fixed;
   text-align: left;
   right: 2%;
   width: 45%;
