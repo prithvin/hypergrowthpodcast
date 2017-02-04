@@ -6,7 +6,7 @@ var SlideModel = new mongoose.Schema({
 	OCRTranscription: String,
 	OCRKeywordsForSlide: [
 		{
-		Word:String
+		Word:String,
 		Frequency:Number
 		}
   ],
