@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 var PodcastModel = new mongoose.Schema({
   podcastName: String,
   podcastUrl: String,
-  keywords: [],
-  lastUpdate: String,
+  keywords: []
 });
 
 // Create a model based on the schema
