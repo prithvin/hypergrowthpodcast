@@ -1,10 +1,14 @@
 // Create a schema
 var mongoose = require('mongoose');
 var PodcastModel = new mongoose.Schema({
-
-  podcastName: String,
-  podcastUrl: String,
-  podcastImage: String,
+  ClassName: String,
+  QuarterOfCourse: String,
+  ClassNameCourseKey: String,
+  VideoDate: String,
+  NextVideo: String,
+  PrevVideo: String,
+  PodcastUrl: String,
+  PodcastImage: String,
   OCRTranscription: String,
   OCRTranscriptionFreq: [{word: String, frequency: Number}],
   AudioTranscription: String,

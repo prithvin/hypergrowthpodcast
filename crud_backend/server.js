@@ -13,7 +13,7 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
   }
   else{
     console.log("Connection Successful");
-    apiFunctions.podcastFunctions.createPodcasts();
+    apiFunctions.coursePageFunctions.createPodcasts();
   }
 });
 
