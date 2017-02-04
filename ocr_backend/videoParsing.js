@@ -19,12 +19,12 @@ module.exports = {
       ffmpegLogic.extraImagesFromVideo(name, function (fileNames) {
         console.log("Images are extracted from video.");
 
-        fs.writeFile('message.txt', "", 'utf8', function() {});
+        var prefix = fileNames[0].substring(0, fileNames[0].indexOf("_"));
+        fs.writeFile(prefix + '.txt', "", 'utf8', function() {});
 
         if (fileNames.length == 0)
           return;
 
-        var prefix = fileNames[0].substring(0, fileNames[0].indexOf("_"));
         console.log(prefix);
         console.log("The prefix is " + prefix);
         recursivelyExtractWithTesseract(1, prefix , fileNames.length,  function () {
@@ -59,7 +59,7 @@ function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
     callback();     
 
   extractTextWithTesseract(index, prefix, numFiles, function (text) {
-    fs.appendFile('message.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
+    fs.appendFile(prefix + '.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
       console.log("Slide " + index + " written and saved");
       recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
     });
