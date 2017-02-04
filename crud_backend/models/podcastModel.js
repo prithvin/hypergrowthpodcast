@@ -7,6 +7,7 @@ var PodcastModel = new mongoose.Schema({
   VideoDate: String,
   NextVideo: String,
   PrevVideo: String,
+  PodcastName: String,
   PodcastUrl: String,
   PodcastImage: String,
   OCRTranscription: String,

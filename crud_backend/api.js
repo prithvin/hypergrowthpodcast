@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 //API Functions
 var apiFunctions = {
         //API Functions for podcast schema
-        coursePageFunctions:{
+        podcastFunctions:{
           //dummy functions
           createPodcasts: function(){
             PodcastModel.create({ClassName: "CSE100", QuarterOfCourse: "Winter", ClassNameCourseKey:"CSE100" + "Winter", PodcastUrl:'https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3743&l=6&v=1',
@@ -16,14 +16,40 @@ var apiFunctions = {
               else console.log(podcasts);
             });
           },
-          findPodcastsByKeyword: function(courseKey,keywordParams){
+          findPodcastsByKeyword: function(courseKey,keywordParams,callback){
             PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
-                console.log(podcasts);
+              var arrayOfPodcasts = [];
+              for(var i = 0; i < podcasts.length; i++){
+                var podcastObject = {
+                  //Todo
+                }
+                arrayOfPodcasts.push(podcastObject);
+              }
+              callback({
+                Podcasts : arrayOfPodcasts
+              });
             });
           }
         },
-        userFunctions:{
 
+        //functions to retrieve and create user information
+        userFunctions:{
+          getUserData : function(email, callback){
+            UserModel.find({Email:email}, function(err,users){
+              if(users.length > 1){
+                console.log("USER NOT UNIQUE");
+              }
+              else if(users.length == 0){
+                console.log("INVALID USER");
+              }
+              var response = {
+                ProfilePicture: users[0].ProfilePicture,
+                Name:user[0].Name
+              }
+              callback(response);
+
+            });
+          }
         },
         slideFunctions:{
 

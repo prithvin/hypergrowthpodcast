@@ -11,7 +11,9 @@ router.get('/', function(req,res){
 router.get('/courses/:course/:keywords',function(req,res){
   console.log(req.params);
   console.log(req.params.course + "" + req.params.keywords);
-  apiFunctions.coursePageFunctions.findPodcastsByKeyword(req.params.course ,req.params.keywords);
+  apiFunctions.podcastFunctions.findPodcastsByKeyword(req.params.course ,req.params.keywords, function(response){
+    res.send(response);
+  });
 });
 
 
