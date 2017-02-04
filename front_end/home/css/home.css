@@ -151,10 +151,10 @@ input#search-bar:focus:-ms-placeholder {
 }
 
 footer {
-  height: 100px;
-  background: transparent;
+  height: 30px;
+  background: #F0F5F9;
   color: #333;
-  padding-top: 40px;
+  padding-top: 0px;
 }
 
 /* Table */
