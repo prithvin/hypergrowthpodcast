@@ -169,7 +169,7 @@ footer {
   font-size: 18px;
   color: #333;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
-  padding-top: 250px;
+  padding-top: 90px;
   margin: auto auto;
   padding: auto auto;
 }
@@ -226,7 +226,7 @@ tbody
 {
   width: 100%;
   overflow: auto;
-  height: 200px;
+  height: 300px;
   display: block;
 }
 
