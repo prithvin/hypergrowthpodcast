@@ -7,7 +7,7 @@ module.exports = {
       process.then( function (video) {
         video.fnExtractFrameToJPG('./videos', {
           file_name : videoURL.split("/").slice(-1)[0],
-          every_n_seconds: 5,
+          every_n_seconds: 30,
           size: '2560x1600'
         }, 
         function (error, files) {
