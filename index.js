@@ -39,10 +39,10 @@ function extractTextWithTesseract (index, prefix, numFiles, callback) {
   var fileName = prefix + "_" + index + ".jpg";
 
   normalize.normalizeImage(fileName , index, function(text) {
-    console.log("Slide " + index + " normalized");
+    console.log("Frame " + index + " normalized");
 
     textAutocorrector.spellCorrect(text, function (autocorrectedString) {
-      console.log("Slide " + index + " autocorrected");
+      console.log("Frame " + index + " autocorrected");
       callback(autocorrectedString);
     });
   })
@@ -55,8 +55,8 @@ function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
     callback();     
 
   extractTextWithTesseract(index, prefix, numFiles, function (text) {
-    fs.appendFile('message.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
-      console.log("Slide " + index + " written and saved");
+    fs.appendFile('message.txt', "Frame " + index + ":\n" + text + "\n\n", 'utf8', function () {
+      console.log("Frame " + index + " written and saved");
       recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
     });
   });
