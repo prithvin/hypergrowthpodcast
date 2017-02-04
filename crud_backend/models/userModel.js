@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var UserModel = new mongoose.Schema({
   User: {
+    CourseNameKey: String,
   	FacebookAuthToken:String,
   	Subscriptions: [String],//course name + number
   	WatchLater: [Number]//podcastids
