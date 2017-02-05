@@ -17,7 +17,7 @@ class Timeline(object):
         :param stream: the video stream from OpenCV
         """
         self.stream = stream
-        self.len = stream.get(cv2.CAP_PROP_FRAME_COUNT)
+        self.len = stream.get(7)
         self.fps = stream.get(cv2.CAP_PROP_FPS)
 
     def next_frame(self):
