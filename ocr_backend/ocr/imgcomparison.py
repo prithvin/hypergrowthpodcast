@@ -76,7 +76,7 @@ class CorrelationOpenCVComparator(OpenCVComparator):
         super(CorrelationOpenCVComparator, self).__init__(threshold)
 
     def get_technique(self):
-        return cv2.HISTCMP_CORREL
+        return 0
 
 
 class ChiOpenCVComparator(OpenCVComparator):
@@ -85,7 +85,7 @@ class ChiOpenCVComparator(OpenCVComparator):
         super(ChiOpenCVComparator, self).__init__(threshold)
 
     def get_technique(self):
-        return cv2.HISTCMP_CHISQR
+        return 1
 
 
 class IntersectionOpenCVComparator(OpenCVComparator):
@@ -94,7 +94,7 @@ class IntersectionOpenCVComparator(OpenCVComparator):
         super(IntersectionOpenCVComparator, self).__init__(threshold)
 
     def get_technique(self):
-        return cv2.HISTCMP_INTERSECT
+        return 2
 
 
 class BhattacharyyaOpenCVComparator(OpenCVComparator):
@@ -103,4 +103,4 @@ class BhattacharyyaOpenCVComparator(OpenCVComparator):
         super(BhattacharyyaOpenCVComparator, self).__init__(threshold)
 
     def get_technique(self):
-        return cv2.HISTCMP_BHATTACHARYYA
+        return 3
