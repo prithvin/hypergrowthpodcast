@@ -1,6 +1,7 @@
 var exec = require("child_process").exec;
 var scraper = require("./scrapePodcasts.js");
 var videoParsing = require("./videoParsing.js");
+var fs = require('fs');
 
 
 
