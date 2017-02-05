@@ -29,6 +29,36 @@ var apiFunctions = {
                 Podcasts : arrayOfPodcasts
               });
             });
+          },
+
+          getVideoInfo: function(lectureId, callback) {
+            PodcastModel.find({_id:lectureId}, function(err,podcast) {
+              if(err) {
+                console.log("error");
+              } else {
+                var response = {
+                  lectureDate: podcast[0].VideoDate,
+                  prevVideoId: podcast[0].PrevVideo,
+                  nextVideoId: podcast[0].NextVideo,
+                  podcastURL: podcast[0].PodcastUrl,
+                  audioTranscipt: podcast[0].AudioTranscription,
+                  slideTimings: podcast[0].Slides,
+                };
+              }
+            })
+          },
+
+          getVideoForUser: function(lectureId, fbAuthId, callback) {
+            UserModel.find({FacebookAuthToken:fbAuthId}, function(err, users) {
+              if(err) {
+                console.log("error");
+              } else {
+                var response = {
+                  NotesForLecture: users[0].WatchHistory
+                };
+                callback(response);
+              }
+            });
           }
         },
 
@@ -44,10 +74,9 @@ var apiFunctions = {
               }
               var response = {
                 ProfilePicture: users[0].ProfilePicture,
-                Name:user[0].Name
-              }
+                Name:users[0].Name
+              };
               callback(response);
-
             });
           }
         },
