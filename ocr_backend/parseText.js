@@ -5,10 +5,31 @@ var worder = require("worder");
 var checkWord = require('check-word');
 var checker = checkWord('en');
 var countWords = require("count-words");
+var read = require('file-reader');
+var fs = require('fs-extra');
 
 module.exports = {
-    parseText: function(text) {
+    parseText: function(dir) {
+        var files = read(dir + '/*.txt');
+        for (var file in files) {
+            var words = countWords(files[file]);
 
+            // Put extra weight on title keywords
+            var splitted = files[file].split("\n");
+            var firstLine = worder(splitted[0]);
+
+            for (var i = 0; i < firstLine.length; i++) {
+                var word = firstLine[i];
+                if (words[word] != null) words[word] += 25;
+            }
+
+            fs.writeJson('./' + file + '_Keywords', words, function(err) {
+                console.log("...Parsed keywords for " + file);
+            });
+        }
+        
+       //var counts = countWords(text);
+        //console.log(counts);
         // var words = worder(text);
         // var validWords = new Array();
 
