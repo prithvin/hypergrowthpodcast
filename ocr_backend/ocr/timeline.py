@@ -18,7 +18,7 @@ class Timeline(object):
         """
         self.stream = stream
         self.len = stream.get(7)
-        self.fps = stream.get(cv2.CAP_PROP_FPS)
+        self.fps = stream.get(5)
 
     def next_frame(self):
         """
@@ -44,7 +44,7 @@ class Timeline(object):
         :return: the frame at the specified position
         """
         assert pos >= 0
-        self.stream.set(cv2.CAP_PROP_POS_FRAMES, self.len - 1)
+        self.stream.set(7, self.len - 1)
         _, frame = self.stream.read()
         self.reader_head = pos + 1
         return frame

@@ -13,7 +13,7 @@ class ImageProcessor(object):
 class GrayscaleProcessor(ImageProcessor):
 
     def process(self, img):
-        return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        return cv2.cvtColor(img, 6)
 
 
 class ImageProcessQueue(object):

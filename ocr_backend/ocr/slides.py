@@ -94,7 +94,7 @@ class OpenCVReader(ImageReader):
 
 
 def convert_to_opencv(img):
-    return cv2.cvtColor(numpy.array(img.convert('RGB')), cv2.COLOR_RGB2BGR)
+    return cv2.cvtColor(numpy.array(img.convert('RGB')), 4)
 
 
 def convert_to_PIL(img):
