@@ -7,7 +7,8 @@ var deletecmd = 'cp ./videos/*.txt . && rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 var textAutocorrector = require("./spellCorrect.js");
 var levenshtein = require("./levenshteinDistance.js");
-var fs = require('fs')
+var fs = require('fs');
+var parseText = require("./parseText.js");
 
 module.exports = {
   parseVideo: function(videoFiles, index) {
@@ -29,6 +30,11 @@ module.exports = {
             if (error) console.log(error);
 
             console.log("OCR output, timetable, and first image in directory " + stripped);
+
+            // Parse text for keywords
+            parseText.parseText(stripped);
+
+
             index = index + 1; 
             if (index != videoFiles.length) {
                 parseVideoLater(videoFiles, index);
