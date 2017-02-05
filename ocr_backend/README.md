@@ -10,3 +10,17 @@ link portaudio. Then, install PyAudio using Pip: pip install pyaudio.<br>
 
 To run the program<br>
 node index.js
+
+## Python dependencies (python2)
+- urllib3
+- beautifulsoup4
+- scipy
+- progressbar
+- pyocr
+
+## Other dependencies for slide-transition-detector
+- opencv
+- tesseract (with en language pack)
+- imagemagick
+- mencoder
+- ffmpeg
