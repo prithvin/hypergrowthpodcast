@@ -2,3 +2,4 @@
 node_modules
 videos
 ./videos
+.DS_Store
