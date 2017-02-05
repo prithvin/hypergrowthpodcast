@@ -1,10 +1,10 @@
 body {
-  padding-top: 55px;
-  background: transparent;
+  padding-top: 0px;
 }
 
 /* Search Bar */
 .search-container {
+  padding-top: 55px;
   position: fixed;
   right: 0;
   left: 0;
@@ -73,7 +73,7 @@ input#search-bar:focus:-ms-placeholder {
   z-index: 9999;
   height: 150px;
   width: 100%;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.95);
   color: #fff;
   line-height: 150px;
   -webkit-transition: height .5s, line-height .5s; /* Safari */
@@ -149,12 +149,15 @@ input#search-bar:focus:-ms-placeholder {
   top: 120px;
   right: 0;
 }
+.caption p {
+  font-size: 18px;
+}
 
 footer {
-  height: 100px;
-  background: transparent;
+  height: 300px;
+  background: #F0F5F9;
   color: #333;
-  padding-top: 40px;
+  padding-top: 275px;
 }
 
 /* Table */
@@ -162,6 +165,7 @@ footer {
 
 #tab
 {
+  top: 0;
   background: url('../img/geisel.jpg') no-repeat center;
   background-size: cover;
   height: 100%;
@@ -169,16 +173,14 @@ footer {
   font-size: 18px;
   color: #333;
   text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
-  padding-top: 250px;
-  margin: auto auto;
-  padding: auto auto;
+  padding-top: 150px;
 }
 
 caption
 {
-  font-size: 64px;
-  margin: 25px;
-  color: #222;
+  font-size: 45px;
+  margin: 12px;
+  color: #333;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
 }
 
@@ -186,8 +188,8 @@ table
 {
   position: fixed;
   text-align: left;
-  right: 0;
-  width: 625px;
+  right: 4%;
+  width: 40%;
   border-collapse:collapse;
   margin: 0 auto;
   max-width: 625px;
@@ -226,7 +228,7 @@ tbody
 {
   width: 100%;
   overflow: auto;
-  height: 200px;
+  height: 350px;
   display: block;
 }
 

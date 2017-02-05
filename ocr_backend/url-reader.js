@@ -1,23 +1,21 @@
-var https = require('https');
-var http = require('http');
+var download = require('download-file');
 var fs = require('fs');
 
 module.exports = {
 	writeToFile: function(url, filename, callback) {
-    if(url.indexOf('https') >= 0) {
-      var file = fs.createWriteStream(filename);
-      var request = https.get(url, function(response) {
-        response.pipe(file);
-        callback(filename);
-      });
-    } else if(url.indexOf('http') >= 0) {
-      var file = fs.createWriteStream(filename);
-      var request = http.get(url, function(response) {
-        response.pipe(file);
-        callback(filename);
-      });
-    } else {
-      callback(url);
+        var fname = url.split("/").slice(-1)[0];
+	    var options = {
+            directory: ".",
+            filename: fname
+        };
+
+        download(url, options, function(err) {
+            if (err) {
+                throw err
+            } else {
+                console.log("download complete");
+                callback(fname);
+            }
+        });
     }
-	}
 }

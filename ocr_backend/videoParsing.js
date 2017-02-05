@@ -3,40 +3,40 @@ var http = require('http');
 var fs = require('fs');
 var ffmpegLogic = require("./ffmpeg.js");
 var url_reader = require("./url-reader.js");
-var deletecmd = 'rm -rf ./videos';
+var deletecmd = 'cp ./videos/*.txt . && rm -rf ./videos';
 var normalize = require("./normalizeImage.js");
 var textAutocorrector = require("./spellCorrect.js");
 var levenshtein = require("./levenshteinDistance.js");
 var fs = require('fs')
 
 module.exports = {
-  parseVideo: function(videoFile) {
+  parseVideo: function(videoFiles, index) {
+    var parseVideoLater = this.parseVideo.bind(this);
+    var videoFile = videoFiles[index];
     console.log("Converting " + videoFile + " to pictures ");
+    var filename = videoFile.split("/").slice(-1)[0];
+    var stripped = filename.slice(0, -4);
 
-    var filename = 'podcast.mp4';
-    
     url_reader.writeToFile(videoFile, filename, function (name) {
-      ffmpegLogic.extraImagesFromVideo(name, function (fileNames) {
-        console.log("Images are extracted from video.");
+        var CMD = "rm -rf contents/ && python2 ocr/detector.py -d " + filename + " -o slides/ && " +
+        "python2 ocr/sorter.py && python2 ocr/extractor.py && " +
+        "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/ && " +
+        "rm contents/*.hocr && rm -rf slides/ unique/ && " +
+        "mkdir " + stripped + " && mv contents/* " + stripped + "/ && rmdir contents && " +
+        "rm " + filename;
 
-        fs.writeFile('message.txt', "", 'utf8', function() {});
+        exec(CMD, function(error, stdout, stderr) {
+            if (error) console.log(error);
 
-        if (fileNames.length == 0)
-          return;
-
-        var prefix = fileNames[0].substring(0, fileNames[0].indexOf("_"));
-        console.log(prefix);
-        console.log("The prefix is " + prefix);
-        recursivelyExtractWithTesseract(1, prefix , fileNames.length,  function () {
-          exec(deletecmd, function(error, stdout, stderr) {
-            console.log("Files are deleted. Script complete");
-          });
-        });
-      });
-    });
+            console.log("OCR output, timetable, and first image in directory " + stripped);
+            index = index + 1; 
+            if (index != videoFiles.length) {
+                parseVideoLater(videoFiles, index);
+            }
+         });
+     });
   }
 }
-
 
 
 function extractTextWithTesseract (index, prefix, numFiles, callback) {
@@ -55,11 +55,13 @@ function extractTextWithTesseract (index, prefix, numFiles, callback) {
 
 
 function recursivelyExtractWithTesseract (index, prefix, numFiles, callback) {
-  if (index == numFiles + 1)
-    callback();     
+  if (index == numFiles + 1) {
+    callback();
+    return;
+  }
 
   extractTextWithTesseract(index, prefix, numFiles, function (text) {
-    fs.appendFile('message.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
+    fs.appendFile(prefix + '.txt', "Slide " + index + ":\n" + text + "\n\n", 'utf8', function () {
       console.log("Slide " + index + " written and saved");
       recursivelyExtractWithTesseract(index + 1, prefix, numFiles, callback);
     });
