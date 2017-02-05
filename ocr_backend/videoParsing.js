@@ -14,38 +14,29 @@ module.exports = {
     var parseVideoLater = this.parseVideo.bind(this);
     var videoFile = videoFiles[index];
     console.log("Converting " + videoFile + " to pictures ");
+    var filename = videoFile.split("/").slice(-1)[0];
+    var stripped = filename.slice(0, -4);
 
-    var filename = 'podcast.mp4';
-    
     url_reader.writeToFile(videoFile, filename, function (name) {
-      ffmpegLogic.extraImagesFromVideo(name, function (fileNames) {
-        console.log("Images are extracted from video.");
+        var CMD = "rm -rf contents/ && python2 ocr/detector.py -d " + filename + " -o slides/ && " +
+        "python2 ocr/sorter.py && python2 ocr/extractor.py && " +
+        "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/ && " +
+        "rm contents/*.hocr && rm -rf slides/ unique/ && " +
+        "mkdir " + stripped + " && mv contents/* " + stripped + "/ && rmdir contents && " +
+        "rm " + filename;
 
-        console.log("filenames is");
-        console.log(fileNames);
-        var prefix = fileNames[0].substring(0, fileNames[0].lastIndexOf("_"));
-        fs.writeFile(prefix + '.txt', "", 'utf8', function() {});
+        exec(CMD, function(error, stdout, stderr) {
+            if (error) console.log(error);
 
-        if (fileNames.length == 0)
-          return;
-
-        console.log(prefix);
-        console.log("The prefix is " + prefix);
-        recursivelyExtractWithTesseract(1, prefix , fileNames.length,  function () {
-            // need to put the text in db here!
-          exec(deletecmd, function(error, stdout, stderr) {
-            console.log("Files are deleted. Script complete");
-            index = index + 1;
+            console.log("OCR output, timetable, and first image in directory " + stripped);
+            index = index + 1; 
             if (index != videoFiles.length) {
                 parseVideoLater(videoFiles, index);
             }
-          });
-        });
-      });
-    });
+         });
+     });
   }
 }
-
 
 
 function extractTextWithTesseract (index, prefix, numFiles, callback) {
