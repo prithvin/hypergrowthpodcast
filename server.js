@@ -20,4 +20,3 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 app.listen(3000, function() {
   console.log('listening on 3000')
 })
-Contact GitHub API Training Shop Blog About
