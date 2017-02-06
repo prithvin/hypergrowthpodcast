@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 module.exports = {
   uploadPodcastData: function(podcast_data, callback) {
     var Podcast = require('./models/podcastModel');
