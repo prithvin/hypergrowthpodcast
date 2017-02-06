@@ -32,10 +32,10 @@ module.exports = {
             console.log("OCR output, timetable, and first image in directory " + stripped);
 
             // Parse text for keywords
-            parseText.parseText(stripped);
+            //parseText.parseText(stripped);
 
 
-            index = index + 1; 
+            index = index + 1;
             if (index != videoFiles.length) {
                 parseVideoLater(videoFiles, index);
             }
