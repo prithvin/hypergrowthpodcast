@@ -3,12 +3,12 @@ var mongoose = require('mongoose');
 var UserModel = new mongoose.Schema({
   User: {
     Name: String,
-    Email: String,
     ProfilePicture: String,
     CourseNameKey: String,
   	FacebookAuthToken:String,
   	Subscriptions: [String],//course name + number
-  	WatchLater: [Number]//podcastids
+  	WatchLater: [Number], //podcastids
+    WatchHistory: [{lectureId: String, Notes: String}]
   }
 });
 
