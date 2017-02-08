@@ -64,6 +64,7 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
+          //gets user profile picture and user information
           getUserData : function(email, callback){
             UserModel.find({Email:email}, function(err,users){
               if(users.length > 1){
@@ -78,6 +79,14 @@ var apiFunctions = {
               };
               callback(response);
             });
+          },
+          //Gets unique courses
+          getCourses : function(callback){
+            PodcastModel.aggregate({ $group: { _id: { ClassName: "$ClassName", QuarterOfCourse: "$QuarterOfCourse" , ClassNameCourseKey: "$ClassNameCourseKey"} } },function(err,uniqueCourses){
+              console.log(uniqueCourses);
+              callback(uniqueCourses);
+            });
+
           }
         },
         slideFunctions:{

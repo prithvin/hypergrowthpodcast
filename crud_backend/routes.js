@@ -16,5 +16,13 @@ router.get('/courses/:course/:keywords',function(req,res){
   });
 });
 
+router.get('/course', function(req, res){
+  apiFunctions.userFunctions.getCourses(function(courses){
+    res.send(courses);
+  });
+});
+
+
+
 
 module.exports = router;
