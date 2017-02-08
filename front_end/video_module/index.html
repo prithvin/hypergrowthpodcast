@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
+        <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+
+    </head>
+    <body>
+        <div class="wrapper"> 
+            <video id="my-video" class="video-js vjs-default-skin" controls preload="none" width="700" height="332" poster="img/thumbnail.png" 
+              data-setup='{"playbackRates": [1,1.5,2]}'>
+                <source src="MY_VIDEO.mp4" type='video/mp4'>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+            <div class="prev-button"><a href=""><img class="crop-pic" src="img/prev.png"/></a></div>
+            <div class="next-button"><a href=""><img class="crop-pic" src="img/next.png"/></a></div>
+        </div>
+
+  
+    </body>
+    <footer>
+
+        <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+        <!-- Business logic>
+        <script>
+            function load (path, data, callback) {
+                loadJavascriptDynamically([path + "/javascript/NavBarLoggedIn.js", path + "/javascript/parseURLParameters.js", path + "/javascript/loadStyles.js"], function () {
+                    loadCSSBasedOnURLPath(path)
+                    new NavBarLoggedInCourse(data);
+                    callback();
+                });
+            }
+        </script-->
+    </footer>
+</html>
+
