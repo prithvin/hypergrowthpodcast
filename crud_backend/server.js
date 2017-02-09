@@ -43,7 +43,10 @@ app.get('/courses/:course/:keywords',function(req,res){
   });
 });
 
-app.get('/course',myPassport.isLoggedIn, function(req, res){
+app.get('/course',apiFunctions.userFunctions.isLoggedIn, function(req, res){
+  if(res.statusCode == 401){
+    res.redirect("auth/facebook");
+  }
   apiFunctions.userFunctions.getCourses(function(courses){
     res.send(courses);
   });

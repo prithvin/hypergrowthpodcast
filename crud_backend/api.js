@@ -64,6 +64,15 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
+          isLoggedIn : function(req,res,next){
+            if (req.isAuthenticated())
+                return next();
+
+            res.sendStatus(401);
+          },
+          createAccount : function(){
+
+          },
           //gets user profile picture and user information
           getUserData : function(email, callback){
             UserModel.find({Email:email}, function(err,users){
