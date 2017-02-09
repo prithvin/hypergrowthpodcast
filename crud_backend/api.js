@@ -87,6 +87,13 @@ var apiFunctions = {
               callback(uniqueCourses);
             });
 
+          },
+
+          //adds courses for the user
+          addCoursesForUser : function(request,callback){
+            var FBAuthID = request.FBAuthID;
+            var ClassNameCourseKey = request.ClassNameCourseKey;
+
           }
         },
         slideFunctions:{

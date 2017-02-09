@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var UserModel = new mongoose.Schema({
   User: {
     Name: String,
+    ProfileId: String,
+    Email: String,
     ProfilePicture: String,
     CourseNameKey: String,
   	FacebookAuthToken:String,
