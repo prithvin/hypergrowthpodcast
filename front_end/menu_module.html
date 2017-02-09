@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/menu_module/logo.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/menu_module/navbar.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/menu_module/searchbar.css" />
     </head>
     <body>
-
-         <div class="container main-container" >
+        <div class="container main-container" >
             <div class="row">
                 <div class="col-3 logo_container">  
                     <div class="row">
 
                         <div class="col-3 podcast_container">
-                            <img class="podcast_icon" src="./image_components/podcast_logo.png">
+                            <img class="podcast_icon" src="./images/podcast_logo.png">
                         </div>
 
                         <div class="col-7 text_container">
@@ -27,7 +26,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img class="icon_text" src="./image_components/ucsd_text_logo.png"></td>
+                                    <td><img class="icon_text" src="./images/ucsd_text_logo.png"></td>
                                 </tr>
                             </table>
                         </div>
@@ -36,8 +35,7 @@
                 </div>
                 <div class="col-6 search-container">
                     <form class="pure-form main_search_container form-group has-success">
-                        <input id="searchBar" class="main_search form-control form-control-success" type="text" >
-    
+                        <input id="searchBar" class="main_search form-control form-control-success" type="text">
                     </form>
                 </div>
                 <div class="col-1 course-button-container">
@@ -59,25 +57,17 @@
                         </div>
                     </div>
                 </div>
-         
             </div>
-
-         </div>
-
-  
+        </div>
     </body>
     <footer>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
-        <!-- Business logic -->
-        <script>
-            function load (path, data, callback) {
-                loadJavascriptDynamically([path + "/javascript/NavBarLoggedIn.js", path + "/javascript/parseURLParameters.js", path + "/javascript/loadStyles.js"], function () {
-                    loadCSSBasedOnURLPath(path)
-                    new NavBarLoggedInCourse(data);
-                    callback();
-                });
-            }
-        </script>
+        <script src="./javascript/menu_module/NavBarLoggedIn.js"></script>
     </footer>
 </html>
