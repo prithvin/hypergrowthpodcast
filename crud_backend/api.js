@@ -64,6 +64,16 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
+          isLoggedIn : function(req,res,next){
+            if (req.isAuthenticated())
+                return next();
+
+            res.sendStatus(401);
+          },
+          createAccount : function(){
+
+          },
+          //gets user profile picture and user information
           getUserData : function(email, callback){
             UserModel.find({Email:email}, function(err,users){
               if(users.length > 1){
@@ -78,6 +88,21 @@ var apiFunctions = {
               };
               callback(response);
             });
+          },
+          //Gets unique courses
+          getCourses : function(callback){
+            PodcastModel.aggregate({ $group: { _id: { ClassName: "$ClassName", QuarterOfCourse: "$QuarterOfCourse" , ClassNameCourseKey: "$ClassNameCourseKey"} } },function(err,uniqueCourses){
+              console.log(uniqueCourses);
+              callback(uniqueCourses);
+            });
+
+          },
+
+          //adds courses for the user
+          addCoursesForUser : function(request,callback){
+            var FBAuthID = request.FBAuthID;
+            var ClassNameCourseKey = request.ClassNameCourseKey;
+
           }
         },
         slideFunctions:{
