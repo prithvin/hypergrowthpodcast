@@ -65,13 +65,24 @@ var apiFunctions = {
         //functions to retrieve and create user information
         userFunctions:{
           isLoggedIn : function(req,res,next){
-            if (req.isAuthenticated())
+            if (req.isAuthenticated()){
+                res.locals.stats = 200;
                 return next();
+            }
 
-            res.sendStatus(401);
+            res.locals.stats = 401;
+            return next();
           },
-          createAccount : function(){
-
+          addUser : function(name,token,profileId,callback){
+            UserModel.create({Name:name, ProfileId: profileId, FacebookAuthToken:token}, function(err,users){
+            if(err) {
+            console.log(err);
+            }
+            else{
+                console.log("HERE ARE THE USERS" + users);
+                callback(err,users);
+            }
+            });
           },
           //gets user profile picture and user information
           getUserData : function(email, callback){

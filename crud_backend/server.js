@@ -44,15 +44,23 @@ app.get('/courses/:course/:keywords',function(req,res){
 });
 
 app.get('/course',apiFunctions.userFunctions.isLoggedIn, function(req, res){
-  if(res.statusCode == 401){
-    res.redirect("auth/facebook");
+  if(res.locals.stats == 401){
+    res.redirect("/auth/facebook");
   }
+  else{
   apiFunctions.userFunctions.getCourses(function(courses){
     res.send(courses);
   });
+  }
 });
 
-app.get("/auth/facebook", passport.authenticate("facebook", { scope : ['email'] }));
+app.get('/auth/facebook', passport.authenticate("facebook",
+{
+  display: 'popup',
+  scope: [ 'email', 'basic_info'],
+  profileFields: ['id', 'displayName', 'photos', 'email', 'birthday'],
+}
+));
 
 app.get("/auth/facebook/callback",
     passport.authenticate("facebook", {
