@@ -34,6 +34,7 @@
         <script>
             
             loadJavascriptDynamically(["http://vjs.zencdn.net/5.16.0/video.js", "//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"], function () {
+                //event to tell when video.js loads
                 var event = new Event('videojsLoaded');
                 document.dispatchEvent(event);
             });
