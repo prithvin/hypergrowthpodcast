@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = {
   uploadPodcastData: function(podcast_data, callback) {
-    var Podcast = require('./models/podcastModel');
+    var Podcast = require('../crud_backend/models/podcastModel');
 
     var newPodcast = Podcast({
       podcast_data
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   uploadPostData: function(post_data, callback) {
-    var Post = require('./models/postModel');
+    var Post = require('../crud_backend/models/postModel');
 
     var newPost = Post({
       post_data
@@ -26,7 +26,7 @@ module.exports = {
   },
 
   uploadSlideData: function(slide_data, callback) {
-    var Slide= require('./models/slideModel');
+    var Slide= require('../crud_backend/models/slideModel');
 
     var newSlide = Slide({
       slide_data
@@ -38,7 +38,7 @@ module.exports = {
   },
 
   uploadUserData: function(user_data, callback) {
-    var User = require('./models/userModel');
+    var User = require('../crud_backend/models/userModel');
 
     var newUser = User({
       user_data
