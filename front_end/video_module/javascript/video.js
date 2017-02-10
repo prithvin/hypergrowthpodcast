@@ -5,13 +5,11 @@ class videoClass {
         this.urlParams = urlParams;
         this.setSource(this.getDataOrDefault("source"),this.getDataOrDefault("previous"),this.getDataOrDefault("next"));
         this.setTime(this.getDataOrDefault("time"));
-        this.nextVid(this.getDataOrDefault("next"));
-        this.prevVid(this.getDataOrDefault("previous"));
+        this.getTime();
         this.initHotKeys();
+        this.changeVideo();
     }
     
-                     
-        
     getDataOrDefault (key) {
         if (this.urlParams[key] == null)
             return "N/A";
@@ -20,11 +18,6 @@ class videoClass {
 
     setSource(source, previous, next){
         $("#videosrc").attr("src", source);
-        /*$("#videosrc").src([
-            { type: "video/mp4", src: "source" },
-            { type: "video/mp4", src: "previous" },
-            { type: "video/mp4", src: "next" }
-        ]);*/
     }
     
     initHotKeys(){
@@ -42,39 +35,36 @@ class videoClass {
     }
     
     setTime(time){
-            document.getElementById("my-video").currentTime = time;   
+        document.getElementById("my-video").currentTime = time;   
         
     }
     
-    showTime() {
-        document.getElementById("my-video").addEventListener("timeupdate", function() {
-            document.getElementById("timer").innerHTML = this.currentTime;
-            currentTime = this.currentTime;
-            console.log(currentTime);
+    getTime() {
+       document.addEventListener('getTime', function(e){
+            videojs('my-video').ready(function() {
+                var video = videojs('my-video');
+                var time = video.currentTime();
+                var minutes = Math.floor(time/60);   
+                var seconds = Math.floor(time - minutes * 60)
+                var x = minutes < 10 ? "0" + minutes : minutes;
+                var y = seconds < 10 ? "0" + seconds : seconds;
+                console.log(x + ':' + y);
+                document.getElementById("timer").innerHTML = x + ':' + y;
+            });
         });
     }
     
-    nextVid(next) {
-        /*document.getElementById("next").addEventListener("click", function() {
-            var video = document.getElementById('my-video');
-            $("#videosrc").attr("src", next);
-            video.load();
-            console.log(document.getElementById("videosrc").src);
-        });*/
-    }
-    
-    prevVid(previous) {
-        /*document.getElementById("prev").addEventListener("click", function() {
-            var video = document.getElementById('my-video');
-            $("#videosrc").attr("src", previous);
-            video.load();
-            console.log(document.getElementById("videosrc").src);
-        });*/
-    }
-    
-    
-                            
-                                                        
-    
+    changeVideo() {
+        document.addEventListener('changeVideo', function(e){
+            videojs('my-video').ready(function() {
+                if (e.type == 'previous')
+                    $("#videosrc").attr("src", "prev");
+                else
+                    $("#videosrc").attr("src", "next");
+                videojs('my-video').load();
+                console.log(document.getElementById("videosrc").src);
+            });
+        });
+    }                                                    
 
 }
