@@ -36,9 +36,19 @@ class videoClass {
     }
     
     setTime(time){
-            document.getElementById("my-video").currentTime = time;
-       
+            document.getElementById("my-video").currentTime = time;   
         
     }
+    
+    showTime() {
+        document.getElementById("my-video").addEventListener("timeupdate", function() {
+            document.getElementById("timer").innerHTML = this.currentTime;
+            currentTime = this.currentTime;
+            console.log(currentTime);
+        });
+    }
+                            
+                                                        
+    
 
 }
