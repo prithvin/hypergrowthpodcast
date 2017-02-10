@@ -16,8 +16,9 @@ class videoClass {
         $("#videosrc").attr("src", source);
     }
     setTime(time){
-        var video = videojs("my-video");
-        video.currentTime(time);
+        document.getElementById("my-video").addEventListener("loadedmetadata", function() {
+            this.currentTime = time;
+        }, false);
     }
 
 }
