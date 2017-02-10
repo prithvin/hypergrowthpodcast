@@ -16,14 +16,11 @@ passport.use(new FacebookStrategy({
     process.nextTick(function() {
       UserModel.find({ ProfileId : profile.id}, function(err, user) {
         if (err){
-          console.log("ERROR in LOCAL STRATEGY");
           return done(err);
         }
         if (user.length != 0) {
-          console.log("USER ALREADY EXISTS" + user[0]);
           return done(null, user);
         }else{
-          console.log("YEYEYEYEYEYE");
           apiFunctions.userFunctions.addUser(profile.displayName,
           token, profile.id, function(err,newUser){
             if (err)
