@@ -9,6 +9,8 @@ var textAutocorrector = require("./spellCorrect.js");
 var levenshtein = require("./levenshteinDistance.js");
 var fs = require('fs');
 var parseText = require("./parseText.js");
+var fileParser = require('./fileParser.js');
+var dbuploader = require('./dbuploader.js');
 
 module.exports = {
   parseVideo: function(videoFiles, index) {
@@ -21,7 +23,7 @@ module.exports = {
     url_reader.writeToFile(videoFile, filename, function (name) {
         var CMD = "rm -rf contents/ && python2 ocr/detector.py -d " + filename + " -o slides/ && " +
         "python2 ocr/sorter.py && python2 ocr/extractor.py && " +
-        "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/ && " +
+        "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/timetable.log && " +
         "rm contents/*.hocr && rm -rf slides/ unique/ && " +
         "mkdir " + stripped + " && mv contents/* " + stripped + "/ && rmdir contents && " +
         "rm " + filename;
@@ -30,20 +32,107 @@ module.exports = {
             if (error) console.log(error);
 
             console.log("OCR output, timetable, and first image in directory " + stripped);
+            var totalTranscription = "";
+            var slideIds = [];
 
             // Parse text for keywords
             //parseText.parseText(stripped);
 
+            fileParser.parseTimetable(stripped + '/timetable.log', function(timetable) {
+              fs.readdir(stripped, function(err, files) {
+                if (err) {
+                  console.log(err);
+                  return;
+                }
 
-            index = index + 1;
-            if (index != videoFiles.length) {
-                parseVideoLater(videoFiles, index);
-            }
+                var counter = 0;
+                files.forEach(function(file, i) {
+                  if (file.endsWith('.txt')) {
+                    var whichSlide = Number(file.slice(0, -4));
+                    var timeStart = timetable[whichSlide - 1].TimeStart;
+                    // we are not using the end time right now
+
+                    var t = timeStart.split(':');
+                    var timeSeconds = 60*60*Number(t[0]) + 60*Number(t[1]) + Number(t[2]);
+                    var timeMs = 1000*timeSeconds;
+                    var transcription;
+                    var id;
+                    fs.readFile(stripped + '/' + file, 'utf8', function (err, data) {
+                      transcription = data;
+                      dbuploader.addSlide({
+                        TimeStart: timeSeconds,
+                        TimeEnd: "NULL",
+                        OCRTranscription: transcription,
+                        OCRKeywordsForSlide: [],  // put extracted keywords here
+                        RecommendedVideos: [],  // TODO
+                        SlidePost: [],
+                        LecturePost: []
+                      }, function(idx) {
+                        id = idx;
+                      });
+                      slideIds.push({
+                        SlideID: id,
+                        TimeStart: timeMs,
+                        TimeEnd: "NULL",
+                        OCRForSlide: transcription,
+                        AudioTranscription: "NULL",
+                        RecommendedVideos: [] // TODO
+                      });
+                      totalTranscription += transcription;
+                      counter++;
+
+                      if (counter == files.length - 2) {
+                        var parts = stripped.split('-');
+                        var course = parts[0];
+                        var date = parts[1];
+                        var quarter = course.slice(-4);
+                        var courseCode = course.slice(0, -4);
+                        if (courseCode.endsWith("_")) {
+                          courseCode = courseCode.slice(0, -1);
+                        }
+                        var image = base64encode(stripped + '/1.jpg');
+
+                        dbuploader.addPodcast({
+                          ClassName: courseCode,
+                          QuarterOfCourse: quarter,
+                          ClassNameCourseKey: course,
+                          VideoDate: date,
+                          NextVideo: "NULL",  // TODO
+                          PrevVideo: "NULL",  // TODO
+                          PodcastName: stripped,
+                          PodcastUrl: videoFile,
+                          PodcastImage: image,
+                          OCRTranscription: totalTranscription,
+                          OCRTranscriptionFreq: [], // put extracted keywords here
+                          AudioTranscription: "NULL", // not implemented yet
+                          AudioTranscriptionFreq: [], // not implemented yet
+                          Slides: slideIds,
+                          LecturePost: []
+                        }, function(id) {
+                          index++;
+                          exec("rm -rf " + stripped,
+                          function(error, stdout, stderr) {
+                            if (index < videoFiles.length) {
+                              parseVideoLater(videoFiles, index);
+                            }
+                            else { process.exit(); }
+                          });
+                        });
+                      }
+                    });
+                  }
+                });
+              });
+            });
          });
      });
   }
 }
 
+function base64encode(file) {
+  var bitmap = fs.readFileSync(file);
+  return new Buffer(bitmap).toString('base64');
+}
 
 function extractTextWithTesseract (index, prefix, numFiles, callback) {
   var fileName = prefix + "_" + index + ".jpg";
