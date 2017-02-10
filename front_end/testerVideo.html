@@ -30,7 +30,10 @@
         <script src="./js_helpers/jsloader.js"></script>
 
         <script>
-
+            sources = [];
+            sources[0] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02062017-0900.mp4";
+            sources[1] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02082017-0900.mp4";
+            sources[2] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02102017-0900.mp4";
             // Scripts above are required on every single page
             $.ajax({
                 url: "video_module/index.html",
@@ -39,16 +42,17 @@
                     $("#navbox").html(data);
                     load("video_module",
                         {
-                            source: "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02082017-0900.mp4",
-                            time: "35"
+                            source: JSON.stringify(sources),
+                            index: -1,
+                            time: "35" 
                         },
                         function () {
                             setTimeout(function () {
                                 $("#loader").hide();
-                            $("#navbox").show();
-                        }, 1000)
+                                $("#navbox").show();
+                            }, 1000)
                         }
-                    )
+                    );
                 }
             });
         </script>

@@ -30,6 +30,7 @@
                 //event to tell when video.js loads
                 var event = new Event('videojsLoaded');
                 document.dispatchEvent(event);
+                
             });
         </script>
         <script>
@@ -47,6 +48,7 @@
             });
         </script>
         <script>
+            
             function load (path, data, callback) {
                     loadJavascriptDynamically([ "/front_end/video_module/javascript/video.js", "/front_end/video_module/javascript/parseURLParameters.js", "/front_end/video_module/javascript/loadStyles.js"], function () {
                         loadCSSBasedOnURLPath(path);
