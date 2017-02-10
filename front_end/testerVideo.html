@@ -33,23 +33,20 @@
 
             // Scripts above are required on every single page
             $.ajax({
-                url: "menu_module/index.html",
+                url: "video_module/index.html",
                 data: {},
                 success: function (data) {
                     $("#navbox").html(data);
-                    load("menu_module",
+                    load("video_module",
                         {
-                            firstname: "Rauhmel",
-                            classname: "CSE 110",
-                            classqrtr: "Fall 2017",
-                            userid: "123123123123",
-                            profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
+                            source: "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02082017-0900.mp4",
+                            time: "35"
                         },
                         function () {
                             setTimeout(function () {
                                 $("#loader").hide();
                             $("#navbox").show();
-                        }, 500)
+                        }, 1000)
                         }
                     )
                 }
