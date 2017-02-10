@@ -1,0 +1,43 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id="loader"></div>
+        <div id="navbox"></div>
+
+    </body>
+
+
+    <footer>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+        <script src="./javascript/components.js"></script>
+
+        <script>
+
+            // Scripts above are required on every single page
+            loadComponent("loader_module.html", "#loader", function () {
+                    loadComponent("menu_module.html", "#navbox", function () {
+                        new NavBarLoggedInCourse({
+                            firstname: "Rauhmel",
+                            classname: "CSE 110", 
+                            classqrtr: "Fall 2017",
+                            userid: "123123123123",
+                            profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
+                        });
+                        $("#loader").hide();
+                        $("#navbox").show();
+                    }, 200)
+                
+            })
+        </script>
+    </footer>
+
+</html>
