@@ -3,3 +3,4 @@ node_modules
 videos
 ./videos
 .DS_Store
+./front-end/.DS_Store
