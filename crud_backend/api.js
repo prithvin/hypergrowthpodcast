@@ -20,7 +20,7 @@ var apiFunctions = {
           getRecentPostsForCourse : function(cnameckey,callback){
             PodcastModel.findOne({ClassNameCourseKey:cnameckey},function(err,podcast){
               var postIds = podcast.LecturePost;
-              PostModel.findOne({_id : {$id : postIds[i]}}, function(err,posts){
+              PostModel.find({_id : {$id : postIds[i]}}, function(err,posts){
                   if(err)
                   console.log("error finding posts");
                   callback(posts);
@@ -31,7 +31,7 @@ var apiFunctions = {
           getRecentVideosForCourse : function(){
 
           },
-          
+
           findPodcastsByKeyword: function(courseKey,keywordParams,callback){
             PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
               var arrayOfPodcasts = [];
