@@ -5,7 +5,7 @@
 
     <body>
         <div id="navbox" style="display:none;"></div>
-        <div id="loader" style="font-family: 'Roboto', sans-serif;position:absolute;width:100%;height:100%;"> 
+        <div id="loader" style="font-family: 'Roboto', sans-serif;position:absolute;width:100%;height:100%;">
             <div class="boxLoading">
             </div>
             <div style="top: 20%;position:relative;width: 100%;text-align: center;">
@@ -33,14 +33,14 @@
 
             // Scripts above are required on every single page
             $.ajax({
-                url: "http://localhost:7888/TesseractNew/cse110projectocr/front_end/menu_module/index.html",
+                url: "http://localhost:8888/cse110projectocr/front_end/menu_module/index.html",
                 data: {},
                 success: function (data) {
-                    $("#navbox").html(data);  
-                    load("http://localhost:7888/TesseractNew/cse110projectocr/front_end/menu_module", 
+                    $("#navbox").html(data);
+                    load("http://localhost:8888/cse110projectocr/front_end/menu_module",
                         {
                             firstname: "Rauhmel",
-                            classname: "CSE 110", 
+                            classname: "CSE 110",
                             classqrtr: "Fall 2017",
                             userid: "123123123123",
                             profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
@@ -51,7 +51,7 @@
                             $("#navbox").show();
                         }, 500)
                         }
-                    ) 
+                    )
                 }
             });
         </script>

@@ -1,84 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-  <link href="./index.css" type="text/css" rel="stylesheet">
-  <script type="text/javascript" src="./index.js"></script>
+  <meta charset="UTF-8">
+  <title>Podcasts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel='stylesheet prefetch' href='https://necolas.github.io/normalize.css/3.0.2/normalize.css'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="index.css">
+
+
 </head>
+
 <body>
-  <div class="wrapper site-header">
-    <h1 class="site-title">UCSD Podcast
-      <div class="search">
-         <input type="text" class="searchTerm" placeholder="What are you looking for?">
-         <button type="submit" class="searchButton">
-           <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </h1>
+
+<form id="search-nav" class="search-container center">
+  <input type="text" id="search-bar" placeholder="What can I help you with today?">
+  <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+</form>
+
+<nav id="global-nav" class="nav">
+  <div class="container">
+    <div class="pull-left"><img id="logo" class="site-title crop-logo" src="img/Logo.png"/></div>
+    <div class="pull-right">
+      <ul class="nav-list">
+        <li><a class="btn btn-link" href"">filter</a><li>
+        <li><a class="btn btn-link" href="" id="profilePic"><img id="prof" class="crop-pic" src="img/profile.png"/></a>
+        <a class="btn btn-link" href="" id="name">Hi Rauhmel!</a></li>
+      </ul>
+    </div>
   </div>
+</nav>
 
-<main class="site-content">
 
-  <section class="video-area">
-    <div class="wrapper">
+<div class="cont-section">
+  <div class="container">
+    <div class="content-text">
+      <h1>Results for </h1>
+        <div class="results-body">
+          <table class="table">
+            <thead>
 
-      <header class="video-header">
-        <h2 class="video-title">CSE 100 - Advanced Data Structures - LE [A00]</h2>
-      </header>
+              <!-- <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr> -->
 
-      <div class="video-column">
-        <div class="video-player">
-          <button id="btnReplay" class="btn-replay"><span class="fontawesome-refresh"></span></button>
+            <tr ng-repeat="x in ctrl.searchArray track by $index">
 
-          <iframe src="https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3742" width=854 height=480 scrolling="no"></iframe>
+            <tr>
+              <td align="left" style="padding-top:20px; padding-bottom:20px;padding-right:20px; padding-left: 40px; font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <img height="130" width="200" src="img/Thumb3.png" alt="">
+              </td>
 
+              <td align="left" style="padding-top:20px; padding-bottom:20px;font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <a href="https://www.youtube.com">CSE 100 Winter Quarter 2017 Lecture on 10/6/2016</a>
+              </td>
+
+              <td position="right" style="padding-top:20px; padding-bottom:20px;width:100%">
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/play.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/notes.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/subscribe.png" /></button>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="left" style="padding-top:20px; padding-bottom:20px;padding-right:20px; padding-left: 40px; font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <img height="130" width="200" src="img/Thumb3.png" alt="">
+              </td>
+
+              <td align="left" style="padding-top:20px; padding-bottom:20px;font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <a href="https://www.youtube.com">CSE 100 Winter Quarter 2017 Lecture on 10/6/2016</a>
+              </td>
+
+              <td position="right" style="padding-top:20px; padding-bottom:20px;width:100%">
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/play.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/notes.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/subscribe.png" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" style="padding-top:20px; padding-bottom:20px;padding-right:20px; padding-left: 40px; font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <img height="130" width="200" src="img/Thumb3.png" alt="">
+              </td>
+
+              <td align="left" style="padding-top:20px; padding-bottom:20px;font: 16px 'HelveticaNeuelTCom-Bd', sans-serif">
+                <a href="https://www.youtube.com">CSE 100 Winter Quarter 2017 Lecture on 10/6/2016</a>
+              </td>
+
+              <td position="right" style="padding-top:20px; padding-bottom:20px;width:100%">
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/play.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/notes.png" /></button>
+                <button style="float: left" type="submit"><img height="20" width="20" src="img/subscribe.png" /></button>
+              </td>
+            </tr>
+
+          </tr>
+
+            </thead>
+          </table>
 
         </div>
-
-        <div class="video-info" style="margin-top:30px;">
-          <div style="font-weight:1000;">Collaborative Notes</div>
-          <textarea id="textExample" style="border: 1px solid #BBB; color:#444" rows="4" cols="60"></textarea>
         </div>
-      </div>
-
-      <div id="video-playlist" class="video-playlist">
-        <header class="playlist-title">Relevant Videos</header>
-
-        <!-- HTML 5 allows us to wrap block-level elements in <a> tags. -->
-
-        <a href="https://dl.dropboxusercontent.com/u/57653109/html5video/video2.mp4" class="next-video">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/197359/caminandes-2.jpg" alt="">
-          <h3 class="next-video-title">Caminandes: Llama Drama - Short Movie</h3>
-          <p class="next-video-info">By the Blender Foundation
-            <br>01:30
-            <br><span class="next-video-description">Caminandes is a Creative Commons movie made by Pablo Vazquez, Beorn Leonard, and Francesco Siddi. Music and Sound by Jan Morgenstern.</span></p>
-        </a>
-
-        <a href="https://dl.dropboxusercontent.com/u/57653109/html5video/video3.mp4" class="next-video">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/197359/big-buck-bunny.jpg" alt="">
-          <h3 class="next-video-title">Big Buck Bunny</h3>
-          <p class="next-video-info">By the Blender Foundation
-            <br>09:57
-            <br><span class="next-video-description">Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.</span></p>
-        </a>
-
-        <a href="https://dl.dropboxusercontent.com/u/57653109/html5video/video4.mp4" class="next-video">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/197359/sintel.jpg" alt="">
-          <h3 class="next-video-title">Sintel - Third Open Movie by Blender Foundation</h3>
-          <p class="next-video-info">By the Blender Foundation
-            <br>14:48<br>
-            <span class="next-video-description">"Sintel" is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.</span></p>
-        </a>
-
-        <a href="https://dl.dropboxusercontent.com/u/57653109/html5video/video1.mp4" class="next-video played-video">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/197359/caminandes-2.jpg" alt="">
-          <h3 class="next-video-title">Caminandes: Grand Dillama</h3>
-          <p class="next-video-info">By the Blender Foundation
-            <br>00:00<br>
-            <span class="next-video-description">Caminandes: Episode 2 is an Open Movie produced by Blender Institute in Amsterdam, the Netherlands. You can support the makers and open source projects by purchasing the 8 GB USB card with all the movie data and tutorials.</span></p>
-        </a>
       </div>
     </div>
-  </section>
-</main>
+
+
+
+  </div>
+</div>
+
+<!-- <div class="fav-section">
+  <div class="container">
+    <div class="content-text">
+      <h1>Favorites</h1>
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="img/Thumb1.png" alt="">
+              <div class="caption">
+                <h3>CSE 100</h3>
+                <p>Week 4, Fri.</p>
+                <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="img/Thumb2.png" alt="">
+                <div class="caption">
+                  <h3>CSE 8A</h3>
+                  <p>Week 4, Thurs.</p>
+                  <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+                </div>
+            </div>
+          </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="img/Thumb3.png" alt="">
+              <div class="caption">
+                <h3>CSE 110</h3>
+                <p>Week 4, Tue.</p>
+                <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rec-section">
+  <div class="container">
+    <div class="content-text">
+      <h1>Recommended</h1>
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="img/Thumb1.png" alt="">
+              <div class="caption">
+                <h3>CSE 100</h3>
+                <p>Week 4, Fri.</p>
+                <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="img/Thumb2.png" alt="">
+                <div class="caption">
+                  <h3>CSE 8A</h3>
+                  <p>Week 4, Thurs.</p>
+                  <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+                </div>
+            </div>
+          </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="img/Thumb3.png" alt="">
+              <div class="caption">
+                <h3>CSE 110</h3>
+                <p>Week 4, Tue.</p>
+                <p><a href="https://www.youtube.com" class="btn btn-primary" role="button">Watch</a></p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<footer>
+  <div class="container">
+     <p>&copy; Only Handle It Once</p>
+  </div>
+</footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="index.js"></script>
+
 </body>
 </html>
