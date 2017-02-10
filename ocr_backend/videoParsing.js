@@ -19,27 +19,28 @@ module.exports = {
     console.log("Converting " + videoFile + " to pictures ");
     var filename = videoFile.split("/").slice(-1)[0];
     var stripped = filename.slice(0, -4);
+    var dirname = "tmp-" + stripped;
 
     url_reader.writeToFile(videoFile, filename, function (name) {
         var CMD = "rm -rf contents/ && python2 ocr/detector.py -d " + filename + " -o slides/ && " +
         "python2 ocr/sorter.py && python2 ocr/extractor.py && " +
         "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/timetable.log && " +
         "rm contents/*.hocr && rm -rf slides/ unique/ && " +
-        "mkdir " + stripped + " && mv contents/* " + stripped + "/ && rmdir contents && " +
+        "mkdir " + dirname + " && mv contents/* " + dirname + "/ && rmdir contents && " +
         "rm " + filename;
 
         exec(CMD, function(error, stdout, stderr) {
             if (error) console.log(error);
 
-            console.log("OCR output, timetable, and first image in directory " + stripped);
+            console.log("OCR output, timetable, and first image in directory " + dirname);
             var totalTranscription = "";
             var slideIds = [];
 
             // Parse text for keywords
-            //parseText.parseText(stripped);
+            //parseText.parseText(dirname);
 
-            fileParser.parseTimetable(stripped + '/timetable.log', function(timetable) {
-              fs.readdir(stripped, function(err, files) {
+            fileParser.parseTimetable(dirname + '/timetable.log', function(timetable) {
+              fs.readdir(dirname, function(err, files) {
                 if (err) {
                   console.log(err);
                   return;
@@ -57,7 +58,7 @@ module.exports = {
                     var timeMs = 1000*timeSeconds;
                     var transcription;
                     var id;
-                    fs.readFile(stripped + '/' + file, 'utf8', function (err, data) {
+                    fs.readFile(dirname + '/' + file, 'utf8', function (err, data) {
                       transcription = data;
                       dbuploader.addSlide({
                         TimeStart: timeSeconds,
@@ -90,7 +91,7 @@ module.exports = {
                         if (courseCode.endsWith("_")) {
                           courseCode = courseCode.slice(0, -1);
                         }
-                        var image = base64encode(stripped + '/1.jpg');
+                        var image = base64encode(dirname + '/1.jpg');
 
                         dbuploader.addPodcast({
                           ClassName: courseCode,
@@ -110,7 +111,7 @@ module.exports = {
                           LecturePost: []
                         }, function(id) {
                           index++;
-                          exec("rm -rf " + stripped,
+                          exec("rm -rf " + dirname,
                           function(error, stdout, stderr) {
                             if (index < videoFiles.length) {
                               parseVideoLater(videoFiles, index);
