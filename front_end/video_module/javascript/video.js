@@ -15,10 +15,18 @@ class videoClass {
     setSource(source){
         $("#videosrc").attr("src", source);
     }
+    
     setTime(time){
         document.getElementById("my-video").addEventListener("loadedmetadata", function() {
             this.currentTime = time;
         }, false);
     }
+    
+    getTime() {
+        document.getElementById("my-video").addEventListener("timeupdate", function() {
+        document.getElementById("timer").innerHTML = this.currentTime;
+        currentTime = this.currentTime;
+    }
+    
 
 }
