@@ -1,12 +1,17 @@
+
 class videoClass {
+
     constructor (urlParams) {
         this.urlParams = urlParams;
         this.setSource(this.getDataOrDefault("source"),this.getDataOrDefault("previous"),this.getDataOrDefault("next"));
         this.setTime(this.getDataOrDefault("time"));
         this.nextVid(this.getDataOrDefault("next"));
         this.prevVid(this.getDataOrDefault("previous"));
+        this.initHotKeys();
     }
     
+                     
+        
     getDataOrDefault (key) {
         if (this.urlParams[key] == null)
             return "N/A";
@@ -22,10 +27,23 @@ class videoClass {
         ]);*/
     }
     
+    initHotKeys(){
+        document.addEventListener('videojsLoaded', function(e){
+            videojs('my-video').ready(function() {
+                console.log("loading hotkeys");
+                this.hotkeys({
+                    volumeStep: 0.1,
+                    seekStep: 5,
+                    enableModifiersForNumbers: false
+                });
+            });
+        });
+        
+    }
+    
     setTime(time){
-        document.getElementById("my-video").addEventListener("loadedmetadata", function() {
-            this.currentTime = time;
-        }, false);
+            document.getElementById("my-video").currentTime = time;   
+        
     }
     
     showTime() {

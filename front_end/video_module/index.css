@@ -42,7 +42,7 @@ body {
   height: 35px;
 }
 .prev-button {
-  /*background-image:url(img/prev.png);*/
+  background-image:url(img/prev.png);
   background-repeat:no-repeat;
   height:15%;
   position:absolute;
@@ -55,7 +55,7 @@ body {
 }
 
 .next-button {
-  /*background-image:url(img/prev.png);*/
+  background-image:url(img/next.png);
   background-repeat:no-repeat;
   height:15%;
   position:absolute;

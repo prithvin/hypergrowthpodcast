@@ -3,13 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link href="http://vjs.zencdn.net/5.16.0/video-js.css" rel="stylesheet">
-        <link href="/front_end/video_module/index.css" rel="stylesheet">
+
+        <!--link href="/front_end/video_module/index.css" rel="stylesheet">
+
+        <!--script src="http://vjs.zencdn.net/5.16.0/video.js"></script-->
+
+        <script language="JavaScript" type="text/javascript" src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
     </head>
     <body>
         <div class="wrapper"> 
-            <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="700" height="332"  
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="700" height="332"  
               data-setup='{"playbackRates": [1,1.5,2]}'>
                 <source id="videosrc" type='video/mp4'>
                 <p class="vjs-no-js">
@@ -20,13 +24,21 @@
             <button id="prev" class="prev-button btn btn-link crop-pic"></button>
             <button id="next" class="next-button btn btn-link crop-pic"></button>
         </div>
+
         <h1 id="timer"> </h1>
 
 
-  
     </body>
     <footer>
-        
+            <!--script language="JavaScript" type="text/javascript" src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script-->
+        <script>
+            
+            loadJavascriptDynamically(["http://vjs.zencdn.net/5.16.0/video.js", "//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"], function () {
+                //event to tell when video.js loads
+                var event = new Event('videojsLoaded');
+                document.dispatchEvent(event);
+            });
+        </script>
         <script>
         loadJavascriptDynamically(["http://vjs.zencdn.net/5.16.0/video.js", "https://code.jquery.com/jquery-3.1.1.min.js"], function () {
        
@@ -48,11 +60,11 @@
 
         <script>
             function load (path, data, callback) {
-                loadJavascriptDynamically(["/front_end/video_module/javascript/video.js", "/front_end/video_module/javascript/parseURLParameters.js", "/front_end/video_module/javascript/loadStyles.js"], function () {
-                    loadCSSBasedOnURLPath(path);
-                    new videoClass(data);
-                    callback();
-                });
+                    loadJavascriptDynamically([ "/front_end/video_module/javascript/video.js", "/front_end/video_module/javascript/parseURLParameters.js", "/front_end/video_module/javascript/loadStyles.js"], function () {
+                        loadCSSBasedOnURLPath(path);
+                        new videoClass(data);
+                        callback();
+                    });
             }
         </script>
     </footer>
