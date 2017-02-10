@@ -2,7 +2,6 @@ class videoClass {
     constructor (urlParams) {
         this.urlParams = urlParams;
         this.setSource(this.getDataOrDefault("source"));
-        
         this.setTime(this.getDataOrDefault("time"));
     }
     
@@ -22,11 +21,15 @@ class videoClass {
         }, false);
     }
     
-    getTime() {
+    showTime() {
         document.getElementById("my-video").addEventListener("timeupdate", function() {
-        document.getElementById("timer").innerHTML = this.currentTime;
-        currentTime = this.currentTime;
+            document.getElementById("timer").innerHTML = this.currentTime;
+            currentTime = this.currentTime;
+            console.log(currentTime);
+        });
     }
+                            
+                                                        
     
 
 }

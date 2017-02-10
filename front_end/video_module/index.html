@@ -5,8 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link href="http://vjs.zencdn.net/5.16.0/video-js.css" rel="stylesheet">
         <link href="/front_end/video_module/index.css" rel="stylesheet">
-        <script language="JavaScript" type="text/javascript" src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-
 
     </head>
     <body>
@@ -22,12 +20,20 @@
             <div class="prev-button"><a href=""><img class="crop-pic" src="/front_end/video_module/img/prev.png"/></a></div>
             <div class="next-button"><a href=""><img class="crop-pic" src="/front_end/video_module/img/next.png"/></a></div>
         </div>
-        <div id="timer"> </div>
+        <h1 id="timer"> </h1>
 
 
   
     </body>
     <footer>
+        <script>
+        document.getElementById("my-video").addEventListener("timeupdate", function() {
+            document.getElementById("timer").innerHTML = this.currentTime;
+            currentTime = this.currentTime;
+            console.log(currentTime);
+        });
+        </script>
+        <script language="JavaScript" type="text/javascript" src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
         <script language="JavaScript" type="text/javascript" src="http://vjs.zencdn.net/5.16.0/video.js"></script>
 
         <script>
