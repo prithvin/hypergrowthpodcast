@@ -3,3 +3,6 @@ node_modules
 videos
 .DS_Store
 ./videos
+front-end/.DS_Store
+*.pyc
+*.mp4

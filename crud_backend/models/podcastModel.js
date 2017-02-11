@@ -11,14 +11,13 @@ var PodcastModel = new mongoose.Schema({
   PodcastUrl: String,
   PodcastImage: String,
   OCRTranscription: String,
-  OCRTranscriptionFreq: [{word: String, frequency: Number}],
+  OCRTranscriptionFreq: [{Word: String, Frequency: Number}],
   AudioTranscription: String,
   AudioTranscriptionFreq: [{word: String, frequency: Number}],
   Slides:[{SlideID:String, TimeStart:String, TimeEnd:String,
             OCRForSlide:String, AudioTranscription:String,
             RecommendedVideos: [String]}],
   LecturePost:[String] //array of ids
-
 });
 
 // Create a model based on the schema
