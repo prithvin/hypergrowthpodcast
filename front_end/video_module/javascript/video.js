@@ -2,29 +2,18 @@
 class videoClass {
     
     constructor (urlParams) {
-
+            this.index = -1;
+            this.srcAttr = $("#videosrc");
             this.urlParams = urlParams;
             this.initSourceArray(this.getDataOrDefault("source"));
-        
-
-        
-        
+            this.initSource(this.getDataOrDefault("index"));
             this.setTime(this.getDataOrDefault("time"));
             this.getTime();
-            this.initAfterJS();
+            this.initHotKeys();
+            this.changeVideo();
+            
     }
-    initAfterJS(){
-        var thus = this;
-
-        document.addEventListener('videojsLoaded', function(e){
-            thus.setSource(thus.getDataOrDefault("index"));
-            thus.initHotKeys();
-
-            thus.changeVideo();
-
-        });
-
-    }
+    
     getDataOrDefault (key) {
         if (this.urlParams[key] == null)
             return "N/A";
@@ -35,26 +24,41 @@ class videoClass {
         this.sourceArray = JSON.parse(source);
         console.log("loaded video series of length " + this.sourceArray.length);
     }
-
-    setSource(index){
+    
+    initSource(index){
+            
         if(index < 0){
-            this.index = 0;
+            index = 0;
             console.log("VIDEO SOURCE INDEX OUT OF BOUNDS");
         }
         else if(index >= this.sourceArray.length){
-            this.index = this.sourceArray.length - 1;
+            index = this.sourceArray.length - 1;
             console.log("VIDEO SOURCE INDEX OUT OF BOUNDS");
         }
-        else{
-            this.index = index;
+        console.log(index);
+        console.log("loading: " + this.sourceArray[index]);
+        $("#videosrc").attr("src", this.sourceArray[index]);
+        this.index = index;
+    }
+    
+    setSource(index){
+            
+        if(index < 0){
+            index = 0;
+            console.log("VIDEO SOURCE INDEX OUT OF BOUNDS");
         }
-        console.log(this.index);
-        console.log("loading: " + this.sourceArray[this.index]);
-        videojs('my-video').src({type: 'video/mp4', src: this.sourceArray[this.index]});
+        else if(index >= this.sourceArray.length){
+            index = this.sourceArray.length - 1;
+            console.log("VIDEO SOURCE INDEX OUT OF BOUNDS");
+        }
+        console.log(index);
+        console.log("loading: " + this.sourceArray[index]);
+        videojs('my-video').src({type: 'video/mp4', src: this.sourceArray[index]});
+        this.index = index;
     }
     
     initHotKeys(){
-        //document.addEventListener('videojsLoaded', function(e){
+        document.addEventListener('videojsLoaded', function(e){
             videojs('my-video').ready(function() {
                 console.log("loading hotkeys");
                 this.hotkeys({
@@ -63,7 +67,7 @@ class videoClass {
                     enableModifiersForNumbers: false
                 });
             });
-        //});
+        });
         
     }
     
@@ -92,7 +96,6 @@ class videoClass {
         document.addEventListener('changeVideo', function(e){
             videojs('my-video').ready(function() {
                 console.log(e.detail);
-                console.log(e);
     
                 if ((e.detail) == ('previous')) {
                     thus.setSource(thus.index - 1);
@@ -102,7 +105,6 @@ class videoClass {
                     console.log("loading next");
                 }
                 videojs('my-video').load();
-                console.log(document.getElementById("videosrc").src);
             });
         });
     }                                                    
