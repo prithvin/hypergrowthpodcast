@@ -3,10 +3,28 @@ var scraper = require("./scrapePodcasts.js");
 var videoParsing = require("./videoParsing.js");
 var fs = require('fs');
 var uploader = require('./dbuploader.js');
-
+var keywordExtract = require("./keywordExtract.js");
 var existing = new Set([]);
 var counter = 0;
 
+keywordExtract.extract(`Designing Justice
+
+Does law alone create justice?
+War of all against all in urban Colombia
+
+Construction ofjustice in Bogoté and Medellin
+
+— Remaking the culture
+— Remaking the built environment
+
+Evidence
+— Broken-window theory of norm compliance
+
+— Medellin data
+`, function (data) {
+  console.log(data);
+})
+/*
 uploader.getPodcastList(function(podcasts) {
   podcasts.forEach(function(e) {
     existing.add(e.PodcastUrl);
@@ -27,3 +45,4 @@ uploader.getPodcastList(function(podcasts) {
     });
   }
 });
+*/
