@@ -26,6 +26,7 @@ mark {
     font-family: 'Roboto', sans-serif;
     padding-left:0px;
     padding-right:0px;
+
 }
 
 .profile-pic-post {
@@ -40,7 +41,7 @@ mark {
     float :left;
 }
 
-.post-header { 
+.post-header {
     padding-top: 15px;
 }
 
@@ -55,11 +56,10 @@ mark {
     height: 35px;
 }
 
-.post-main-content { 
+.post-main-content {
     padding-left: 15px;
     padding-right: 15px;
     font-size: 0.77em;
-    font-weight: 200;
 }
 
 .time-signature-main {
@@ -82,8 +82,7 @@ mark {
 .comments {
     margin-top: 10px;
     padding:0;
-    width:100%;
-
+    width:217px;
 
 }
 
@@ -103,8 +102,11 @@ mark {
 
 .one-comment {
     padding-bottom: 13px;
-        background-color: #F7F7F7;
+    background-color: #F7F7F7;
     margin-bottom:3px;
+    width: 217px;
+    word-wrap: break-word;
+
 }
 
 .comment-text {
@@ -113,6 +115,7 @@ mark {
     margin-top: 16px;
     margin-left: 7px;
     color: #404040;
+
 }
 
 .post-container .row {
@@ -128,7 +131,8 @@ mark {
 .time-comment {
     text-align:right;
     top:5px;
-    padding:0;
+    padding:5px;
+    height:100%;
 }
 
 .comment-answer {
@@ -149,4 +153,6 @@ mark {
 .push-up-comment {
     vertical-align: top;
     width: 100%;
+    overflow:hidden;
+    width: 217px;
 }
