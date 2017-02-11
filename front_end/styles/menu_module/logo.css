@@ -1,0 +1,36 @@
+.podcast_icon {
+    width:90%;
+}
+
+.class-name{
+    margin-top: 5px;
+}
+
+.icon_text {
+    width:100%;
+}
+
+.class_text {
+    font-family: 'Roboto', sans-serif;
+    text-align:center;
+    color: #67809F;
+
+    padding:0; 
+}
+
+.class_text h4 {
+    margin:0 !IMPORTANT;
+}
+
+.bolded_class {
+    font-weight:900;
+    color: #0F2B5E;
+}
+
+.text_container {
+    padding-left:0px;
+}
+
+.form-control-success {
+    background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7LE9IY2mTREC1zYoRyyo182eoXd6EH-EV4IGRXDYYnMvAaYoN") !IMPORTANT;
+}
