@@ -92,6 +92,8 @@ module.exports = {
                           }
                           var image = base64encode(dirname + '/1.jpg');
 
+                          date = date.slice(4) + date.slice(0, 4);
+
                           dbuploader.addPodcast({
                             ClassName: courseCode,
                             QuarterOfCourse: quarter,

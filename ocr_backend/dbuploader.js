@@ -42,7 +42,8 @@ module.exports = {
   },
   getPodcastsForCourse: function (course, callback) {
     connectMongo(function () {
-      PodcastModel.find({ClassNameCourseKey: course}, '_id PodcastImage PodcastName', function (err, podcasts){
+      PodcastModel.find({ClassNameCourseKey: course}, '_id PodcastImage PodcastName',
+                        {sort: 'VideoDate'}, function (err, podcasts){
         if (err) {
           console.error("Issue connecting to database");
           console.error(err);
