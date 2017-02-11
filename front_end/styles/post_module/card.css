@@ -14,10 +14,6 @@ mark {
     margin: 5px;
 }
 
-.post-main-content mark {
-    margin-left: 2px;
-    margin-right: 2px;
-}
 
 .post-container {
     background-color:white;
@@ -26,6 +22,7 @@ mark {
     font-family: 'Roboto', sans-serif;
     padding-left:0px;
     padding-right:0px;
+    margin-top: 10px;
 }
 
 .profile-pic-post {

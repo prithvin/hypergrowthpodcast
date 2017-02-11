@@ -2,13 +2,23 @@
     <head>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="./styles/post_module/searching.css" />
     </head>
     <body>
-        <div class="search-module row">
+        <div class="search-module-main">
+            <form class="pure-form main_search_container_post form-group has-success">
+                <input id="secondary-search-bar" placeholder="Keyword Search in Lecture" class="post_main_search form-control form-control-success" type="text">
+                <a class="pure-button pure-button-primary new-post-img"><img src="https://cdn2.iconfinder.com/data/icons/basic-ui-elements-3/424/edit_compose_draft_note_new_create_pencil-512.png"></a>
+            </form>
+            <div class="search-module row">
+                <div class="no-results col-sm-10 offset-sm-1">
+                <br><br>Sorry, no posts match your search :( <br>
+                Check out <a href="" class="all-posts-view">the rest of the posts</a><br>
+                Or make a new post...</div>
+            </div>
+            <div class="hidden-post" style="display:none;"></div>
         </div>
-        <div class="hidden-post" style="display:none;"></div>
     </body>
     <footer>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
