@@ -7,33 +7,28 @@ var checker = checkWord('en');
 var countWords = require("count-words");
 var read = require('file-reader');
 var fs = require('fs-extra');
+var keywordExtract = require('./keywordExtract.js');
 
 const SLIDE_TITLE_KEYWORD_WEIGHT = 25;
 
 module.exports = {
-    parseText: function(dir) {
+  parseText: function(dir, callback) {
+    /*var all = [];
+    var all_flat = [];
+    var total = {};*/
+    var textArr = [];
 
-        var files = read(dir + '/*.txt');
-        for (var file in files) {
-            var fileBuffer = files[file].contents;
-            if (fileBuffer != undefined) {
-                var text = fileBuffer.toString();
-                var words = countWords(text);
+    var files = read(dir + '/*.txt');
+    var num_files = Object.keys(files).length;
+    for (var file in files) {
+      var fileBuffer = files[file].contents;
+      if (fileBuffer != undefined) {
+        textArr.push(fileBuffer.toString());
+      }
+    }
 
-                // Put extra weight on title keywords
-                var splitted = text.split("\n");
-                var firstLine = worder(splitted[0] + '');
-
-                for (var i = 0; i < firstLine.length; i++) {
-                    var word = firstLine[i];
-                    if (words[word] != null) words[word] += SLIDE_TITLE_KEYWORD_WEIGHT;
-                }
-
-                fs.writeJson('./contents/' + file + '_keywords.txt', words, function(err) {
-                    if (err != null) console.log(err);
-                    // else console.log("...Parsed keywords for " + file);
-                });
-            }
-        }
-    } 
+    keywordExtract.extractKeywordsFromSlide(textArr, function(data) {
+      callback(data['RegularReturned'], data['FlattenedReturn']);
+    });
+  }
 }

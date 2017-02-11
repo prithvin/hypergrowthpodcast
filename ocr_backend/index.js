@@ -3,7 +3,7 @@ var scraper = require("./scrapePodcasts.js");
 var videoParsing = require("./videoParsing.js");
 var fs = require('fs');
 var uploader = require('./dbuploader.js');
-
+var keywordExtract = require("./keywordExtract.js");
 var existing = new Set([]);
 var counter = 0;
 
