@@ -14,7 +14,7 @@ var SlideModel = new mongoose.Schema({
 		{
 			PodcastId: Number,
 			PodcastImage: String,
-			PodcastTitle: String
+			PodcastName: String
 		}
 	],
 	SlidePost: [],
