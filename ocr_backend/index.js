@@ -2,35 +2,28 @@ var exec = require("child_process").exec;
 var scraper = require("./scrapePodcasts.js");
 var videoParsing = require("./videoParsing.js");
 var fs = require('fs');
-
 var uploader = require('./dbuploader.js');
 
-//console.log(levenshtein.levenshteinDistance('designing justice does law alone create justice war of all against all in urban colombia construction ofjustice in bogota and medellin remaking the culture remaking the built environment evidence broken window theory of norm compliance medellin data'
-//  , 'designing justice does law alone create justice war of all against all in urban colombia construction ofjustice in bogota and medellin remaking the culture remaking the built environment evidence broken window theory of norm compliance medellin data'));
+var existing = new Set([]);
+var counter = 0;
 
-// scrape podcast.ucsd.edu every hour
-/*
-fs.stat("scraped", function(err, stats) {
-    var interval = 1000*60*60;
+uploader.getPodcastList(function(podcasts) {
+  podcasts.forEach(function(e) {
+    existing.add(e.PodcastUrl);
+    counter++;
+  });
 
-    var mtime = stats["mtime"].getTime();
-    var now = (new Date).getTime();
-    if (now - mtime > interval) {
-        console.log("scrape");
-        scraper.scrapePodcasts(function() { console.log ('scrape done'); });
-    }
+  if (counter == podcasts.length) {
+    scraper.scrapePodcasts(existing, function(working) {
+      console.log("finished scraping");
+
+      exec("rm -rf tmp* && rm -f *.mp4", function(error, stdout, stderr) {
+        working = [
+          'http://podcast.ucsd.edu/Podcasts//fa16/poli27fa16/poli27fa16-11022016-1200.mp4',
+          'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02032017-0900.mp4'
+        ];
+        videoParsing.parseVideo(working, 0);
+      });
+    });
+  }
 });
-*/
-// In production, we would read the array from JSON.parse(diff file)
-/*videoParsing.parseVideo(['http://podcast.ucsd.edu/Podcasts//fa16/poli27fa16/poli27fa16-11022016-1200.mp4',
-'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02032017-0900.mp4'],
-0);*/
-
-
-uploader.addPodcast({}, function (data) {
-    console.log(data);
-})
-
-uploader.addSlide({}, function (data) {
-    console.log(data);
-})

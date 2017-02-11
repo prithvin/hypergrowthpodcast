@@ -20,15 +20,34 @@ var apiFunctions = {
           getRecentPostsForCourse : function(cnameckey,callback){
             PodcastModel.findOne({ClassNameCourseKey:cnameckey},function(err,podcast){
               var postIds = podcast.LecturePost;
-              PostModel.findOne({_id : {$id : postIds[i]}}, function(err,posts){
+              PostModel.find({_id : {$id : postIds[i]}}, function(err,posts){
                   if(err)
-                  console.log("error finding posts");
+                    console.log("error finding posts");
                   callback(posts);
               });
             });
           },
 
           getRecentVideosForCourse : function(){
+            PodcastModel.find({ClassNameCourseKey:cnameckey}, function(err,podcasts){
+              if(err) {
+                console.log("error finding course");
+              } else {
+                var arrayOfPodcasts = [];
+                for(var i = 0; i < podcasts.length; i++) {
+                  var responseData = {
+                    //TODO-lectureId: podcasts[0].LectureId (from search)
+                    lectureImage: podcasts[i].PodcastImage,
+                    courseQtr: podcasts[i].QuarterOfCourse,
+                    lectureName: podcasts[i].ClassName,
+                    lectureDate: podcasts[i].VideoDate
+                  };
+                  arrayOfPodcasts.push(responseData);
+                }
+
+                callback({ Podcasts : arrayOfPodcasts });
+              }
+            });
 
           },
 
@@ -143,7 +162,21 @@ var apiFunctions = {
 
         },
         postFunctions:{
+          createComment: function(request, callback) {
+              var postID = request.postID;
+              var FBAuthID = request.FBAuthID;
+              var commentContent = request.commentContent;
 
+              // @response should be true or false on successful/unsuccessful comment
+          },
+
+          createPost: function(request, callback) {
+            var postID = request.postID;
+            var FBAuthID = request.FBAuthID;
+            var postContent = request.postContent;
+
+            // @response should be true or false on successful/unsuccessful post
+          }
         }
 }
 

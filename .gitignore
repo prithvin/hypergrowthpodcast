@@ -2,3 +2,5 @@
 node_modules
 videos
 ./videos
+*.pyc
+*.mp4
