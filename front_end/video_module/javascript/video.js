@@ -85,7 +85,7 @@ class videoClass {
                 var seconds = Math.floor(time - minutes * 60)
                 var x = minutes < 10 ? "0" + minutes : minutes;
                 var y = seconds < 10 ? "0" + seconds : seconds;
-                console.log(x + ':' + y);
+                //console.log(x + ':' + y);
                 document.getElementById("timer").innerHTML = x + ':' + y;
             });
         });
