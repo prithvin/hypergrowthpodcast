@@ -13,6 +13,12 @@ mark {
 .name-of-poster mark {
     margin: 5px;
 }
+
+.post-main-content mark {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
 .post-container {
     background-color:white;
     border-radius: 6px;

@@ -1,8 +1,9 @@
 var APost = class APost {
 
-    constructor (params, currentUserName, currentUserPic, currentUserAuthToken, postDiv) {
+    constructor (params, currentUserName, currentUserPic, currentUserAuthToken, postDiv, controller) {
         this.params = params;
         this.mainDiv = $(postDiv);
+        this.controller = controller;
         this.commentDiv = $(postDiv).find(".comments");
         this.loadHeader(this.params["Name"], this.params["ProfilePic"]);
         this.loadMainContent(this.params["Content"], this.params["TimeOfPost"], this.params["SlideOfPost"]);
@@ -24,6 +25,9 @@ var APost = class APost {
             "Content": $(inputForm).val(),
             "Time": timeOfComment
         });
+        if (this.controller != null) {
+            this.controller.remarkText();
+        }
         $(inputForm).val("");
     }
 
@@ -64,7 +68,7 @@ var APost = class APost {
 
         $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost);
         
-        $(this.mainDiv).find(".post-main-content").html(content);
+        $(this.mainDiv).find(".post-main-content").find("span").html(content);
     }
 
     loadCommentContent (comments) {

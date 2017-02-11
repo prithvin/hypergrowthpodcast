@@ -24,11 +24,19 @@ var PostSearch = class PostSearch {
     searchByText (text) {
         this.mark.unmark();
         jQuery.expr[':'].contains = function(a,i,m){
-    return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
-};
+            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+        };
+        this.currentTextBeingSearched = text;
         this.mark.mark(text, { "caseSensitive" : false})
         for (var x = 0; x < this.posts.length; x++) {
             this.posts[x].searchForContent(text);
+        }
+    }
+
+    remarkText () {
+        if (this.currentTextBeingSearched != null) {
+            this.mark.unmark();
+            this.mark.mark(this.currentTextBeingSearched, { "caseSensitive" : false})
         }
     }
 
@@ -49,7 +57,7 @@ var PostSearch = class PostSearch {
         var parentClass = this;
         this.loadPostModuleData(function () {
             var newDiv = $(parentClass.componentData);
-            var newPostObj = new APost(postData, parentClass.currentUserName, parentClass.currentUserPic, parentClass.currentUserAuthToken, newDiv);
+            var newPostObj = new APost(postData, parentClass.currentUserName, parentClass.currentUserPic, parentClass.currentUserAuthToken, newDiv, parentClass);
             parentClass.posts.push(newPostObj);
             parentClass.mainDiv.append(newDiv);
         })
