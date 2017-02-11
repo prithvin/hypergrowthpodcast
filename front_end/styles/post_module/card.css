@@ -4,6 +4,15 @@
     top:0;
 }
 
+mark {
+    padding: 0 !IMPORTANT;
+    background-color: rgba(0, 0,0, 0) !IMPORTANT;
+    color: #C00000;
+    font-weight: 600;
+}
+.name-of-poster mark {
+    margin: 5px;
+}
 .post-container {
     background-color:white;
     border-radius: 6px;

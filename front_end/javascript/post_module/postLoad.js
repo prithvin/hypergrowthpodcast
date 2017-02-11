@@ -1,4 +1,4 @@
-class APost {
+var APost = class APost {
 
     constructor (params, currentUserName, currentUserPic, currentUserAuthToken, postDiv) {
         this.params = params;
@@ -7,10 +7,12 @@ class APost {
         this.loadHeader(this.params["Name"], this.params["ProfilePic"]);
         this.loadMainContent(this.params["Content"], this.params["TimeOfPost"], this.params["SlideOfPost"]);
         this.loadCommentContent(this.params["Comments"]);
+        this.postId = this.params["PostId"];
 
         var parentClass = this;
         $(this.mainDiv).find(".comment-form").on("submit", function (ev) {
             ev.preventDefault();
+            console.log(parentClass.postId);
             parentClass.addComment($(parentClass.mainDiv).find(".comment-answer"), currentUserPic, currentUserName, new Date().getTime());
         })
     }
@@ -23,6 +25,30 @@ class APost {
             "Time": timeOfComment
         });
         $(inputForm).val("");
+    }
+
+    searchForContent (searchTerm) {
+        var isSearch = $(this.mainDiv).is(':contains("' + searchTerm + '")');
+        if (isSearch)
+            this.showThisPost();
+        else
+            this.hideThisPost();
+    }
+
+    fetchBySlide (slideNo) {
+        var isGoodSlide = $($(this.mainDiv).find(".slide-no")).is(':contains("Slide ' + slideNo + '")');
+        if (isGoodSlide)
+            this.showThisPost();
+        else
+            this.hideThisPost();
+    }
+
+    hideThisPost () {
+        $(this.mainDiv).fadeOut(500);
+    }
+
+    showThisPost () {
+        $(this.mainDiv).fadeIn(500);
     }
 
     loadHeader (name, pic) {
