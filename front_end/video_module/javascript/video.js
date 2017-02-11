@@ -2,15 +2,29 @@
 class videoClass {
     
     constructor (urlParams) {
-        this.urlParams = urlParams;
-        this.initSourceArray(this.getDataOrDefault("source"));
-        this.setSource(this.getDataOrDefault("index"));
-        this.setTime(this.getDataOrDefault("time"));
-        this.getTime();
-        this.initHotKeys();
-        this.changeVideo();
+
+            this.urlParams = urlParams;
+            this.initSourceArray(this.getDataOrDefault("source"));
+        
+
+        
+        
+            this.setTime(this.getDataOrDefault("time"));
+            this.getTime();
+            this.initAfterJS();
     }
-    
+    initAfterJS(){
+        var thus = this;
+
+        document.addEventListener('videojsLoaded', function(e){
+            thus.setSource(thus.getDataOrDefault("index"));
+            thus.initHotKeys();
+
+            thus.changeVideo();
+
+        });
+
+    }
     getDataOrDefault (key) {
         if (this.urlParams[key] == null)
             return "N/A";
@@ -34,12 +48,13 @@ class videoClass {
         else{
             this.index = index;
         }
+        console.log(this.index);
         console.log("loading: " + this.sourceArray[this.index]);
-        $("#videosrc").attr("src", this.sourceArray[this.index]);
+        videojs('my-video').src({type: 'video/mp4', src: this.sourceArray[this.index]});
     }
     
     initHotKeys(){
-        document.addEventListener('videojsLoaded', function(e){
+        //document.addEventListener('videojsLoaded', function(e){
             videojs('my-video').ready(function() {
                 console.log("loading hotkeys");
                 this.hotkeys({
@@ -48,7 +63,7 @@ class videoClass {
                     enableModifiersForNumbers: false
                 });
             });
-        });
+        //});
         
     }
     
@@ -73,12 +88,19 @@ class videoClass {
     }
     
     changeVideo() {
+        var thus = this;
         document.addEventListener('changeVideo', function(e){
             videojs('my-video').ready(function() {
-                if (e.type == 'previous')
-                    $("#videosrc").attr("src", "prev");
-                else
-                    $("#videosrc").attr("src", "next");
+                console.log(e.detail);
+                console.log(e);
+    
+                if ((e.detail) == ('previous')) {
+                    thus.setSource(thus.index - 1);
+                    console.log("loading prev");
+                } else {
+                    thus.setSource(thus.index + 1);
+                    console.log("loading next");
+                }
                 videojs('my-video').load();
                 console.log(document.getElementById("videosrc").src);
             });

@@ -36,8 +36,8 @@
         <script>
             /* Switch Video */
             function changeVid(video) {
-                console.log("loading " + video + " video");
-                var event = new CustomEvent('changeVideo', {'type': video});
+                //console.log("loading " + video + " video");
+                var event = new CustomEvent('changeVideo', {'detail': video});
                 document.dispatchEvent(event);
             };
             
@@ -52,6 +52,7 @@
             function load (path, data, callback) {
                     loadJavascriptDynamically([ "/front_end/video_module/javascript/video.js", "/front_end/video_module/javascript/parseURLParameters.js", "/front_end/video_module/javascript/loadStyles.js"], function () {
                         loadCSSBasedOnURLPath(path);
+                        
                         new videoClass(data);
                         callback();
                     });
