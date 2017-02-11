@@ -5,4 +5,6 @@ function loadCSSBasedOnURLPath (urlPath) {
     loadCSSDynamically(urlPath + "/style_sheets/logo.css");
     loadCSSDynamically(urlPath + "/style_sheets/navbar.css");
     loadCSSDynamically(urlPath + "/style_sheets/searchbar.css");
+  
+
 }

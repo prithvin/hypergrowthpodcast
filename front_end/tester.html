@@ -33,11 +33,11 @@
 
             // Scripts above are required on every single page
             $.ajax({
-                url: "http://localhost:8888/cse110projectocr/front_end/menu_module.html",
+                url: "menu_module/index.html",
                 data: {},
                 success: function (data) {
                     $("#navbox").html(data);
-                    load("http://localhost:8888/cse110projectocr/front_end/menu_module",
+                    load("menu_module",
                         {
                             firstname: "Rauhmel",
                             classname: "CSE 110",
