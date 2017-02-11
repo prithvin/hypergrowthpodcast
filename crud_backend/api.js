@@ -31,7 +31,7 @@ var apiFunctions = {
           getRecentVideosForCourse : function(){
 
           },
-          
+
           findPodcastsByKeyword: function(courseKey,keywordParams,callback){
             PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
               var arrayOfPodcasts = [];

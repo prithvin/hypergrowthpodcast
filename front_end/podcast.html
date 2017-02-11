@@ -24,19 +24,19 @@
 
             // Scripts above are required on every single page
             loadComponent("loader_module.html", "#loader", function () {
-                    loadComponent("menu_module.html", "#navbox", function () {
-                        new NavBarLoggedInCourse({
-                            firstname: "Rauhmel",
-                            classname: "CSE 110", 
-                            classqrtr: "Fall 2017",
-                            userid: "123123123123",
-                            profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
-                        });
-                        $("#loader").hide();
-                        $("#navbox").show();
-                    }, 200)
-                
-            })
+                loadComponent("menu_module.html", "#navbox", function () {
+                    new NavBarLoggedInCourse({
+                        firstname: "Rauhmel",
+                        classname: "CSE 110", 
+                        classqrtr: "Fall 2017",
+                        userid: "123123123123",
+                        profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
+                    });
+                    $("#loader").hide();
+                    $("#navbox").show();
+                }, 200);
+            });
+
         </script>
     </footer>
 
