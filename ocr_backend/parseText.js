@@ -11,10 +11,14 @@ var fs = require('fs-extra');
 const SLIDE_TITLE_KEYWORD_WEIGHT = 25;
 
 module.exports = {
-    parseText: function(dir) {
+    parseText: function(dir, callback) {
+      var all = [];
+      var total = {};
+      var all_flat = [];
 
         var files = read(dir + '/*.txt');
         for (var file in files) {
+            var obj = [];
             var fileBuffer = files[file].contents;
             if (fileBuffer != undefined) {
                 var text = fileBuffer.toString();
@@ -29,11 +33,27 @@ module.exports = {
                     if (words[word] != null) words[word] += SLIDE_TITLE_KEYWORD_WEIGHT;
                 }
 
-                fs.writeJson('./contents/' + file + '_keywords.txt', words, function(err) {
-                    if (err != null) console.log(err);
-                    // else console.log("...Parsed keywords for " + file);
-                });
+                for (var key in words) {
+                  if (words.hasOwnProperty(key)) {
+                    if (total.hasOwnProperty(key)) {
+                      total[key] += words[key];
+                    } else {
+                      total[key] = words[key];
+                    }
+                    obj.push({'Word': key, 'Frequency': words[key]});
+                  }
+                }
+
+                all.push(obj);
             }
         }
-    } 
+
+        for (var key in total) {
+          if (total.hasOwnProperty(key)) {
+            all_flat.push({'Word': key, 'Frequency': total[key]});
+          }
+        }
+
+        callback(all, all_flat);
+    }
 }

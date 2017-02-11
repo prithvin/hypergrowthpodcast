@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 URL = 'http://podcast.ucsd.edu/'
 
 # suppress InsecureRequestWarning
+"""
 urllib3.disable_warnings()
 http = urllib3.PoolManager()
 soup = BeautifulSoup(http.request('GET', URL).data, 'html.parser')
@@ -28,9 +29,11 @@ for course in courses:
             media = t.get('forfile')
             if media.endswith('mp4'):
                 videos.append(media)
-        
+
         except:
             pass
 
     for video in videos:
         print(URL + 'Podcasts//' + video)
+        """
+print("TEMPORARILY DOING NOTHING IN THIS FILE")
