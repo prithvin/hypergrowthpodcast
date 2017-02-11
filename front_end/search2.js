@@ -28,7 +28,7 @@ app.controller('MainCtrl', [
     $scope.pods.push(counter)
     $scope.chunk($scope.pods, $scope.pods.length)
     console.log("pods length is: " + $scope.pods.length)
-    console.log("chunkedArray length is" + $scope.chunkedArray.length)
+    console.log("chunkedArray length is: " + $scope.chunkedArray.length)
   }
 
   $scope.chunk = function(array, size){
