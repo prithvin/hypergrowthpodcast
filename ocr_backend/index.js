@@ -6,7 +6,7 @@ var uploader = require('./dbuploader.js');
 var keywordExtract = require("./keywordExtract.js");
 var existing = new Set([]);
 var counter = 0;
-
+/*
 uploader.getPodcastList(function(podcasts) {
   podcasts.forEach(function(e) {
     existing.add(e.PodcastUrl);
@@ -27,3 +27,5 @@ uploader.getPodcastList(function(podcasts) {
     });
   }
 });
+*/
+var srtProcessor = require('./srtProcessor.js');
