@@ -4,9 +4,6 @@
   margin-right: 50px;
 }
 
-.vid-border{
-  border: 50px solid green;
-}
 
 *{
   font-family: 'Roboto', sans-serif;
@@ -15,10 +12,10 @@
 .customHr {
     width: 100%
     font-size: 1px;
-    color: #f0f4f1;
+    color: #F4F6F8;
     line-height: 1px;
 
-    background-color: #bacdf7;
+    background-color: #BAC5D3;
     margin-top: -6px;
     margin-bottom: 10px;
 }

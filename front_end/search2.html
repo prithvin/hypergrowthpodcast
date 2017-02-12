@@ -18,10 +18,10 @@
   <div id="loader"></div>
   <div id="navbox"></div>
 
-  <div style="background-color:#f0f4f1">
+  <div style="background-color:#F4F6F8">
       <div class="container">
         <div class="row">
-          <div class="col-md-8" style="min-height: 750px; padding-left: 70px; background-color:#f0f4f1"><button ng-click="add()">Add</button><h4 style="color: #0f3170">Search Results</h4><br />
+          <div class="col-md-8" style="min-height: 750px; padding-left: 40px; background-color:#F4F6F8"><button ng-click="add()">Add</button><h4 style="color: #0f3170">Search Results for "searchQuery" in "queryClass"</h4><br />
 
             <div class="customHr">.</div><br /><br />
 
@@ -33,13 +33,13 @@
                   <h4 class="col-md-6">Col 2</h4>
                 </div> -->
 
-                <div style="width:100%" class="row col-md-12">
+                <div style="width:70%" class="row col-md-12">
 
                   <table>
                     <span ng-show="chunkedArray.length > 0"
                       <tr ng-repeat="pod in chunkedArray track by $index">
-                        <div style="padding-right: 50px; padding-bottom:30px;padding-left: 50px">
-                            <iframe style="padding:1px; border:2px solid #1c73ca; border-radius: 10px" width="300" height="240" src="https://www.youtube.com/embed/p2CrdaoGGXY" frameborder="0"></iframe>{{$index}}<br />
+                        <div style="padding-right: 50px; padding-bottom:30px;padding-left: 30px">
+                            <iframe style="border-radius: 6px;border: 1px solid #BAC5D3" width="300" height="240" src="https://www.youtube.com/embed/p2CrdaoGGXY" frameborder="0"></iframe>{{$index}}<br />
                             <div style="color:#124d87; font-size: 12; margin: 10px">
                               <span>OCR match on "{{pod.ocrMatchText}}" on slide {{pod.ocrMatchSlide}}</span><br />
                               <span>Keywords: {{pod.keywords}}</span><br />
@@ -80,9 +80,9 @@
 
           </div><hr />
 
-          <div class="col-md-3" style="padding-right:30px; padding-left:20px;padding-top:28px;background-color:lavender"><h4 style="color:#0f3170; position:relative;left:8px">Matching Posts</h4><br />
+          <div class="col-md-3" style="padding-right:30px; padding-left:20px;padding-top:28px;background-color:#F4F6F8"><h4 style="color:#0f3170; position:relative;left:8px">Matching Posts</h4><br />
             <div class="customHr">.</div><br />
-            <div id="postbox"></div>
+            <div id="postsearch"></div>
 
           </div><hr />
 
@@ -119,25 +119,57 @@
             }, 200);
         });
 
-                loadComponent("post_module.html", "#postbox", function () {
-                  new APost(
-                    {"Name": "Rauhmel Bob",
-                     "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                     "Content": "This is a test post with some random data just to test the functionality",
-                     "TimeOfPost": 1486659593882,
-                     "SlideOfPost": 5,
-                     "Comments": [
-                     {
-                        "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                        "PosterName" : "Rauhmel Bob",
-                        "Content" : "This is a really cool test comment and a really long test comment because it needs to be tested",
-                        "Time" : 1486691019627
-                     },
-                     ]
-                   }, "Prithvi Narasimhan", "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png", null, $(".post-container"));
+                loadComponent("post_search_module.html", "#postsearch", function () {
+                  new PostSearch(
+                      [{"Name": "Rauhmel Bob",
+                          "PostId": "123123123",
+                           "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                           "Content": "This is a test post with some random data just to test the functionality",
+                           "TimeOfPost": 1486659593882,
+                           "SlideOfPost": 5,
+                           "Comments": [
+                           {
+                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                              "PosterName" : "Rauhmel Tob",
+                              "Content" : "This is a really cool test commement",
+                              "Time" : 1486691019627
+                           },
+                           {
+                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                              "PosterName" : "LOL Bob",
+                              "Content" : "This is a really cool test commement and it is going to be abbsurdley long to test a weird edge case that wil hopefully not break everything",
+                              "Time" : 1486691009627
+                           }
+                           ]
+                          },
+                  {"Name": "Rauhmel Bob",
+                          "PostId": "123123123",
+                           "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                           "Content": "This post will only talk about hash tables and hash maps but will not talk about anything else",
+                           "TimeOfPost": 1486659593882,
+                           "SlideOfPost": 5,
+                           "Comments": [
+                           {
+                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                              "PosterName" : "Rauhmel Tob",
+                              "Content" : "FUBAR. If you search for FUBAR, you will find it here maybe?",
+                              "Time" : 1486691019627
+                           },
+                           {
+                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                              "PosterName" : "LOL Bob",
+                              "Content" : "This is a really cool test commement and it is going to be abbsurdley long to test a weird edge case that wil hopefully not break everything",
+                              "Time" : 1486691009627
+                           }
+                           ]
+                          }],
+                      "Prithvi Narasimhan",
+                      "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png",
+                      null,
+                       $(".search-module"));
                     $("#loader").hide();
                     $("#navbox").show();
-                    $("#postbox").show();
+                    $("#postsearc").show();
                 }, 200);
 
 </script>
