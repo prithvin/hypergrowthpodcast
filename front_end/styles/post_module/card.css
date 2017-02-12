@@ -56,6 +56,8 @@ mark {
     padding-left: 15px;
     padding-right: 15px;
     font-size: 0.77em;
+    font-weight: 200;
+
 }
 
 .time-signature-main {
@@ -64,6 +66,7 @@ mark {
     font-size: 0.73em;
     font-weight: 300;
     color: #9094A9;
+    left: 3px;
 }
 
 .slide-no {
@@ -78,8 +81,7 @@ mark {
 .comments {
     margin-top: 10px;
     padding:0;
-    width:217px;
-
+    width: 100%;
 }
 
 .comment-pic {
@@ -100,7 +102,6 @@ mark {
     padding-bottom: 13px;
     background-color: #F7F7F7;
     margin-bottom:3px;
-    width: 217px;
     word-wrap: break-word;
 
 }
@@ -127,7 +128,7 @@ mark {
 .time-comment {
     text-align:right;
     top:5px;
-    padding:5px;
+    padding:3px;
     height:100%;
 }
 
@@ -149,6 +150,4 @@ mark {
 .push-up-comment {
     vertical-align: top;
     width: 100%;
-    overflow:hidden;
-    width: 217px;
 }
