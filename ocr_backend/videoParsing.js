@@ -69,7 +69,7 @@ module.exports = {
                             OCRKeywordsForSlide: words[whichSlide - 1],  // put extracted keywords here
                             SlidePost: [],
                             AudioTranscription: slideSubs[whichSlide - 1],
-                            AudioTranscriptionFreq: slideKeywords[whichSlide - 1],
+                            AudioTranscriptionFreq: slideKeywords[whichSlide - 1]
                           }, function(idx) {
                             id = idx;
                           });
@@ -120,7 +120,7 @@ module.exports = {
                               videosFromCourse.push({'_id': id});
 
                               index++;
-                              exec("rm -f " + filename + "&& rm -rf " + dirname,
+                              exec("rm -f " + filename + "&& ls " + dirname,
                               function(error, stdout, stderr) {
                                 var nextKey = course;
                                 if (index < videoFiles.length) {
