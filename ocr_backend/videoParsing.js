@@ -42,7 +42,7 @@ function generateCommand (fileData) {
 
 function addSRTtoFileData (fileData, subs) {
   fileData['SRTFile'] = subs['SRTFile'];
-  fileData['SRTKeywordsForFile'] = subs['SRTKeywords'];
+  fileData['SRTKeywordsForFile'] = subs['FlattenedKeywords'];
   fileData['SRTPerSlide'] = subs['SubsPerSlide'];
   fileData['SRTKeywordsPerSlide'] = subs['KeywordsBySlide'];
   return fileData;
@@ -113,7 +113,7 @@ function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, idOfS
 }
 
 function deleteRandomPodcastData (fileData, callback) {
-  exec("rm -f " + fileData["FileName"] + "&& rm -rf " + fileData["DirName"], function(error, stdout, stderr) {
+  exec("rm -f keywordEncoding.txt && rm -f *.srt && rm -f " + fileData["FileName"] + "&& rm -rf " + fileData["DirName"], function(error, stdout, stderr) {
     if (error) {
       console.log("Random error occured in deleting files. This should not happen");
     }

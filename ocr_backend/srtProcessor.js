@@ -6,6 +6,8 @@ var keywordExtract = require("./keywordExtract.js");
 
 module.exports = {
     getSRT: function (videoFileName, intervalData, callback) {
+        intervalData = intervalData.map((num) => { return num / 1000; }); // convert ms to s
+
         var callString = "autosub " + videoFileName;
         console.log("Starting audio extraction for " + videoFileName);
         exec(callString , function(error, stdout, stderr) {

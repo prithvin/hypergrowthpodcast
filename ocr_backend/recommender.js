@@ -7,7 +7,7 @@ module.exports = {
 		var ret = [];
 
     for(var i = 0; i < tmp.length; i++) {
-      if(podcastList[i]['_id'] === input_podcast['_id']) {
+      if(String(podcastList[i]['_id']) === String(input_podcast['_id'])) {
         tmp.splice(i, 1);
         break;
       }

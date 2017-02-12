@@ -19,7 +19,6 @@ uploader.getPodcastList(function(podcasts) {
 
         exec("rm -rf tmp* && rm -f *.mp4", function(error, stdout, stderr) {
           working = [
-            /*
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01132017-0900.mp4',
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01182017-0900.mp4',
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01202017-0900.mp4',
@@ -30,7 +29,6 @@ uploader.getPodcastList(function(podcasts) {
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02032017-0900.mp4',
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02062017-0900.mp4',
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02082017-0900.mp4',
-            */
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02102017-0900.mp4',
           ];
 
