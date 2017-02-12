@@ -1,7 +1,29 @@
 var parseSRT = require('parse-srt');
 var fs = require('fs-extra')
+var exec = require('child_process').exec;
 
-parseFile('lol.srt', [0, 100, 200, 300, 400]);
+
+module.exports = {
+    getSRT: function (videoFileName, intervalData, callback) {
+        var callString = "autosub " + videoFileName;
+        exec(callString , function(error, stdout, stderr) {
+            if (error) {
+                console.log("An error occurred");
+                console.log(stderr);
+                console.log(stdout);
+                console.log(error);
+                callback({
+                    'SRTFile': {},
+                    'SubsPerSlide': []
+                }); 
+                return;
+            }
+            var srtFleName = videoFileName.slice(-4) + ".srt";
+            parseFile(srtFleName, intervalData, callback);
+        });
+    }
+};
+
 
 function parseFile (fileName, intervalData, callback) {
     if (intervalData.length == 0) {
@@ -40,8 +62,8 @@ function parseFile (fileName, intervalData, callback) {
         }
         subsPerSlide.push(forCurrentSlide);
         var returnedObj = {
-            'SRTFile': jsonSubs,
-            'SubsPerFile': subsPerSlide
+            'SRTFile': data,
+            'SubsPerSlide': subsPerSlide
         };
         callback(returnedObj);
     });

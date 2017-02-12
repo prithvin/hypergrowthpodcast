@@ -4,8 +4,14 @@ var videoParsing = require("./videoParsing.js");
 var fs = require('fs');
 var uploader = require('./dbuploader.js');
 var keywordExtract = require("./keywordExtract.js");
+var srtProcessor = require('./srtProcessor.js');
 var existing = new Set([]);
 var counter = 0;
+
+srtProcessor.getSRT('poli27fa16-11022016-1200.mp4', [0, 100, 200, 300, 400], function (data) {
+  console.log(data);
+});
+
 /*
 uploader.getPodcastList(function(podcasts) {
   podcasts.push("");
@@ -39,4 +45,3 @@ uploader.getPodcastList(function(podcasts) {
   });
 });
 */
-var srtProcessor = require('./srtProcessor.js');
