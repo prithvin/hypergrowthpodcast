@@ -26,10 +26,12 @@ function extractKeyByEle (slideTexts, index, callback, regularReturned, flattene
 }
 
 function extract (text, callback) {
-    var callString = "python ./runner.py \""  + text + "\"";
+    var callString = "python2 ./runner.py \""  + text + "\"";
     exec(callString , function(error, stdout, stderr) {
         if (error) {
             console.log("An error occurred");
+            console.log(error);
+            console.log(stderr);
             callback([]); return;
         }
         var data = JSON.parse(stdout);

@@ -17,7 +17,7 @@ module.exports = {
                 callback({
                     'SRTFile': {},
                     'SubsPerSlide': []
-                }); 
+                });
                 return;
             }
             console.log("Audio extraction complete for " + videoFileName);
@@ -43,7 +43,7 @@ function parseFile (fileName, intervalData, callback) {
 
         var currentMin = intervalData[0];
         var currentMax = Number.MAX_VALUE;
-        if (intervalData.length > 0) 
+        if (intervalData.length > 0)
             currentMax = intervalData[1];
 
         var currentMaxIntervalIndex = 1;
@@ -66,11 +66,11 @@ function parseFile (fileName, intervalData, callback) {
         }
         subsPerSlide.push(forCurrentSlide);
         console.log("Extracting keywords for audio extraction");
-        keywordExtract.extractKeywordsFromSlide(subsPerSlide, function (data) {
+        keywordExtract.extractKeywordsFromSlide(subsPerSlide, function (dataKeys) {
             console.log("Keyword extraction complete..");
             var returnedObj = {
-                'FlattenedKeywords': data["FlattenedReturn"],
-                'KeywordsBySlide': data["RegularReturned"],
+                'FlattenedKeywords': dataKeys["FlattenedReturn"],
+                'KeywordsBySlide': dataKeys["RegularReturned"],
                 'SRTFile': data,
                 'SubsPerSlide': subsPerSlide
             };
