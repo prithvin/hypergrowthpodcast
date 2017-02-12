@@ -11,9 +11,10 @@ var fs = require('fs');
 var parseText = require("./parseText.js");
 var fileParser = require('./fileParser.js');
 var dbuploader = require('./dbuploader.js');
+var recommender = require('./recommender.js');
 
 module.exports = {
-  parseVideo: function(videoFiles, index) {
+  parseVideo: function(videoFiles, videosFromCourse, index) {
     var parseVideoLater = this.parseVideo.bind(this);
     var videoFile = videoFiles[index];
     console.log("Converting " + videoFile + " to pictures ");
@@ -64,7 +65,6 @@ module.exports = {
                           TimeEnd: "NULL",
                           OCRTranscription: transcription,
                           OCRKeywordsForSlide: words[whichSlide - 1],  // put extracted keywords here
-                          RecommendedVideos: [],  // TODO
                           SlidePost: [],
                           LecturePost: []
                         }, function(idx) {
@@ -109,15 +109,42 @@ module.exports = {
                             AudioTranscription: "NULL", // not implemented yet
                             AudioTranscriptionFreq: [], // not implemented yet
                             Slides: slideIds,
+                            RecommendedVideos: [],
                             LecturePost: []
                           }, function(id) {
+                            videosFromCourse.push({'_id': id});
+
                             index++;
                             exec("rm -rf " + dirname,
                             function(error, stdout, stderr) {
+                              var nextKey = course;
                               if (index < videoFiles.length) {
-                                parseVideoLater(videoFiles, index);
+                                nextKey = videoFiles[index].split("/").slice(-1)[0].slice(0, -4).split('-')[0];
                               }
-                              else { process.exit(); }
+
+                              if (index == videoFiles.length || course != nextKey) {
+                                var c;
+
+                                dbuploader.getPodcastsForCourse(course, function(existing) {
+                                  for (c = 0; c < videosFromCourse.length; c++) {
+                                    var current = videosFromCourse[c];
+                                    recommender.getRecommendedPodcasts(current, existing, function(r) {
+                                      dbuploader.setRecommendations(current._id, r, function() {
+                                        if (c == videosFromCourse.length) {
+                                          if (index < videoFiles.length) {
+                                            parseVideoLater(videoFiles, [], index);
+                                          }
+
+                                          else { process.exit(); }
+                                        }
+                                      });
+                                    });
+                                  }
+                                });
+                              }
+                              else {
+                                parseVideoLater(videoFiles, videosFromCourse, index);
+                              }
                             });
                           });
                         }
@@ -127,8 +154,6 @@ module.exports = {
                 });
               });
             });
-
-
          });
      });
   }
