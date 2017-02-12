@@ -89,7 +89,7 @@ function parseFileNameForCourseData (fileName) {
   };
 }
 
-function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray) {
+function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray, callback) {
   dbuploader.addPodcast({
     ClassName: partsOfFileName["Course"],
     QuarterOfCourse: partsOfFileName["Quarter"],
@@ -122,7 +122,7 @@ function deleteRandomPodcastData (fileData, callback) {
 }
 
 function isMorePodcastInLecture (videoFiles, index, videosFromCourse, partsOfFileName) {
-  if (index >= videoFiles.length)
+  if (index + 1 >= videoFiles.length)
     return false;
 
   var nextFileData = parseURL(videoFiles[index + 1]);
@@ -131,7 +131,7 @@ function isMorePodcastInLecture (videoFiles, index, videosFromCourse, partsOfFil
 
 }
 
-function getRecommendationsForCourseVideos (classNameCourseKey, callback) {
+function getRecommendationsForCourseVideos (classNameCourseKey, videosFromCourse, callback) {
   dbuploader.getPodcastsForCourse(classNameCourseKey, function(videosInLectureInDB) {
     for (var i = 0; i < videosFromCourse.length; i++) {
       var current = videosFromCourse[i];
@@ -181,7 +181,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
                   if (!hasMoreVideosInSeries) {
-                    getRecommendationsForCourseVideos(partsOfFile["ClassNameCourseKey"], function () {
+                    getRecommendationsForCourseVideos(partsOfFileName["ClassNameCourseKey"], videosFromCourse, function () {
                       parseVideoForEach(videoFiles, videosFromCourse, index + 1);
                     });
                   }
