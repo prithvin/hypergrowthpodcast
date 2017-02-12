@@ -94,8 +94,12 @@ module.exports = {
 
                           date = date.slice(4) + date.slice(0, 4);
 
+                          var formattedCourse = course.split('_')[0].toUpperCase();
+                          var pre = formattedCourse.split(/[0-9]/)[0];
+                          formattedCourse = pre + ' ' + formattedCourse.slice(pre.length);
+
                           dbuploader.addPodcast({
-                            ClassName: courseCode,
+                            ClassName: formattedCourse,
                             QuarterOfCourse: quarter,
                             ClassNameCourseKey: course,
                             VideoDate: date,
