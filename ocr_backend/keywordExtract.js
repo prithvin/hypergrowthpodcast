@@ -31,8 +31,8 @@ function extract (text, callback) {
             console.log("Some error occured when writing to the keyword file");
             console.log(err);
         }
-        
-        var callString = "python ./runner.py";
+
+        var callString = "python2 ./runner.py";
         exec(callString , function(error, stdout, stderr) {
             if (error) {
                 console.log("An error occurred");
