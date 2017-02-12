@@ -1196,7 +1196,7 @@ And so in some contacts you'll see that DFS is just Explorer
 
 300
 00:27:11,488 --> 00:27:17,632
-But in this book that were using they called DFS of this hole algorithm that kind of explores the
+But in this book that were using they call DFS in this whole algorithm that kind of explores the
 
 301
 00:27:17,888 --> 00:27:19,168
