@@ -10,13 +10,6 @@ var SlideModel = new mongoose.Schema({
 		Frequency:Number
 		}
   ],
-	RecommendedVideos: [
-		{
-			PodcastId: Number,
-			PodcastImage: String,
-			PodcastName: String
-		}
-	],
 	SlidePost: [],
   LecturePost: []
 

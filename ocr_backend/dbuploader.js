@@ -54,6 +54,20 @@ module.exports = {
       });
     });
   },
+  setRecommendations: function (id, recommendations, callback) {
+    connectMongo(function () {
+      PodcastModel.update({_id: id}, {$set: {RecommendedVideos: recommendations}},
+                          function (err, podcast){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          callback();
+        }
+      });
+    });
+  },
   addPodcast: function (obj, callback) {
     connectMongo(function () {
       PodcastModel.create(obj, function (err, podcasts){
