@@ -1,3 +1,4 @@
+        $(".no-results").hide();
 var PostSearch = class PostSearch {
     constructor (postData, currentUserName, currentUserPic, currentUserAuthToken, mainDiv) {
         this.currentUserName = currentUserName;
@@ -5,6 +6,7 @@ var PostSearch = class PostSearch {
         this.currentUserAuthToken = currentUserAuthToken;
         this.mainDiv = mainDiv;
         this.posts = [];
+        $(".no-results").hide();
 
         this.mark = new Mark(document.getElementsByClassName("search-module")[0]);
         var parentClass = this;
@@ -12,6 +14,23 @@ var PostSearch = class PostSearch {
             for (var x = 0; x < postData.length; x++) {
                 parentClass.loadPost(postData[x]);
             }
+        });
+
+        var searchBar = $(this.mainDiv).prev();
+        var inputField = $(searchBar).find("#secondary-search-bar");
+
+        $(searchBar).on("submit", function (ev) {
+            ev.preventDefault();
+            parentClass.searchByText($(inputField).val())
+        })
+        $(inputField).on("input", function (ev) {
+            ev.preventDefault();
+            parentClass.searchByText($(inputField).val())
+        })
+
+        $(this.mainDiv).find(".all-posts-view").on("click", function (ev) {
+            ev.preventDefault();
+            parentClass.searchByText("");
         });
     }
 
@@ -27,16 +46,25 @@ var PostSearch = class PostSearch {
             return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
         };
         this.currentTextBeingSearched = text;
-        this.mark.mark(text, { "caseSensitive" : false})
+        this.mark.mark(text, { "caseSensitive" : false, "separateWordSearch" : false})
+        var anyPostsShown = false;
         for (var x = 0; x < this.posts.length; x++) {
-            this.posts[x].searchForContent(text);
+            var hasPostsShown = this.posts[x].searchForContent(text);
+            anyPostsShown = (anyPostsShown || hasPostsShown );
+        }
+        if (!anyPostsShown) {
+            if (!$(".no-results").is(":visible"))
+                $(".no-results").fadeIn(500);
+        }
+        else {
+            $(".no-results").hide();
         }
     }
 
     remarkText () {
         if (this.currentTextBeingSearched != null) {
             this.mark.unmark();
-            this.mark.mark(this.currentTextBeingSearched, { "caseSensitive" : false})
+            this.mark.mark(this.currentTextBeingSearched, { "caseSensitive" : false, "separateWordSearch" : false})
         }
     }
 

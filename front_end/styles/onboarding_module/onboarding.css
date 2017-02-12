@@ -1,0 +1,33 @@
+.onboarding-right {
+}
+
+.onboarding-left {
+  background: url('../../images/Material-Design-Background-1024.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+html,body {
+  height: 100%;
+}
+
+.container {
+	height: 100%;
+	padding: 0px;
+}
+
+.fill{
+	width:100%;
+	height:100%;
+	min-height:100%;
+}
+
+.center-pic {
+	padding-top: 10%;
+	padding-left: 10%;
+	padding-right: 10%;
+	max-width:100%;
+	height: auto;
+}

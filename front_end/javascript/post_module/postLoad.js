@@ -33,10 +33,14 @@ var APost = class APost {
 
     searchForContent (searchTerm) {
         var isSearch = $(this.mainDiv).is(':contains("' + searchTerm + '")');
-        if (isSearch)
+        if (isSearch) { 
             this.showThisPost();
-        else
+            return true;
+        }
+        else {
             this.hideThisPost();
+            return false;
+        }
     }
 
     fetchBySlide (slideNo) {

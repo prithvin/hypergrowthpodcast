@@ -11,5 +11,5 @@ Full-fledged webapp that allows for searching of UCSD podcasts by keyword with r
 - FFmpeg
 - MEncoder
 - PyOCR
-- React
 - MongoDB
+- Autosub
