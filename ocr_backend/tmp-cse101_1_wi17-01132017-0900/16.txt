@@ -1,0 +1,46 @@
+PRE AND POST NUMBERS
+
+ 
+
+ 
+
+procedure explore(G = (V,E)\ v)
+
+procedure dfs(G) visited(v)=lrue
+cc=0;
+for each vertex v: for sac“ edge (V'UV
+visited(v)-false if not vtsiled(u), then
+' prev(u)=v
+for each vertex v: explore(G.u)
+
+if not visited(v), then cc++z explore(G,v)
+
+ 
+
+ 
+
+ 
+
+pre and post numbers assign 2 integers to each pmcedureprewsm")
+
+ 
+
+ 
+
+vertex. pre(v)=clock;
+clock++;
+
+These correspond to the steps of when that
+
+vertex enters the stack and leaves the stack. procedure postvisit(v)
+
+post(v)=clock++;
+
+ 
+
+ 
+
+ 
+
+ 
+

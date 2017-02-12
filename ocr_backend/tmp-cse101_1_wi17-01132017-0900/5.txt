@@ -1,0 +1,29 @@
+ 
+
+HOW LONG DOES IT TAKE?
+
+ 
+
+Worst case scenario, you pass
+through all vertices and set them to
+true which takes O(|V|) then after
+you set it to true you look at each
+edge incident with it which will take
+O(deg(v)) for each vertex v.
+
+What is
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+for each edge (v.u):
+if not visited(u), then
+explore(G,u)
+
+ 
+
+ 
+

@@ -7,11 +7,7 @@ var srtProcessor = require('./srtProcessor.js');
 var existing = new Set([]);
 var counter = 0;
 
-srtProcessor.getSRT('poli27fa16-11022016-1200.mp4', [0, 100, 200, 300, 400], function (data) {
-  console.log(data);
-});
 
-/*
 uploader.getPodcastList(function(podcasts) {
   podcasts.push("");
   podcasts.forEach(function(e) {
@@ -43,4 +39,4 @@ uploader.getPodcastList(function(podcasts) {
     }
   });
 });
-*/
+

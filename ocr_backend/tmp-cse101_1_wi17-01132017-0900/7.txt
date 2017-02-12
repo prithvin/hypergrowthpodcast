@@ -1,0 +1,24 @@
+KEEPING TRACK OF PATHS
+
+ 
+
+ 
+
+At the end of the procedure, the C;::::&::::Iore(e _ (V’E)’ V)
+algorithm will have assigned true to for each edge (v,u):
+
+each vertex that can be reached by if not visitedw), the“
+
+v. What if we want to know what explore(G,u)
+those paths are?
+
+ 
+
+ 
+
+ 
+
+C;
+
+ 
+

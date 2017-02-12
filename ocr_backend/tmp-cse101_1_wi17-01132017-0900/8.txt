@@ -1,0 +1,29 @@
+ 
+
+KEEPING TRACK OF PATHS
+
+ 
+
+At the end of the procedure, the
+algorithm will have assigned true to
+each vertex that can be reached by
+v. What if we want to know what
+those paths are?
+
+C;
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+for each edge (v,u):
+if not visited(u), then
+prev(u)=v
+explore(G,u)
+
+ 
+
+ 
+

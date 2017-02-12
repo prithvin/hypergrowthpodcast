@@ -1,0 +1,29 @@
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+
+visited(v)=true
+
+KEEPING TRACK OF PATHS fmeachedge(v,u);
+
+if not visited(u), then
+prev(u)=v
+
+Example: explore(G.u)
+
+ 
+
+ 
+
+ 
+
+    
+
+0‘ €>—@ @
+
+ 
+
+ 
+

@@ -1,0 +1,33 @@
+ 
+
+ 
+
+ 
+  
+
+procedure explore(G— - (V,E), v)
+visited(v )= true
+
+KEEPING TRACK OF PATHS foreachedgewu)
+
+if not visited(u ), then
+
+prev(u)=v
+Example: explore(G,u)
+
+/B> __/c> g) (/13?) DFS tree
+(/B\/\/\<F\
+09 AK” 3 <1:
+
+<5 I / KL) (I (ES: H )
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+

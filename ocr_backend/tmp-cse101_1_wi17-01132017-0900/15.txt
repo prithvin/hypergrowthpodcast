@@ -1,0 +1,30 @@
+ 
+
+DEPTH FIRST SEARCH (EXAMPLE)
+
+ 
+
+procedure DFS(G)
+cc=0;
+for each vertex v:
+Visited(v)=false
+for each vertex v:
+if not visited(v), then cc++z explore(G,v)
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+for each edge (v,u):
+if not visited(u), then
+prev(u)=v
+explore(G,u)
+
+ 
+
+ 
+
+ 
+

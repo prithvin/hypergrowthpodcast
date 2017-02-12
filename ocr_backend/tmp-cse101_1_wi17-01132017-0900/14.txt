@@ -1,0 +1,31 @@
+DEPTH FIRST SEARCH
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+
+procedure DFS(G) . .
+vustted(v)=true
+
+ 
+
+cc=0;
+foreach vertexv: for each edge (v,u):
+visited(v)=false if not visited(u), then
+for each yertex yz' prev(u)=v
+If not VISIted(v), then cc++: explore(G,v) explore(G , u)
+
+ 
+
+ 
+
+DFS is a procedure that calls explore on G until all vertices have
+been reached
+
+cc stands for connected component and by the end of DFS, cc will
+be set to the number of connected components.
+
+ 
+

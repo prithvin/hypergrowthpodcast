@@ -1,0 +1,23 @@
+DOES IT WORK?
+
+ 
+
+ 
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+At some point, 2 was set to true for each edge (m):
+and then you loop through all ifnotvisited(u), then
+vertices including w. explore(G,u)
+we “r' “’/“‘*\6‘ “‘ "' ﬁ’l/t
+v % W
+
+w has not been set to true so
+explore(G,w) and set w to true.
+
+ 
+

@@ -1,0 +1,13 @@
+EDGE TYPES AND PRE/POST NUMBERS
+
+ 
+
+The different types of edges can be determined from the pre/post
+numbers for the edge (11,17)
+
+(11,17) is a tree/forward edge then pre(u) < pre(v) < post(v) < post(u)
+(u,v) is a back edge then pre(v) < pram) < post(u) < 10051507)
+(u, v) is a cross edge then pre(v) < post(v) < pre(u) < post(u)
+
+ 
+

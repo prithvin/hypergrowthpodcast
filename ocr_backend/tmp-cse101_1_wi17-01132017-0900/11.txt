@@ -1,0 +1,13 @@
+BACK EDGES IN UNDIRECTED GRAPHS
+
+ 
+
+Definition: back edges in an undirected graph G that has been
+explored are edges in G that are not in the DFS tree of G.
+
+What do back edges tell you about the graph?
+
+How do you know if an edge is a back edge?
+
+ 
+

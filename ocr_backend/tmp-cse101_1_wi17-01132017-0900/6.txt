@@ -1,0 +1,32 @@
+HOW LONG DOES IT TAKE?
+
+ 
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+for each edge (v,u):
+if not visited(u), then
+explore(G,u)
+
+So the procedure assigns true to |V|
+vertices and checks 2|E| edges when
+it has visited all vertices.
+
+ 
+
+ 
+
+ 
+
+This algorithm has a runtime of
+0(lV|+|E|)-
+
+For graph algorithms, this is called
+linear time, since the runtime grows
+proportional to the number of
+vertices and edges.
+
+ 
+

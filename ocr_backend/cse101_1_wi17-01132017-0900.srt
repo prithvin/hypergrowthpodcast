@@ -1,0 +1,2215 @@
+1
+00:01:22,688 --> 00:01:28,832
+We're going to see how far we can get today let's just jump right into
+
+2
+00:01:29,088 --> 00:01:35,232
+Where we left off so we left off with this procedure called Explorer
+
+3
+00:01:35,488 --> 00:01:41,632
+We talked about how it would terminate right because
+
+4
+00:01:41,888 --> 00:01:48,032
+It's going to only encounter each vertex atmo
+
+5
+00:01:48,288 --> 00:01:54,432
+Most one time and it will never encounter or never visited vertex
+
+6
+00:01:54,688 --> 00:02:00,832
+More than one cell
+
+7
+00:02:01,088 --> 00:02:07,232
+Define number of vertices so it should terminate what I'm going to attempt to do now
+
+8
+00:02:07,488 --> 00:02:13,632
+Prove its correctness so to prove and algorithms correctness need to know what the algorithm is trying to
+
+9
+00:02:13,888 --> 00:02:20,032
+Does anybody know what the goal of Explorer is gay
+
+10
+00:02:20,288 --> 00:02:26,432
+Give me the graph and a starting for a text what do you want to happen
+
+11
+00:02:26,688 --> 00:02:32,832
+You want to set this visited value to be true for each
+
+12
+00:02:33,088 --> 00:02:39,232
+Vertex that is reachable from the starting for a text okay so
+
+13
+00:02:39,488 --> 00:02:45,632
+This is a proof technique that's used a lot in graph algorithms especially when
+
+14
+00:02:45,888 --> 00:02:52,032
+When you're talking about whether or not vertices are connected
+
+15
+00:02:52,288 --> 00:02:58,432
+I talked to does anybody know Russell from the CSE Department Heat
+
+16
+00:02:58,688 --> 00:03:04,832
+He calls this like the the first time failure proof method or something like that basically what we're going
+
+17
+00:03:05,088 --> 00:03:08,416
+Going to do is do a proof by contradiction
+
+18
+00:03:08,672 --> 00:03:14,816
+We're going to assume that algorithm doesn't work and figure out the first time it doesn't work and show that
+
+19
+00:03:15,072 --> 00:03:21,216
+There's a contradiction so we talked about
+
+20
+00:03:21,472 --> 00:03:26,592
+What the goal is so what would happen let's say okay let's do it with a say like this
+
+21
+00:03:31,712 --> 00:03:35,296
+What would what would we have to say would happen
+
+22
+00:03:35,552 --> 00:03:39,904
+The algorithm did work if the algorithm failed what we know to be true
+
+23
+00:03:50,912 --> 00:03:51,936
+That
+
+24
+00:03:52,448 --> 00:03:54,496
+A vertex
+
+25
+00:03:57,824 --> 00:04:03,968
+Oh oh oh right right okay
+
+26
+00:04:06,528 --> 00:04:10,880
+I thought it would be reachable but the algorithm wouldn't
+
+27
+00:04:11,136 --> 00:04:11,904
+Detective
+
+28
+00:04:14,464 --> 00:04:20,607
+Rides at the algorithm was not correct
+
+29
+00:04:20,863 --> 00:04:27,007
+What would write it wouldn't turn
+
+30
+00:04:29,311 --> 00:04:35,455
+This is this is how we're going to prove its the contradiction is going to be there exists a
+
+31
+00:04:35,711 --> 00:04:41,855
+You that is reachable from the but the algorithm doesn't
+
+32
+00:04:42,111 --> 00:04:43,647
+Set its value to be true
+
+33
+00:04:44,415 --> 00:04:50,559
+So if it's reachable from V that means that there exists a path from V2
+
+34
+00:04:50,815 --> 00:04:51,327
+To you
+
+35
+00:04:51,839 --> 00:04:57,983
+And since you is not true we know that be is true right that's just the first
+
+36
+00:04:58,239 --> 00:05:03,359
+Part of algorithm it's said to be true we know he is true and we know you was not true
+
+37
+00:05:03,615 --> 00:05:09,247
+So there's a point in this past where we find the first time it's fall
+
+38
+00:05:10,271 --> 00:05:15,647
+We have this is true
+
+39
+00:05:15,903 --> 00:05:17,439
+This is false
+
+40
+00:05:18,207 --> 00:05:24,351
+Night so there's a first time that it's false let's just say the first time that it's fall
+
+41
+00:05:24,607 --> 00:05:25,631
+What is w
+
+42
+00:05:32,799 --> 00:05:36,383
+Everything's true up until that point
+
+43
+00:05:36,895 --> 00:05:43,039
+So we get to see it is we set a value to be true right
+
+44
+00:05:44,063 --> 00:05:48,927
+It was false initially so what happens after you set a Vertex to be true
+
+45
+00:06:00,959 --> 00:06:07,103
+Right you look at all of the notes right you you look through all of the edges that are
+
+46
+00:06:07,359 --> 00:06:10,431
+Adjacent to it and you check if they're visited
+
+47
+00:06:10,687 --> 00:06:13,759
+And if they're not visited yet then you explore them
+
+48
+00:06:14,015 --> 00:06:15,039
+So
+
+49
+00:06:15,551 --> 00:06:21,695
+W is a neighbor of Z so when we explore Z
+
+50
+00:06:21,951 --> 00:06:23,231
+The encounter w
+
+51
+00:06:23,487 --> 00:06:24,767
+WS Falls
+
+52
+00:06:25,023 --> 00:06:27,071
+So
+
+53
+00:06:27,583 --> 00:06:32,191
+We explore W and what's the first thing you do when you explore as you said it to be true
+
+54
+00:06:32,447 --> 00:06:34,239
+Frank suck
+
+55
+00:06:36,287 --> 00:06:37,823
+So I'm
+
+56
+00:06:38,079 --> 00:06:41,919
+Basically if she has been in
+
+57
+00:06:42,431 --> 00:06:44,223
+Explored
+
+58
+00:06:45,503 --> 00:06:48,319
+Then double you must
+
+59
+00:06:48,831 --> 00:06:50,111
+Beset
+
+60
+00:06:50,879 --> 00:06:52,159
+Two
+
+61
+00:06:52,415 --> 00:06:53,951
+And there's your contradiction
+
+62
+00:06:57,791 --> 00:07:00,351
+Any questions
+
+63
+00:07:05,727 --> 00:07:06,495
+Okay
+
+64
+00:07:06,751 --> 00:07:12,895
+So what do I say at some point see was that the true that you look through all the vertices including ww has not
+
+65
+00:07:13,151 --> 00:07:15,967
+Habitat the truth so you explore W instead it to true
+
+66
+00:07:16,223 --> 00:07:21,087
+Okay how long does it take well we
+
+67
+00:07:27,487 --> 00:07:33,631
+We in in the worst case we may have to visit all of the vertices right and every time you
+
+68
+00:07:33,887 --> 00:07:40,031
+Visit of vertex you have to look through all of its neighbors right so every time you're at a vertex
+
+69
+00:07:40,287 --> 00:07:43,103
+You have to do degree of the many
+
+70
+00:07:43,359 --> 00:07:48,991
+Steps and so does anybody know what this sum is
+
+71
+00:08:04,863 --> 00:08:07,935
+Yeah so this is a undirected graph
+
+72
+00:08:08,191 --> 00:08:14,335
+So they don't have any directions to the degree of V is just however many edges are incident with B
+
+73
+00:08:23,039 --> 00:08:24,319
+Everybody now
+
+74
+00:08:28,415 --> 00:08:33,279
+Two times because you
+
+75
+00:08:37,119 --> 00:08:43,263
+Okay so basically you have to visit all the eggs all the vertices
+
+76
+00:08:43,519 --> 00:08:45,311
+And you have to visit twice
+
+77
+00:08:49,663 --> 00:08:55,807
+Signs true to the vertices and then checks all of these edges when it is visited each birthday
+
+78
+00:08:56,063 --> 00:09:00,159
+This algorithm has a run time of Big O V plus
+
+79
+00:09:00,671 --> 00:09:06,815
+In this class we're always going to say this is Lenny your time okay so whenever I ask you to design
+
+80
+00:09:07,071 --> 00:09:10,911
+Graph algorithm that runs in linear time
+
+81
+00:09:11,167 --> 00:09:15,519
+This is what I'm looking for
+
+82
+00:09:19,103 --> 00:09:20,127
+So
+
+83
+00:09:24,223 --> 00:09:25,247
+Any questions
+
+84
+00:09:29,599 --> 00:09:31,647
+Okay
+
+85
+00:09:32,415 --> 00:09:36,255
+So what if we want to keep track of the pads
+
+86
+00:09:36,767 --> 00:09:41,119
+Right what what we've done so far is
+
+87
+00:09:41,631 --> 00:09:47,775
+Explore will set true to all the vertices that are reachable from starting for a text
+
+88
+00:09:48,031 --> 00:09:49,567
+But sometimes that's not
+
+89
+00:09:50,335 --> 00:09:56,479
+That's not so useful maybe you actually want to know how to get there right when we're looking at the May
+
+90
+00:09:56,735 --> 00:09:58,271
+Problem
+
+91
+00:09:59,295 --> 00:10:05,439
+Did you just run Explorer as it is all you're going to know is whether or not the bird can reach the tree
+
+92
+00:10:05,695 --> 00:10:09,279
+But what's more useful is to know exactly how to get there
+
+93
+00:10:09,535 --> 00:10:14,655
+Frank so we're going to introduce
+
+94
+00:10:14,911 --> 00:10:21,055
+A small piece of code it's an array of
+
+95
+00:10:21,311 --> 00:10:27,455
+We're calling it previous or pre and basically whenever you
+
+96
+00:10:27,711 --> 00:10:30,015
+Find a Vertex that hasn't been visited
+
+97
+00:10:30,783 --> 00:10:35,135
+You said its previous value to the vertex that came right before it
+
+98
+00:10:35,647 --> 00:10:39,999
+So what this does is it is it to find a tree we're going to see that in a minute
+
+99
+00:10:40,255 --> 00:10:45,375
+Okay so let's do an example
+
+100
+00:10:47,423 --> 00:10:50,751
+We're going to
+
+101
+00:10:51,007 --> 00:10:52,287
+Explore
+
+102
+00:10:53,823 --> 00:10:54,591
+G
+
+103
+00:10:55,103 --> 00:10:57,407
+Na we're going to start at 8
+
+104
+00:10:57,663 --> 00:10:58,943
+And I'm
+
+105
+00:10:59,967 --> 00:11:02,527
+In this class the default
+
+106
+00:11:03,039 --> 00:11:09,183
+Usually on my vertices are all alphabetical the default unless I say otherwise is that we're going to
+
+107
+00:11:09,439 --> 00:11:14,047
+To always go in alphabetical order if there is a choice
+
+108
+00:11:14,815 --> 00:11:16,863
+Okay so
+
+109
+00:11:20,191 --> 00:11:22,751
+Reset a to be true
+
+110
+00:11:24,031 --> 00:11:25,823
+Visited
+
+111
+00:11:27,871 --> 00:11:29,151
+A is true
+
+112
+00:11:32,479 --> 00:11:34,015
+That's this part
+
+113
+00:11:34,527 --> 00:11:40,671
+Now for each Edge Vu so for each Edge coming out of how many edges are coming
+
+114
+00:11:40,927 --> 00:11:41,695
+Amun-ra
+
+115
+00:11:42,463 --> 00:11:46,303
+3 in so we're just going to look through them
+
+116
+00:11:46,559 --> 00:11:52,703
+And we're just going to respect the alphabetical ordering so the first one we're going to encounter a
+
+117
+00:11:54,751 --> 00:12:00,895
+Be right okay so be has not been visited so we
+
+118
+00:12:01,151 --> 00:12:02,687
+Set previous
+
+119
+00:12:03,455 --> 00:12:04,735
+Abby
+
+120
+00:12:04,991 --> 00:12:06,783
+To be equal to a
+
+121
+00:12:08,319 --> 00:12:09,343
+And then
+
+122
+00:12:09,599 --> 00:12:11,391
+We explore
+
+123
+00:12:14,207 --> 00:12:15,487
+Gob
+
+124
+00:12:18,559 --> 00:12:19,071
+Right
+
+125
+00:12:19,839 --> 00:12:24,191
+Williamsport GOP you said visited
+
+126
+00:12:29,055 --> 00:12:31,359
+B2B true
+
+127
+00:12:32,383 --> 00:12:34,943
+And then you look through
+
+128
+00:12:35,455 --> 00:12:36,735
+The edges
+
+129
+00:12:36,991 --> 00:12:40,319
+Incident with B so what's the first and you look at
+
+130
+00:12:45,695 --> 00:12:51,839
+A husband visited so this this if statement you just don't
+
+131
+00:12:52,095 --> 00:12:53,631
+If you don't go to that condition
+
+132
+00:12:53,887 --> 00:12:54,911
+And then you
+
+133
+00:12:55,167 --> 00:13:01,055
+You move along to the next to the next Edgewood BC
+
+134
+00:13:01,311 --> 00:13:03,359
+So you said previous
+
+135
+00:13:03,615 --> 00:13:07,455
+5 C to PB and then you explore
+
+136
+00:13:08,991 --> 00:13:15,135
+I got this is a very tedious way of
+
+137
+00:13:15,391 --> 00:13:17,439
+Showing algorithm
+
+138
+00:13:18,463 --> 00:13:23,071
+Instead what I'm going to do is I'm just going to build the tree as we go okay
+
+139
+00:13:23,583 --> 00:13:26,143
+And the um
+
+140
+00:13:27,167 --> 00:13:33,311
+The previous values like the previous thing that's going to be shown by a tree
+
+141
+00:13:33,567 --> 00:13:39,711
+Chuseok so let's just go like that so we started we go to be
+
+142
+00:13:40,991 --> 00:13:47,135
+Beach XA it's been visited Beach XC so it's not been visited so put in
+
+143
+00:13:47,391 --> 00:13:53,535
+The triage so she is a dead end right so then you break out of the
+
+144
+00:13:53,791 --> 00:13:59,679
+Floor C algorithm and you continue looking at the edges of bee
+
+145
+00:14:00,447 --> 00:14:03,519
+So the next edge of being you look at Izzy
+
+146
+00:14:05,055 --> 00:14:09,663
+And then you look at
+
+147
+00:14:10,431 --> 00:14:11,967
+And then J
+
+148
+00:14:13,247 --> 00:14:18,111
+And then Jay looks at a butt has been visited so
+
+149
+00:14:18,367 --> 00:14:24,511
+So you break out of that Explorer
+
+150
+00:14:24,767 --> 00:14:30,399
+Is also a dead end cuz it doesn't have any other
+
+151
+00:14:31,167 --> 00:14:32,959
+New vertices
+
+152
+00:14:33,215 --> 00:14:39,359
+And also and we get back to B and B is also a dead end
+
+153
+00:14:39,615 --> 00:14:43,967
+Then you go back to a day now goes to f
+
+154
+00:14:44,991 --> 00:14:46,271
+F goes to
+
+155
+00:14:47,039 --> 00:14:49,599
+Gigi Hadid
+
+156
+00:14:49,855 --> 00:14:53,439
+Ideas a dead-end to go back to G and you go to H
+
+157
+00:14:56,255 --> 00:14:58,303
+Okay are there any questions about that
+
+158
+00:15:05,983 --> 00:15:10,591
+So here I do it little bit nicer
+
+159
+00:15:11,871 --> 00:15:18,015
+Alright so this thing is called a DFS tree or a DFS output tree if you like
+
+160
+00:15:20,063 --> 00:15:26,207
+And what do you notice about the difference between the DFX output tree and the original
+
+161
+00:15:37,983 --> 00:15:43,359
+Right so this is a tree and this is this actually has some Cycles in it right
+
+162
+00:15:43,871 --> 00:15:46,687
+Which means that there are edges that we've missed
+
+163
+00:15:46,943 --> 00:15:50,015
+What are the ages that we've missed
+
+164
+00:15:54,111 --> 00:15:55,903
+AJ rank
+
+165
+00:15:56,671 --> 00:16:00,767
+What else bti
+
+166
+00:16:03,071 --> 00:16:04,095
+Did it
+
+167
+00:16:06,399 --> 00:16:10,751
+PayPal right but those those are not
+
+168
+00:16:11,263 --> 00:16:13,311
+Does. Didn't even get discovered
+
+169
+00:16:13,567 --> 00:16:19,711
+But that's fine that's that's what we want our algorithm to do is is skip over those because those are not
+
+170
+00:16:19,967 --> 00:16:22,271
+Connected to the starting for text
+
+171
+00:16:23,551 --> 00:16:24,831
+Okay
+
+172
+00:16:25,087 --> 00:16:26,111
+So
+
+173
+00:16:28,159 --> 00:16:28,927
+These
+
+174
+00:16:29,439 --> 00:16:35,583
+These red lines are called back edges and the black lines are called tree edges
+
+175
+00:16:35,839 --> 00:16:39,423
+Okay so let me just say a few things about this
+
+176
+00:16:40,703 --> 00:16:46,847
+You can't you can't look at a graph and tell which ones are back edges you have to do that
+
+177
+00:16:47,103 --> 00:16:47,615
+Algorithm
+
+178
+00:16:47,871 --> 00:16:50,687
+Packages are dependent on
+
+179
+00:16:50,943 --> 00:16:57,087
+The output tree of the outer it okay so
+
+180
+00:16:57,343 --> 00:17:01,951
+Definition packages
+
+181
+00:17:02,719 --> 00:17:08,863
+Packages in an undirected graph that has been explored or edges and G that are not in the DFS tree
+
+182
+00:17:09,119 --> 00:17:09,887
+Update
+
+183
+00:17:10,143 --> 00:17:13,727
+So what do back I just tell you about the graph
+
+184
+00:17:27,551 --> 00:17:33,695
+There's a loop there's a cycle right so if you find a package there's a cycle if there's a cycle that you will
+
+185
+00:17:33,951 --> 00:17:34,719
+You'll find a package
+
+186
+00:17:37,791 --> 00:17:41,119
+And how do you know if an egg is a package
+
+187
+00:17:44,191 --> 00:17:48,799
+Is missing from the tree and so there's a few ways you can do it you could
+
+188
+00:17:50,079 --> 00:17:54,943
+You could eat eggs to be true or to be visited
+
+189
+00:17:55,711 --> 00:17:57,247
+As you go through the tree
+
+190
+00:17:57,503 --> 00:18:01,855
+And then go back and check if there are any edges that you've met
+
+191
+00:18:04,415 --> 00:18:06,207
+So that's how I would do it
+
+192
+00:18:12,095 --> 00:18:15,423
+Assign
+
+193
+00:18:17,215 --> 00:18:18,495
+Visited
+
+194
+00:18:19,263 --> 00:18:21,567
+Age to be true
+
+195
+00:18:22,591 --> 00:18:23,871
+If age
+
+196
+00:18:24,895 --> 00:18:26,687
+Is
+
+197
+00:18:28,223 --> 00:18:30,271
+What's a good for Trevor
+
+198
+00:18:36,159 --> 00:18:37,439
+During
+
+199
+00:18:38,719 --> 00:18:39,487
+Explorer
+
+200
+00:18:41,279 --> 00:18:43,327
+Then after
+
+201
+00:18:44,095 --> 00:18:44,863
+Check
+
+202
+00:18:47,167 --> 00:18:48,191
+Any
+
+203
+00:18:48,447 --> 00:18:49,727
+Visited
+
+204
+00:18:55,359 --> 00:18:56,895
+Age is false
+
+205
+00:18:58,175 --> 00:19:02,783
+What's up this is the this is a good way to figure out if there are any Cycles in the grass
+
+206
+00:19:03,295 --> 00:19:04,319
+3 questions
+
+207
+00:19:07,391 --> 00:19:08,415
+Aren't
+
+208
+00:19:08,927 --> 00:19:10,463
+So um
+
+209
+00:19:11,487 --> 00:19:17,631
+Notice of the other thing that it did was it only found one connect to component right and it left the other one
+
+210
+00:19:19,423 --> 00:19:20,447
+Unexplored
+
+211
+00:19:23,007 --> 00:19:25,311
+Is exactly what we wanted to do so that's fine
+
+212
+00:19:25,823 --> 00:19:31,967
+Go to examine the rest of the graph we need to restart the Explorer on the other connected components
+
+213
+00:19:32,223 --> 00:19:34,527
+If we really want to know the structure of the entire draft
+
+214
+00:19:36,063 --> 00:19:42,207
+Okay before we do that I wanted to give you kind of a little hint about one of the homework problems
+
+215
+00:19:42,975 --> 00:19:43,999
+So
+
+216
+00:19:44,767 --> 00:19:49,375
+Noticed that when you have your tree right when you have your
+
+217
+00:19:49,887 --> 00:19:53,727
+DFS tree if you remove one of the packages
+
+218
+00:19:54,751 --> 00:19:56,287
+The tree is still connected
+
+219
+00:19:58,079 --> 00:20:04,223
+And basically what the theorem it says is that if you remove the edge that's part of a cycle
+
+220
+00:20:04,479 --> 00:20:06,527
+Pendergrass stays connected
+
+221
+00:20:07,551 --> 00:20:13,439
+And if you remove an edge that's not part of a cycle then the graph will become disconnected
+
+222
+00:20:13,695 --> 00:20:14,463
+Cancel this
+
+223
+00:20:15,487 --> 00:20:18,047
+That's that's that's
+
+224
+00:20:18,559 --> 00:20:24,703
+This little thing this might help you on one of the homework problems
+
+225
+00:20:29,311 --> 00:20:35,455
+Okay so now we're going to look at another algorithm that uses Explorer
+
+226
+00:20:35,711 --> 00:20:41,087
+What the purpose of this algorithm is to do is to count the number of connected components
+
+227
+00:20:41,343 --> 00:20:42,623
+Pet Shop
+
+228
+00:20:43,903 --> 00:20:49,535
+We're just going to call this depth-first search and I just called it that because the
+
+229
+00:20:49,791 --> 00:20:53,375
+I'm just following the book this is what the book called.
+
+230
+00:20:53,631 --> 00:20:59,775
+Basically what it does is it initializes is this variable called cc
+
+231
+00:21:00,031 --> 00:21:02,079
+Distance for connected component
+
+232
+00:21:02,335 --> 00:21:05,151
+And what we hope that it does
+
+233
+00:21:05,919 --> 00:21:10,783
+Is go to the graph and count how many connected components there are
+
+234
+00:21:12,063 --> 00:21:17,696
+So by the end of the process CC will be equal to the number of connected components
+
+235
+00:21:19,488 --> 00:21:24,608
+Okay so let's look at this first weekend if she lies
+
+236
+00:21:27,936 --> 00:21:29,728
+Everything to be false
+
+237
+00:21:30,240 --> 00:21:35,360
+And then we Loop through all the vertices of the graph
+
+238
+00:21:44,320 --> 00:21:45,600
+The disjoint parts
+
+239
+00:21:55,584 --> 00:22:00,960
+So I'm it looks to the vertices so the first vertex you encounter it
+
+240
+00:22:01,216 --> 00:22:05,312
+It is not visited yet right because we initialize everything to befall
+
+241
+00:22:05,824 --> 00:22:09,152
+Sedan you increment CC
+
+242
+00:22:09,408 --> 00:22:15,552
+Right because you've encountered a new connect to component then you explore that protects and we all know what explorer
+
+243
+00:22:15,808 --> 00:22:20,672
+Or does it sets true to all the vertices reachable from that starting for a text
+
+244
+00:22:20,928 --> 00:22:24,256
+Right so then once Explorer is done
+
+245
+00:22:24,768 --> 00:22:28,096
+You continue along this
+
+246
+00:22:28,352 --> 00:22:29,376
+This Loop
+
+247
+00:22:30,144 --> 00:22:31,680
+Until you find
+
+248
+00:22:31,936 --> 00:22:35,520
+A Vertex that has not been discovered
+
+249
+00:22:35,776 --> 00:22:41,920
+What does that mean if you found a Vertex that is not been discovered that means that that vertex is not
+
+250
+00:22:42,176 --> 00:22:44,480
+Part of that first connected component that you've done
+
+251
+00:22:44,736 --> 00:22:48,576
+So then you increment Cece and your support
+
+252
+00:22:50,624 --> 00:22:52,928
+Let's look at an example
+
+253
+00:22:55,232 --> 00:22:58,816
+Remember we're going to
+
+254
+00:23:00,352 --> 00:23:04,192
+By default run through the vertices in alphabetical order
+
+255
+00:23:04,448 --> 00:23:07,008
+So first we set them all to be false
+
+256
+00:23:07,264 --> 00:23:08,032
+Let's just
+
+257
+00:23:08,288 --> 00:23:13,408
+Remember that in our heads and then the next thing we do is we start at 8
+
+258
+00:23:14,176 --> 00:23:20,320
+If a is not visible to oh yeah first thing we do the CCA is not visited
+
+259
+00:23:21,600 --> 00:23:22,368
+Rent
+
+260
+00:23:23,392 --> 00:23:26,464
+So you set a to be visited
+
+261
+00:23:26,720 --> 00:23:30,048
+Annual increment cctv1
+
+262
+00:23:31,584 --> 00:23:35,168
+Wright Venue Explorer
+
+263
+00:23:35,424 --> 00:23:41,568
+That's what we did this we did this and now we're doing this exploring we go to be
+
+264
+00:23:44,128 --> 00:23:45,408
+We got us
+
+265
+00:23:47,712 --> 00:23:49,504
+We go to a
+
+266
+00:23:50,016 --> 00:23:51,552
+Right
+
+267
+00:23:51,808 --> 00:23:56,416
+Go back to FB is a dead end
+
+268
+00:23:56,928 --> 00:23:58,720
+Is there a custody
+
+269
+00:24:00,256 --> 00:24:06,400
+Okay so that that was Explorer and now a
+
+270
+00:24:06,656 --> 00:24:12,544
+BF and have all been visited right the visited value has been said the truth
+
+271
+00:24:13,056 --> 00:24:17,152
+So then we go to the next vertex
+
+272
+00:24:17,920 --> 00:24:21,504
+With this look so what's the next vertex we look at
+
+273
+00:24:22,784 --> 00:24:24,832
+Be right
+
+274
+00:24:26,112 --> 00:24:28,672
+Missing a thank you
+
+275
+00:24:34,304 --> 00:24:39,936
+The next vertex you look at is B B has been visited
+
+276
+00:24:40,192 --> 00:24:42,496
+So this
+
+277
+00:24:42,752 --> 00:24:48,896
+Conditional doesn't do anything and you just move to the next vertex next for Texas C
+
+278
+00:24:49,152 --> 00:24:52,992
+She has not been visited so you increment CC
+
+279
+00:24:54,528 --> 00:24:58,624
+And you sexy to be able to true and explore sea
+
+280
+00:25:05,792 --> 00:25:08,864
+Okay now are we done now
+
+281
+00:25:20,128 --> 00:25:21,664
+What's up
+
+282
+00:25:24,480 --> 00:25:25,504
+Receipt
+
+283
+00:25:26,784 --> 00:25:32,928
+Yeah we explored see now what's the next thing it does it looked at
+
+284
+00:25:33,184 --> 00:25:34,208
+Right
+
+285
+00:25:34,976 --> 00:25:41,120
+He has been visited but does nothing it looks like he has been visited it does nothing it just goes
+
+286
+00:25:41,376 --> 00:25:45,472
+It finishes up looping through this lupier
+
+287
+00:25:45,984 --> 00:25:49,568
+Until I get to the end of the loop and then they'll go to them terminate
+
+288
+00:26:03,648 --> 00:26:06,208
+Yeah I guess
+
+289
+00:26:07,488 --> 00:26:13,120
+I don't know somebody somebody said a similar thing of another graph to
+
+290
+00:26:13,376 --> 00:26:19,520
+So now I think it's a
+
+291
+00:26:19,776 --> 00:26:25,920
+Supposed to be there I think it's just when I printed it it might have skipped that
+
+292
+00:26:26,176 --> 00:26:27,200
+Notation
+
+293
+00:26:29,248 --> 00:26:32,832
+I'll let you know the other the other thing that they caught
+
+294
+00:26:33,600 --> 00:26:38,464
+Okay so let's move along to another
+
+295
+00:26:40,256 --> 00:26:46,400
+Another addition to the Alberta?
+
+296
+00:26:47,936 --> 00:26:54,080
+So I'm just calling this TFS because that's what the book does DFS in general is just kind of like a
+
+297
+00:26:54,336 --> 00:27:00,224
+Concept the concept is you you explore the graph
+
+298
+00:27:00,480 --> 00:27:04,832
+By going as deep as you possibly can that's why it's called depth-first search
+
+299
+00:27:05,088 --> 00:27:11,232
+And so in some contacts you'll see that DFS is just Explorer
+
+300
+00:27:11,488 --> 00:27:17,632
+But in this book that were using they called DFS of this hole algorithm that kind of explores the
+
+301
+00:27:17,888 --> 00:27:19,168
+The whole track
+
+302
+00:27:19,424 --> 00:27:20,448
+Just kind of thought
+
+303
+00:27:21,984 --> 00:27:24,288
+AR convention
+
+304
+00:27:27,104 --> 00:27:32,224
+Alright so we're going to add another thing into this algorithm
+
+305
+00:27:32,992 --> 00:27:39,136
+Pre and post numbers so what you can think about for pre and post numbers is thing
+
+306
+00:27:39,392 --> 00:27:43,488
+Think about it as you're putting the vertices into a stack
+
+307
+00:27:43,744 --> 00:27:49,632
+And every time you do an operation the clock increments Okay so
+
+308
+00:27:50,400 --> 00:27:55,520
+Every time you put a Vertex on to the Stacked you would sign it a free number
+
+309
+00:27:55,776 --> 00:28:00,128
+And every time you pop over text off of the Stacked you would sign it it supposed number
+
+310
+00:28:01,920 --> 00:28:05,504
+So are you
+
+311
+00:28:06,016 --> 00:28:09,600
+Initialize the clock and you put these two
+
+312
+00:28:09,856 --> 00:28:11,392
+Subroutines in there
+
+313
+00:28:12,160 --> 00:28:13,184
+I wanted to
+
+314
+00:28:13,952 --> 00:28:15,744
+I want to do it like that sorry
+
+315
+00:28:17,280 --> 00:28:18,304
+Clock
+
+316
+00:28:18,816 --> 00:28:19,584
+Hotspot
+
+317
+00:28:20,096 --> 00:28:26,240
+And basically what it does is before you
+
+318
+00:28:26,496 --> 00:28:28,288
+Floor the vertex well
+
+319
+00:28:28,544 --> 00:28:34,688
+I can say that after you assign the vertex to be true then like right after you do that you would sign it spree number
+
+320
+00:28:34,944 --> 00:28:41,088
+Then you look at all of its ashes outgoing edges and explore all of that area and when you
+
+321
+00:28:41,344 --> 00:28:45,696
+When you're done with that you come back to that vertex and you assign it is supposed to
+
+322
+00:28:48,256 --> 00:28:51,840
+So let's look at an example
+
+323
+00:28:52,352 --> 00:28:54,656
+Oh I wanted to say something
+
+324
+00:28:54,912 --> 00:29:01,056
+Pre and post numbers they don't have much use in directed with directed
+
+325
+00:29:01,312 --> 00:29:02,592
+Undirected graph
+
+326
+00:29:02,848 --> 00:29:08,736
+We're really going to see them useful with directed graphs as you'll see in this next example
+
+327
+00:29:09,760 --> 00:29:13,088
+Okay so
+
+328
+00:29:13,856 --> 00:29:15,904
+We're running DFS on this
+
+329
+00:29:16,672 --> 00:29:17,952
+Okay song
+
+330
+00:29:18,208 --> 00:29:21,024
+Be the guy in the other class said that this
+
+331
+00:29:21,536 --> 00:29:26,144
+This is from ETA is not on the spot under
+
+332
+00:29:26,400 --> 00:29:27,680
+Is that right
+
+333
+00:29:29,984 --> 00:29:35,360
+Okay. If you guys are following from the slides posted on the website draw that edge
+
+334
+00:29:35,872 --> 00:29:42,016
+Okay so we're running DFS so we're going to set CC
+
+335
+00:29:42,272 --> 00:29:47,136
+Need to be zero and then we see a and we get a
+
+336
+00:29:47,904 --> 00:29:49,184
+Reset a to be true
+
+337
+00:29:49,440 --> 00:29:52,256
+And we assign like this
+
+338
+00:29:54,304 --> 00:29:59,936
+I'm going to write its post number on the left and it's free number on the left is posted on the right
+
+339
+00:30:00,704 --> 00:30:06,848
+A has assigned us a day with one right then you look at all of
+
+340
+00:30:07,104 --> 00:30:09,152
+The edges coming out of a
+
+341
+00:30:09,920 --> 00:30:11,456
+There's only one right
+
+342
+00:30:14,784 --> 00:30:15,808
+COC
+
+343
+00:30:17,344 --> 00:30:18,880
+You said that to me too
+
+344
+00:30:20,160 --> 00:30:24,768
+And then she has three edges coming up so which one do you look at first
+
+345
+00:30:25,280 --> 00:30:26,560
+B
+
+346
+00:30:31,168 --> 00:30:32,704
+PS3
+
+347
+00:30:36,800 --> 00:30:41,920
+Okay now he has to adjust coming out so which one do you look at first
+
+348
+00:30:43,200 --> 00:30:46,272
+Hey right hey has been visited
+
+349
+00:30:47,040 --> 00:30:51,648
+So You Move Along 2
+
+350
+00:30:57,792 --> 00:31:00,864
+Okay so she is a dead end
+
+351
+00:31:01,632 --> 00:31:07,776
+Rent so you basically that means you're going to pop the out of the stack so what we've done so far as we put
+
+352
+00:31:08,032 --> 00:31:14,176
+A on the Stacked and see that be the DD is it dead-ends you pop the out and you a sign it is
+
+353
+00:31:14,432 --> 00:31:20,576
+Post number of 5B is also at 10:10 so you pop that out
+
+354
+00:31:20,832 --> 00:31:21,600
+6
+
+355
+00:31:22,368 --> 00:31:28,512
+Penske has still a few places to go right there you're not done exploring C
+
+356
+00:31:29,024 --> 00:31:30,304
+So you don't pop it out yet
+
+357
+00:31:31,328 --> 00:31:34,144
+So you go to
+
+358
+00:31:37,984 --> 00:31:40,800
+Can you assign it a pre number of 7
+
+359
+00:31:42,336 --> 00:31:44,128
+And then the next one is f
+
+360
+00:31:48,480 --> 00:31:49,248
+8
+
+361
+00:31:49,760 --> 00:31:52,320
+Episode dead end sign
+
+362
+00:31:57,696 --> 00:31:59,232
+G10
+
+363
+00:32:05,120 --> 00:32:06,144
+11
+
+364
+00:32:06,400 --> 00:32:07,680
+And then
+
+365
+00:32:08,448 --> 00:32:12,544
+Pretty much done so I just signed the post numbers 1213
+
+366
+00:32:12,800 --> 00:32:15,360
+14 15 16
+
+367
+00:32:20,480 --> 00:32:22,272
+Any questions
+
+368
+00:32:34,048 --> 00:32:36,864
+So I want you guys to try this
+
+369
+00:32:37,376 --> 00:32:43,520
+Again if you're looking at the slides then draw in this this Edge from U2
+
+370
+00:32:43,776 --> 00:32:49,920
+Now run DFS on here
+
+371
+00:32:50,176 --> 00:32:56,320
+But I want you to look through the at the vertices in Reverse alphabetical order keep track of the pre
+
+372
+00:32:56,576 --> 00:33:02,720
+Compose numbers and keep track of the CC variable
+
+373
+00:33:02,976 --> 00:33:09,120
+So I should see you should start out something like this species
+
+374
+00:33:09,376 --> 00:33:15,520
+Hero then we're going in reverse alphabetical order so we're starting with h
+
+375
+00:33:15,776 --> 00:33:21,920
+Can you assign the first pre number to be one
+
+376
+00:34:12,096 --> 00:34:18,240
+Tomorrow I'm going to start doing it if so we can follow
+
+377
+00:34:18,496 --> 00:34:20,032
+Which goes to
+
+378
+00:34:24,384 --> 00:34:25,152
+Two
+
+379
+00:34:25,920 --> 00:34:26,944
+Today
+
+380
+00:34:30,784 --> 00:34:31,552
+Three
+
+381
+00:34:32,064 --> 00:34:33,344
+Okay and then
+
+382
+00:34:33,600 --> 00:34:34,112
+4
+
+383
+00:34:38,208 --> 00:34:38,976
+6
+
+384
+00:34:40,000 --> 00:34:41,280
+Sexiest women
+
+385
+00:34:50,496 --> 00:34:52,800
+Did the next one is G
+
+386
+00:35:38,624 --> 00:35:41,440
+Okay is that what you guys got
+
+387
+00:35:55,520 --> 00:36:01,664
+So notice a few things about this the clock keeps
+
+388
+00:36:01,920 --> 00:36:08,064
+I'm going right it doesn't stop when you jump it doesn't reset when you jump to a new connected component
+
+389
+00:36:08,320 --> 00:36:14,464
+And what are we noticed about connect this is a variable connected components
+
+390
+00:36:14,720 --> 00:36:15,744
+CC
+
+391
+00:36:27,776 --> 00:36:31,104
+Is not very useful for directed graphs is it
+
+392
+00:36:34,432 --> 00:36:36,992
+I mean
+
+393
+00:36:38,016 --> 00:36:43,136
+We were really interested in information where it doesn't depend on the order that you
+
+394
+00:36:43,648 --> 00:36:45,184
+That you love
+
+395
+00:36:48,768 --> 00:36:50,816
+Encounter the vertices
+
+396
+00:36:51,584 --> 00:36:55,680
+Maybe just showed right that given two different ordering
+
+397
+00:36:55,936 --> 00:37:00,544
+One of them we got one connected component one of them we got three connected components oh
+
+398
+00:37:00,800 --> 00:37:06,944
+The conclusion here is that for directed graph this CC variable
+
+399
+00:37:07,200 --> 00:37:11,552
+Doesn't tell you the number of connected components racing
+
+400
+00:37:11,808 --> 00:37:17,952
+His face it doesn't really give a lot of information we're going to see how to use it to our advantage
+
+401
+00:37:18,208 --> 00:37:20,256
+Probably starting on Wednesday
+
+402
+00:37:20,512 --> 00:37:24,096
+But for right now it doesn't have much meaning
+
+403
+00:37:24,864 --> 00:37:26,400
+Are there any questions
+
+404
+00:37:31,776 --> 00:37:35,616
+Alright so let's go back to
+
+405
+00:37:36,640 --> 00:37:40,224
+The first graph we did now
+
+406
+00:37:43,808 --> 00:37:46,112
+Are there any edges that we missed
+
+407
+00:37:49,952 --> 00:37:50,720
+Let's see
+
+408
+00:37:52,512 --> 00:37:54,816
+ETA
+
+409
+00:37:55,072 --> 00:37:56,352
+Right
+
+410
+00:37:59,936 --> 00:38:01,216
+C to F
+
+411
+00:38:05,312 --> 00:38:07,360
+F.2d
+
+412
+00:38:10,432 --> 00:38:12,992
+What is a eth
+
+413
+00:38:15,808 --> 00:38:17,600
+H2 app
+
+414
+00:38:18,624 --> 00:38:21,696
+BJ
+
+415
+00:38:22,720 --> 00:38:27,328
+Okay I think that's it
+
+416
+00:38:27,584 --> 00:38:28,864
+Right
+
+417
+00:38:29,120 --> 00:38:35,264
+So just like with undirected graph right
+
+418
+00:38:36,032 --> 00:38:40,640
+When you do your DFS output tree there are certain edges that you missed right because
+
+419
+00:38:40,896 --> 00:38:44,224
+You have a graph and turning it into a tree
+
+420
+00:38:44,736 --> 00:38:50,880
+But with directed graph there are three different kinds of edges that are not part of the
+
+421
+00:38:51,136 --> 00:38:51,904
+Output tree
+
+422
+00:38:52,928 --> 00:38:56,512
+Okay there are things called
+
+423
+00:39:01,120 --> 00:39:02,144
+Packages
+
+424
+00:39:06,240 --> 00:39:07,520
+Forward edges
+
+425
+00:39:13,920 --> 00:39:15,456
+Ben Cross edges
+
+426
+00:39:20,320 --> 00:39:26,464
+Again these are just like the labeling of these age
+
+427
+00:39:26,720 --> 00:39:31,328
+This is completely determined by the algorithm right
+
+428
+00:39:32,608 --> 00:39:33,888
+You'll see that
+
+429
+00:39:34,912 --> 00:39:41,056
+An edge might be a package on this TFS output tree but all in
+
+430
+00:39:41,312 --> 00:39:47,456
+Slide when we did it the reverse way it may not be a package rights up to Define
+
+431
+00:39:47,712 --> 00:39:52,320
+Something as a back as you first have to construct the DFS output tree
+
+432
+00:39:53,856 --> 00:39:57,696
+Okay so what are the
+
+433
+00:39:59,232 --> 00:40:02,048
+What are the definitions of these three things
+
+434
+00:40:02,560 --> 00:40:06,656
+A package goes from a descendant to ancestor
+
+435
+00:40:07,936 --> 00:40:14,080
+A forward Edge goes from an ancestor to a descendant and a cross Edge goes
+
+436
+00:40:17,152 --> 00:40:23,296
+The cross-eyed you're just another
+
+437
+00:40:23,552 --> 00:40:24,576
+Forward or back
+
+438
+00:40:24,832 --> 00:40:25,856
+I mean
+
+439
+00:40:26,624 --> 00:40:28,160
+It looks like
+
+440
+00:40:29,184 --> 00:40:33,024
+From from F to D that's like a
+
+441
+00:40:34,048 --> 00:40:37,632
+That would be like a cousin right
+
+442
+00:40:37,888 --> 00:40:42,240
+This is the parents because Ian BR Brothers
+
+443
+00:40:42,496 --> 00:40:43,520
+Sisters
+
+444
+00:40:44,800 --> 00:40:50,688
+And the children of B&E are cuz it's okay what about from H2 app
+
+445
+00:40:51,456 --> 00:40:52,992
+That would be like a
+
+446
+00:40:53,504 --> 00:40:59,648
+Uncle right so if it's not grandpa or granddaughter or
+
+447
+00:40:59,904 --> 00:41:01,952
+Something like that then it's a cross Edge
+
+448
+00:41:04,256 --> 00:41:05,024
+Questions
+
+449
+00:41:07,840 --> 00:41:13,728
+I'm glad I'm glad you asked that
+
+450
+00:41:13,984 --> 00:41:17,056
+What are the uses of back Edge forward Edge and cross stitch
+
+451
+00:41:17,824 --> 00:41:21,920
+There's no use for cross edges or forward edges
+
+452
+00:41:23,200 --> 00:41:26,016
+Packages tell you something about the graph
+
+453
+00:41:28,064 --> 00:41:28,576
+Right
+
+454
+00:41:29,088 --> 00:41:30,880
+What what is it that they tell you
+
+455
+00:41:31,904 --> 00:41:38,048
+If there's a cycle forward edges and cross edges they don't really tell you much
+
+456
+00:41:38,304 --> 00:41:39,328
+And tell you
+
+457
+00:41:39,584 --> 00:41:43,168
+A lot of packages are the ones that are important
+
+458
+00:41:43,424 --> 00:41:47,264
+But I needed to classify them all so that we can tell the difference
+
+459
+00:41:48,544 --> 00:41:51,360
+Okay so um
+
+460
+00:41:52,384 --> 00:41:55,199
+Let's see here
+
+461
+00:41:55,455 --> 00:41:58,015
+What were the ages that we missed here
+
+462
+00:42:00,319 --> 00:42:02,111
+C to F
+
+463
+00:42:02,367 --> 00:42:07,999
+These guys aren't even related cute that's a package
+
+464
+00:42:09,535 --> 00:42:11,071
+B2d
+
+465
+00:42:12,863 --> 00:42:14,655
+BJ
+
+466
+00:42:16,959 --> 00:42:20,031
+I see that I did that c2e
+
+467
+00:42:23,103 --> 00:42:24,895
+E2f
+
+468
+00:42:28,479 --> 00:42:30,271
+Eth
+
+469
+00:42:32,831 --> 00:42:34,111
+G2g
+
+470
+00:42:36,671 --> 00:42:37,951
+NG th
+
+471
+00:42:40,511 --> 00:42:41,535
+Pizza
+
+472
+00:42:41,791 --> 00:42:47,935
+We have so that we may not even get the same number of packages from graph to graph right but
+
+473
+00:42:48,191 --> 00:42:54,335
+What what they do tell us is if there is a cycle and in fact
+
+474
+00:42:55,359 --> 00:43:00,479
+It is the case that every one of these packages in this graph is part of a cycle
+
+475
+00:43:02,015 --> 00:43:03,295
+And I'm
+
+476
+00:43:03,807 --> 00:43:04,831
+Similarly
+
+477
+00:43:06,111 --> 00:43:08,927
+Will we have when we have two packages here
+
+478
+00:43:13,023 --> 00:43:16,095
+And eat one of these packages
+
+479
+00:43:16,607 --> 00:43:19,935
+Is part of a cycle
+
+480
+00:43:23,519 --> 00:43:25,055
+Okay questions
+
+481
+00:43:30,943 --> 00:43:37,087
+Alright so here are the definitions of the different Edge types there's the tree as right that's
+
+482
+00:43:37,855 --> 00:43:39,647
+What kind of bomb is
+
+483
+00:43:39,903 --> 00:43:42,207
+Clear there's the package
+
+484
+00:43:42,975 --> 00:43:49,119
+A descendant leading to an ancestor a forward Edge is an ancestor leading to a descendant this is
+
+485
+00:43:49,375 --> 00:43:55,519
+Maybe you should put something in here like a Ford edges least to a descendant and is
+
+486
+00:43:55,775 --> 00:43:56,287
+Not
+
+487
+00:43:57,055 --> 00:43:58,335
+Patriot
+
+488
+00:44:00,639 --> 00:44:06,783
+But like you said they don't really matter the forward I just in the cross such as they don't tell us much
+
+489
+00:44:08,575 --> 00:44:10,111
+Okay so
+
+490
+00:44:10,367 --> 00:44:16,511
+Across ages an ancestor descendant that the term
+
+491
+00:44:16,767 --> 00:44:21,887
+Package has a different meaning when you're talking about an undirected graph and a directed graph
+
+492
+00:44:22,143 --> 00:44:28,287
+Goodnight you're going to see that come up a lot we're going to have the same words for these two different con
+
+493
+00:44:29,311 --> 00:44:31,359
+And they're going to have slightly different meanings
+
+494
+00:44:31,615 --> 00:44:33,151
+Okay so
+
+495
+00:44:37,247 --> 00:44:41,343
+Does anybody have any idea how we can tell
+
+496
+00:44:42,623 --> 00:44:45,951
+Whether or not an edge is a package or a
+
+497
+00:44:46,975 --> 00:44:49,023
+Weather not an edge of the package
+
+498
+00:44:57,215 --> 00:45:03,359
+Right good that's that's the biggest reason that were using pre numbers and post
+
+499
+00:45:03,615 --> 00:45:09,759
+Those numbers is so that we can find packages because we're going to see that it's important to
+
+500
+00:45:10,015 --> 00:45:12,063
+Know if there is a cycle in the graph
+
+501
+00:45:12,319 --> 00:45:18,463
+Because if there's no cycle in the graph then we have this thing called a dad
+
+502
+00:45:18,719 --> 00:45:24,863
+Directed acyclic graph and those have a lot of great properties and there's a lot of fish
+
+503
+00:45:25,119 --> 00:45:29,471
+Algorithms that you can do on bags that you can't do on
+
+504
+00:45:31,263 --> 00:45:37,407
+Just regular directed graph so it's it's in our best interest to try to see if the
+
+505
+00:45:37,663 --> 00:45:39,455
+Graph is a dad before we
+
+506
+00:45:40,223 --> 00:45:43,039
+Trying algorithm on Excel this is dumb
+
+507
+00:45:43,807 --> 00:45:48,415
+What is one way to do that okay so what is the formula well
+
+508
+00:45:52,767 --> 00:45:55,583
+I want you guys to notice a few things
+
+509
+00:45:55,839 --> 00:45:57,375
+A.m.
+
+510
+00:45:57,631 --> 00:46:02,751
+An ancestor the ancestors of pre and post numbers
+
+511
+00:46:03,519 --> 00:46:07,615
+Volbeat will contain all of its children's pre and post numbers
+
+512
+00:46:08,383 --> 00:46:13,503
+Right if you think about them as an interval for example
+
+513
+00:46:14,527 --> 00:46:17,087
+Let's go let's go back here instead
+
+514
+00:46:17,855 --> 00:46:18,623
+Let's see
+
+515
+00:46:19,135 --> 00:46:20,671
+H is
+
+516
+00:46:22,207 --> 00:46:23,743
+A descendant
+
+517
+00:46:27,839 --> 00:46:28,607
+Right
+
+518
+00:46:29,119 --> 00:46:31,167
+He is the grandfather of the h
+
+519
+00:46:32,703 --> 00:46:34,239
+And look at the post numbers
+
+520
+00:46:34,495 --> 00:46:35,519
+We have
+
+521
+00:46:36,287 --> 00:46:37,055
+Me
+
+522
+00:46:38,335 --> 00:46:41,919
+Goes from 7 to 14
+
+523
+00:46:42,431 --> 00:46:45,759
+NH goes from 11 to 12
+
+524
+00:46:46,271 --> 00:46:51,903
+See see how the The Descendants post numbers are contained as an interval
+
+525
+00:46:52,159 --> 00:46:58,303
+Entirely within its ancestor in one way to think about this is the whole
+
+526
+00:46:58,559 --> 00:46:59,327
+Stack
+
+527
+00:46:59,583 --> 00:47:05,727
+Idea right somebody's appearance of another vertex as a parent
+
+528
+00:47:05,983 --> 00:47:12,127
+Or ancestor of another text if you put that vertex in the stack put the put the descendant in and then
+
+529
+00:47:12,383 --> 00:47:18,527
+Take the send it out for you take the parent so if we have this idea of
+
+530
+00:47:18,783 --> 00:47:21,343
+Pre and post numbers
+
+531
+00:47:21,599 --> 00:47:26,719
+To tell whether of an edge of the back at all we have to do is see if it's
+
+532
+00:47:26,975 --> 00:47:29,279
+If its head
+
+533
+00:47:29,791 --> 00:47:31,839
+The vertex that it comes out of
+
+534
+00:47:33,631 --> 00:47:38,495
+I'm have pre and post numbers entirely within its tail
+
+535
+00:47:39,007 --> 00:47:40,287
+Vertex that goes into
+
+536
+00:47:45,151 --> 00:47:46,431
+Here are
+
+537
+00:47:48,479 --> 00:47:54,623
+The definitions of the edges in terms of their pre and post numbers but this one really is the most
+
+538
+00:47:59,999 --> 00:48:03,839
+Until all that means is
+
+539
+00:48:08,703 --> 00:48:09,727
+You
+
+540
+00:48:13,055 --> 00:48:16,639
+B is a package if
+
+541
+00:48:18,431 --> 00:48:23,807
+If you put me first into the stack then you take you out and take me out
+
+542
+00:48:24,063 --> 00:48:30,207
+Okay so
+
+543
+00:48:30,463 --> 00:48:36,607
+Just like in the class before I didn't quite get to the part of class I wanted to
+
+544
+00:48:36,863 --> 00:48:43,007
+You cover the homework entirely so I may be removing one of
+
+545
+00:48:43,263 --> 00:48:49,407
+The homework problems from the homework because
+
+546
+00:48:49,663 --> 00:48:55,807
+I also thought that we'd still have time to cover it before the homework was due but then I remember that we have a
+
+547
+00:48:56,063 --> 00:49:02,207
+Holiday this coming week so
+
+548
+00:49:02,463 --> 00:49:08,607
+I'll send a post out in Piazza formalizing it but what I would like you to do is
+
+549
+00:49:08,863 --> 00:49:15,007
+Look through the slides they're posted and look through the book it
+
+550
+00:49:15,263 --> 00:49:21,407
+It goes through a way of using the post numbers to linearize a tag okay so where it
+
+551
+00:49:21,663 --> 00:49:27,807
+We're going to cover it on Wednesday in detail but maybe this would be a nice way to
+
+552
+00:49:28,063 --> 00:49:34,207
+To prepare yourself for Wednesdays lecture okay have a great
+
+553
+00:49:34,463 --> 00:49:40,607
+Long weekend everyone
+
+554
+00:49:47,263 --> 00:49:53,407
+So are you

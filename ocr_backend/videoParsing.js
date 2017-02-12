@@ -68,8 +68,8 @@ module.exports = {
                             OCRTranscription: transcription,
                             OCRKeywordsForSlide: words[whichSlide - 1],  // put extracted keywords here
                             SlidePost: [],
-                            AudioTranscription: slideSubs[whichSlide - 1];
-                            AudioTranscriptionFreq: slideKeywords[whichSlide - 1];
+                            AudioTranscription: slideSubs[whichSlide - 1],
+                            AudioTranscriptionFreq: slideKeywords[whichSlide - 1]
                           }, function(idx) {
                             id = idx;
                           });

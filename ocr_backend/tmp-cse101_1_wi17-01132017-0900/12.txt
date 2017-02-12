@@ -1,0 +1,15 @@
+CONNECTED UNDIRECTED GRAPHS
+
+ 
+
+Definition: An undirected graph G is connected if for every pair of
+vertices v,u in G, there exists a path from v to u.
+
+exglore only reaches one connected component of the graph,
+namely the set of vertices reachable from v.
+
+To examine the rest of the graph, we need to restart explore on a
+vertex that has not been visited.
+
+ 
+
