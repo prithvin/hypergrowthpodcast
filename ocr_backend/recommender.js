@@ -1,7 +1,7 @@
 var NUM_RECOMMENDED = 5;
 
 module.exports = {
-  getRecommendedPodcasts: function(input_podcast, podcastList) {
+  getRecommendedPodcasts: function(input_podcast, podcastList, callback) {
 		// Make a copy of the array
 		var tmp = podcastList.slice(podcastList);
 		var ret = [];
@@ -12,7 +12,7 @@ module.exports = {
         break;
       }
     }
-		
+
 		while(tmp.length > 0 && ret.length < 5) {
 			var index = Math.floor(Math.random() * tmp.length);
 			var removed = tmp.splice(index, 1);
@@ -21,6 +21,6 @@ module.exports = {
       ret.push(removed[0]);
     }
 
-    return ret;
+    callback(ret);
 	}
 }
