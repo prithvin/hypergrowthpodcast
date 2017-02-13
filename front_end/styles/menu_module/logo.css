@@ -11,11 +11,11 @@
 }
 
 .class_text {
-    font-family: 'Roboto', sans-serif;
-    text-align:center;
+    font-family: 'Roboto', sans-serif !IMPORTANT;
+    text-align:center ;
     color: #67809F;
 
-    padding:0; 
+    padding:0;
 }
 
 .class_text h4 {
@@ -28,7 +28,7 @@
 }
 
 .text_container {
-    padding-left:0px;
+    padding-left:0px !IMPORTANT;
 }
 
 .form-control-success {

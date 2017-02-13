@@ -1,4 +1,4 @@
-function loadComponent (fileName, domTarget, callback, hideUntilAfter) {
+function loadComponent (fileName, domTarget, callback, hideUntilAfter, dontShow) {
     $.ajax({
         url: fileName,
         data: {},
@@ -8,7 +8,8 @@ function loadComponent (fileName, domTarget, callback, hideUntilAfter) {
             $(domTarget).hide();
             $(domTarget).html(data).promise().done(function(){
                 setTimeout( function () {
-                    $(domTarget).show();
+                    if (!dontShow)
+                        $(domTarget).show();
                     callback();
                 }, hideUntilAfter)
             });
