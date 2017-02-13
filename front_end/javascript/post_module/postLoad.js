@@ -61,7 +61,7 @@ var APost = class APost {
 
     loadHeader (name, pic) {
         $(this.mainDiv).find(".profile-pic-post").attr("src", pic);
-        $(this.mainDiv).find(".name-of-poster").html(name);
+        $(this.mainDiv).find(".name-of-poster").find("span").html(name);
     }
 
     loadMainContent (content, time, slideOfPost) {
