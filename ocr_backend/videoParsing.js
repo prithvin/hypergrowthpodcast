@@ -135,8 +135,8 @@ function getRecommendationsForCourseVideos (classNameCourseKey, videosFromCourse
   dbuploader.getPodcastsForCourse(classNameCourseKey, function(videosInLectureInDB) {
     for (var i = 0; i < videosFromCourse.length; i++) {
       var current = videosFromCourse[i];
-      recommender.getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture) {
-        dbuploader.setRecommendations(current._id, recommendationsForLecture, function () {
+      recommender.getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture, prevId, nextId) {
+        dbuploader.setRecommendations(current._id, recommendationsForLecture, String(prevId), String(nextId), function () {
           callback();
         });
       });
