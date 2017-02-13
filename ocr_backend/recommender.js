@@ -14,7 +14,6 @@ module.exports = {
         break;
       }
     }
-    console.log(indexOfInputPodcast);
 
     var indexOfNextPodcast = indexOfInputPodcast + 1;
     var indexOfPrevPodcast = indexOfInputPodcast - 1;
