@@ -28,7 +28,7 @@ module.exports = {
     }
 
     keywordExtract.extractKeywordsFromSlide(textArr, function(data) {
-      callback(data['RegularReturned'], data['FlattenedReturn']);
+      callback(data['RegularReturned'], data['FlattenedReturn'], textArr);
     });
   }
 }

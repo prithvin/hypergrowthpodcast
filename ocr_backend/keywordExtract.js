@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 var autocomplete = require('./spellCorrect.js');
-
+var fs = require('fs');
 
 module.exports = {
     extractKeywordsFromSlide: function (slideTexts, callback) {
@@ -26,17 +26,26 @@ function extractKeyByEle (slideTexts, index, callback, regularReturned, flattene
 }
 
 function extract (text, callback) {
-    var callString = "python ./runner.py \""  + text + "\"";
-    exec(callString , function(error, stdout, stderr) {
-        if (error) {
-            console.log("An error occurred");
-            callback([]); return;
+    fs.writeFile('keywordEncoding.txt', text, 'utf8', function (err) {
+        if (err) {
+            console.log("Some error occured when writing to the keyword file");
+            console.log(err);
         }
-        var data = JSON.parse(stdout);
-        var keywordsExtracted = [];
-        spellCorrectExtract(keywordsExtracted, data, 0, function () {
-            callback(keywordsExtracted);
-        })
+
+        var callString = "python2 ./runner.py";
+        exec(callString , function(error, stdout, stderr) {
+            if (error) {
+                console.log(error);
+                console.log(stderr);
+                console.log("An error occurred");
+                callback([]); return;
+            }
+            var data = JSON.parse(stdout);
+            var keywordsExtracted = [];
+            spellCorrectExtract(keywordsExtracted, data, 0, function () {
+                callback(keywordsExtracted);
+            })
+        });
     });
 }
 
