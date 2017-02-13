@@ -14,10 +14,11 @@ module.exports = {
         break;
       }
     }
+    console.log(indexOfInputPodcast);
 
     var indexOfNextPodcast = indexOfInputPodcast + 1;
     var indexOfPrevPodcast = indexOfInputPodcast - 1;
-    
+
     if (indexOfPrevPodcast < 0)
       indexOfPrevPodcast = podcastList.length - 1;
 
@@ -32,6 +33,6 @@ module.exports = {
       ret.push(removed[0]);
     }
 
-    callback(ret, indexOfPrevPodcast, indexOfNextPodcast);
+    callback(ret, podcastList[indexOfPrevPodcast]['_id'], podcastList[indexOfNextPodcast]['_id']);
 	}
 }
