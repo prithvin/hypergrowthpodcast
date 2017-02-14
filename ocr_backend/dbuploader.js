@@ -54,9 +54,9 @@ module.exports = {
       });
     });
   },
-  setRecommendations: function (id, recommendations, callback) {
+  setRecommendations: function (id, recommendations, prevId, nextId, callback) {
     connectMongo(function () {
-      PodcastModel.update({_id: id}, {$set: {RecommendedVideos: recommendations}},
+      PodcastModel.update({_id: id}, {$set: {RecommendedVideos: recommendations, PrevVideo: prevId, NextVideo: nextId}},
                           function (err, podcast){
         if (err) {
           console.error("Issue connecting to database");

@@ -35,5 +35,9 @@ for course in courses:
 
     for video in videos:
         print(URL + 'Podcasts//' + video)
-        """
-print("TEMPORARILY DOING NOTHING IN THIS FILE")
+"""
+
+with open ('./catted', 'r') as f:
+    lines = f.read().rstrip()
+
+print(lines)

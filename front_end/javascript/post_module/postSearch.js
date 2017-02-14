@@ -1,4 +1,4 @@
-        $(".no-results").hide();
+$(".no-results").hide();
 var PostSearch = class PostSearch {
     constructor (postData, currentUserName, currentUserPic, currentUserAuthToken, mainDiv) {
         this.currentUserName = currentUserName;
@@ -6,6 +6,7 @@ var PostSearch = class PostSearch {
         this.currentUserAuthToken = currentUserAuthToken;
         this.mainDiv = mainDiv;
         this.posts = [];
+        this.currentSlide = 1;
         $(".no-results").hide();
 
         this.mark = new Mark(document.getElementsByClassName("search-module")[0]);
@@ -32,6 +33,29 @@ var PostSearch = class PostSearch {
             ev.preventDefault();
             parentClass.searchByText("");
         });
+
+        $(this.mainDiv).prev().find(".new-post-img").on("click", function (ev) {
+            var newPostVal = $(parentClass.mainDiv).prev().find("#secondary-search-bar").val();
+            if (newPostVal.trim().length == 0)
+                swal("Please ask a question to search for!");
+            else 
+                parentClass.generateNewPost(newPostVal, new Date().getTime(), parentClass.currentSlide); // <TODO> FIX THIS WITH CURRENT SLIDE
+        });
+    }
+
+    generateNewPost(text, timeOfPost, slideOfPost) {
+        var newPost = {
+            "Name": this.currentUserName,
+            "PostId": "12312312", // get from callback
+            "ProfilePic": this.currentUserPic,
+            "Content": text,
+            "TimeOfPost": timeOfPost,
+            "SlideOfPost": slideOfPost,
+            "Comments": []
+        };
+        $(this.mainDiv).prev().find("#secondary-search-bar").val("");
+        this.searchByText("");
+        this.loadPost(newPost, true);
     }
 
     searchForSlide (slideNo) {
@@ -81,13 +105,16 @@ var PostSearch = class PostSearch {
         });
     }
 
-    loadPost (postData) {
+    loadPost (postData, prepend) {
         var parentClass = this;
         this.loadPostModuleData(function () {
             var newDiv = $(parentClass.componentData);
             var newPostObj = new APost(postData, parentClass.currentUserName, parentClass.currentUserPic, parentClass.currentUserAuthToken, newDiv, parentClass);
             parentClass.posts.push(newPostObj);
-            parentClass.mainDiv.append(newDiv);
+            if (prepend && prepend == true)
+                parentClass.mainDiv.prepend(newDiv);
+            else
+                parentClass.mainDiv.append(newDiv);
         })
     }
 }

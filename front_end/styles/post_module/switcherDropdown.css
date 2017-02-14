@@ -1,0 +1,33 @@
+.dropdownOfSlide {
+    margin-left: 9.45% !IMPORTANT;
+    margin-right: 40px;
+}
+
+
+.dropdownOfSlide .dropdown-menu {
+    font-size: 0.85em !IMPORTANT;
+    width: 100% !IMPORTANT;
+}
+.dropdownOfSlide button {
+    border-radius: 2px;
+    background-color:#4B77BE;
+    color: white;
+    font-weight: 100;
+    font-size: 0.8em;
+    padding: 10px 20px;
+    border: none;
+    height: 2.75em;
+    text-align:left;
+    width: 101.5%;
+}
+
+.show-fa {
+    font: normal normal normal 14px/1 FontAwesome !IMPORTANT;
+    float:right;
+    font-size: 1.75em !IMPORTANT;
+    position:relative;
+    top: -3px;
+}
+
+.red{border-top:4px solid red;}
+
