@@ -34,7 +34,7 @@ function parseURL (videoFile) {
 
 function generateCommand (fileData) {
   return "rm -rf contents/ && python2 ocr/detector.py -d " + fileData["FileName"] + " -o slides/ && " +
-  "python2 ocr/sorter.py && python2 ocr/extractor.py && " +
+  "find slides/ -size 0 -delete && python2 ocr/sorter.py && python2 ocr/extractor.py && " +
   "mv unique/1.jpg contents/ && mv unique/timetable.txt contents/timetable.log && " +
   "rm contents/*.hocr && rm -rf slides/ unique/ && " +
   "mkdir " + fileData["DirName"] + " && mv contents/* " + fileData["DirName"] + "/ && rmdir contents";
