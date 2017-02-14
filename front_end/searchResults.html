@@ -13,7 +13,7 @@
   <script src="./javascript/search_module/searchResults.js"></script>
 </head>
 
-<body style="overflow-y: scroll; height:100%; width:100%; padding-bottom:30px" ng-app="podcast" ng-controller="MainCtrl">
+<body style="position:relative;overflow-y: scroll; background-color: #F4F6F8" ng-app="podcast" ng-controller="MainCtrl">
 
   <div id="loader"></div>
   <div id="navbox"></div>
@@ -21,9 +21,9 @@
   <div style="background-color:#F4F6F8">
       <div class="container">
         <div class="row">
-          <div class="col-8" style="min-height: 750px; padding-left: 40px; background-color:#F4F6F8"><button ng-click="add()">Add</button><h4 style="color: #0f3170">Search Results for "searchQuery" in "queryClass"</h4><br />
+          <div class="col-8" style="height:100%; padding-left: 40px; background-color:#F4F6F8"><button ng-click="add()">Add</button><header style="margin-left: 5px; font-size: 18px; color: #2d4761; font-family: 'Roboto', sans-serif">Search Results for "searchQuery" in "queryClass"</header><br />
 
-            <div class="customHr">.</div><br /><br />
+            <div class="customHr">.</div><br />
 
             <section>
 
@@ -33,21 +33,26 @@
                   <h4 class="col-md-6">Col 2</h4>
                 </div> -->
 
-                <div style="width:70%" class="row col-md-12">
+                <div style="padding-top:6; width:70%" class="row col-md-12">
 
                   <table>
-                    <span ng-show="chunkedArray.length > 0"
+                    <div ng-show="chunkedArray.length > 0"
                       <tr ng-repeat="pod in chunkedArray track by $index">
-                        <div style="padding-right: 50px; padding-bottom:30px;padding-left: 30px">
-                            <iframe style="border-radius: 6px;border: 1px solid #BAC5D3" width="300" height="240" src="https://www.youtube.com/embed/p2CrdaoGGXY" frameborder="0"></iframe>{{$index}}<br />
-                            <div style="color:#124d87; font-size: 12; margin: 10px">
-                              <span>OCR match on "{{pod.ocrMatchText}}" on slide {{pod.ocrMatchSlide}}</span><br />
-                              <span>Keywords: {{pod.keywords}}</span><br />
-                              <span>Lecture on {{pod.date}}</span>
+                        <div style="padding-right: 50px;padding-left: 30px;padding-bottom:60px">
+                            <div>
+                              <div>
+                              <img style="width: 300px; height: 240px; border-radius:6px; border: 1px solid #BAC5D3" src="./images/podcast-cover.png">
+                              <div class="imageOverVid">
+                                <p style="bottom: 10; left: 50; position:absolute">OCR Match in "" on Slide ""</p>
+                                <p style="bottom: -13; left: 50; position:absolute">Keywords: "" "" "" ""</p>
+                              </div>
+                              </div>
+                              <p class="textUnderVid">Lecture on {{pod.date}}</p>
                             </div>
+                            <!-- <iframe style="border-radius: 6px;border: 1px solid #BAC5D3" width="300" height="240" src="https://www.youtube.com/embed/p2CrdaoGGXY" frameborder="0"></iframe>{{$index}}<br /> -->
                         </div>
                       </tr>
-                    </span>
+                    </div>
                     </tr>
 
                     <!-- <tr ng-repeat="post in posts | orderBy: '+upvotes' track by $index">
@@ -80,8 +85,8 @@
 
           </div><hr />
 
-          <div class="col-3" style="padding-right:30px; padding-left:20px;padding-top:28px;background-color:#F4F6F8"><h4 style="color:#0f3170; position:relative;left:8px">Matching Posts</h4><br />
-            <div class="customHr">.</div><br />
+          <div class="col-4" style="padding-top:28;padding-left: 30px; background-color:#F4F6F8"><header style="font-family: 'Roboto', sans-serif; font-size: 18px; margin-left: 35px; color:#2d4761; position:relative">Matching Posts</header><br />
+            <div style="margin-left: 30px;" class="customHr">.</div>
             <div id="postsearch"></div>
 
           </div><hr />
@@ -93,7 +98,7 @@
 </body>
 
 
-<footer>
+<footer style="background-color:#F4F6F8; position:absolute">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
