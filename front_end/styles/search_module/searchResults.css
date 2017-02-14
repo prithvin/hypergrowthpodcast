@@ -6,7 +6,6 @@
 
 * {
   font-family: 'Roboto', sans-serif;
-  font-weight: 600;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -25,22 +24,38 @@ h1, h2, h3, h4, h5, h6, p {
   left:0;
 }*/
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
 html, body{
   height:100%;
   width:100%;
   margin:0;
   padding:0;
-  background-color: #F4F6F8;
 }
 
 body{
   background-color: #F4F6F8;
 }
 
+.container{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .imageOverVid{
   font-family: 'Roboto', sans-serif;
   color: #67809f;
-  font-weight: 600;
   font-size: 16px;
   max-height: 10px;
   margin-left: -38;
@@ -52,7 +67,6 @@ body{
   font-family: 'Roboto', sans-serif;
   color:#124d87;
   font-size: 16px;
-  font-weight: 600;
   max-height: 10px;
   margin-left: 10px;
   margin-top:10;
