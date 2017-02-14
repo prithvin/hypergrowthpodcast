@@ -58,7 +58,8 @@ html,body {
 }
 
 .logo-container {
-  padding-top: 25%;
+  padding-top: 20%;
+  padding-bottom: 5%;
   padding-left: 20%;
   padding-right: 0%;
 }
@@ -98,4 +99,76 @@ html,body {
 
 .button-text-outer {
   vertical-align: middle;
+}
+
+/* Second Onboarding Style */
+
+.course-list-container {
+  padding-top: 10%;
+}
+
+table {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+td, th {
+  padding: 20px;
+  width: 1%;
+  line-height: 50px;
+  font-weight: normal;
+  font-size: 20px;
+
+  color: white;
+}
+
+td a {
+    display: block;
+}
+
+thead {
+  display: block;
+  background: white;
+  
+}
+
+th {
+  text-align: center;
+  color: #444;
+  background: white;
+}
+
+
+tbody {
+  width: 100%;
+  overflow: auto;
+  height: 473px;
+  display: block;
+}
+
+.table-row {
+    cursor: pointer;
+}
+
+tr:hover {
+  opacity:.90 !important;
+}
+
+tr:nth-child(4n + 1) {
+  background: rgba(56, 90, 154, 1);
+}
+
+tr:nth-child(4n + 2) {
+  background: rgba(229, 77, 66, 1);
+}
+
+tr:nth-child(4n + 3) {
+  background: rgba(41, 187, 156, 1);
+}
+
+tr:nth-child(4n + 4) {
+  background: rgba(104, 129, 158, 1);
 }
