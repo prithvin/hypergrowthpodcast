@@ -1,7 +1,7 @@
 var PodcastModel = require('./models/podcastModel.js').PodcastModel;
 var UserModel = require('./models/userModel.js').UserModel;
 var SlideModel = require('./models/slideModel.js').SlideModel;
-var PostModel = require('./models/PostModel.js').PostModel;
+var PostModel = require('./models/postModel.js').PostModel;
 var mongoose = require('mongoose');
 
 //API Functions
