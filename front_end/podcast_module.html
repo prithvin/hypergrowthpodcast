@@ -87,10 +87,12 @@
                             "Prithvi Narasimhan", 
                             "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png", 
                             null,
-                            $(".search-module"));
-                          $(".podcast-row").css("height", $("html").height() - $("#navbox").height());
+                            $(".search-module"),
+                            [1000, 2000, 4000, 10000] // start timings for the lecture sldies
+                            );
 
-                                                $("#loader").hide();
+                        $(".podcast-row").css("height", $("html").height() - $("#navbox").height());
+                        $("#loader").hide();
                         $("#podcast-posts").show();
                         $("#navbox").show();
                     }, 200, true);

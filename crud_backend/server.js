@@ -62,8 +62,26 @@ app.get('/auth/facebook', passport.authenticate("facebook",
 }
 ));
 
-app.get("/auth/facebook/callback",
-    passport.authenticate("facebook", {
-        successRedirect : "/course",
-        failureRedirect : "/",
-}));
+app.get("/auth/facebook/callback", function (req, res) {
+   passport.authenticate('facebook', function(err, user, info) {
+      if (err) { 
+        res.send({
+          "Type": "Error",
+          "Data": err
+        });
+      }
+      else if(!user) {
+        res.send({
+          "Type": "Error",
+          "Data": err
+        });
+      }
+      else {
+        res.send({
+          "User": user,
+          "Info": info
+        });
+      }
+      
+    })(req, res);
+});

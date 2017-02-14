@@ -30,11 +30,12 @@
     padding-bottom: 10px;
 }
 .post_main_search {
-    height:2.5em;
+    height:2.75em;
     box-shadow: none !IMPORTANT;
     border-radius: 3px !IMPORTANT;
     border-color: #C0C9D7 !IMPORTANT;
     border: 0.5px;
+    font-size: 0.9em !IMPORTANT;
     font-weight: 200;
     color: black;
     display:inline !IMPORTANT;
