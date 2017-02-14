@@ -4,7 +4,7 @@
 }
 
 .onboarding-left {
-  background: url('../../images/onboarding_module/Material-Design-Background-1024.jpg'), rgba(190,190,190,0.7);
+  background: url('../../images/onboarding_module/Material-Design-Background-1024.jpg'), rgba(0,0,0,0.6);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -80,9 +80,22 @@ html,body {
   margin-left: auto;
   margin-right: auto;
   min-width: 50%;
-  font-size: 28px;
+  font-size: 24px;
   background: rgb(59,89,152);
   color: white;
   margin-top: 27%;
-  border-radius:10px;
+}
+
+.fa.fa-facebook-official {
+  font-size: 175%;
+  margin-right: 36px;
+}
+
+.button-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.button-text-outer {
+  vertical-align: middle;
 }
