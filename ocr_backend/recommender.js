@@ -24,8 +24,8 @@ function getRecs (videosInLectureInDB, index, callback) {
   }
 
   var current = videosInLectureInDB[index];
-  recommender.getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture) {
-    dbuploader.setRecommendations(current._id, recommendationsForLecture, function () {
+  getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture, prevId, nextId) {
+    dbuploader.setRecommendations(current._id, recommendationsForLecture, prevId, nextId, function () {
       getRecs(videosInLectureInDB, index + 1, callback);
     });
   });
