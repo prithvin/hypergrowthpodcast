@@ -1,4 +1,5 @@
 var NUM_RECOMMENDED = 5;
+var dbuploader = require('./dbuploader.js');
 
 module.exports = {
   getRecommendationsForClassNameCourseID: function (shouldGetRecommendations, classNameCourseKey, callback) {
@@ -21,7 +22,7 @@ function getRecs (videosInLectureInDB, index, callback) {
     callback();
     return;
   }
-  
+
   var current = videosInLectureInDB[index];
   recommender.getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture) {
     dbuploader.setRecommendations(current._id, recommendationsForLecture, function () {
@@ -65,9 +66,3 @@ function getRecommendedPodcasts (input_podcast, podcastList, callback) {
 
   callback(ret, podcastList[indexOfPrevPodcast]['_id'], podcastList[indexOfNextPodcast]['_id']);
 }
-
-
-
-
-
-
