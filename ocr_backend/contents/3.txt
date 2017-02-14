@@ -1,0 +1,25 @@
+DOES IT WORK?
+
+ 
+
+procedure explore(G = (V,E), v)
+visited(v)=true
+
+ 
+
+ 
+
+ 
+
+If it doesn’t work then there is a for each edge (m);
+vertex u that is reachable from v if not visited(u), then
+but does not become true. explore(G,u)
+ywrir'“’/‘W‘“‘“" ﬁ’l/t
+V % W
+
+let w be the first reachable vertex
+that is not true and so 2 is the last
+reachable vertex that is true.
+
+ 
+

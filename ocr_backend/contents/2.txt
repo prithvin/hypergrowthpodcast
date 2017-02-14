@@ -1,0 +1,11 @@
+CSE 101
+
+Algorithm Design and Analysis
+Miles Jones
+me'016@eng,ucsd.edu
+
+Office 4208 CSE Building
+Lecture 3: Directed Graph/DAG
+
+ 
+

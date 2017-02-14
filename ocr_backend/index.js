@@ -17,7 +17,7 @@ uploader.getPodcastList(function(podcasts) {
       scraper.scrapePodcasts(existing, function(working) {
         console.log("finished scraping");
 
-        exec("rm -rf tmp* && rm -f *.mp4", function(error, stdout, stderr) {
+        exec("rm -rf tmp* contents slides unique && rm -f *.mp4", function(error, stdout, stderr) {
           working = [
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01132017-0900.mp4',
             'http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01182017-0900.mp4',
