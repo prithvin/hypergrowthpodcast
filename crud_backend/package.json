@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "1.16.1",
     "express": "^4.14.1",
-    "mongoose": "^4.5.8"
+    "express-session": "1.15.1",
+    "mongoose": "^4.5.8",
+    "passport": "0.3.2",
+    "passport-facebook": "2.1.1",
+    "passport-local": "1.0.0"
   },
   "description": ""
 }

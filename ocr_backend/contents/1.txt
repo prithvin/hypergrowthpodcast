@@ -1,5 +1,11 @@
- 
+CSE 101
 
-9.00 AM
-qua/2017
+Algorithm Design and Analysis
+Miles Jones
+me'016@eng,ucsd.edu
+
+Office 4208 CSE Building
+Lecture 4: DAG/SOC
+
+ 
 

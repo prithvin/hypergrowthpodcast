@@ -9,33 +9,22 @@
   <meta name='ocr-capabilities' content='ocr_page ocr_carea ocr_par ocr_line ocrx_word'/>
 </head>
 <body>
-  <div class='ocr_page' id='page_1' title='image "/var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/tess_QhRg3c.bmp"; bbox 0 0 1280 800; ppageno 0'>
-   <div class='ocr_carea' id='block_1_1' title="bbox 698 329 922 371">
-    <p class='ocr_par' dir='ltr' id='par_1_1' title="bbox 698 329 922 371">
-     <span class='ocr_line' id='line_1_1' title="bbox 698 329 922 371; baseline -0.004 0; x_size 54.666668; x_descenders 13.666667; x_ascenders 13.666667"><span class='ocrx_word' id='word_1_1' title='bbox 698 329 812 371; x_wconf 89' lang='eng' dir='ltr'><strong>CSE</strong></span> <span class='ocrx_word' id='word_1_2' title='bbox 840 330 922 371; x_wconf 93' lang='eng'><strong>101</strong></span> 
+  <div class='ocr_page' id='page_1' title='image "/var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/tess_eupKzj.bmp"; bbox 0 0 1280 800; ppageno 0'>
+   <div class='ocr_carea' id='block_1_1' title="bbox 323 117 957 149">
+    <p class='ocr_par' dir='ltr' id='par_1_1' title="bbox 323 117 957 149">
+     <span class='ocr_line' id='line_1_1' title="bbox 323 117 957 149; baseline 0 -1; x_size 42; x_descenders 10.5; x_ascenders 10.5"><span class='ocrx_word' id='word_1_1' title='bbox 323 117 408 148; x_wconf 92' lang='eng' dir='ltr'>DFS</span> <span class='ocrx_word' id='word_1_2' title='bbox 430 117 491 149; x_wconf 94' lang='eng' dir='ltr'>ON</span> <span class='ocrx_word' id='word_1_3' title='bbox 515 117 746 149; x_wconf 91' lang='eng' dir='ltr'>DIRECTED</span> <span class='ocrx_word' id='word_1_4' title='bbox 768 117 957 149; x_wconf 91' lang='eng' dir='ltr'>GRAPHS</span> 
      </span>
     </p>
    </div>
-   <div class='ocr_carea' id='block_1_2' title="bbox 530 406 938 576">
-    <p class='ocr_par' dir='ltr' id='par_1_2' title="bbox 539 406 938 502">
-     <span class='ocr_line' id='line_1_2' title="bbox 539 406 938 430; baseline 0 -5; x_size 24; x_descenders 5; x_ascenders 5"><span class='ocrx_word' id='word_1_3' title='bbox 539 406 662 430; x_wconf 86' lang='eng' dir='ltr'><strong>Algorithm</strong></span> <span class='ocrx_word' id='word_1_4' title='bbox 675 406 761 430; x_wconf 85' lang='eng' dir='ltr'>Design</span> <span class='ocrx_word' id='word_1_5' title='bbox 775 406 819 425; x_wconf 88' lang='eng' dir='ltr'><strong>and</strong></span> <span class='ocrx_word' id='word_1_6' title='bbox 830 406 938 430; x_wconf 83' lang='eng' dir='ltr'><strong>Analysis</strong></span> 
-     </span>
-     <span class='ocr_line' id='line_1_3' title="bbox 786 443 938 461; baseline 0 0; x_size 23.02384; x_descenders 5.0238395; x_ascenders 5"><span class='ocrx_word' id='word_1_7' title='bbox 786 443 851 461; x_wconf 81' lang='eng' dir='ltr'>Miles</span> <span class='ocrx_word' id='word_1_8' title='bbox 863 443 938 461; x_wconf 89' lang='eng' dir='ltr'>Jones</span> 
-     </span>
-     <span class='ocr_line' id='line_1_4' title="bbox 642 479 937 502; baseline 0 -5; x_size 23.02384; x_descenders 5.0238395; x_ascenders 5"><span class='ocrx_word' id='word_1_9' title='bbox 642 479 937 502; x_wconf 67' lang='eng' dir='ltr'>me&#39;016@eng,ucsd.edu</span> 
-     </span>
-    </p>
-
-    <p class='ocr_par' dir='ltr' id='par_1_3' title="bbox 530 516 937 576">
-     <span class='ocr_line' id='line_1_5' title="bbox 608 516 937 539; baseline 0 -5; x_size 25.232143; x_descenders 5.5; x_ascenders 5.5"><span class='ocrx_word' id='word_1_10' title='bbox 608 516 682 534; x_wconf 85' lang='eng' dir='ltr'><strong>Office</strong></span> <span class='ocrx_word' id='word_1_11' title='bbox 693 516 755 534; x_wconf 90' lang='eng'>4208</span> <span class='ocrx_word' id='word_1_12' title='bbox 768 516 822 534; x_wconf 85' lang='eng' dir='ltr'><strong>CSE</strong></span> <span class='ocrx_word' id='word_1_13' title='bbox 836 516 937 539; x_wconf 89' lang='eng' dir='ltr'><strong>Building</strong></span> 
-     </span>
-     <span class='ocr_line' id='line_1_6' title="bbox 530 552 937 576; baseline 0 -5; x_size 24; x_descenders 5; x_ascenders 5"><span class='ocrx_word' id='word_1_14' title='bbox 530 552 624 571; x_wconf 87' lang='eng' dir='ltr'><strong>Lecture</strong></span> <span class='ocrx_word' id='word_1_15' title='bbox 637 552 658 571; x_wconf 86' lang='eng'><strong>3:</strong></span> <span class='ocrx_word' id='word_1_16' title='bbox 672 552 778 571; x_wconf 81' lang='eng' dir='ltr'><strong>Directed</strong></span> <span class='ocrx_word' id='word_1_17' title='bbox 791 552 937 576; x_wconf 85' lang='eng' dir='ltr'>Graph/DAG</span> 
+   <div class='ocr_carea' id='block_1_2' title="bbox 0 40 1 759">
+    <p class='ocr_par' dir='ltr' id='par_1_2' title="bbox 0 40 1 759">
+     <span class='ocr_line' id='line_1_2' title="bbox 0 40 1 759; baseline 0 0; x_size 359.5; x_descenders -179.75; x_ascenders 179.75"><span class='ocrx_word' id='word_1_5' title='bbox 0 40 1 759; x_wconf 95' lang='eng' dir='ltr'> </span> 
      </span>
     </p>
    </div>
-   <div class='ocr_carea' id='block_1_3' title="bbox 0 36 1280 764">
-    <p class='ocr_par' dir='ltr' id='par_1_4' title="bbox 0 36 1280 764">
-     <span class='ocr_line' id='line_1_7' title="bbox 0 36 1280 764; baseline 0 36; x_size 1020; x_descenders 255; x_ascenders 255"><span class='ocrx_word' id='word_1_18' title='bbox 0 36 1280 764; x_wconf 95' lang='eng' dir='ltr'><strong> </strong></span> 
+   <div class='ocr_carea' id='block_1_3' title="bbox 0 0 1280 800">
+    <p class='ocr_par' dir='ltr' id='par_1_3' title="bbox 0 0 1280 800">
+     <span class='ocr_line' id='line_1_3' title="bbox 0 0 1280 800; baseline 0 0; x_size 1068; x_descenders 267; x_ascenders 267"><span class='ocrx_word' id='word_1_6' title='bbox 0 0 1280 800; x_wconf 95' lang='eng' dir='ltr'> </span> 
      </span>
     </p>
    </div>
