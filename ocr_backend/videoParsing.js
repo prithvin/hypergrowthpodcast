@@ -131,19 +131,6 @@ function isMorePodcastInLecture (videoFiles, index, videosFromCourse, partsOfFil
 
 }
 
-function getRecommendationsForCourseVideos (classNameCourseKey, videosFromCourse, callback) {
-  dbuploader.getPodcastsForCourse(classNameCourseKey, function(videosInLectureInDB) {
-    for (var i = 0; i < videosFromCourse.length; i++) {
-      var current = videosFromCourse[i];
-      recommender.getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture) {
-        dbuploader.setRecommendations(current._id, recommendationsForLecture, function () {
-          callback();
-        });
-      });
-    }
-  });
-}
-
 function parseVideoForEach (videoFiles, videosFromCourse, index) {
   if (index == videoFiles.length)
     process.exit(); // DONE
@@ -180,13 +167,11 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
                 videosFromCourse.push({"_id" : podcastId});
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
-                  if (!hasMoreVideosInSeries) {
-                    getRecommendationsForCourseVideos(partsOfFileName["ClassNameCourseKey"], videosFromCourse, function () {
-                      parseVideoForEach(videoFiles, videosFromCourse, index + 1);
-                    });
-                  }
-                  else
+                  recommender.getRecommendationsForClassNameCourseID(!hasMoreVideosInSeries, partsOfFileName["ClassNameCourseKey"], function () {
+                    if (!hasMoreVideosInSeries)
+                      videoFiles = [];
                     parseVideoForEach(videoFiles, videosFromCourse, index + 1);
+                  });
                 });
               });
             });
