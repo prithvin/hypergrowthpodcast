@@ -1,0 +1,68 @@
+body {
+}
+.vjs-default-skin .vjs-big-play-button {
+  font-size: 0em;
+}
+.directional-button {
+  width: 100px;
+  height: 100px;
+}
+
+.video-js {
+}
+.video-js .vjs-play-progress,
+.video-js .vjs-volume-level,
+.video-js .vjs-slider-bar {
+  background: rgb(56, 142, 247);
+}
+
+.video-js .vjs-control-bar { 
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+  background-color: rgba( 0, 0, 0, 0.7);
+  width: 72%;
+  left: 14%;
+  right: 0;
+  bottom: 2%;
+}
+.wrapper{
+  display: table;
+  width: auto;
+  position: relative;
+  margin: auto auto;
+}
+.crop-pic {
+  width: 35px;
+  height: 35px;
+}
+.prev-button {
+  background-image:url(img/prev.png);
+  background-repeat:no-repeat;
+  height:15%;
+  position:absolute;
+  left:3%;
+  top:0%;
+  bottom:0%;
+  margin:auto;
+  background-size:contain;
+  background-position: center;
+}
+
+.next-button {
+  background-image:url(img/next.png);
+  background-repeat:no-repeat;
+  height:15%;
+  position:absolute;
+  right:3%;
+  top:0%;
+  bottom:0%;
+  margin:auto;
+  background-size:contain;
+  background-position: center;
+}
