@@ -18,7 +18,7 @@ module.exports = {
 };
 
 function getRecs (videosInLectureInDB, index, callback) {
-  if (index == videosInLectureInDB)  {
+  if (index == videosInLectureInDB.length)  {
     callback();
     return;
   }
