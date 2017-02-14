@@ -1,16 +1,26 @@
 .onboarding-right {
+  min-width: 50%;
+  padding: 0px;
 }
 
 .onboarding-left {
-  background: url('../../images/onboarding_module/Material-Design-Background-1024.jpg') no-repeat center center fixed;
+  background: url('../../images/onboarding_module/Material-Design-Background-1024.jpg'), rgba(190,190,190,0.7);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-color: rgba(100,100,100,.61);
+  background-blend-mode: multiply;
+  min-width: 50%;
+  padding: 0px;
 }
 
 html,body {
   height: 100%;
+  width: 100%;
+  min-width: 1200px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .container {
@@ -25,9 +35,54 @@ html,body {
 }
 
 .center-pic {
-	padding-top: 10%;
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-top: 14%;
+	padding-left: 11%;
+	padding-right: 11%;
 	max-width:100%;
 	height: auto;
+}
+
+.caption {
+  padding-top: 5%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 42px;
+  /*font-size: 2.5vw;*/
+  color: white;
+}
+
+.emphasis {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.logo-container {
+  padding-top: 12%;
+  padding-left: 25%;
+  padding-right: 10%;
+}
+
+.podcast-logo {
+  width: 25%;
+}
+
+.ucsd-text-logo {
+  width: 45%;
+}
+
+.row {
+  margin: 0;
+}
+
+.fb-login-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 50%;
+  font-size: 28px;
+  background: rgb(59,89,152);
+  color: white;
+  margin-top: 27%;
+  border-radius:10px;
 }

@@ -168,8 +168,6 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
                   recommender.getRecommendationsForClassNameCourseID(!hasMoreVideosInSeries, partsOfFileName["ClassNameCourseKey"], function () {
-                    if (!hasMoreVideosInSeries)
-                      videoFiles = [];
                     parseVideoForEach(videoFiles, videosFromCourse, index + 1);
                   });
                 });
