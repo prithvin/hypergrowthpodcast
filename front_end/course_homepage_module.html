@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./styles/podcast_module/containerStyles.css">
+    </head>
+
+    <body>
+        <div class="podcast-page-div">
+            <div id="loader"></div>
+            <div id="navbox"></div>
+            <div class="container podcast-cont">
+                <div class="pure-g podcast-row">
+                    <div class="pure-u-17-24" id="course-videos"></div>
+                    <div class="pure-u-7-24" id="posts"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+
+    <footer>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="./javascript/components.js"></script>
+
+        <script>
+                              
+            // Scripts above are required on every single page
+            loadComponent("loader_module.html", "#loader", function () {
+                   $("#podcast-posts").hide();
+
+                        $("#navbox").hide();
+                loadComponent("menu_module.html", "#navbox", function () {
+                    new NavBarLoggedInCourse({
+                        firstname: "Rauhmel",
+                        classname: "CSE 110", 
+                        classqrtr: "Fall 2017",
+                        userid: "123123123123",
+                        profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
+                    });
+                    
+                    loadComponent("post_module.html", "#posts", function() {
+                        new APost(
+                            {"Name": "Rauhmel Bob",
+                             "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg", 
+                             "Content": "This is a test post with some random data just to test the functionality", 
+                             "TimeOfPost": 1486659593882, 
+                             "SlideOfPost": 5,
+                             "Comments": [
+                             {
+                                "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                                "PosterName" : "Rauhmel Tob",
+                                "Content" : "This is a really cool test commement",
+                                "Time" : 1486691019627
+                             },
+                             {
+                                "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
+                                "PosterName" : "LOL Bob",
+                                "Content" : "This is a really cool test commement and it is going to be abbsurdley long to test a weird edge case that wil hopefully not break everything",
+                                "Time" : 1486691009627
+                             }
+                             ]
+                            }, "Prithvi Narasimhan", "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png", null, $(".post-container"))
+                    
+                        loadComponent("course_videos_module.html", "#course-videos", function() {
+                            new CourseVideosClass(
+                                {
+                                 "CourseTitle": "CSE 100 - Advanced Data Structures - Winter 2017",
+                                 "Videos": [
+                                 {
+                                    "Id" : 1,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                 {
+                                    "Id" : 2,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                 {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                 ]
+                                }
+                            )
+                            $(".podcast-row").css("height", $("html").height() - $("#navbox").height());
+                            $("#loader").hide();
+                            $("#posts").show();
+                            $("#course-videos").show();
+                            $("#navbox").show();
+                        }, 200, true);
+                    }, 200, true);
+                }, 200, true);
+            });
+
+        </script>
+    </footer>
+
+</html>

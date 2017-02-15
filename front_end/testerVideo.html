@@ -9,8 +9,8 @@
             <div class="boxLoading">
             </div>
             <div style="top: 20%;position:relative;width: 100%;text-align: center;">
-                <img src="./image_components/podcast_logo.png" style="height:10%;min-height:50px;">
-                <img src="./image_components/ucsd_text_logo.png" style="height:10%;min-height:50px">
+                <img src="./images/podcast_logo.png" style="height:10%;min-height:50px;">
+                <img src="./images/ucsd_text_logo.png" style="height:10%;min-height:50px">
             </div>
             <div style="top: 60%;position:relative;width: 100%;text-align: center;font-size:1.5em;">
                 One Moment Please...
@@ -30,21 +30,20 @@
         <script src="./javascript/loader_module/jsloader.js"></script>
 
         <script>
-            sources = [];
-            sources[0] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02062017-0900.mp4";
-            sources[1] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02082017-0900.mp4";
-            sources[2] = "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02102017-0900.mp4";
+            sources = ["https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02062017-0900.mp4",
+                                                    "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02082017-0900.mp4",
+                                                    "https://podcast.ucsd.edu/Podcasts//cse100_wi17/cse100_wi17-02102017-0900.mp4"];
             // Scripts above are required on every single page
             $.ajax({
-                url: "video_module/index.html",
+                url: "video_module.html",
                 data: {},
                 success: function (data) {
                     $("#navbox").html(data);
                     load("video_module",
                         {
                             source: JSON.stringify(sources),
-                            index: -1,
-                            time: "35" 
+                            index: 0,
+                            time: 35 
                         },
                         function () {
                             setTimeout(function () {
