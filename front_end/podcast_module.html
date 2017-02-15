@@ -23,6 +23,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="./javascript/components.js"></script>
+        <script src="./javascript/podcast_module/podcast.js"></script>
 
         <script>
                               
@@ -87,11 +88,10 @@
                             "Prithvi Narasimhan", 
                             "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png", 
                             null,
-                            $(".search-module"),
-                            [1000, 2000, 4000, 10000] // start timings for the lecture sldies
+                            $(".search-module")
                             );
 
-                        $(".podcast-row").css("height", $("html").height() - $("#navbox").height());
+
                         $("#loader").hide();
                         $("#podcast-posts").show();
                         $("#navbox").show();
