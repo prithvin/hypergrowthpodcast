@@ -5,9 +5,7 @@ var UserModel = new mongoose.Schema({
     ProfileId: String,
     Email: String,
     ProfilePicture: String,
-    CourseNameKey: String,
   	FacebookAuthToken:String,
-  	Subscriptions: [String],//course name + number
   	WatchLater: [Number], //podcastids
     WatchHistory: [{lectureId: String, Notes: String}]
 });

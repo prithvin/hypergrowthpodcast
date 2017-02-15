@@ -54,6 +54,15 @@ app.get('/course',apiFunctions.userFunctions.isLoggedIn, function(req, res){
   }
 });
 
+app.get('/login',function(req,res){
+  res.send("LOGIN PAGE");
+});
+
+app.get('/logout',function(req,res){
+  req.logout();
+  res.send("LOGGED OUT");
+});
+
 app.get('/auth/facebook', passport.authenticate("facebook",
 {
   display: 'popup',

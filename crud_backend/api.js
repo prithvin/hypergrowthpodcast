@@ -16,11 +16,11 @@ var apiFunctions = {
               else console.log(podcasts);
             });
           },
-
-          getRecentPostsForCourse : function(cnameckey,callback){
+          //get all posts for course sorted
+          getRecentPostsForCourse : function(cname,callback){
             PodcastModel.findOne({ClassNameCourseKey:cnameckey},function(err,podcast){
               var postIds = podcast.LecturePost;
-              PostModel.find({_id : {$id : postIds[i]}}, function(err,posts){
+              PostModel.find({_id : {$id : postIds}}, function(err,posts){
                   if(err)
                     console.log("error finding posts");
                   callback(posts);
@@ -66,19 +66,12 @@ var apiFunctions = {
             });
           },
 
-          getVideoInfo: function(lectureId, callback) {
-            PodcastModel.find({_id:lectureId}, function(err,podcast) {
+          getVideoInfo: function(cnameckey, callback) {
+            PodcastModel.findOne({ClassNameCourseKey:cnameckey}, function(err,podcast) {
               if(err) {
                 console.log("error");
               } else {
-                var response = {
-                  lectureDate: podcast[0].VideoDate,
-                  prevVideoId: podcast[0].PrevVideo,
-                  nextVideoId: podcast[0].NextVideo,
-                  podcastURL: podcast[0].PodcastUrl,
-                  audioTranscipt: podcast[0].AudioTranscription,
-                  slideTimings: podcast[0].Slides,
-                };
+                callback(podcast);
               }
             })
           },
@@ -108,12 +101,12 @@ var apiFunctions = {
           },
           isLoggedIn : function(req,res,next){
             if (req.isAuthenticated()){
-                res.locals.stats = 200;
                 return next();
             }
+            else {
+                res.redirect('/login');
+            }
 
-            res.locals.stats = 401;
-            return next();
           },
           addUser : function(name,token,profileId,callback){
             UserModel.create({Name:name, ProfileId: profileId, FacebookAuthToken:token}, function(err,users){
@@ -127,7 +120,7 @@ var apiFunctions = {
             });
           },
           //gets user profile picture and user information
-          getUserData : function(email, callback){
+          /*getUserData : function(email, callback){
             UserModel.find({Email:email}, function(err,users){
               if(users.length > 1){
                 console.log("USER NOT UNIQUE");
@@ -141,7 +134,7 @@ var apiFunctions = {
               };
               callback(response);
             });
-          },
+          },*/
           //Gets unique courses
           getCourses : function(callback){
             PodcastModel.aggregate({ $group: { _id: { ClassName: "$ClassName", QuarterOfCourse: "$QuarterOfCourse" , ClassNameCourseKey: "$ClassNameCourseKey"} } },function(err,uniqueCourses){
@@ -162,19 +155,43 @@ var apiFunctions = {
 
         },
         postFunctions:{
-          createComment: function(request, callback) {
-              var postID = request.postID;
-              var FBAuthID = request.FBAuthID;
-              var commentContent = request.commentContent;
+
+          createPost: function(classnamecoursekey,fbauthid,commentCont,callback) {
+              var cnameckey = classnamecoursekey;
+              var FBAuthID = fbauthid;
+              var postContent = postContent;
+
+              PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
+                PostModel.create({Content: postContent}, function(err,post){
+                  apiFunctions.userFunctions.getUserInfo(FBAuthID,function(user){
+                    post.NameOfUser = user.Name;
+                    post.ProfilePicture = user.ProfilePicture;
+                    post.Content = postContent;
+                    podcast.LecturePost.push(post);
+                    callback({successful:true});
+                  });
+                });
+              });
 
               // @response should be true or false on successful/unsuccessful comment
           },
 
-          createPost: function(request, callback) {
-            var postID = request.postID;
-            var FBAuthID = request.FBAuthID;
-            var postContent = request.postContent;
+          createComment: function(postid,fbauthid,content,callback) {
+            var postID = postid;
+            var FBAuthID = fbauthid;
+            var commentContent = content;
 
+            PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
+              PostModel.create({Content: postContent}, function(err,post){
+                apiFunctions.userFunctions.getUserInfo(FBAuthID,function(user){
+                  post.NameOfUser = user.Name;
+                  post.ProfilePicture = user.ProfilePicture;
+                  post.Content = postContent;
+                  podcast.LecturePost.push(post);
+                  callback({successful:true});
+                });
+              });
+            });
             // @response should be true or false on successful/unsuccessful post
           }
         }
