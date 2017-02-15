@@ -1,0 +1,8 @@
+#course-videos-div {
+    background-color: #F4F6F8;
+    height: 100%;
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
