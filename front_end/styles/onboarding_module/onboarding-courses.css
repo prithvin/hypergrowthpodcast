@@ -4,7 +4,7 @@
 }
 
 .onboarding-left {
-  background: url('../../images/onboarding_module/Material-Design-Background-1024.jpg'), rgba(0,0,0,0.6);
+  background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -99,4 +99,78 @@ html,body {
 
 .button-text-outer {
   vertical-align: middle;
+}
+
+/* Second Onboarding Style */
+
+.course-list-container {
+  /*padding-top: 10%;*/
+  height: 582px;
+  width: 100%;
+  padding-bottom: 10%;
+  position: absolute;
+}
+
+table {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+td, th {
+  padding: 20px;
+  width: 1%;
+  line-height: 50px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  color: white;
+}
+
+
+thead {
+  display: block;
+  background: white;
+  
+}
+
+th {
+  text-align: center;
+  color: #444;
+  background: white;
+}
+
+
+.course-list-container tbody {
+  position: relative;
+  width: auto;
+  height: 492px;
+  overflow: auto;
+  display: block;
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+tr:hover {
+  opacity:.90 !important;
+}
+
+tr:nth-child(4n + 1) {
+  background: rgba(56, 90, 154, 1);
+}
+
+tr:nth-child(4n + 2) {
+  background: rgba(229, 77, 66, 1);
+}
+
+tr:nth-child(4n + 3) {
+  background: rgba(41, 187, 156, 1);
+}
+
+tr:nth-child(4n + 4) {
+  background: rgba(104, 129, 158, 1);
 }
