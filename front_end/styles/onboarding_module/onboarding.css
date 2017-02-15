@@ -104,7 +104,11 @@ html,body {
 /* Second Onboarding Style */
 
 .course-list-container {
-  padding-top: 10%;
+  /*padding-top: 10%;*/
+  height: 582px;
+  width: 100%;
+  padding-bottom: 10%;
+  position: absolute;
 }
 
 table {
@@ -139,15 +143,16 @@ th {
 }
 
 
-tbody {
-  width: 100%;
+.course-list-container tbody {
+  position: relative;
+  width: auto;
+  height: 492px;
   overflow: auto;
-  height: 521px;
   display: block;
 }
 
 .table-row {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 tr:hover {
