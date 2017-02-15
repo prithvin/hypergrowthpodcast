@@ -51,7 +51,7 @@ body {
   height: 35px;
 }
 .prev-button {
-  background-image:url(/front_end/images/video_module/prev.png);
+  background-image:url(../../images/video_module/prev.png);
   background-repeat:no-repeat;
   height:15%;
   position:absolute;
@@ -68,7 +68,7 @@ body {
     opacity: 1;
 }
 .next-button {
-  background-image:url(/front_end/images/video_module/next.png);
+  background-image:url(../../images/video_module/next.png);
   background-repeat:no-repeat;
   height:15%;
   position:absolute;
