@@ -119,15 +119,12 @@ td, th {
   padding: 20px;
   width: 1%;
   line-height: 50px;
-  font-weight: normal;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
   font-size: 20px;
-
   color: white;
 }
 
-td a {
-    display: block;
-}
 
 thead {
   display: block;
