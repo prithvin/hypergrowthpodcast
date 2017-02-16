@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <title>Podcasts</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="./styles/search_module/searchResults.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <script src="./javascript/search_module/searchResults.js"></script>
+
 </head>
 
 <body style="position:relative;overflow-y: scroll; margin-right:10px" ng-app="podcast" ng-controller="MainCtrl">
@@ -101,13 +97,16 @@
 <footer style="background-color:#F4F6F8; position:relative">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
     <script src="./javascript/components.js"></script>
-
+  <script src="./javascript/search_module/searchResults.js"></script>
     <script>
         // Scripts above are required on every single page
         loadComponent("loader_module.html", "#loader", function () {
@@ -171,7 +170,8 @@
                       "Prithvi Narasimhan",
                       "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png",
                       null,
-                       $(".search-module"));
+                       $(".search-module"),
+                       true);
                     $("#loader").hide();
                     $("#navbox").show();
                     $("#postsearc").show();

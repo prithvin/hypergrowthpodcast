@@ -9,7 +9,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: rgba(100,100,100,.61);
+  background-color: rgba(0,0,0,.61);
   background-blend-mode: multiply;
   min-width: 50%;
   padding: 0px;

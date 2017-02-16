@@ -27,11 +27,7 @@
 
         <script>
                               
-            // Scripts above are required on every single page
-            loadComponent("loader_module.html", "#loader", function () {
-                   $("#podcast-posts").hide();
 
-                        $("#navbox").hide();
                 loadComponent("menu_module.html", "#navbox", function () {
                     new NavBarLoggedInCourse({
                         firstname: "Rauhmel",
@@ -90,14 +86,11 @@
                             null,
                             $(".search-module")
                             );
-
-
-                        $("#loader").hide();
-                        $("#podcast-posts").show();
+                        updatePostHeights()
                         $("#navbox").show();
-                    }, 300, true);
-                }, 300, true);
-            });
+
+                    }, 0, false);
+                }, 0, false);
 
         </script>
     </footer>
