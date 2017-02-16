@@ -1,12 +1,10 @@
 .onboarding-right {
-  position: fixed;
   min-width: 50%;
   padding: 0px;
   right: 0%;
 }
 
 .onboarding-left {
-  position: fixed;
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -83,10 +81,7 @@ html,body {
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  height: 100%;
   width: 100%;
-  padding-bottom: 10%;
-  position: absolute;
 }
 
 table {
@@ -122,9 +117,8 @@ th {
 
 
 .course-list-container tbody {
-  position: relative;
   width: auto;
-  height: 487px;
+  height: 55vh;
   overflow: auto;
   display: block;
 }
