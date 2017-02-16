@@ -80,11 +80,10 @@ html,body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  min-width: 50%;
   font-size: 24px;
   background: rgb(59,89,152);
   color: white;
-  margin-top: 27%;
+  margin-top: 23%;
 }
 
 .fa.fa-facebook-official {
@@ -94,10 +93,6 @@ html,body {
 
 .button-text {
   display: inline-block;
-  vertical-align: middle;
-}
-
-.button-text-outer {
   vertical-align: middle;
 }
 
@@ -147,7 +142,7 @@ tbody {
 }
 
 .table-row {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 tr:hover {
