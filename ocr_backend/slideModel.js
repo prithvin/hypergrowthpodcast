@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var SlideModel = new mongoose.Schema({
 	TimeStart: Number,
-	TimeEnd: String,
 	OCRTranscription: String,
 	OCRKeywordsForSlide: [
 		{
@@ -10,16 +9,9 @@ var SlideModel = new mongoose.Schema({
 		Frequency:Number
 		}
   ],
-	RecommendedVideos: [
-		{
-			PodcastId: Number,
-			PodcastImage: String,
-			PodcastTitle: String
-		}
-	],
-	SlidePost: [],
-  LecturePost: []
-
+  AudioTranscription: String,
+  AudioTranscriptionFreq: [{Word: String, Frequency: Number}],
+	SlidePost: []
 });
 
 // Create a model based on the schema

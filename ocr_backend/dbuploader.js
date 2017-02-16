@@ -27,9 +27,50 @@ function connectMongo (callback) {
 
 
 module.exports = {
+  getPodcastList: function (callback) {
+    connectMongo(function () {
+      PodcastModel.find({}, 'PodcastUrl', function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          callback(podcasts);
+        }
+      });
+    });
+  },
+  getPodcastsForCourse: function (course, callback) {
+    connectMongo(function () {
+      PodcastModel.find({ClassNameCourseKey: course}, '_id PodcastImage PodcastName',
+                        {sort: 'VideoDate'}, function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          callback(podcasts);
+        }
+      });
+    });
+  },
+  setRecommendations: function (id, recommendations, prevId, nextId, callback) {
+    connectMongo(function () {
+      PodcastModel.update({_id: id}, {$set: {RecommendedVideos: recommendations, PrevVideo: prevId, NextVideo: nextId}},
+                          function (err, podcast){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          callback();
+        }
+      });
+    });
+  },
   addPodcast: function (obj, callback) {
     connectMongo(function () {
-      PodcastModel.create(obj, function (err, podcasts){ 
+      PodcastModel.create(obj, function (err, podcasts){
         if (err) {
           console.error("Issue connecting to database");
           console.error(err);
@@ -42,7 +83,7 @@ module.exports = {
   },
   addSlide: function (obj, callback) {
     connectMongo(function () {
-      SlideModel.create(obj, function (err, slides){ 
+      SlideModel.create(obj, function (err, slides){
         if (err) {
           console.error("Issue connecting to database");
           console.error(err);

@@ -1,10 +1,9 @@
 .main_search {
     width:100%;
-    height:2.5em;
+    height:2.5em !IMPORTANT;
     box-shadow: none !IMPORTANT;
     border-radius: 3px !IMPORTANT;
     border-color: #446CB3 !IMPORTANT;
-    border: 0.5px;
 }
 
 .main_search_container {

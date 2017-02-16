@@ -83,7 +83,7 @@ class Detector(Analyzer):
             elif not self.comparator.are_same(prev_frame, frame):
 
                 while True:
-                    if self.comparator.are_same(prev_frame, frame):
+                    if frame is None or self.comparator.are_same(prev_frame, frame):
                         break
                     prev_frame = frame
                     frame = self.sequence.next_frame()

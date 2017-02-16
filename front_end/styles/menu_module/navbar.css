@@ -1,15 +1,18 @@
 
+* {
+        font-family: 'Roboto', sans-serif !IMPORTANT;
+}
 /* Reset the container */
 .container {
-  min-width: 1252px;
+  min-width: 1252px !IMPORTANT;
   max-width: none !important;
-  width:100%;
+  width:100% !IMPORTANT;
 }
 
 .main-container {
 
-    margin:0px;
-    margin-top:5px;
+    margin:0px !IMPORTANT;
+    margin-top:5px !IMPORTANT;
     height: 100px !IMPORTANT;
 }
 
@@ -23,7 +26,7 @@
   
     font-size: 0.9em;
     height: 40px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !IMPORTANT;
     font-weight: 500;
     text-align:center !IMPORTANT;
     color: #2D4761;
@@ -38,18 +41,18 @@
 }
 
 .podcast_container {
-    padding-right:0px;
-    padding-left:0px;
-    padding-top:5px;
+    padding-right:0px !IMPORTANT;
+    padding-left:0px !IMPORTANT;
+    padding-top:5px !IMPORTANT;
 }
 
 .search-container {
-    left:20px;
+    left:20px !IMPORTANT;
 }
 
 .logo_container {
-    margin-top:10px;
-    padding-left:35px;
+    margin-top:10px !IMPORTANT;
+    padding-left:35px !IMPORTANT;
 
 }
 
@@ -60,15 +63,15 @@
 }
 
 .course-button-container {
-    margin-top: 30px;
-    left:-32px;
+    margin-top: 30px !IMPORTANT;
+    left:-32px !IMPORTANT;
 }
 
 .course-button {
-    height: 2.7em;
-    border-radius: 2px;
-    background-color: #0F2B5E;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    font-size:0.85em;
+    height: 2.7em !IMPORTANT;
+    border-radius: 2px !IMPORTANT;
+    background-color: #0F2B5E !IMPORTANT;
+    font-family: 'Roboto', sans-serif !IMPORTANT;
+    font-weight: 100 !IMPORTANT;
+    font-size:0.85em !IMPORTANT;
 }

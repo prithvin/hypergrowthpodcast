@@ -1,7 +1,7 @@
 var PodcastModel = require('./models/podcastModel.js').PodcastModel;
 var UserModel = require('./models/userModel.js').UserModel;
 var SlideModel = require('./models/slideModel.js').SlideModel;
-var PostModel = require('./models/PostModel.js').PostModel;
+var PostModel = require('./models/postModel.js').PostModel;
 var mongoose = require('mongoose');
 
 //API Functions
@@ -9,13 +9,13 @@ var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
           //dummy function
-          createPodcasts: function(){
+          /*createPodcasts: function(){
             PodcastModel.create({ClassName: "CSE100", QuarterOfCourse: "Winter", ClassNameCourseKey:"CSE100" + "Winter", PodcastUrl:'https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3743&l=6&v=1',
             OCRTranscriptionFreq: [{word:'BST', freq: 2}, {word: "Iterator", freq: 3}]}, function(err, podcasts){
             if(err) console.log(err);
               else console.log(podcasts);
             });
-          },
+          },*/
           //get all posts for course sorted
           getRecentPostsForCourse : function(cname,callback){
             PodcastModel.findOne({ClassNameCourseKey:cnameckey},function(err,podcast){
@@ -92,8 +92,8 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
-          getUserInfo: function(fbtoken,callback){
-            UserModel.findOne({FacebookAuthToken:fbtoken},function(err,user){
+          getUserInfo: function(profileId,callback){
+            UserModel.findOne({ProfileId:profileId},function(err,user){
               if(err)
               console.log("ERROR GETTING USER INFO");
               callback(err,user);
@@ -102,6 +102,7 @@ var apiFunctions = {
           isLoggedIn : function(req,res,next){
             if (req.isAuthenticated()){
                 return next();
+                console.log(res);
             }
             else {
                 res.redirect('/login');
