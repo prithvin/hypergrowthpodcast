@@ -3,5 +3,5 @@ function loadCSSBasedOnURLPath (urlPath) {
     loadCSSDynamically("https://fonts.googleapis.com/css?family=Roboto:300,400,700,900");
     loadCSSDynamically("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
     loadCSSDynamically("http://vjs.zencdn.net/5.16.0/video-js.css");
-    loadCSSDynamically("/front_end/video_module/index.css");
+    loadCSSDynamically("styles/video_module/index.css");
 }

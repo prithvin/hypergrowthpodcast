@@ -1,0 +1,154 @@
+.onboarding-right {
+  position: fixed;
+  min-width: 50%;
+  padding: 0px;
+  right: 0%;
+}
+
+.onboarding-left {
+  position: fixed;
+  background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: rgba(100,100,100,.61);
+  background-blend-mode: multiply;
+  min-width: 50%;
+  padding: 0px;
+}
+
+
+html,body {
+  height: 100%;
+  width: 100%;
+  min-width: 1200px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.container {
+	height: 100%;
+	padding: 0px;
+}
+
+.fill{
+	width:100%;
+	height:100%;
+	min-height:100%;
+}
+
+.center-pic {
+	padding-top: 14%;
+	padding-left: 11%;
+	padding-right: 11%;
+	max-width:100%;
+	height: auto;
+}
+
+.caption {
+  padding-top: 5%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 42px;
+  /*font-size: 2.5vw;*/
+  color: white;
+}
+
+.emphasis {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.logo-container {
+  padding-top: 20%;
+  padding-bottom: 5%;
+  padding-left: 20%;
+  padding-right: 0%;
+}
+
+.podcast-logo {
+  width: 15%;
+}
+
+.ucsd-text-logo {
+  width: 60%;
+}
+
+.row {
+  margin: 0;
+}
+
+/* Second Onboarding Style */
+.course-list-container {
+  /*padding-top: 10%;*/
+  height: 100%;
+  width: 100%;
+  padding-bottom: 10%;
+  position: absolute;
+}
+
+table {
+  text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+td, th {
+  padding: 20px;
+  width: 1%;
+  line-height: 50px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  color: white;
+}
+
+
+thead {
+  display: block;
+  background: white;
+  
+}
+
+th {
+  text-align: center;
+  color: #444;
+  background: white;
+}
+
+
+.course-list-container tbody {
+  position: relative;
+  width: auto;
+  height: 487px;
+  overflow: auto;
+  display: block;
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+tr:hover {
+  opacity:.90 !important;
+}
+
+tr:nth-child(4n + 1) {
+  background: rgba(56, 90, 154, 1);
+}
+
+tr:nth-child(4n + 2) {
+  background: rgba(229, 77, 66, 1);
+}
+
+tr:nth-child(4n + 3) {
+  background: rgba(41, 187, 156, 1);
+}
+
+tr:nth-child(4n + 4) {
+  background: rgba(104, 129, 158, 1);
+}
