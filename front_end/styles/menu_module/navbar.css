@@ -1,5 +1,6 @@
 
-* {
+*:not(.video-js .vjs-tech,
+      .video-js .vjs-menu) {
         font-family: 'Roboto', sans-serif !IMPORTANT;
 }
 /* Reset the container */

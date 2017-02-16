@@ -10,7 +10,7 @@
             <div class="container podcast-cont">
                 <div class="pure-g podcast-row">
                     <div class="pure-u-7-24" id="podcast-posts"></div>
-                    <div class="pure-u-17-24"></div>
+                    <div class="pure-u-17-24" id="video-space"></div>
                 </div>
             </div>
         </div>
@@ -87,10 +87,24 @@
                             $(".search-module")
                             );
                         updatePostHeights()
-                        $("#navbox").show();
-
+                        loadComponent("video_module.html", "#video-space", function () {
+                                sources = ["https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02062017-0900.mp4",
+                                            "https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4",
+                                            "https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02102017-0900.mp4"];
+                                new videoClass({
+                                    source: JSON.stringify(sources),
+                                    index: 1,
+                                    time: 35 
+                                });
+                                
+                                $("#video-space").show();
+                                $("#navbox").show();
+                            }, 0, false);
+                        
+                        
                     }, 0, false);
                 }, 0, false);
+
 
         </script>
     </footer>
