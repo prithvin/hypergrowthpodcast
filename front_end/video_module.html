@@ -3,11 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css">
+        <link rel="stylesheet" href="http://vjs.zencdn.net/5.16.0/video-js.css">
+        <link rel="stylesheet" href="/front_end/styles/video_module/index.css"-->
 
     </head>
     <body>
         <div class="wrapper"> 
-            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="700" height="332"  
+            <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="700" height="332"  
               data-setup='{"playbackRates": [1,1.5,2], "autoplay": true}'>
                 <source id="videosrc" type='video/mp4'>
                 <p class="vjs-no-js">
@@ -16,7 +21,8 @@
                 </p>
             </video>
             <button id="prev" value="previous" onclick="changeVid(document.getElementById('prev').value)" class="prev-button btn btn-link crop-pic"></button>
-            <button id="next" value="next" onclick="changeVid(document.getElementById('next').value)" class="next-button btn btn-link crop-pic"></button>
+            <button id="next" value="next" onclick="changeVid(document.getElementById('next').value)" class="next-button btn btn-link crop-pic">
+            </button>
         </div>
 
         <h1 id="timer" class="text-center"> </h1>
@@ -25,12 +31,9 @@
     </body>
     <footer>
         <script src="http://vjs.zencdn.net/5.16.0/video.js"></script>
-        <script src="https:////cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script>
-        <script>
-            //event to tell when video.js loads
-            var event = new Event('videojsLoaded');
-            document.dispatchEvent(event);
-        </script>
+        <!--script src="/front_end/javascript/video_module/parseURLParameters.js"></script>
+        <script src="/front_end/javascript/video_module/video.js"></script-->
+        
         <script>
             /* Switch Video */
             function changeVid(video) {
@@ -48,9 +51,8 @@
         <script>
             
             function load (path, data, callback) {
-                    loadJavascriptDynamically([ "/front_end/video_module/javascript/video.js", "/front_end/video_module/javascript/parseURLParameters.js", "/front_end/video_module/javascript/loadStyles.js"], function () {
+                    loadJavascriptDynamically(["./javascript/video_module/video.js", "./javascript/video_module/parseURLParameters.js", "./javascript/video_module/loadStyles.js"], function () {
                         loadCSSBasedOnURLPath(path);
-                        
                         new videoClass(data);
                         callback();
                     });

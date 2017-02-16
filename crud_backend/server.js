@@ -92,14 +92,14 @@ app.get('/auth/facebook', function(req, res, next) {
 
 
 app.get("/auth/facebook/callback", function (req, res) {
-   passport.authenticate('facebook', function(err, user, info) {
+  passport.authenticate('facebook', function(err, user, info) {
     if (err || !user) {
       res.redirect(auth.errorCallback);
     }
     else {
-      console.log(user);
-      res.redirect(auth.callbackURL + "?id=" + user[0].FacebookAuthToken);
+      var retUrl = auth.callbackURL + "?id=" + user[0].FacebookAuthToken;
+      res.redirect(retUrl);
     }
 
-    })(req, res);
+  })(req, res);
 });

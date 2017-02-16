@@ -1,6 +1,6 @@
 $(".no-results").hide();
 var PostSearch = class PostSearch {
-    constructor (postData, currentUserName, currentUserPic, currentUserAuthToken, mainDiv) {
+    constructor (postData, currentUserName, currentUserPic, currentUserAuthToken, mainDiv, shouldHideCommentsAndSearch) {
         this.currentUserName = currentUserName;
         this.currentUserPic = currentUserPic; 
         this.currentUserAuthToken = currentUserAuthToken;
@@ -8,6 +8,15 @@ var PostSearch = class PostSearch {
         this.posts = [];
         this.currentSlide = 1;
         $(".no-results").hide();
+
+        this.shouldHideCommentsAndSearch = shouldHideCommentsAndSearch;
+
+        if (this.shouldHideCommentsAndSearch) {
+            $(this.mainDiv).parent().find(".dropdownOfSlide").hide();
+            $(this.mainDiv).parent().find(".main_search_container_post").hide();
+            $(this.mainDiv).parent().find(".search-module").css("border", "none");
+            console.log($(this.mainDiv).parent().find(".search-module"));
+        }
 
         this.mark = new Mark(document.getElementsByClassName("search-module")[0]);
         var parentClass = this;

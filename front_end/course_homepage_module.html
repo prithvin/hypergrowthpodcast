@@ -9,8 +9,8 @@
             <div id="navbox"></div>
             <div class="container podcast-cont">
                 <div class="pure-g podcast-row">
-                    <div class="pure-u-7-24" id="podcast-posts"></div>
-                    <div class="pure-u-17-24"></div>
+                    <div class="pure-u-17-24" id="course-videos"></div>
+                    <div class="pure-u-7-24" id="posts"></div>
                 </div>
             </div>
         </div>
@@ -23,7 +23,6 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="./javascript/components.js"></script>
-        <script src="./javascript/podcast_module/podcast.js"></script>
 
         <script>
                               
@@ -41,7 +40,8 @@
                         profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
                     });
                     
-                    loadComponent("post_search_module.html", "#podcast-posts", function () {
+
+                    loadComponent("post_search_module.html", "#posts", function () {
                         new PostSearch( 
                             [{"Name": "Rauhmel Bob",
                             "PostId": "123123123",
@@ -88,15 +88,88 @@
                             "Prithvi Narasimhan", 
                             "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png", 
                             null,
-                            $(".search-module")
+                            $(".search-module"),
+                            true
                             );
 
+     
+                        loadComponent("course_videos_module.html", "#course-videos", function() {
+                            new CourseVideosClass(
+                                {
+                                 "CourseTitle": "CSE 100 - Advanced Data Structures - Winter 2017",
+                                 "Videos": [
+                                 {
+                                    "Id" : 1,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                 {
+                                    "Id" : 2,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                 {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
+                                                                  {
+                                    "Id" : 3,
+                                    "Date" : "Mon 1/0",
+                                    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg"
+                                 },
 
-                        $("#loader").hide();
-                        $("#podcast-posts").show();
-                        $("#navbox").show();
-                    }, 300, true);
-                }, 300, true);
+                                 ]
+                                }
+                            )
+                            $(".podcast-row").css("height", $("html").height() - $("#navbox").height());
+                            $("#loader").hide();
+                            $("#posts").show();
+                            $("#course-videos").show();
+                            $("#navbox").show();
+                        }, 200, true);
+                    }, 200, true);
+                }, 200, true);
             });
 
         </script>
