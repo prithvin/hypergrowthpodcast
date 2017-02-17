@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles/podcast_module/containerStyles.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,200,400,500" />
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" />
@@ -11,6 +12,7 @@
   </head>
 
   <body>
+    <!--div id="loader"></div-->
     <div class="row fill">
       <div class="col-sm-6 no-float fill onboarding-left dark">
         <img class="center-pic" src="images/onboarding_module/ResultsPageMac.png"/>
@@ -23,12 +25,12 @@
           <img class="podcast-logo" src="images/podcast_logo.png"/>
           <img class="ucsd-text-logo" src="images/ucsd_text_logo.png"/>
         </div>
-        <div class="course-list-container">
-            <table>
+        <div id="course-table" class="course-list-container">
+            <!--table>
               <thead>
                 <th>Select a Course.</th>
               </thead>
-            <tbody>
+            <tbody id="course-table">
               <tr class="table-row" data-href="./course_homepage_module.html"><td>CSE 100 - Winter 2017</td></tr>
               <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
               <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
@@ -36,7 +38,7 @@
               <tr class="table-row" data-href=""><td>CSE 8B - Winter 2017</td></tr>
               <tr class="table-row" data-href=""><td>CSE 103 - Winter 2017</td></tr>
             </tbody>
-          </table>
+          </table-->
         </div>
       </div>
     </div>
@@ -45,6 +47,7 @@
   <footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./javascript/components.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
     <script src="https://cdn.jsdelivr.net/mark.js/8.8.3/mark.es6.min.js"></script>
 
@@ -59,6 +62,49 @@
                 window.document.location = $(this).data("href");
             });
         });
+    </script>
+    <script>
+        //loadComponent("loader_module.html", "#loader", function () {
+                loadComponent("onboarding_course_table_module.html", "#course-table", function () {
+                    new CourseTableClass({
+                        Classes: [
+                            {
+                                classname: "CSE 100",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                            {
+                                classname: "CSE 110",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                            {
+                                classname: "CSE 100",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                            {
+                                classname: "CSE 110",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                            {
+                                classname: "CSE 100",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                            {
+                                classname: "CSE 110",
+                                classqrtr: "Winter 2017",
+                                classpage: "./course_homepage_module.html"
+                            },
+                        ]
+                    });
+                    //$("#loader").hide();
+                    $("#course-table").show(); 
+                }, 0, true);
+       // });
+                    
     </script>
   </footer>
 </html>
