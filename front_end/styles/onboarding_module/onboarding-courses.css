@@ -116,7 +116,7 @@ th {
 
 .course-list-container tbody {
   width: auto;
-  height: 55vh;
+  height: 60vh;
   overflow: auto;
   display: block;
 }
