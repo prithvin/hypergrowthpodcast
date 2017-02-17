@@ -1,27 +1,22 @@
-function loadComponent (fileName, domTarget, callback, hideUntilAfter, dontShow) {
-    $.ajax({
-        url: fileName,
-        data: {},
-        success: function (data) {
-            if (hideUntilAfter == null) 
-                hideUntilAfter = 0;
-            $(domTarget).hide();
-            $(domTarget).html(data).promise().done(function(){
-                setTimeout( function () {
-                    if (!dontShow)
-                        $(domTarget).show();
-                    callback();
-                }, hideUntilAfter)
-            });
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.log("Something went wrong when loading " + fileName);
-            console.log("Status: " + textStatus + " Error: " + errorThrown);
-        }  
+function loadHTMLComponent (fileName, domTarget, callback, hideUntilAfter, dontShow) {
+    loadHTML(fileName, function (data) {
+        if (hideUntilAfter == null) 
+            hideUntilAfter = 0;
+        $(domTarget).hide();
+        $(domTarget).html(data).promise().done(function(){
+            setTimeout( function () {
+                if (!dontShow)
+                    $(domTarget).show();
+                callback();
+            }, hideUntilAfter)
+        });
     });
 }
 
-function loadHTML (fileName, callback) {
+window.appModules = {};
+
+
+function loadHTMLComponent (fileName, callback) {
     $.ajax({
         url: fileName,
         data: {},

@@ -2,8 +2,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var PostModel = new mongoose.Schema({
-    SlideId: Number,
-  	LectureId: Number, // this is in the schema, the _id cannot be an umber. its an aes something encrypted id
   	ProfilePicture: String,
   	NameOfUser: String,
     SlideId: Schema.Types.ObjectId,

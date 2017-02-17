@@ -1,8 +1,13 @@
-$( window ).resize(function() {
-    updatePostHeights();
-});
+class PodcastPage {
 
-function updatePostHeights() {
-    var newHeight =$(window).height() - $(".podcast-page-div").find("#navbox").height();
-    $(".podcast-page-div").find("#podcast-posts").css("height",newHeight );
-}
+    constructor () {
+        $( window ).resize(function() {
+            updatePostHeights();
+        });
+    }
+
+    updatePostHeights() {
+        var newHeight =$(window).height() - $(".podcast-page-div").find("#navbox").height();
+        $(".podcast-page-div").find("#podcast-posts").css("height",newHeight );
+    }
+};
