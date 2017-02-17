@@ -59,11 +59,20 @@ app.get('/course',apiFunctions.userFunctions.isLoggedIn, function(req, res){
   }
 });
 
+app.get('/login',function(req,res){
+  res.send("LOGIN PAGE");
+});
+
+app.get('/logout',function(req,res){
+  req.logout();
+  res.send("LOGGED OUT");
+});
+
 // MAT <TODO> USE THIS TO CALL THE API
 // http://localhost:3000/auth/facebook?callbackURL=http://www.google.com&errorCallbackURL=http://yahoo.com
 // Google.com id parameter will be the user fb auth id
 // yahoo.com will have no id parameter
-// After calling this api, call another api to generate a session 
+// After calling this api, call another api to generate a session
 // Then work on the get courses api for the next page while cody does the frontend
 app.get('/auth/facebook', function(req, res, next) {
   if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {

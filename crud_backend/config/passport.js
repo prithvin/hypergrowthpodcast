@@ -11,8 +11,9 @@ passport.use(new FacebookStrategy({
     clientID: configAuth.facebookAuth.clientID,
     clientSecret: configAuth.facebookAuth.clientSecret,
     callbackURL: configAuth.facebookAuth.callbackURL,
+    passReqToCallback: true,
   },
-  function(token, refreshToken, profile, done) {
+  function(req,token, refreshToken, profile, done) {
     process.nextTick(function() {
       UserModel.find({ ProfileId : profile.id}, function(err, user) {
         if (err){

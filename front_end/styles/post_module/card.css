@@ -7,7 +7,7 @@
 mark {
     padding: 0 !IMPORTANT;
     background-color: rgba(0, 0,0, 0) !IMPORTANT;
-    color: #C00000;
+    color: #C00000 !IMPORTANT;
     font-weight: 600;
 }
 .name-of-poster mark {
@@ -22,6 +22,7 @@ mark {
     font-family: 'Roboto', sans-serif;
     padding-left:0px;
     padding-right:0px;
+    padding: 0px !IMPORTANT;
     margin-top: 10px;
 }
 
@@ -128,6 +129,7 @@ mark {
 .time-comment {
     text-align:right;
     top:5px;
+    padding-right: 3px !IMPORTANT;
     padding:3px;
     height:100%;
 }
