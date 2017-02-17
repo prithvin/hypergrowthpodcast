@@ -1,13 +1,13 @@
 // Create a schema
 var mongoose = require('mongoose');
 var UserModel = new mongoose.Schema({
-    Name: String,
-    ProfileId: String,
-    Email: String,
     ProfilePicture: String,
-  	FacebookAuthToken:String,
-  	WatchLater: [Number], //podcastids
-    WatchHistory: [{lectureId: String, Notes: String}]
+    Name: String,
+    Email: String,
+  	FBAuthId:String,
+    ProfileId: String,
+  	Notes:[Schema.Types.ObjectId],
+    WatchHistory:[Schema.Types.ObjectId]
 });
 
 // Create a model based on the schema
