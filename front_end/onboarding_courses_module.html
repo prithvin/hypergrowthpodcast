@@ -26,17 +26,15 @@
         <div class="course-list-container">
             <table>
               <thead>
-                <th>Select a Course</th>
+                <th>Select a Course.</th>
               </thead>
             <tbody>
-              <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
+              <tr class="table-row" data-href="./course_homepage_module.html"><td>CSE 100 - Winter 2017</td></tr>
               <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
               <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td>CSE 8A - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td>CSE 8B - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td>CSE 103 - Winter 2017</td></tr>
             </tbody>
           </table>
         </div>
@@ -45,14 +43,6 @@
   </body>
 
   <footer>
-    <!-- Clickable Rows -->
-    <script type="text/javascript">
-        $(document).ready(function($) {
-            $(".table-row").click(function() {
-                window.document.location = $(this).data("href");
-            });
-        });
-    </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
@@ -61,6 +51,14 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="javascript/onboarding_module/login.js"></script>
+    <!--script src="javascript/onboarding_module/login.js"></script-->
+    <!-- Clickable Rows -->
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
   </footer>
 </html>

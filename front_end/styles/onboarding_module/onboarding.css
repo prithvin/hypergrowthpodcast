@@ -9,7 +9,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: rgba(100,100,100,.61);
+  background-color: rgba(0,0,0,.53);
   background-blend-mode: multiply;
   min-width: 50%;
   padding: 0px;
@@ -80,11 +80,10 @@ html,body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  min-width: 50%;
   font-size: 24px;
   background: rgb(59,89,152);
   color: white;
-  margin-top: 27%;
+  margin-top: 23%;
 }
 
 .fa.fa-facebook-official {
@@ -94,9 +93,5 @@ html,body {
 
 .button-text {
   display: inline-block;
-  vertical-align: middle;
-}
-
-.button-text-outer {
   vertical-align: middle;
 }

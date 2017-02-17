@@ -1,6 +1,7 @@
 .onboarding-right {
   min-width: 50%;
   padding: 0px;
+  right: 0%;
 }
 
 .onboarding-left {
@@ -14,6 +15,7 @@
   min-width: 50%;
   padding: 0px;
 }
+
 
 html,body {
   height: 100%;
@@ -76,39 +78,10 @@ html,body {
   margin: 0;
 }
 
-.fb-login-button {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 50%;
-  font-size: 24px;
-  background: rgb(59,89,152);
-  color: white;
-  margin-top: 27%;
-}
-
-.fa.fa-facebook-official {
-  font-size: 175%;
-  margin-right: 36px;
-}
-
-.button-text {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.button-text-outer {
-  vertical-align: middle;
-}
-
 /* Second Onboarding Style */
-
 .course-list-container {
   /*padding-top: 10%;*/
-  height: 582px;
   width: 100%;
-  padding-bottom: 10%;
-  position: absolute;
 }
 
 table {
@@ -144,9 +117,8 @@ th {
 
 
 .course-list-container tbody {
-  position: relative;
   width: auto;
-  height: 492px;
+  height: 55vh;
   overflow: auto;
   display: block;
 }
