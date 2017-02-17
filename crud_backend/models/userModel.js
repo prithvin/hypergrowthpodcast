@@ -1,5 +1,6 @@
 // Create a schema
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var UserModel = new mongoose.Schema({
     ProfilePicture: String,
     Name: String,

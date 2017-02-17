@@ -1,5 +1,6 @@
 // Create a schema
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var SlideModel = new mongoose.Schema({
 	TimeStart: Number,
 	OCRTranscription: String,

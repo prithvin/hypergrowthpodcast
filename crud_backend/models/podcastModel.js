@@ -1,5 +1,6 @@
 // Create a schema
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var PodcastModel = new mongoose.Schema({
   ClassName: String,
   QuarterOfCourse: String,
