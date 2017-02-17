@@ -81,15 +81,15 @@ html,body {
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
+  position: absolute;
   width: 100%;
+  bottom: 0%;
 }
 
 table {
   text-align: center;
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
-  max-width: 100%;
 }
 
 td, th {
@@ -102,11 +102,9 @@ td, th {
   color: white;
 }
 
-
 thead {
   display: block;
   background: white;
-  
 }
 
 th {
