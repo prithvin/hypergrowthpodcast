@@ -1,5 +1,6 @@
 // Create a schema
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var PostModel = new mongoose.Schema({
     SlideId: Schema.Types.ObjectId,
   	PodcastId: Schema.Types.ObjectId,

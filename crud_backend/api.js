@@ -2,6 +2,8 @@ var PodcastModel = require('./models/podcastModel.js').PodcastModel;
 var UserModel = require('./models/userModel.js').UserModel;
 var SlideModel = require('./models/slideModel.js').SlideModel;
 var PostModel = require('./models/postModel.js').PostModel;
+var NotesModel = require('./models/notesModel.js').NotesModel;
+var FrequencyModel = require('./models/postModel.js').FrequencyModel;
 var mongoose = require('mongoose');
 
 //API Functions
@@ -9,16 +11,22 @@ var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
           //dummy function
-          /*createPodcasts: function(){
+          createPodcasts: function(){/*
             PodcastModel.create({ClassName: "CSE100", QuarterOfCourse: "Winter", ClassNameCourseKey:"CSE100" + "Winter", PodcastUrl:'https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3743&l=6&v=1',
             OCRTranscriptionFreq: [{word:'BST', freq: 2}, {word: "Iterator", freq: 3}]}, function(err, podcasts){
             if(err) console.log(err);
               else console.log(podcasts);
-            });
-          },*/
+            });*/
+          },
           //get all posts for course sorted
-          getRecentPostsForCourse : function(cname,callback){
-            PodcastModel.findOne({ClassNameCourseKey:cnameckey},function(err,podcast){
+          /*
+          var response{
+            ClassNameCourseKey : value
+          }
+
+        }*/
+          getRecentPostsForCourse : function(request,callback){
+            PodcastModel.findOne({ClassNameCourseKey:request.ClassNameCourseKey},function(err,podcast){
               var postIds = podcast.LecturePost;
               PostModel.find({_id : {$id : postIds}}, function(err,posts){
                   if(err)

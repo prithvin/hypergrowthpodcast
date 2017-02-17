@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var NotesModel = new mongoose.Schema({
   PodcastId : Schema.Types.ObjectId,
   Content: String
