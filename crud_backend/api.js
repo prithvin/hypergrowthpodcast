@@ -29,12 +29,12 @@ var apiFunctions = {
           }
           */
           getVideosForCourse: function(request, callback){
-            PodcastModel.find({CourseId:response.CourseId}, function(err,podcasts){
+            CourseModel.findOne({_id:response.CourseId}, function(err,course){
               if(err) {
                 console.log("error finding course");
               } else {
                 var response = {
-                  Podcasts : podcasts
+                  Podcasts : course.Podcasts
                 };
                 callback(response)
               }
@@ -86,8 +86,13 @@ var apiFunctions = {
             });
           },
 
-          getVideoInfo: function(cnameckey, callback) {
-            PodcastModel.findOne({ClassNameCourseKey:cnameckey}, function(err,podcast) {
+          /*
+            request{
+              PodcastId : podcastId
+            }
+          */
+          getVideoInfo: function(request, callback) {
+            PodcastModel.findOne({_id : request.PodcastId}, function(err,podcast) {
               if(err) {
                 console.log("error");
               } else {

@@ -13,7 +13,9 @@ var auth = require('./config/auth.js');
 app.use(session({
     secret: 'cse110secretstring',
     resave: true,
-    saveUninitialized: true }));
+    saveUninitialized: true,
+    maxAge: 86400000 // 24 hours in milliseconds
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,31 +38,23 @@ app.listen(3000, function() {
   console.log('listening on 3000')
 })
 
-app.get('/', function(req,res){
-  res.send("Routed to main page");
+/******************************************************************ROUTES*******************************************************************/
+
+app.get('/', apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  res.send("MAIN PAGE ROUTE");
 });
 
-app.get('/courses/:course/:keywords',function(req,res){
-  console.log(req.params);
-  console.log(req.params.course + "" + req.params.keywords);
-  apiFunctions.podcastFunctions.findPodcastsByKeyword(req.params.course ,req.params.keywords, function(response){
-    res.send(response);
-  });
-});
-
-app.get('/course',apiFunctions.userFunctions.isLoggedIn, function(req, res){
-  if(res.locals.stats == 401){
-    res.redirect("/auth/facebook");
+app.get('/login', function(req,res){
+  if(req.user){
+    res.redirect("/");
   }
-  else{
-  apiFunctions.userFunctions.getCourses(function(courses){
-    res.send(courses);
-  });
+  else {
+    res.sendfile('./index.html', {root: __dirname });
   }
 });
 
-app.get('/login',function(req,res){
-  res.send("LOGIN PAGE");
+app.post('/login',function(req,res){
+  res.redirect("/auth/facebook");
 });
 
 app.get('/logout',function(req,res){
@@ -68,6 +62,7 @@ app.get('/logout',function(req,res){
   res.send("LOGGED OUT");
 });
 
+/***************************************FACEBOOK AUTH****************************************************/
 // MAT <TODO> USE THIS TO CALL THE API
 // http://localhost:3000/auth/facebook?callbackURL=http://www.google.com&errorCallbackURL=http://yahoo.com
 // Google.com id parameter will be the user fb auth id
@@ -75,12 +70,13 @@ app.get('/logout',function(req,res){
 // After calling this api, call another api to generate a session
 // Then work on the get courses api for the next page while cody does the frontend
 app.get('/auth/facebook', function(req, res, next) {
-  if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
+  /*if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
     res.send("Error. Invalid params");
     return;
   }
   auth.callbackURL = req.query.callbackURL;
   auth.errorCallback = req.query.errorCallbackURL;
+  */
   passport.authenticate('facebook',
     {
       display: 'popup',
@@ -91,20 +87,35 @@ app.get('/auth/facebook', function(req, res, next) {
 
 
 
-app.get("/auth/facebook/callback", function (req, res) {
-  passport.authenticate('facebook', function(err, user, info) {
-    if (err || !user) {
+app.get("/auth/facebook/callback",
+  passport.authenticate('facebook', {
+  successRedirect : '/', // redirect to the secure profile section
+  failureRedirect : '/login'
+  }),
+  function(err, user, info) {
+    /*if (err || !user) {
       res.redirect(auth.errorCallback);
     }
     else {
-      var retUrl = auth.callbackURL + "?id=" + user[0].FacebookAuthToken;
+      user = user[0]['_doc'];
+      var user_id = user.ProfileId;
+      var retUrl = auth.callbackURL + "?id=" + user_id;
       res.redirect(retUrl);
+    }*/
+  },
+  /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
+  function(err,req,res,next) {
+        if(err) {
+          console.log("THE ERROR" + err);
+            res.redirect('/auth/facebook');
+        }
+
+      // Save the user id to the current session
+      req.session.user_id = user_id;
+      req.session.save((err) => {
+        if(err) {
+          console.log(err);
+        }
+      });
     }
-
-  })(req, res);
-});
-
-
-app.get("/podcast", function (req, res) {
-
-});
+);

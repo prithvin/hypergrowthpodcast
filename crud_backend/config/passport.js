@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var UserModel = require("../models/userModel.js").UserModel;
+var UserModel = require("../models/userModel.js");
 var configAuth = require("./auth.js");
 var passport = require('passport');
 var bodyParser = require('body-parser');

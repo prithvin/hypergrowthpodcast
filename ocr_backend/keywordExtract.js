@@ -2,6 +2,8 @@ var exec = require('child_process').exec;
 var autocomplete = require('./spellCorrect.js');
 var fs = require('fs');
 
+const BASELINE = 5;
+
 module.exports = {
     extractKeywordsFromSlide: function (slideTexts, callback) {
         extractKeyByEle(slideTexts, 0, function (data) {
@@ -13,8 +15,35 @@ module.exports = {
 
 function extractKeyByEle (slideTexts, index, callback, regularReturned, flattenedReturn) {
     if (slideTexts.length == index) {
+        var i;
+        var flattenedObj = {};
+
+        for (i = 0; i < flattenedReturn.length; i++) {
+          var element = flattenedReturn[i];
+
+          if (!(flattenedObj.hasOwnProperty(element['Word'])))
+            flattenedObj[element['Word']] = 0;
+
+          flattenedObj[element['Word']] += element['Frequency'];
+        }
+
+        var sortable = [];
+        for (var word in flattenedObj) {
+          sortable.push([word, flattenedObj[word]]);
+        }
+
+        sortable.sort((x, y) => {return y[1] - x[1];})
+
+        var flattenedOutput = [];
+        for (i = 0; i < sortable.length; i++) {
+          if (sortable[i][1] < BASELINE)
+            break;
+
+          flattenedOutput.push(sortable[i][0]);
+        }
+
         callback({
-            "FlattenedReturn": flattenedReturn,
+            "FlattenedReturn": flattenedOutput,
             "RegularReturned": regularReturned
         }); return;
     }
