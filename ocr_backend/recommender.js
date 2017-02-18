@@ -26,6 +26,7 @@ function getRecs (videosInLectureInDB, index, callback) {
   var current = videosInLectureInDB[index];
   getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture, prevId, nextId) {
     dbuploader.setRecommendations(current.PodcastId, recommendationsForLecture, prevId, nextId, function () {
+      console.log("Set recommendations for podcast id: " + current.PodcastId);
       getRecs(videosInLectureInDB, index + 1, callback);
     });
   });
@@ -64,5 +65,5 @@ function getRecommendedPodcasts (input_podcast, podcastList, callback) {
     ret.push(removed[0]);
   }
 
-  callback(ret, podcastList[indexOfPrevPodcast]['Podcastid'], podcastList[indexOfNextPodcast]['PodcastId']);
+  callback(ret, podcastList[indexOfPrevPodcast]['PodcastId'], podcastList[indexOfNextPodcast]['PodcastId']);
 }
