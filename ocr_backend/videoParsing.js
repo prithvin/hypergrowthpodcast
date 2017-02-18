@@ -48,25 +48,19 @@ function addSRTtoFileData (fileData, subs) {
   return fileData;
 }
 
-function addSlideToDB (timeStart, ocrTranscription, ocrKeywordsForSlide, fileData, index, slideIds, callback) {
+function addSlide (timeStart, ocrTranscription, index, slidesArray, callback) {
   if (index == ocrTranscription.length) {
-    callback(slideIds);
+    callback(slidesArray);
     return;
   }
 
-  dbuploader.addSlide(
+  slidesArray.push(
     {
-      TimeStart: timeStart[index],
+      SlideNum: index + 1,
       OCRTranscription: ocrTranscription[index],
-      OCRKeywordsForSlide: ocrKeywordsForSlide[index],  // put extracted keywords here
-      SlidePost: [],
-      AudioTranscription: fileData['SRTPerSlide'][index],
-      AudioTranscriptionFreq: fileData['SRTKeywordsPerSlide'][index]
-    },
-    function(id) {
-      slideIds.push(id);
-      addSlideToDB(timeStart, ocrTranscription, ocrKeywordsForSlide, fileData, index + 1, slideIds, callback);
-    }
+      StartTime: timeStart[index]
+    });
+  addSlide(timeStart, ocrTranscription, index + 1, slidesArray, callback);
   );
 }
 
@@ -89,24 +83,19 @@ function parseFileNameForCourseData (fileName) {
   };
 }
 
-function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray, callback) {
+function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, slidesArray, callback) {
   dbuploader.addPodcast({
-    ClassName: partsOfFileName["Course"],
-    QuarterOfCourse: partsOfFileName["Quarter"],
-    ClassNameCourseKey: partsOfFileName["ClassNameCourseKey"],
-    VideoDate: partsOfFileName["Date"],
-    NextVideo: "NULL",  // TODO
-    PrevVideo: "NULL",  // TODO
-    PodcastName: fileData["FileNameWithoutExtension"],
+    Name: partsOfFileName["Course"],
+    Quarter: partsOfFileName["Quarter"],
+    Time: partsOfFileName["Date"],
     PodcastUrl: fileData["URLOfVideo"],
-    PodcastImage: image,
-    OCRTranscription: transcriptionStuff["TotalTranscription"],
-    OCRTranscriptionFreq: transcriptionStuff["FlatKeywordTranscription"], // put extracted keywords here
-    AudioTranscription: fileData["SRTFile"],
-    AudioTranscriptionFreq: fileData["SRTKeywordsForFile"],
-    Slides: idOfSlidesArray,
-    RecommendedVideos: [],
-    LecturePost: []
+    Slides: slidesArray,
+    AudioTranscript: [],
+    SRTBlob: fileData["SRTFile"],
+    PrevVideo: "NULL",  // TODO - needs to be an Id or mongoose will complain
+    NextVideo: "NULL",  // TODO
+    Recommendations: [],
+    Image: image
   }, function (id) {
     callback(id);
   });
@@ -155,7 +144,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
             fileData = addSRTtoFileData(fileData, subs);  // Updates JSON obj with audio transcription stuff
 
             // Traverse through OCR trasncripts
-            addSlideToDB(timetable, ocrTranscription, words, fileData, 0, [], function (idOfSlidesArray) {
+            addSlide(timetable, ocrTranscription, 0, [], function (slidesArray) {
               var transcriptionStuff = {
                 "TotalTranscription": ocrTranscription.join(" "),
                 "FlatKeywordTranscription": flat
@@ -163,7 +152,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
               var partsOfFileName = parseFileNameForCourseData(fileData["FileNameWithoutExtension"]); // parses file name for course data
               var image = base64encode(fileData["DirName"] + '/1.jpg');
 
-              addPodcast(transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray, function (podcastId) {
+              addPodcast(transcriptionStuff, partsOfFileName, image, fileData, slidesArray, function (podcastId) {
                 videosFromCourse.push({"_id" : podcastId});
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
