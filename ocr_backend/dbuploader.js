@@ -107,7 +107,7 @@ module.exports = {
                   course.save();
                 });
 
-                callback(podcast['_id']);
+                callback(podcast['_id'], obj.CourseId);
               }
             });
           });
@@ -134,7 +134,7 @@ module.exports = {
                 course.save();
               });
 
-              callback(podcast['_id']);
+              callback(podcast['_id'], obj.CourseId);
             }
           });
         }
