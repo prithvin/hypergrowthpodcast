@@ -1,4 +1,4 @@
-class NavBarLoggedInCourse {
+var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (params) {
 
         this.params = params;

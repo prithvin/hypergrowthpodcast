@@ -1,0 +1,35 @@
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700,900");
+@import url("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/* Video module */
+@import url("http://vjs.zencdn.net/5.16.0/video-js.css");
+@import url("./video_module/index.css");
+
+/* Podcast module */
+@import url("./podcast_module/containerStyles.css");
+
+/* Onboarding module */
+@import url("./onboarding_module/onboarding.css");
+@import url("./onboarding_module/onboarding-courses.css");
+
+/* course videos module */
+@import url("./course_videos_module/course_videos.css");
+
+/* loader module */
+@import url("./loader_module/loading.css");
+
+/* menu module */
+@import url("./menu_module/logo.css");
+@import url("./menu_module/navbar.css");
+@import url("./menu_module/searchbar.css");
+
+/* search module */
+@import url("./search_module/searchResults.css");
+
+/* post module */
+@import url("./post_module/alertBox.css");
+@import url("./post_module/card.css");
+@import url("./post_module/searching.css");
+@import url("./post_module/switcherDropdown.css");

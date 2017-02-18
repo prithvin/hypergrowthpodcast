@@ -1,0 +1,58 @@
+<div class="wrapper"> 
+    <div class="videocontent">
+        <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="700" height="332"  
+          data-setup='{"playbackRates": [1,1.5,2], "autoplay": true}'>
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+        <button id="prev" value="previous" onclick="changeVid(document.getElementById('prev').value)" class="prev-button btn btn-link crop-pic"></button>
+        <button id="next" value="next" onclick="changeVid(document.getElementById('next').value)" class="next-button btn btn-link crop-pic">
+        </button>
+    </div>
+</div>
+<h1 id="timer" class="text-center"> </h1>
+
+
+    </body>
+
+        <script>
+
+            function load(moduleName, data, callback) {
+                new videoClass(data);
+                callback();
+            }
+    
+            //event to tell when video.js loads
+            var event = new Event('videojsLoaded');
+            document.dispatchEvent(event);
+            
+
+            /* Switch Video */
+            function changeVid(video) {
+                //console.log("loading " + video + " video");
+                var event = new CustomEvent('changeVideo', {'detail': video});
+                document.dispatchEvent(event);
+            };
+            
+            /* Get Current Timestamp */
+            document.getElementById("my-video").addEventListener("timeupdate", function() {
+                var event = new Event('getTime');
+                document.dispatchEvent(event);
+            });
+        </script>
+
+        <!--script>
+            
+            function load (path, data, callback) {
+                    loadJavascriptDynamically(["./javascript/video_module/video.js", "./javascript/video_module/parseURLParameters.js", "./javascript/video_module/loadStyles.js"], function () {
+                        loadCSSBasedOnURLPath(path);
+                        new videoClass(data);
+                        callback();
+                    });
+            }
+        </script-->
+
+    </footer>
+</html>

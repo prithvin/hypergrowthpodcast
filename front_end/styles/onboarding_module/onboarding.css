@@ -9,7 +9,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: rgba(100,100,100,.61);
+  background-color: rgba(0,0,0,.53);
   background-blend-mode: multiply;
   min-width: 50%;
   padding: 0px;
@@ -80,97 +80,18 @@ html,body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  min-width: 50%;
   font-size: 24px;
   background: rgb(59,89,152);
   color: white;
-  margin-top: 27%;
+  margin-top: 23%;
 }
 
 .fa.fa-facebook-official {
-  font-size: 175%;
+  font-size: 187%;
   margin-right: 36px;
 }
 
 .button-text {
   display: inline-block;
   vertical-align: middle;
-}
-
-.button-text-outer {
-  vertical-align: middle;
-}
-
-/* Second Onboarding Style */
-
-.course-list-container {
-  /*padding-top: 10%;*/
-  height: 582px;
-  width: 100%;
-  padding-bottom: 10%;
-  position: absolute;
-}
-
-table {
-  text-align: center;
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-td, th {
-  padding: 20px;
-  width: 1%;
-  line-height: 50px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 200;
-  font-size: 20px;
-  color: white;
-}
-
-
-thead {
-  display: block;
-  background: white;
-  
-}
-
-th {
-  text-align: center;
-  color: #444;
-  background: white;
-}
-
-
-.course-list-container tbody {
-  position: relative;
-  width: auto;
-  height: 492px;
-  overflow: auto;
-  display: block;
-}
-
-.table-row {
-  cursor: pointer;
-}
-
-tr:hover {
-  opacity:.90 !important;
-}
-
-tr:nth-child(4n + 1) {
-  background: rgba(56, 90, 154, 1);
-}
-
-tr:nth-child(4n + 2) {
-  background: rgba(229, 77, 66, 1);
-}
-
-tr:nth-child(4n + 3) {
-  background: rgba(41, 187, 156, 1);
-}
-
-tr:nth-child(4n + 4) {
-  background: rgba(104, 129, 158, 1);
 }

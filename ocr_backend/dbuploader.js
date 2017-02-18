@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var PodcastModel = require('./podcastModel.js').PodcastModel;
-var SlideModel = require('./slideModel.js').SlideModel;
+var CourseModel = require('./courseModel.js').CourseModel;
 
 var isMongoConnected = false;
 
@@ -42,21 +42,20 @@ module.exports = {
   },
   getPodcastsForCourse: function (course, callback) {
     connectMongo(function () {
-      PodcastModel.find({ClassNameCourseKey: course}, '_id PodcastImage PodcastName',
-                        {sort: 'VideoDate'}, function (err, podcasts){
+      CourseModel.findOne({_id: course}, 'Podcasts', function (err, podcasts){
         if (err) {
           console.error("Issue connecting to database");
           console.error(err);
         }
         else {
-          callback(podcasts);
+          callback(podcasts.Podcasts);
         }
       });
     });
   },
   setRecommendations: function (id, recommendations, prevId, nextId, callback) {
     connectMongo(function () {
-      PodcastModel.update({_id: id}, {$set: {RecommendedVideos: recommendations, PrevVideo: prevId, NextVideo: nextId}},
+      PodcastModel.update({_id: id}, {$set: {Recommendations: recommendations, PrevVideo: prevId, NextVideo: nextId}},
                           function (err, podcast){
         if (err) {
           console.error("Issue connecting to database");
@@ -70,26 +69,100 @@ module.exports = {
   },
   addPodcast: function (obj, callback) {
     connectMongo(function () {
-      PodcastModel.create(obj, function (err, podcasts){
-        if (err) {
-          console.error("Issue connecting to database");
-          console.error(err);
+      module.exports.getCourseList(function(courseList) {
+        var i;
+        var index = -1;
+        var course;
+        var tmpImage = obj.Image;
+        delete obj.Image;
+        var tmpKeywords = obj.OCRKeywords;
+        delete obj.OCRKeywords;
+
+        for (i = 0; i < courseList.length; i++) {
+          if (courseList[i]['Name'] == obj['Name'] && courseList[i]['Quarter'] == obj['Quarter']) {
+            index = i;
+            break;
+          }
         }
+
+        if (index < 0) {
+          module.exports.addCourse(obj, function(newCourseId) {
+            delete obj.Name;
+            delete obj.Quarter;
+            obj.CourseId = newCourseId;
+
+            PodcastModel.create(obj, function (err, podcast){
+              if (err) {
+                console.error("Issue connecting to database");
+                console.error(err);
+              }
+              else {
+                CourseModel.findById(newCourseId, function(err, course) {
+                  course.Podcasts.push({
+                    PodcastId: podcast['_id'],
+                    PodcastImage: tmpImage,
+                    OCRKeywords: tmpKeywords,
+                    Time: obj.Time
+                  });
+                  course.save();
+                });
+
+                callback(podcast['_id'], obj.CourseId);
+              }
+            });
+          });
+        }
+
         else {
-          callback(podcasts['_id']);
+          delete obj.Name;
+          delete obj.Quarter;
+          obj.CourseId = courseList[index]._id;
+
+          PodcastModel.create(obj, function (err, podcast){
+            if (err) {
+              console.error("Issue connecting to database");
+              console.error(err);
+            }
+            else {
+              CourseModel.findById(obj.id, function(err, course) {
+                course.Podcasts.push({
+                  PodcastId: podcast['_id'],
+                  PodcastImage: tmpImage,
+                  OCRKeywords: tmpKeywords,
+                  Time: obj.Time
+                });
+                course.save();
+              });
+
+              callback(podcast['_id'], obj.CourseId);
+            }
+          });
         }
       });
     });
   },
-  addSlide: function (obj, callback) {
+  addCourse: function(obj, callback) {
     connectMongo(function () {
-      SlideModel.create(obj, function (err, slides){
+      CourseModel.create({Name: obj.Name, Quarter: obj.Quarter, Podcasts: []}, function(err, course) {
         if (err) {
           console.error("Issue connecting to database");
           console.error(err);
         }
         else {
-          callback(slides['_id']);
+          callback(course['_id']);
+        }
+      });
+    });
+  },
+  getCourseList: function (callback) {
+    connectMongo(function () {
+      CourseModel.find({}, '_id Name Quarter', function (err, courses){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          callback(courses);
         }
       });
     });

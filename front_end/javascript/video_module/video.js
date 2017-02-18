@@ -1,22 +1,28 @@
-
 class videoClass {
     
     constructor (urlParams) {
+            //loadCSSBasedOnURLPath();
+
             this.index = 0;
             this.srcAttr = $("#videosrc");
             this.urlParams = urlParams;
-            this.initSourceArray(this.getDataOrDefault("source"));
-            this.initSource(this.getDataOrDefault("index"));
-            this.setTime(this.getDataOrDefault("time"));
-            this.getTime();
-            this.initHotKeys();
-            this.changeVideo();
+            this.sid = 0;
+            var self = this;
+            this.loadScriptJS("http://vjs.zencdn.net/5.16.0/video.js", function(){
+                self.initSourceArray(self.getDataOrDefault("source"));
+                self.setSource(self.getDataOrDefault("index"));
+                self.setTime(self.getDataOrDefault("time"));
+                self.getTime();
+                self.initHotKeys();
+                self.changeVideo();
+            });
+            
             
     }
     
     getDataOrDefault (key) {
         if (this.urlParams[key] == null)
-            return "N/A";
+            return 0;
         var result = decodeURIComponent(this.urlParams[key])
         if (key == "index"){
             return parseInt(result);
@@ -80,7 +86,8 @@ class videoClass {
     }
     
     initHotKeys(){
-        this.loadHotkeysJS(function(){
+        this.loadScriptJS("https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js", 
+                           function(){
             videojs('my-video').hotkeys({
                 volumeStep: 0.1,
                 seekStep: 5,
@@ -90,7 +97,7 @@ class videoClass {
     }
     
     setTime(time){
-        document.getElementById("my-video").currentTime = time;   
+        videojs('my-video').currentTime(time);   
     }
     
     getTime() {
@@ -134,7 +141,7 @@ class videoClass {
         });
     }  
     
-    loadHotkeysJS( callback ) {
+    loadScriptJS( scriptURL, callback ) {
         var script = document.createElement( "script" );
         script.type = "text/javascript";
         if(script.readyState) {  //IE
@@ -150,7 +157,7 @@ class videoClass {
         };
       }
 
-      script.src = "https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js";
+      script.src = scriptURL;
       document.getElementsByTagName( "footer" )[0].appendChild( script );
     }
 

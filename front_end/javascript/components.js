@@ -1,31 +1,42 @@
-function loadComponent (fileName, domTarget, callback, hideUntilAfter, dontShow) {
-    $.ajax({
-        url: fileName,
-        data: {},
-        success: function (data) {
-            if (hideUntilAfter == null) 
-                hideUntilAfter = 0;
-            $(domTarget).hide();
-            $(domTarget).html(data).promise().done(function(){
-                setTimeout( function () {
-                    if (!dontShow)
-                        $(domTarget).show();
-                    callback();
-                }, hideUntilAfter)
-            });
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.log("Something went wrong when loading " + fileName);
-            console.log("Status: " + textStatus + " Error: " + errorThrown);
-        }  
+window.appModules = {};
+
+var loadHTMLModules = {
+    "CommentModule": "comment_module.html",
+    "CourseHomepageModule": "course_homepage_module.html",
+    "CourseSearchModule": "course_search_module.html",
+    "LoaderModule": "loader_module.html",
+    "MenuModule": "menu_module.html",
+    "OnboardingCourseTableModule": "onboarding_course_table_module.html",
+    "OnboardingCoursesModule": "onboarding_courses_module.html",
+    "OnboardingFrontPage": "onboarding_module.html",
+    "PodcastModule": "podcast_module.html",
+    "PostModule": "post_module.html",
+    "PostSearchModule": "post_search_module.html",
+    "VideoModule": "video_module.html"
+};
+
+function loadComponent (moduleName, divToLoad, callback) {
+    if (loadHTMLModules[moduleName] == null) {
+        console.log("Invalid module");
+        return;
+    }
+    loadHTMLComponent(moduleName, function (data) {
+        $(divToLoad).html(data);
+        callback();
     });
 }
 
-function loadHTML (fileName, callback) {
+function loadHTMLComponent (moduleName, callback) {
+
+    if (window.appModules[moduleName] != null) 
+        callback(window.appModules[moduleName]);
+    
+    var filePath = loadHTMLModules[moduleName]; 
     $.ajax({
-        url: fileName,
+        url: filePath,
         data: {},
         success: function (data) {
+            window.appModules[moduleName] = data;
             callback(data);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 

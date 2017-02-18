@@ -5,9 +5,7 @@ var keywordExtract = require("./keywordExtract.js");
 
 
 module.exports = {
-    getSRT: function (videoFileName, intervalData, callback) {
-        intervalData = intervalData.map((num) => { return num / 1000; }); // convert ms to s
-
+    getSRT: function (videoFileName, callback) {
         var callString = "autosub " + videoFileName;
         console.log("Starting audio extraction for " + videoFileName);
         exec(callString , function(error, stdout, stderr) {
@@ -18,67 +16,37 @@ module.exports = {
                 console.log(error);
                 callback({
                     'SRTFile': {},
-                    'SubsPerSlide': []
+                    'SRTByTime': []
                 });
                 return;
             }
             console.log("Audio extraction complete for " + videoFileName);
-            var srtFleName = videoFileName.slice(0, -4) + ".srt";
-            parseFile(srtFleName, intervalData, callback);
+            var srtFileName = videoFileName.slice(0, -4) + ".srt";
+            parseFile(srtFileName, callback);
         });
     }
 };
 
 
-function parseFile (fileName, intervalData, callback) {
-    if (intervalData.length == 0) {
-        callback();
-        return;
+function parseFile (fileName, callback) {
+  console.log("Reading from srt file: " + fileName);
+  fs.readFile(fileName,'utf8', (err, data) => {
+
+  var jsonSubs = parseSRT(data);
+    var i;
+    for (i = 0; i < jsonSubs.length; i++) {
+      var working = jsonSubs[i];
+      delete working.id;
+      working.StartTime = working.start;
+      delete working.start;
+      delete working.end;
+      working.Content = working.text;
+      delete working.text;
     }
 
-    console.log("Reading from srt file: " + fileName);
-    fs.readFile(fileName,'utf8', (err, data) => {
-
-        var jsonSubs = parseSRT(data);
-
-
-
-        var currentMin = intervalData[0];
-        var currentMax = Number.MAX_VALUE;
-        if (intervalData.length > 0)
-            currentMax = intervalData[1];
-
-        var currentMaxIntervalIndex = 1;
-        var forCurrentSlide = "";
-        var subsPerSlide = [];
-        for (var x = 0; x < jsonSubs.length; x++) {
-            if (jsonSubs[x]['start'] <= currentMax) {
-                forCurrentSlide += " " + jsonSubs[x]['text'];
-            }
-            else {
-                subsPerSlide.push(forCurrentSlide);
-                forCurrentSlide = "";
-                currentMin = currentMax;
-                currentMaxIntervalIndex++;
-                currentMax = Number.MAX_VALUE;
-                if (currentMaxIntervalIndex < intervalData.length)
-                    currentMax = intervalData[currentMaxIntervalIndex];
-                x--;
-            }
-        }
-        subsPerSlide.push(forCurrentSlide);
-        console.log("Extracting keywords for audio extraction");
-        keywordExtract.extractKeywordsFromSlide(subsPerSlide, function (dataKeys) {
-            console.log("Keyword extraction complete..");
-            var returnedObj = {
-                'FlattenedKeywords': dataKeys["FlattenedReturn"],
-                'KeywordsBySlide': dataKeys["RegularReturned"],
-                'SRTFile': data,
-                'SubsPerSlide': subsPerSlide
-            };
-            callback(returnedObj);
-        });
-
-
+    callback({
+      'SRTFile': data,
+      'SRTByTime': jsonSubs
     });
+  });
 }
