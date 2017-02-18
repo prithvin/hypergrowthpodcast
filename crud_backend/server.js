@@ -9,6 +9,7 @@ var passport = require('passport');
 var cors = require('cors');
 var session = require('express-session');
 var auth = require('./config/auth.js');
+var path = require('path');
 
 app.use(session({
     secret: 'cse110secretstring',
@@ -51,6 +52,14 @@ app.get('/login', function(req,res){
   else {
     res.sendfile('./index.html', {root: __dirname });
   }
+});
+
+app.get('/course/:courseId/posts',function(req,res){
+  res.sendfile(path.resolve("../front_end/fake_data/getPosts.json"));
+});
+
+app.get('/course/:courseId/podcast/:podcastId/posts',function(req,res){
+  res.sendfile(path.resolve("../front_end/fake_data/getPosts.json"));
 });
 
 app.post('/login',function(req,res){
