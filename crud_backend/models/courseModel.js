@@ -6,7 +6,7 @@ var CourseModel = mongoose.Schema({
 	PodcastId: Schema.Types.ObjectId,//_id for podcast
 	PodcastImage: String,
 	OCRKeywords: [String], //words ordered by frequencies with any words above a baseline frequency.
-		PodcastDate: Number //milliseconds
+		Time: Number //milliseconds
 	}]
 }
 

@@ -3,15 +3,15 @@ var mongoose = require('mongoose');
 var PostModel = new mongoose.Schema({
 	PodcastId: Schema.Types.ObjectId,
 	ProfilePicture: String,
-	SlideNum: Number, 
+	SlideNum: Number,
 	Name: String,
-	Date: Number,
+	Time: Number,
 	Content: String,
 	CourseId: Schema.Types.ObjectId,
 	Comments: [{
 		ProfilePicture : String,
 		Name: String,
-		Date: Number,
+		Time: Number,
 		Content: String
 	}]
 });

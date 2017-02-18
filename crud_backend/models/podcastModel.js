@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var PodcastModel = new mongoose.Schema({
 	CourseId: Schema.Types.ObjectId, // id for course it belongs to
-	PodcastDate: Number,
+	Time: Number,
 	PodcastUrl: String,
 	Slides: [{
 		SlideNum: Number,
@@ -19,7 +19,7 @@ var PodcastModel = new mongoose.Schema({
 	Recommendations: [{
 		PodcastId: Schema.Types.ObjectId,
 		PodcastImage: String,
-		PodcastDate: Number
+		Time: Number
 	}]
 });
 
