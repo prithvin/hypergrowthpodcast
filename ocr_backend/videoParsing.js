@@ -83,24 +83,19 @@ function parseFileNameForCourseData (fileName) {
   };
 }
 
-function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray, callback) {
+function addPodcast (transcriptionStuff, partsOfFileName, image, fileData, slidesArray, callback) {
   dbuploader.addPodcast({
-    ClassName: partsOfFileName["Course"],
-    QuarterOfCourse: partsOfFileName["Quarter"],
-    ClassNameCourseKey: partsOfFileName["ClassNameCourseKey"],
-    VideoDate: partsOfFileName["Date"],
-    NextVideo: "NULL",  // TODO
-    PrevVideo: "NULL",  // TODO
-    PodcastName: fileData["FileNameWithoutExtension"],
+    Name: partsOfFileName["Course"],
+    Quarter: partsOfFileName["Quarter"],
+    Time: partsOfFileName["Date"],
     PodcastUrl: fileData["URLOfVideo"],
-    PodcastImage: image,
-    OCRTranscription: transcriptionStuff["TotalTranscription"],
-    OCRTranscriptionFreq: transcriptionStuff["FlatKeywordTranscription"], // put extracted keywords here
-    AudioTranscription: fileData["SRTFile"],
-    AudioTranscriptionFreq: fileData["SRTKeywordsForFile"],
-    Slides: idOfSlidesArray,
-    RecommendedVideos: [],
-    LecturePost: []
+    Slides: slidesArray,
+    AudioTranscript: [],
+    SRTBlob: fileData["SRTFile"],
+    PrevVideo: "NULL",  // TODO - needs to be an Id or mongoose will complain
+    NextVideo: "NULL",  // TODO
+    Recommendations: [],
+    Image: image
   }, function (id) {
     callback(id);
   });
@@ -157,7 +152,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
               var partsOfFileName = parseFileNameForCourseData(fileData["FileNameWithoutExtension"]); // parses file name for course data
               var image = base64encode(fileData["DirName"] + '/1.jpg');
 
-              addPodcast(transcriptionStuff, partsOfFileName, image, fileData, idOfSlidesArray, function (podcastId) {
+              addPodcast(transcriptionStuff, partsOfFileName, image, fileData, slidesArray, function (podcastId) {
                 videosFromCourse.push({"_id" : podcastId});
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
