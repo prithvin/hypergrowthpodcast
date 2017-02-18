@@ -1,20 +1,37 @@
 var APost = class APost {
 
-    constructor (params, currentUserName, currentUserPic, currentUserAuthToken, postDiv, controller) {
-        this.params = params;
-        this.mainDiv = $(postDiv);
-        this.controller = controller;
-        this.commentDiv = $(postDiv).find(".comments");
-        this.loadHeader(this.params["Name"], this.params["ProfilePic"]);
-        this.loadMainContent(this.params["Content"], this.params["TimeOfPost"], this.params["SlideOfPost"]);
-        this.loadCommentContent(this.params["Comments"]);
-        this.postId = this.params["PostId"];
+    constructor (postData, userData, mainDiv, shouldAllowNewComments) {
 
-        var parentClass = this;
-        $(this.mainDiv).find(".comment-form").on("submit", function (ev) {
+        // Set up globals
+        this.postData = postData;
+        this.userData = userData;
+    
+        // DOM elements
+        this.mainDiv = $(mainDiv);
+        this.commentDiv = $(this.mainDiv).find(".comments");
+        this.commentForm = $(this.mainDiv).find(".comment-form");
+
+
+        this.loadHeader(this.postData["Name"], this.postData["ProfilePic"]);
+        this.loadMainContent(this.postData["Content"], this.postData["TimeOfPost"], this.postData["SlideOfPost"]);
+        this.loadCommentContent(this, this.postData["Comments"]);
+        this.postID = this.postData["PostId"];
+
+        if (shouldAllowNewComments) {
+            this.addCommentListener(this);
+        }
+
+    }
+
+    addCommentListener (thisClass) {
+        $(this.commentForm).on("submit", function (ev) {
             ev.preventDefault();
-            console.log(parentClass.postId);
-            parentClass.addComment($(parentClass.mainDiv).find(".comment-answer"), currentUserPic, currentUserName, new Date().getTime());
+            thisClass.addComment(
+                $(thisClass.mainDiv).find(".comment-answer"), 
+                thisClass.userData["Pic"], 
+                thisClass.userData["Name"], 
+                new Date().getTime()
+            );
         })
     }
 
@@ -25,9 +42,7 @@ var APost = class APost {
             "Content": $(inputForm).val(),
             "Time": timeOfComment
         });
-        if (this.controller != null) {
-            this.controller.remarkText();
-        }
+        $( this.mainDiv ).trigger( "commentAdded", [] );
         $(inputForm).val("");
     }
 
@@ -75,13 +90,12 @@ var APost = class APost {
         $(this.mainDiv).find(".post-main-content").find("span").html(content);
     }
 
-    loadCommentContent (comments) {
-        var parentClass = this;
-        loadHTML("comment_module.html", function (data) {
-            parentClass.commentModule = data;
+    loadCommentContent (thisClass, comments) {
+        loadHTMLComponent("CommentModule", function (data) {
+            thisClass.commentModule = data;
 
             for (var x = 0; x < comments.length; x++) {
-                parentClass.loadIndividualComment(comments[x]);
+                thisClass.loadIndividualComment(comments[x]);
             }
         });
             

@@ -3,35 +3,33 @@
 @import url("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-/* Post search module */
-@import "./post_module/searching.css";
-@import "./post_module/switcherDropdown.css";
-@import "./post_module/alertBox.css";
-
+/* Video module */
+@import url("http://vjs.zencdn.net/5.16.0/video-js.css");
+@import url("./video_module/index.css");
 
 /* Podcast module */
-@import "./podcast_module/containerStyles.css";
+@import url("./podcast_module/containerStyles.css");
 
 /* Onboarding module */
-@import "./onboarding_module/onboarding.css"
-@import "./onboarding_module/onboarding-courses.css"
+@import url("./onboarding_module/onboarding.css");
+@import url("./onboarding_module/onboarding-courses.css");
 
 /* course videos module */
-@import "./course_videos_module/course_videos.css"
+@import url("./course_videos_module/course_videos.css");
 
 /* loader module */
-@import "./loader_module/loading.css"
+@import url("./loader_module/loading.css");
 
 /* menu module */
-@import "./menu_module/logo.css"
-@import "./menu_module/navbar.css"
-@import "./menu_module/searchbar.css"
+@import url("./menu_module/logo.css");
+@import url("./menu_module/navbar.css");
+@import url("./menu_module/searchbar.css");
 
 /* search module */
-@import "./search_module/searchResults.css"
+@import url("./search_module/searchResults.css");
 
 /* post module */
-@import "./post_module/alertBox.css"
-@import "./post_module/card.css"
-@import "./post_module/searching.css"
-@import "./post_module/switcherDropdown.css"
+@import url("./post_module/alertBox.css");
+@import url("./post_module/card.css");
+@import url("./post_module/searching.css");
+@import url("./post_module/switcherDropdown.css");

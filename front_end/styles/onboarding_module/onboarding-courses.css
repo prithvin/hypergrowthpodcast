@@ -114,6 +114,7 @@
 }
 
 
+
 .course-list-container .table-body {
   width: auto;
   height: 60vh;
@@ -124,6 +125,7 @@
 .table-row {
   cursor: pointer;
 }
+
 
 .table-row:hover {
   opacity:.90 !important;

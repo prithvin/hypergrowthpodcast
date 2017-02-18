@@ -1,18 +1,30 @@
 window.appModules = {};
 
 var loadHTMLModules = {
-    "CommentModule": "../comment_module.html",
-    "CourseHomepageModule": "../course_homepage_module.html",
-    "CourseSearchModule": "../course_search_module.html",
-    "LoaderModule": "../loader_module.html",
-    "MenuModule": "../menu_module.html",
-    "OnboardingCourseTableModule": "../onboarding_course_table_module.html",
-    "OnboardingCoursesModule": "../onboarding_courses_module.html",
-    "PodcastModule": "../podcast_module.html",
-    "PostModule": "../podcast_module.html",
-    "PostSearchModule": "../post_search_module.html",
-    "VideoModule": "../video_module.html"
+    "CommentModule": "comment_module.html",
+    "CourseHomepageModule": "course_homepage_module.html",
+    "CourseSearchModule": "course_search_module.html",
+    "LoaderModule": "loader_module.html",
+    "MenuModule": "menu_module.html",
+    "OnboardingCourseTableModule": "onboarding_course_table_module.html",
+    "OnboardingCoursesModule": "onboarding_courses_module.html",
+    "OnboardingFrontPage": "onboarding_module.html",
+    "PodcastModule": "podcast_module.html",
+    "PostModule": "post_module.html",
+    "PostSearchModule": "post_search_module.html",
+    "VideoModule": "video_module.html"
 };
+
+function loadComponent (moduleName, divToLoad, callback) {
+    if (loadHTMLModules[moduleName] == null) {
+        console.log("Invalid module");
+        return;
+    }
+    loadHTMLComponent(moduleName, function (data) {
+        $(divToLoad).html(data);
+        callback();
+    });
+}
 
 function loadHTMLComponent (moduleName, callback) {
 
