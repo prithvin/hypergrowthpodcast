@@ -85,7 +85,7 @@ html,body {
   width: 100%;
   bottom: 0%;
 }
-
+/*
 table {
   text-align: center;
   width: 100%;
@@ -113,7 +113,7 @@ th {
   background: white;
 }
 
-
+*/
 .course-list-container tbody {
   width: auto;
   height: 60vh;
@@ -124,7 +124,7 @@ th {
 .table-row {
   cursor: pointer;
 }
-
+/*
 tr:hover {
   opacity:.90 !important;
 }
@@ -143,4 +143,4 @@ tr:nth-child(4n + 3) {
 
 tr:nth-child(4n + 4) {
   background: rgba(104, 129, 158, 1);
-}
+}*/

@@ -4,9 +4,7 @@
     </head>
 
     <body>
-      <div class="podcast-page-div">
         <div id="page" style="width:100%;height:100%;position:fixed;top:0;left:0;"></div>
-      </div>
     </body>
 
     <script src="./javascript/require-config.js"></script>
@@ -14,27 +12,26 @@
 
     <script>
 
-    require(['director'], function (director) {
-      var loginPage = function (podcastId) { 
-  
-      loadComponent("onboarding_module.html", "#page", function () {
-          $("#loader_module").hide();
+    require(['director', 'components', 'loader'], function () {
+      var loginPage = function () { 
+        loadComponent("OnboardingFrontPage", $("#page"), function () {
+
         });
       };
 
 
       var podcast = function (podcastId) { 
-        $("#loader_module").show();
-        loadComponent("podcast_module.html", "#page", function () {
-          $("#loader_module").hide();
+        loadComponent("PodcastModule", $("#page"), function () {
+          require(['podcast'], function () {
+            new PodcastPage(122, $("#page").find(".podcast-page-div"));
+          });
         });
       };
 
       var search = function (courseId) {
-        $("#loader_module").show();
-        loadComponent("course_search_module.html", "#page", function () {
-          $("#loader_module").hide();
-        });
+        /*loadComponent("course_search_module.html", $("#page"), function () {
+
+        });*/
       };
 
 
@@ -48,8 +45,11 @@
       var router = Router(routes);
 
       // Scripts above are required on every single page
-      loadComponent("loader_module.html", "#loader_module", function () {
-        router.init();
+      console.log($("#page"));
+      loadComponent("LoaderModule", $("#page"), function () {
+        setTimeout(function () {
+          router.init();
+        }, 500);
       });
     });
     
