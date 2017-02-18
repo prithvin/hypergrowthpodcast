@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html class="html-body">
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./styles/podcast_module/containerStyles.css">
@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="styles/onboarding_module/onboarding-courses.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/menu_module/logo.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/menu_module/navbar.css" />
   </head>
 
-  <body>
-    <!--div id="loader"></div-->
+  <body class="html-body">
     <div class="row fill">
       <div class="col-sm-6 no-float fill onboarding-left dark">
         <img class="center-pic" src="images/onboarding_module/ResultsPageMac.png"/>
@@ -26,19 +27,24 @@
           <img class="ucsd-text-logo" src="images/ucsd_text_logo.png"/>
         </div>
         <div id="course-table" class="course-list-container">
-            <!--table>
-              <thead>
-                <th>Select a Course.</th>
+            <table id="myTable" class="table-style">
+              <thead class="table-head">
+                <div class="search-container">
+                    <form class="form-style pure-form main_search_container form-group has-success">
+                        <input id="searchBar" onkeyup="myFunction()" class="input-style main_search form-control form-control-success text-center" type="text" placeholder="Find Your Course.">
+                    </form>
+                </div>
+                <!--th class="cell-head" >Select a Course.</th-->
               </thead>
-            <tbody id="course-table">
-              <tr class="table-row" data-href="./course_homepage_module.html"><td>CSE 100 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 110 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 8A - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 8B - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td>CSE 103 - Winter 2017</td></tr>
+            <tbody id="course-table" class="table-body">
+              <tr class="table-row" data-href="./course_homepage_module.html"><td class="cell">CSE 100 - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td class="cell">CSE 110 - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td class="cell">CSE 101 - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td class="cell">CSE 8A - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td class="cell">CSE 8B - Winter 2017</td></tr>
+              <tr class="table-row" data-href=""><td class="cell">CSE 103 - Winter 2017</td></tr>
             </tbody>
-          </table-->
+          </table>
         </div>
       </div>
     </div>
@@ -54,9 +60,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <!--script src="javascript/onboarding_module/login.js"></script-->
+    <script src="./javascript/onboarding_module/onboarding_courses.js"></script>
     <script>
-        //loadComponent("loader_module.html", "#loader", function () {
+        /*loadComponent("loader_module.html", "#loader", function () {
                 loadComponent("onboarding_course_table_module.html", "#course-table", function () {
                     new CourseTableClass({
                         Classes: [
@@ -113,7 +119,7 @@
                         ]
                     });
                 }, 0, false);
-       // });       
+            });  */     
     </script>
   </footer>
 </html>

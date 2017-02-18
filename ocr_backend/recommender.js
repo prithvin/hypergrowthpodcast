@@ -2,13 +2,13 @@ var NUM_RECOMMENDED = 5;
 var dbuploader = require('./dbuploader.js');
 
 module.exports = {
-  getRecommendationsForClassNameCourseID: function (shouldGetRecommendations, classNameCourseKey, callback) {
+  getRecommendationsForClassNameCourseID: function (shouldGetRecommendations, courseId, callback) {
     if (!shouldGetRecommendations) {
       callback();
       return;
     }
 
-    dbuploader.getPodcastsForCourse(classNameCourseKey, function(videosInLectureInDB) {
+    dbuploader.getPodcastsForCourse(courseId, function(videosInLectureInDB) {
       getRecs(videosInLectureInDB, 0, function () {
         callback();
       });

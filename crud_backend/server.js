@@ -13,7 +13,9 @@ var auth = require('./config/auth.js');
 app.use(session({
     secret: 'cse110secretstring',
     resave: true,
-    saveUninitialized: true }));
+    saveUninitialized: true,
+    maxAge: 86400000 // 24 hours in milliseconds
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -95,7 +97,9 @@ app.get("/auth/facebook/callback",
       res.redirect(auth.errorCallback);
     }
     else {
-      var retUrl = auth.callbackURL + "?id=" + user[0].FacebookAuthToken;
+      user = user[0]['_doc'];
+      var user_id = user.ProfileId;
+      var retUrl = auth.callbackURL + "?id=" + user_id;
       res.redirect(retUrl);
     }*/
   },
@@ -105,5 +109,13 @@ app.get("/auth/facebook/callback",
           console.log("THE ERROR" + err);
             res.redirect('/auth/facebook');
         }
+
+      // Save the user id to the current session
+      req.session.user_id = user_id;
+      req.session.save((err) => {
+        if(err) {
+          console.log(err);
+        }
+      });
     }
 );
