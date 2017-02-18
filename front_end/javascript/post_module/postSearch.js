@@ -1,4 +1,4 @@
-$(".no-results").hide();
+
 var PostSearch = class PostSearch {
     constructor (postData, currentUserName, currentUserPic, currentUserAuthToken, mainDiv, shouldHideCommentsAndSearch) {
         this.currentUserName = currentUserName;
@@ -7,8 +7,7 @@ var PostSearch = class PostSearch {
         this.mainDiv = mainDiv;
         this.posts = [];
         this.currentSlide = 1;
-        $(".no-results").hide();
-
+        $(this.mainDiv).(".no-results").hide();
         this.shouldHideCommentsAndSearch = shouldHideCommentsAndSearch;
 
         if (this.shouldHideCommentsAndSearch) {

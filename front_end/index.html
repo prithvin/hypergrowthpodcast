@@ -5,22 +5,19 @@
 
     <body>
       <div class="podcast-page-div">
-        <div id="loader_module" style="z-index:10000;background-color:white;width:100%;height:100%;position:fixed;top:0;left:0;"></div>
         <div id="page" style="width:100%;height:100%;position:fixed;top:0;left:0;"></div>
       </div>
     </body>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-    <script src="./javascript/components.js"></script>
+    <script src="./javascript/require-config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.min.js"></script>
 
     <script>
 
+    require(['director'], function (director) {
       var loginPage = function (podcastId) { 
-        $("#loader_module").show();
-        loadComponent("onboarding_module.html", "#page", function () {
+  
+      loadComponent("onboarding_module.html", "#page", function () {
           $("#loader_module").hide();
         });
       };
@@ -40,28 +37,29 @@
         });
       };
 
-      var books = function () { console.log("books"); };
-      var viewBook = function (bookId) {
-        console.log("viewBook: bookId is populated: " + bookId);
-      };
 
       var routes = {
         '/podcast/:podcastId': podcast,
         '/search/:courseId': search,
         '/': loginPage,
-        '': loginPage,
-        '/books': [books, function() {
-          console.log("An inline route handler.");
-        }],
-        '/books/view/:bookId': viewBook
+        '': loginPage
       };
 
       var router = Router(routes);
 
       // Scripts above are required on every single page
       loadComponent("loader_module.html", "#loader_module", function () {
-       router.init();
+        router.init();
       });
+    });
+    
+   
+        
+      
+
+
+
+
     </script>
   </head>
 
