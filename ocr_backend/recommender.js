@@ -2,7 +2,7 @@ var NUM_RECOMMENDED = 5;
 var dbuploader = require('./dbuploader.js');
 
 module.exports = {
-  getRecommendationsForClassNameCourseID: function (shouldGetRecommendations, courseId, callback) {
+  getRecommendationsForCourseID: function (shouldGetRecommendations, courseId, callback) {
     if (!shouldGetRecommendations) {
       callback();
       return;
@@ -25,7 +25,7 @@ function getRecs (videosInLectureInDB, index, callback) {
 
   var current = videosInLectureInDB[index];
   getRecommendedPodcasts(current, videosInLectureInDB, function (recommendationsForLecture, prevId, nextId) {
-    dbuploader.setRecommendations(current._id, recommendationsForLecture, prevId, nextId, function () {
+    dbuploader.setRecommendations(current.PodcastId, recommendationsForLecture, prevId, nextId, function () {
       getRecs(videosInLectureInDB, index + 1, callback);
     });
   });
@@ -40,7 +40,7 @@ function getRecommendedPodcasts (input_podcast, podcastList, callback) {
 
   var indexOfInputPodcast = 0;
   for(var i = 0; i < tmp.length; i++) {
-    if(String(podcastList[i]['_id']) === String(input_podcast['_id'])) {
+    if(String(podcastList[i]['PodcastId']) === String(input_podcast['PodcastId'])) {
       tmp.splice(i, 1);
       indexOfInputPodcast = i;
       break;
@@ -64,5 +64,5 @@ function getRecommendedPodcasts (input_podcast, podcastList, callback) {
     ret.push(removed[0]);
   }
 
-  callback(ret, podcastList[indexOfPrevPodcast]['_id'], podcastList[indexOfNextPodcast]['_id']);
+  callback(ret, podcastList[indexOfPrevPodcast]['Podcastid'], podcastList[indexOfNextPodcast]['PodcastId']);
 }
