@@ -48,25 +48,19 @@ function addSRTtoFileData (fileData, subs) {
   return fileData;
 }
 
-function addSlideToDB (timeStart, ocrTranscription, ocrKeywordsForSlide, fileData, index, slideIds, callback) {
+function addSlide (timeStart, ocrTranscription, index, slidesArray, callback) {
   if (index == ocrTranscription.length) {
-    callback(slideIds);
+    callback(slidesArray);
     return;
   }
 
-  dbuploader.addSlide(
+  slidesArray.push(
     {
-      TimeStart: timeStart[index],
+      SlideNum: index + 1,
       OCRTranscription: ocrTranscription[index],
-      OCRKeywordsForSlide: ocrKeywordsForSlide[index],  // put extracted keywords here
-      SlidePost: [],
-      AudioTranscription: fileData['SRTPerSlide'][index],
-      AudioTranscriptionFreq: fileData['SRTKeywordsPerSlide'][index]
-    },
-    function(id) {
-      slideIds.push(id);
-      addSlideToDB(timeStart, ocrTranscription, ocrKeywordsForSlide, fileData, index + 1, slideIds, callback);
-    }
+      StartTime: timeStart[index]
+    });
+  addSlide(timeStart, ocrTranscription, index + 1, slidesArray, callback);
   );
 }
 
@@ -155,7 +149,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
             fileData = addSRTtoFileData(fileData, subs);  // Updates JSON obj with audio transcription stuff
 
             // Traverse through OCR trasncripts
-            addSlideToDB(timetable, ocrTranscription, words, fileData, 0, [], function (idOfSlidesArray) {
+            addSlide(timetable, ocrTranscription, 0, [], function (slidesArray) {
               var transcriptionStuff = {
                 "TotalTranscription": ocrTranscription.join(" "),
                 "FlatKeywordTranscription": flat
