@@ -1,59 +1,35 @@
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" />
-        <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="./styles/post_module/searching.css" />
-         <link rel="stylesheet" type="text/css" href="./styles/post_module/switcherDropdown.css" />
-        <link rel="stylesheet" type="text/css" href="./styles/post_module/alertBox.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div class="search-module-main">
-
-            <div class="offset-1 dropdownOfSlide dropdown">
-                  <button class="btn btn-secondary pure-u-24-24" type="button" id="dropdownSlideSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button<i class="fa fa-caret-down show-fa"></i></span>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-            </div>
-            <br>
-
-
-
-            <form class="offset-1 pure-form main_search_container_post form-group has-success pure-g">
-                <input id="secondary-search-bar" placeholder="Keyword Search in Lecture" class="post_main_search form-control form-control-success pure-u-19-24" type="text">
-                <div class="pure-u-1-24"></div>
-                <a class="pure-button pure-button-primary new-post-img pure-u-4-24"><img src="https://cdn2.iconfinder.com/data/icons/basic-ui-elements-3/424/edit_compose_draft_note_new_create_pencil-512.png"></a>
-            </form>
-            <div class="search-module row">
-                <div class="no-results col-10 offset-1">
-                <br><br>Sorry, no posts match your search :( <br>
-                Check out <a href="" class="all-posts-view">the rest of the posts</a><br>
-                Or make a new post...</div>
-            </div>
-            <div class="hidden-post" style="display:none;"></div>
+<div class="search-module-main">
+    <div>
+        <div class="offset-1 dropdownOfSlide dropdown">
+              <button class="btn btn-secondary pure-u-24-24" type="button" id="dropdownSlideSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button<i class="fa fa-caret-down show-fa"></i></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
         </div>
-    </body>
-    <footer>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-        <script src="./javascript/post_module/alertbox.js"></script>
+        <br>
 
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-        <script src="./javascript/post_module/mark.js"></script>
-        <script src="./javascript/components.js"></script>
-        <script src="./javascript/post_module/postSearch.js"></script>       
 
-    </footer>
-</html>
+
+        <form class="offset-1 pure-form main_search_container_post form-group has-success pure-g">
+            <input id="secondary-search-bar" placeholder="Keyword Search in Lecture" class="post_main_search form-control form-control-success pure-u-19-24" type="text">
+            <div class="pure-u-1-24"></div>
+            <a class="pure-button pure-button-primary new-post-img pure-u-4-24"><img src="https://cdn2.iconfinder.com/data/icons/basic-ui-elements-3/424/edit_compose_draft_note_new_create_pencil-512.png"></a>
+        </form>
+    </div>
+    <div class="search-module row">
+        <div class="no-results col-10 offset-1">
+        <br><br>Sorry, no posts match your search :( <br>
+        Check out <a href="" class="all-posts-view">the rest of the posts</a><br>
+        Or make a new post...</div>
+    </div>
+    <div class="hidden-post" style="display:none;"></div>
+</div>
+
+
 
 <!-- 
 
