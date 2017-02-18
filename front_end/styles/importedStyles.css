@@ -3,10 +3,6 @@
 @import url("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-/* The post module */
-@import "./post_module/card.css";
-
-
 /* Post search module */
 @import "./post_module/searching.css";
 @import "./post_module/switcherDropdown.css";
@@ -15,3 +11,27 @@
 
 /* Podcast module */
 @import "./podcast_module/containerStyles.css";
+
+/* Onboarding module */
+@import "./onboarding_module/onboarding.css"
+@import "./onboarding_module/onboarding-courses.css"
+
+/* course videos module */
+@import "./course_videos_module/course_videos.css"
+
+/* loader module */
+@import "./loader_module/loading.css"
+
+/* menu module */
+@import "./menu_module/logo.css"
+@import "./menu_module/navbar.css"
+@import "./menu_module/searchbar.css"
+
+/* search module */
+@import "./search_module/searchResults.css"
+
+/* post module */
+@import "./post_module/alertBox.css"
+@import "./post_module/card.css"
+@import "./post_module/searching.css"
+@import "./post_module/switcherDropdown.css"
