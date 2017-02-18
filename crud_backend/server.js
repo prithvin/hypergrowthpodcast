@@ -53,6 +53,13 @@ app.get('/login', function(req,res){
   }
 });
 
+app.get('/course/:courseId/posts',function(req,res){
+  
+});
+
+app.get('/course/:courseId/podcast/:podcastId/posts',function(req,res){
+});
+
 app.post('/login',function(req,res){
   res.redirect("/auth/facebook");
 });
