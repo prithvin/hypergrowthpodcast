@@ -1,23 +1,23 @@
 // Create a schema
 var mongoose = require('mongoose');
 var PodcastModel = new mongoose.Schema({
-  CourseId: Schema.Types.ObjectId, // id for course it belongs to
-	Date: Number,
+	CourseId: Schema.Types.ObjectId, // id for course it belongs to
+	PodcastDate: Number,
 	PodcastUrl: String,
 	Slides: [{
 		SlideNum: Number,
 		OCRTranscription: String,
 		StartTime: Number,
-		AudioTranscript: [{
-			StartTime: Number,
-			Content: String
-		}]
 	}],
-	SRTBlob: String
-	PrevVideo: Schema.Types.ObjectId
-	NextVideo: Schema.Types.ObjectId
+	AudioTranscript: [{
+		StartTime: Number,
+		Content: String
+	}],
+	SRTBlob: String,
+	PrevVideo: Schema.Types.ObjectId,
+	NextVideo: Schema.Types.ObjectId,
 	Recommendations: [{
-		PodcastId: Schema.Types.ObjectId
+		PodcastId: Schema.Types.ObjectId,
 		PodcastImage: String,
 		PodcastDate: Number
 	}]
