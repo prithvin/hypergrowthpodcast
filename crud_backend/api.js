@@ -23,40 +23,54 @@ var apiFunctions = {
           }
 
         }*/
-          getRecentPostsForCourse : function(request,callback){
-            PodcastModel.findOne({ClassNameCourseKey:request.ClassNameCourseKey},function(err,podcast){
-              var postIds = podcast.LecturePost;
-              PostModel.find({_id : {$id : postIds}}, function(err,posts){
-                  if(err)
-                    console.log("error finding posts");
-                  callback(posts);
-              });7
-            });
-          },
-
-          getRecentVideosForCourse : function(){
-            PodcastModel.find({ClassNameCourseKey:cnameckey}, function(err,podcasts){
+          /*
+          request{
+            CourseId
+          }
+          */
+          getVideosForCourse: function(request, callback){
+            PodcastModel.find({CourseId:response.CourseId}, function(err,podcasts){
               if(err) {
                 console.log("error finding course");
               } else {
-                var arrayOfPodcasts = [];
-                for(var i = 0; i < podcasts.length; i++) {
-                  var responseData = {
-                    //TODO-lectureId: podcasts[0].LectureId (from search)
-                    lectureImage: podcasts[i].PodcastImage,
-                    courseQtr: podcasts[i].QuarterOfCourse,
-                    lectureName: podcasts[i].ClassName,
-                    lectureDate: podcasts[i].VideoDate
-                  };
-                  arrayOfPodcasts.push(responseData);
-                }
-
-                callback({ Podcasts : arrayOfPodcasts });
+                var response = {
+                  Podcasts : podcasts
+                };
+                callback(response)
               }
             });
 
           },
 
+
+          getVideosByKeyword : function(request, callback){
+
+          },
+          /*
+            request{
+              CourseId :
+              UpperLimit :
+            }
+          */
+          getPostsForCourse : function(request, callback){
+            PostModel.find({CourseId: request.CourseId , $orderby : {Time: -1}},function(err,posts){
+              var response;
+              if(posts.length >= request.UpperLimit){
+                response = {
+                  Posts : posts.slice(0,request.UpperLimit)
+                };
+              }
+              else{
+                response = {
+                  Posts : posts
+                };
+              }
+              callback(response);
+            });
+          },
+          getPostsByKeyword : function(request,callback){
+
+          },
           findPodcastsByKeyword: function(courseKey,keywordParams,callback){
             PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
               var arrayOfPodcasts = [];
