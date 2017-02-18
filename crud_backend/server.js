@@ -10,6 +10,7 @@ var cors = require('cors');
 var session = require('express-session');
 var auth = require('./config/auth.js');
 var path = require('path');
+var fs = require('fs');
 
 app.use(session({
     secret: 'cse110secretstring',
@@ -55,11 +56,17 @@ app.get('/login', function(req,res){
 });
 
 app.get('/course/:courseId/posts',function(req,res){
-  res.sendfile(path.resolve("../front_end/fake_data/getPosts.json"));
+  fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
+    if (err) throw err; // we'll not consider error handling for now
+     res.send(JSON.parse(data));
+  });
 });
 
 app.get('/course/:courseId/podcast/:podcastId/posts',function(req,res){
-  res.sendfile(path.resolve("../front_end/fake_data/getPosts.json"));
+  fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
+    if (err) throw err; // we'll not consider error handling for now
+     res.send(JSON.parse(data));
+  });
 });
 
 app.post('/login',function(req,res){
