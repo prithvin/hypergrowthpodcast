@@ -73,8 +73,10 @@ module.exports = {
         var i;
         var index = -1;
         var course;
-        var tmp = obj.Image;
+        var tmpImage = obj.Image;
         delete obj.Image;
+        var tmpKeywords = obj.OCRKeywords;
+        delete obj.OCRKeywords;
 
         for (i = 0; i < courseList.length; i++) {
           if (courseList[i]['Name'] == obj['Name'] && courseList[i]['Quarter'] == obj['Quarter']) {
@@ -98,8 +100,8 @@ module.exports = {
                 CourseModel.findById(newCourseId, function(err, course) {
                   course.Podcasts.push({
                     PodcastId: podcast['_id'],
-                    PodcastImage: tmp,
-                    OCRKeywords: [],// TODO
+                    PodcastImage: tmpImage,
+                    OCRKeywords: tmpKeywords,
                     Time: obj.Time
                   });
                   course.save();
@@ -125,8 +127,8 @@ module.exports = {
               CourseModel.findById(obj.id, function(err, course) {
                 course.Podcasts.push({
                   PodcastId: podcast['_id'],
-                  PodcastImage: tmp,
-                  OCRKeywords: [],// TODO
+                  PodcastImage: tmpImage,
+                  OCRKeywords: tmpKeywords,
                   Time: obj.Time
                 });
                 course.save();
