@@ -12,10 +12,10 @@ var PodcastModel = new mongoose.Schema({
   PodcastUrl: String,
   PodcastImage: String,
   OCRTranscription: String,
-  OCRTranscriptionFreq: [Schema.Types.ObjectId],
+  OCRTranscriptionFreq: [{word:String, frequency:Number}],
   AudioTranscription: String,
-  AudioTranscriptionFreq: [Schema.Types.ObjectId],
-  Slides:[Schema.Types.ObjectId],
+  AudioTranscriptionFreq: [{word:String, frequency: Number}],
+  Slides:[{TimeStart: Number, OCRTranscription: Strin33g, OCRKeywordsForSlide: [], AudioTranscription: String, AudioTranscriptionFreq: [Schema.Types.ObjectId], SlidePost: [Schema.Types.ObjectId]}],
   LecturePost:[Schema.Types.ObjectId],
   RecommendedVideos: [Schema.Types.ObjectId]
 });

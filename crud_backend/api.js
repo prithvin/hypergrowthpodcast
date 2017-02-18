@@ -1,9 +1,7 @@
-var PodcastModel = require('./models/podcastModel.js').PodcastModel;
-var UserModel = require('./models/userModel.js').UserModel;
-var SlideModel = require('./models/slideModel.js').SlideModel;
-var PostModel = require('./models/postModel.js').PostModel;
-var NotesModel = require('./models/notesModel.js').NotesModel;
-var FrequencyModel = require('./models/postModel.js').FrequencyModel;
+var PodcastModel = require('./models/podcastModel.js');
+var UserModel = require('./models/userModel.js');
+var PostModel = require('./models/postModel.js');
+var CourseModel = require('./models/courseModel.js');
 var mongoose = require('mongoose');
 
 //API Functions
@@ -32,7 +30,7 @@ var apiFunctions = {
                   if(err)
                     console.log("error finding posts");
                   callback(posts);
-              });
+              });7
             });
           },
 
