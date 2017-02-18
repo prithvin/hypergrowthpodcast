@@ -17,7 +17,7 @@
 }
 
 
-html,body {
+.html-body {
   height: 100%;
   width: 100%;
   min-width: 1200px;
@@ -86,13 +86,13 @@ html,body {
   bottom: 0%;
 }
 
-table {
+.table-style {
   text-align: center;
   width: 100%;
   border-collapse: collapse;
 }
 
-td, th {
+.cell, .cell-head {
   padding: 20px;
   width: 1%;
   line-height: 50px;
@@ -102,19 +102,19 @@ td, th {
   color: white;
 }
 
-thead {
+.table-head {
   display: block;
   background: white;
 }
 
-th {
+.cell-head {
   text-align: center;
   color: #444;
   background: white;
 }
 
 
-.course-list-container tbody {
+.course-list-container .table-body {
   width: auto;
   height: 60vh;
   overflow: auto;
@@ -125,22 +125,39 @@ th {
   cursor: pointer;
 }
 
-tr:hover {
+.table-row:hover {
   opacity:.90 !important;
 }
 
-tr:nth-child(4n + 1) {
+.table-row:nth-child(4n + 1) {
   background: rgba(56, 90, 154, 1);
 }
 
-tr:nth-child(4n + 2) {
+.table-row:nth-child(4n + 2) {
   background: rgba(229, 77, 66, 1);
 }
 
-tr:nth-child(4n + 3) {
+.table-row:nth-child(4n + 3) {
   background: rgba(41, 187, 156, 1);
 }
 
-tr:nth-child(4n + 4) {
+.table-row:nth-child(4n + 4) {
   background: rgba(104, 129, 158, 1);
+}
+
+
+/* Search Bar */
+.form-style {
+  position:relative;
+  margin-top:3%;
+  width:100%;
+  padding-right:50px;
+  padding-left:50px;	
+}
+
+.input-style {
+  height:60px;
+  font-family: Roboto, sans-serif;
+  font-weight: 200;
+  font-size: 20px;
 }
