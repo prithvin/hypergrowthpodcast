@@ -4,10 +4,10 @@ var CourseModel = mongoose.Schema({
 	Name: String,
 	Quarter: String,
 	Podcasts: [{
-    PodcastId: Schema.Types.ObjectId,//_id for podcast
-    PodcastImage: String,
-    OCRKeywords: [String], //words ordered by frequencies with any words above a baseline frequency.
-		Time: Number //milliseconds
+  PodcastId: Schema.Types.ObjectId,//_id for podcast
+  PodcastImage: String,
+  OCRKeywords: [String], //words ordered by frequencies with any words above a baseline frequency.
+	Time: Number //milliseconds
 	}]
 });
 
