@@ -1,4 +1,3 @@
 $('.fb-login-button')[0].onclick = () => {
-  var origin = window.location.origin;
-  window.location.href = '/auth/facebook?callbackURL=' + origin + '/auth/facebook&errorCallbackURL=http://yahoo.com';
+  window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + login_origins.callback + '/onboarding_courses_module.html&errorCallbackURL=http://yahoo.com';
 }
