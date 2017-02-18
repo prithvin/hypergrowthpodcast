@@ -1,0 +1,17 @@
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700,900");
+@import url("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+/* The post module */
+@import "./post_module/card.css";
+
+
+/* Post search module */
+@import "./post_module/searching.css";
+@import "./post_module/switcherDropdown.css";
+@import "./post_module/alertBox.css";
+
+
+/* Podcast module */
+@import "./podcast_module/containerStyles.css";

@@ -19,6 +19,12 @@ class CourseTableClass {
             console.log(row);
             var myClass = document.createTextNode(this.classes[i]['classname'] + ' - ' + this.classes[i]['classqrtr']);
             cell.appendChild(myClass);
+            /* Change Window on Click */
+            $(document).ready(function($) {
+                $(".table-row").click(function() {
+                    window.document.location = $(this).data("href");
+                });
+            });
         }
     }
         

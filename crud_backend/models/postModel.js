@@ -1,17 +1,22 @@
 // Create a schema
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var PostModel = new mongoose.Schema({
-    SlideId: Schema.Types.ObjectId,
-  	PodcastId: Schema.Types.ObjectId,
-    UserId: Schema.Types.ObjectId,
-    isComment: Boolean,
-  	TimeOfPost: Number,
-  	Content: String,
-  	Responses: [Schema.Types.ObjectId]
+	PodcastId: Schema.Types.ObjectId,
+	ProfilePicture: String,
+	SlideNum: Number, 
+	Name: String,
+	Date: Number,
+	Content: String,
+	CourseId: Schema.Types.ObjectId,
+	Comments: [{
+		ProfilePicture : String,
+		Name: String,
+		Date: Number,
+		Content: String
+	}]
 });
 
 // Create a model based on the schema
 var PostModel = mongoose.model('PostModel', PostModel);
 
-module.exports = {PostModel: PostModel}
+module.exports = PostModel;
