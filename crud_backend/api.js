@@ -117,13 +117,6 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
-          testMiddle : function(req,res,next){
-            if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
-              res.send("Error. Invalid params");
-              return;
-            }
-            next();
-          },
           getUserInfo: function(profileId,callback){
             UserModel.findOne({ProfileId:profileId},function(err,user){
               if(err)

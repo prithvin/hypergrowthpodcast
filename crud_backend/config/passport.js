@@ -16,7 +16,7 @@ passport.use(new FacebookStrategy({
   function(req,token, refreshToken, profile, done) {
     console.log("UP HERE");
     process.nextTick(function() {
-      UserModel.findOne({ ProfileId : profile.id}, function(err, user) {
+      UserModel.findOne({ FBUserId : profile.id}, function(err, user) {
         if (err){
           console.log("ERROR ENCOUNTERED");
           return done(err);

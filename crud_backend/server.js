@@ -85,7 +85,15 @@ app.get('/logout',function(req,res){
 // yahoo.com will have no id parameter
 // After calling this api, call another api to generate a session
 // Then work on the get courses api for the next page while cody does the frontend
-app.get('/auth/facebook', apiFunctions.userFunctions.testMiddle,
+app.get('/auth/facebook', function(req,res,next){
+  if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
+    res.send("Error. Invalid params");
+    return;
+  }
+  auth.callbackURL = req.query.callbackURL;
+  auth.errorCallback = req.query.errorCallbackURL;
+  next();
+},
   passport.authenticate('facebook',
   {
       display: 'popup',
@@ -94,33 +102,16 @@ app.get('/auth/facebook', apiFunctions.userFunctions.testMiddle,
   }
 ));
 
-app.get("/auth/facebook/callback", function (req, res) {
-  console.log("UP HERE");
-  passport.authenticate('facebook', function(err, user, info) {
-    console.log("URL IS" + auth.errorCallback + "OTHER ONE IS" + auth.callbackURL);
-    if (err || !user) {
-      res.redirect(auth.errorCallbackURL);
-    }
-    else {
-      var retUrl = auth.callbackURL + "?id=" + user.FBUserId;
-      res.redirect(retUrl);
-    }
-
-  })(req, res),
+app.get("/auth/facebook/callback",
+  passport.authenticate('facebook', {
+    failureRedirect : auth.errorCallbackURL,
+  }),
+  function(req,res){
+    res.redirect(auth.callbackURL);
+  },
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
-    console.log();
         if(err) {
-          console.log("THE ERROR" + err);
-            res.redirect('/auth/facebook');
+            res.redirect('/auth/facebook?callbackURL=' + auth.callbackURL);
         }
-
-      // Save the user id to the current session
-      req.session.user_id = user_id;
-      req.session.save((err) => {
-        if(err) {
-          console.log(err);
-        }
-      });
-    }
-});
+  });
