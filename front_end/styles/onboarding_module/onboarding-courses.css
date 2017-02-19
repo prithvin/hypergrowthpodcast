@@ -94,11 +94,9 @@
 .pic-filter {
     width: 30px;
     height: 20px;
-    opacity: .1;
-    padding: 1px;
+    opacity: .09;
+    padding: 2px;
     margin-bottom: 5px;
-    -webkit-transition: padding .3s;
-    transition: padding .3s;
 }
 
 .pic-filter:hover {
