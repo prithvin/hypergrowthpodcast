@@ -1,33 +1,37 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (coursesData, mainDiv) {
         this.coursesData = coursesData;
-        this.mainDiv = $(mainDiv).find(".courses-module");
+        this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.loadCoursesFromServer();
+        $(".table-row").click(function() {
+            window.location = this.data("link");
+        })
     }
 
     loadCoursesFromServer() {
         var thus = this;
         var apiURL = "./fake_data/getCourses.json";
-        console.log(apiURL);
         callAPI(apiURL, "GET", {}, function (data) {
             for(var i = 0; i < data.length; i++) {
                 var row = thus.tableRef.insertRow(thus.tableRef.rows.length);
                 var cell = row.insertCell(0);
-                cell.className = 'cello';
+                cell.className = 'cell';
                 row.className = 'table-row';
                 row.id = data[i]['Course'];
-                console.log(row);
-                var att = document.createAttribute('data-href');
-                //att.value = this.classes[i]['classpage'];
+                var att = document.createAttribute('onclick');
+                var path = window.location.pathname;
+                att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
                 row.setAttributeNode(att);
-                var myClass = document.createTextNode(data[i]['Course'] + ' - ' + data[i]['Quarter']);
+                var course = data[i]['Course'] + ' - ' +data[i]['Title'] + ' - ' + data[i]['Quarter'];
+                var myClass = document.createTextNode(course);
                 cell.appendChild(myClass);
             }
         });
     }   
 }
 
+/* Search Function */
 function myFunction() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("searchBar");

@@ -1,34 +1,50 @@
 [ 
     {
-            "Course": "CSE 100", 
+            "Id": 1,
+            "Course": "CSE 100",
+            "Title": "Advanced Data Structures",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 2,
             "Course": "CSE 110",
+            "Title": "Software Engineering",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 3,
             "Course": "CSE 103",
+            "Title": "Probability & Statistics",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 4,
             "Course": "CSE 105",
+            "Title": "Intro/Theory to Computation",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 5,
             "Course": "CSE 140",
+            "Title": "Component&Desgn Tech/Digtl Sys",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 6,
             "Course": "CSE 140L",
+            "Title": "Digital Systems Laboratory",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 7,
             "Course": "CSE 120",
+            "Title": "Princ/Computer Operating Systm",
             "Quarter": "Winter 2017"
     },
     {
-            "Course": "CSE 130",
+            "Id": 8,
+            "Course": "Gary's Industry Tips",
+            "Title": "gg",
             "Quarter": "Winter 1997"
     }
 ]
