@@ -6,46 +6,60 @@ class SearchVideosClass {
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
           console.log(data);
           var masterDiv = document.getElementById('search-videos-div');
-
+          document.getElementById('title').innerHTML = "Search Results for " + data['Query'] + "  in " + data['Title'];
+          
+          var overallDiv = document.createElement('div');
+          masterDiv.appendChild(overallDiv);
+          overallDiv.class = 'scroll';
+          
           var row = document.createElement('div');
           row.className = 'row';
-          masterDiv.appendChild(row);
-
-          var videos = data;
+          overallDiv.appendChild(row);
+          
+          var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
               if (row.childElementCount == 2) {
                   row = document.createElement('div');
                   row.className = 'row';
-                  masterDiv.appendChild(row);
+                  overallDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
               videoDiv.className = 'col-md-6';
               row.appendChild(videoDiv);
-
+              
+              var innerDiv = document.createElement('div');
+              videoDiv.appendChild(innerDiv);
+            
               var img = document.createElement('img');
               img.className = 'img-fluid';
               img.src = videos[i]['PreviewImage'];
-              videoDiv.appendChild(img);
+              img.style = "width: 300px; height: 240px; border-radius:6px; border: 1px solid #67809f";
+              innerDiv.appendChild(img);
 
-              var heading = document.createElement('h5');
-              heading.align = 'center';
-              heading.innerHTML = videos[i]['Date'];
-              videoDiv.appendChild(heading);
+              var imageTextDiv = document.createElement('div');
+              imageTextDiv.className = 'imageOverVid';
+              innerDiv.appendChild(imageTextDiv);
               
-              var keyword = document.createElement('h5');
-              keyword.align = 'center';
+              var keyword = document.createElement('p');
+              keyword.style = "bottom: 10; left: 50; position:absolute";
               var allKeywords = videos[i]['Keywords'];
               keyword.innerHTML = "Keywords: ";
-              for (int j = 0; j < allKeywords.length - 1; j++) {
-                  keyword.innerHTML += allKeywords[i] + ", ";
+              for (var j = 0; j < allKeywords.length - 1; j++) {
+                  keyword.innerHTML += allKeywords[j] + ", ";
               }
               keyword.innerHTML += allKeywords[allKeywords.length - 1];
-              videoDiv.appendChild(keyword);
+              imageTextDiv.appendChild(keyword);
               
-              var ocrMatch = document.createElement('h5');
-              ocrMatch.align = 'center';
+              var ocrMatch = document.createElement('p');
+              ocrMatch.style = "bottom: -13; left: 50; position:absolute";
               ocrMatch.innerHTML = "OCR match on " + videos[i]['OCRMatch']['Quote'] + " on Slide " + videos[i]['OCRMatch']['Slide'];
-              videoDiv.appendChild(ocrMatch);
+              imageTextDiv.appendChild(ocrMatch);
+            
+              var heading = document.createElement('p');
+              heading.className = 'testUnderVid';
+              heading.innerHTML = "Lecture on " + videos[i]['Date'];
+              videoDiv.appendChild(heading);
+            
               
           }
         });
