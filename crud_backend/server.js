@@ -55,14 +55,14 @@ app.get('/login', function(req,res){
   }
 });
 
-app.get('/course/:courseId/posts',function(req,res){
+app.get('/course/:courseId/posts',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
     if (err) throw err; // we'll not consider error handling for now
      res.send(JSON.parse(data));
   });
 });
 
-app.get('/course/:courseId/podcast/:podcastId/posts',function(req,res){
+app.get('/course/:courseId/podcast/:podcastId/posts',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
     if (err) throw err; // we'll not consider error handling for now
      res.send(JSON.parse(data));
@@ -70,7 +70,7 @@ app.get('/course/:courseId/podcast/:podcastId/posts',function(req,res){
 });
 
 app.post('/login',function(req,res){
-  res.redirect("/auth/facebook");
+  res.redirect("/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
 });
 
 app.get('/logout',function(req,res){
@@ -85,42 +85,31 @@ app.get('/logout',function(req,res){
 // yahoo.com will have no id parameter
 // After calling this api, call another api to generate a session
 // Then work on the get courses api for the next page while cody does the frontend
-app.get('/auth/facebook', function(req, res, next) {
-  /*if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
-    res.send("Error. Invalid params");
-    return;
-  }
-  auth.callbackURL = req.query.callbackURL;
-  auth.errorCallback = req.query.errorCallbackURL;
-  */
+app.get('/auth/facebook', apiFunctions.userFunctions.testMiddle,
   passport.authenticate('facebook',
-    {
+  {
       display: 'popup',
       scope: [ 'email', 'basic_info'],
       profileFields: ['id', 'displayName', 'photos', 'email', 'birthday']
-  })(req, res, next);
-});
+  }
+));
 
-
-
-app.get("/auth/facebook/callback",
-  passport.authenticate('facebook', {
-  successRedirect : '/', // redirect to the secure profile section
-  failureRedirect : '/login'
-  }),
-  function(err, user, info) {
-    /*if (err || !user) {
-      res.redirect(auth.errorCallback);
+app.get("/auth/facebook/callback", function (req, res) {
+  console.log("UP HERE");
+  passport.authenticate('facebook', function(err, user, info) {
+    console.log("URL IS" + auth.errorCallback + "OTHER ONE IS" + auth.callbackURL);
+    if (err || !user) {
+      res.redirect(auth.errorCallbackURL);
     }
     else {
-      user = user[0]['_doc'];
-      var user_id = user.ProfileId;
-      var retUrl = auth.callbackURL + "?id=" + user_id;
+      var retUrl = auth.callbackURL + "?id=" + user.FBUserId;
       res.redirect(retUrl);
-    }*/
-  },
+    }
+
+  })(req, res),
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
+    console.log();
         if(err) {
           console.log("THE ERROR" + err);
             res.redirect('/auth/facebook');
@@ -134,4 +123,4 @@ app.get("/auth/facebook/callback",
         }
       });
     }
-);
+});

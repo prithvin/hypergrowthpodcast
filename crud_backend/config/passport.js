@@ -14,18 +14,21 @@ passport.use(new FacebookStrategy({
     passReqToCallback: true,
   },
   function(req,token, refreshToken, profile, done) {
+    console.log("UP HERE");
     process.nextTick(function() {
-      UserModel.find({ ProfileId : profile.id}, function(err, user) {
+      UserModel.findOne({ ProfileId : profile.id}, function(err, user) {
         if (err){
+          console.log("ERROR ENCOUNTERED");
           return done(err);
         }
-        if (user.length != 0) {
+        if (user) {
+          console.log("USER FOUND");
           return done(null, user);
         }else{
-          apiFunctions.userFunctions.addUser(profile.displayName,
-          token, profile.id, function(err,newUser){
+          apiFunctions.userFunctions.addUser(profile.displayName, profile.id, function(err,newUser){
             if (err)
               throw err;
+            console.log("USER ADDED NEWLY");
             return done(null, newUser);
           });
         }

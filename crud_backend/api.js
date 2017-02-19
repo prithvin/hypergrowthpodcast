@@ -117,6 +117,13 @@ var apiFunctions = {
 
         //functions to retrieve and create user information
         userFunctions:{
+          testMiddle : function(req,res,next){
+            if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
+              res.send("Error. Invalid params");
+              return;
+            }
+            next();
+          },
           getUserInfo: function(profileId,callback){
             UserModel.findOne({ProfileId:profileId},function(err,user){
               if(err)
@@ -130,12 +137,13 @@ var apiFunctions = {
                 console.log(res);
             }
             else {
-                res.redirect('/login');
+                console.log("HERE'S THE REDIRECT URL" + req.url);
+                res.redirect('/login?callbackURL=' + req.url);
             }
 
           },
-          addUser : function(name,token,profileId,callback){
-            UserModel.create({Name:name, ProfileId: profileId, FacebookAuthToken:token}, function(err,users){
+          addUser : function(name,profileId,callback){
+            UserModel.create({Name:name, FBUserId: profileId}, function(err,users){
             if(err) {
             console.log(err);
             }
