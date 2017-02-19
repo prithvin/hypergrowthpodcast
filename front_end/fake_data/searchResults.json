@@ -1,4 +1,4 @@
- "Videos": [
+ [
  {
     "Id" : 1,
     "Date" : "Saturday, December 3rd, 2017",
@@ -43,4 +43,4 @@
             "Quote" : "Supply is elastic"
         }
  }
- ]
+]
