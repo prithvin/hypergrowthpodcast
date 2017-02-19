@@ -1,5 +1,5 @@
-body {
-}
+/*body {
+}*/
 .vjs-default-skin .vjs-big-play-button {
   font-size: 0em;
 }
@@ -41,7 +41,7 @@ body {
     bottom: 15px;
 }
 
-.wrapper{
+.videowrapper{
   display: table;
   width: 100%;
   position: relative;
@@ -58,7 +58,7 @@ body {
     min-width: 600px;
     margin: auto;
 }
-.crop-pic {
+.crop-pic-vid {
   width: 35px;
   height: 35px;
 }

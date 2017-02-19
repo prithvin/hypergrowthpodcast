@@ -29,7 +29,21 @@
         });
       }
 
-      var podcast = function (podcastId) {
+
+        var video = function(){
+            loadComponent("VideoModule", $("#page"), function () {
+                require(['video-wrapper'], function(){
+                    new videoClass({
+                        source: "https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4",
+                        time: 35 
+                    }, $("#page").find(".videowrapper"));
+                });
+                
+                
+            });
+        };
+        
+      var podcast = function (podcastId) { 
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
             new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
@@ -57,6 +71,7 @@
       var routes = {
         '/podcast/:podcastId': podcast,
         '/search/:courseId': search,
+        '/video': video,
         '/': loginPage,
         '': loginPage,
         '/course_homepage/:courseId': courseHomepage,
