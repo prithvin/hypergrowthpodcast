@@ -23,7 +23,7 @@
       var podcast = function (podcastId) {
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
-            new PodcastPage(122, $("#page").find(".podcast-page-div"));
+            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
           });
         });
       };
