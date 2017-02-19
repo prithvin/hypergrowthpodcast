@@ -24,6 +24,7 @@
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
             new PodcastPage(122, $("#page").find(".podcast-page-div"));
+            
           });
         });
       };
@@ -34,12 +35,20 @@
         });*/
       };
 
+      var courseHomepage = function() {
+        loadComponent("CourseHomepageModule", $("#page"), function() {
+          require(['course-homepage'], function() {
+            new CourseHomepageClass(1, $("#page").find(".course-homepage-div"));
+          });
+        });
+      }
 
       var routes = {
         '/podcast/:podcastId': podcast,
         '/search/:courseId': search,
         '/': loginPage,
-        '': loginPage
+        '': loginPage,
+        '/course_homepage/:courseId': courseHomepage
       };
 
       var router = Router(routes);
@@ -52,18 +61,5 @@
         }, 500);
       });
     });
-    
-   
-        
-      
-
-
-
-
     </script>
-  </head>
-
-  <body>
-
-  </body>
 </html>

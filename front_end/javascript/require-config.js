@@ -48,6 +48,12 @@ var require = {
         "angular": {},
         "navbar": {
             "deps": ['bootstrap']
+        },
+        "course-videos": {
+            "deps": ['jquery', 'bootstrap']
+        },
+        "course-homepage": {
+            "deps": ['course-videos', 'components']
         }
     },
     // Note: Don't include the .js in the path
@@ -68,6 +74,8 @@ var require = {
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
-        "navbar": "menu_module/NavBarLoggedIn"
+        "navbar": "menu_module/NavBarLoggedIn",
+        "course-videos": "course_videos_module/course_videos",
+        "course-homepage": "course_homepage_module/course_homepage"
     }
 };
