@@ -16,7 +16,6 @@ app.use(session({
     secret: 'cse110secretstring',
     resave: true,
     saveUninitialized: true,
-    maxAge: 86400000 // 24 hours in milliseconds
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -79,12 +78,6 @@ app.get('/logout',function(req,res){
 });
 
 /***************************************FACEBOOK AUTH****************************************************/
-// MAT <TODO> USE THIS TO CALL THE API
-// http://localhost:3000/auth/facebook?callbackURL=http://www.google.com&errorCallbackURL=http://yahoo.com
-// Google.com id parameter will be the user fb auth id
-// yahoo.com will have no id parameter
-// After calling this api, call another api to generate a session
-// Then work on the get courses api for the next page while cody does the frontend
 app.get('/auth/facebook', function(req,res,next){
   if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
     res.send("Error. Invalid params");
