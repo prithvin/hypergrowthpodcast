@@ -117,14 +117,15 @@
   font-weight: 300;
   font-size: 18px;
   color: white;
-  -webkit-transition: font-size .3s;
-  transition: font-size .3s;
+  /*-webkit-transition: font-size .3s;
+  transition: font-size .3s;*/
   /*white-space:nowrap;*/
 }
 
+/*
 .cell:hover {
   font-size: 20;
-}
+}*/
 
 .table-head {
   display: block;
