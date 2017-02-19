@@ -65,6 +65,14 @@ var SearchPage = class SearchPage {
             });
         });
     }
+    
+    loadVideos(thisClass) {
+      require(['search-videos'], function() {
+        var divToLoad = $(thisClass.mainDiv).find("#search-videos");
+//        loadComponent("CourseVideosModule", divToLoad, function() {
+//            new CourseVideosClass(1, $(thisClass.mainDiv));
+//        });
+      });
 
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
