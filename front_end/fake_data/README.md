@@ -27,6 +27,11 @@ Fake Data Available:
     Get's video data needed to play video
     Pass in PodcastID
 
+    --API ./fake_data/getCourse.json
+    Pass in CourseID
+    Could also take in PodcastID
+        -Backend will  detect which type is passed
+
     Get notes for User
 
 

@@ -11,28 +11,16 @@
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Roboto', sans-serif;
 }
-
-/*#wrapper{
-  min-height: 100%;
-  position:relative;
-}
-#footer{
-  width:100%;
-  height:50px;
-  position:absolute;
-  bottom:0;
-  left:0;
-}*/
-
+/*
 html {
     overflow: scroll;
     overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+    width: 0px;  /* remove scrollbar space *
+    background: transparent;  /* optional: just make scrollbar invisible *
 }
-/* optional: show position indicator in red */
+/* optional: show position indicator in red *
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
 }
@@ -52,7 +40,7 @@ body{
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
+*/
 .imageOverVid{
   font-family: 'Roboto', sans-serif;
   color: #67809f;

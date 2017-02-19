@@ -28,8 +28,10 @@ function loadComponent (moduleName, divToLoad, callback) {
 
 function loadHTMLComponent (moduleName, callback) {
 
-    if (window.appModules[moduleName] != null) 
-        callback(window.appModules[moduleName]);
+    if (window.appModules[moduleName] != null)  {
+        callback(window.appModules[moduleName]); 
+        return;
+    }
     
     var filePath = loadHTMLModules[moduleName]; 
     $.ajax({
