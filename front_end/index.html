@@ -18,7 +18,14 @@
 
         });
       };
-
+        
+      var onboardingCoursesPage = function(courses) {
+        loadComponent("OnboardingCoursesModule", $("#page"), function () {
+            require(['course-selection'], function () {
+            new OnboardingCourses([], $("#page").find(".course-table"));
+          });
+        });
+      }
 
       var podcast = function (podcastId) { 
         loadComponent("PodcastModule", $("#page"), function () {
