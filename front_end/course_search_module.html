@@ -1,21 +1,11 @@
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Podcasts</title>
-
-  <link rel="stylesheet" href="./styles/search_module/searchResults.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-</head>
-
-<body style="position:relative;overflow-y: scroll; margin-right:10px" ng-app="podcast" ng-controller="MainCtrl">
-
-  <div id="loader"></div>
+<div class="search-results-div">
   <div id="navbox"></div>
+
+<div style="position:relative;overflow-y: scroll; margin-right:10px" ng-app="podcast" ng-controller="MainCtrl">
 
   <div style="background-color:#F4F6F8">
       <div class="container">
+
         <div class="row">
           <div class="col-8" style="height:100%; padding-left: 40px; background-color:#F4F6F8"><button ng-click="add()">Add</button><header style="margin-left: 5px; font-size: 18px; color: #2d4761; font-family: 'Roboto', sans-serif">Search Results for "searchQuery" in "queryClass"</header><br />
 
@@ -24,10 +14,6 @@
             <section>
 
               <div class="container">
-                <!-- <div class="row col-md-12">
-                  <h4 class="col-md-6"></h4>
-                  <h4 class="col-md-6">Col 2</h4>
-                </div> -->
 
                 <div style="padding-top:6; width:70%" class="row col-md-12">
 
@@ -37,7 +23,7 @@
                         <div style="padding-right: 50px;padding-left: 30px;padding-bottom:60px">
                             <div>
                               <div>
-                              <img style="width: 300px; height: 240px; border-radius:6px; border: 1px solid #BAC5D3" src="./images/podcast-cover.png">
+                              <img style="width: 300px; height: 240px; border-radius:6px; border: 1px solid #67809f" src="./images/podcast-cover.png">
                               <div class="imageOverVid">
                                 <p style="bottom: 10; left: 50; position:absolute">OCR Match in "" on Slide ""</p>
                                 <p style="bottom: -13; left: 50; position:absolute">Keywords: "" "" "" ""</p>
@@ -51,27 +37,6 @@
                     </div>
                     </tr>
 
-                    <!-- <tr ng-repeat="post in posts | orderBy: '+upvotes' track by $index">
-                      <td style="overflow:hidden; width:100%">
-                        <div>
-                          <span ng-click="increment(post)">+</span>
-                          <a ng-show="post.link" href="{{post.link}}">
-                            {{post.title}}
-                          </a>
-                          <span ng-hide="post.link">
-                            {{post.title}}
-                          </span>
-                          - upvotes: {{post.upvotes}}
-                        </div>
-                      </td>
-                    </tr>
-
-                    <form ng-submit="addResult">
-                      <input type="text" placeholder="Title" ng-model="title" /><br />
-                      <input type="test" placeholder="Link" ng-model="link" /><br />
-                      <button type="submit">Post</button>
-                    </form> -->
-
                   </table>
                 </div>
               </div>
@@ -83,7 +48,8 @@
 
           <div class="col-4" style="padding-top:28;padding-left: 30px; background-color:#F4F6F8"><header style="font-family: 'Roboto', sans-serif; font-size: 18px; margin-left: 35px; color:#2d4761; position:relative">Matching Posts</header><br />
             <div style="margin-left: 30px;" class="customHr">.</div>
-            <div id="postsearch"></div>
+
+            <div id="post-search"></div>
 
           </div><hr />
 
@@ -91,96 +57,11 @@
       </div>
     </div>
 
-</body>
+</div>
 
     <div class="container">
        <p>&copy; Only Handle It Once</p>
     </div>
 
-<footer style="background-color:#F4F6F8; position:relative">
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
-    <script src="./javascript/components.js"></script>
-    <script src="./javascript/search_module/searchResults.js"></script>
-    <script>
-        // Scripts above are required on every single page
-        loadComponent("loader_module.html", "#loader", function () {
-            loadComponent("menu_module.html", "#navbox", function () {
-                new NavBarLoggedInCourse({
-                    firstname: "Rauhmel",
-                    classname: "CSE 110",
-                    classqrtr: "Fall 2017",
-                    userid: "123123123123",
-                    profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
-                });
-                $("#loader").hide();
-                $("#navbox").show();
-            }, 200);
-        });
-
-                loadComponent("post_search_module.html", "#postsearch", function () {
-                  new PostSearch(
-                      [{"Name": "Rauhmel Bob",
-                          "PostId": "123123123",
-                           "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                           "Content": "This is a test post with some random data just to test the functionality",
-                           "TimeOfPost": 1486659593882,
-                           "SlideOfPost": 5,
-                           "Comments": [
-                           {
-                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                              "PosterName" : "Rauhmel Tob",
-                              "Content" : "This is a really cool test commement",
-                              "Time" : 1486691019627
-                           },
-                           {
-                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                              "PosterName" : "LOL Bob",
-                              "Content" : "This is a really cool test commement and it is going to be abbsurdley long to test a weird edge case that wil hopefully not break everything",
-                              "Time" : 1486691009627
-                           }
-                           ]
-                          },
-                  {"Name": "Rauhmel Bob",
-                          "PostId": "123123123",
-                           "ProfilePic": "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                           "Content": "This post will only talk about hash tables and hash maps but will not talk about anything else",
-                           "TimeOfPost": 1486659593882,
-                           "SlideOfPost": 5,
-                           "Comments": [
-                           {
-                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                              "PosterName" : "Rauhmel Tob",
-                              "Content" : "FUBAR. If you search for FUBAR, you will find it here maybe?",
-                              "Time" : 1486691019627
-                           },
-                           {
-                              "Pic" : "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg",
-                              "PosterName" : "LOL Bob",
-                              "Content" : "This is a really cool test commement and it is going to be abbsurdley long to test a weird edge case that wil hopefully not break everything",
-                              "Time" : 1486691009627
-                           }
-                           ]
-                          }],
-                      "Prithvi Narasimhan",
-                      "http://pages.stern.nyu.edu/~sbp345/websys/phonegap-facebook-plugin-master/src/android/facebook/FacebookLib/res/drawable/com_facebook_profile_picture_blank_square.png",
-                      null,
-                       $(".search-module"),
-                       true);
-                    $("#loader").hide();
-                    $("#navbox").show();
-                    $("#postsearc").show();
-                }, 200);
-
-</script>
-
-</footer>
-
-</html>
+<div style="background-color:#F4F6F8; position:relative"></div>
+</div>

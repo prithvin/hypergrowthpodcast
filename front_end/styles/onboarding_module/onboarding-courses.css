@@ -16,8 +16,7 @@
   padding: 0px;
 }
 
-
-.html-body {
+.onboarding-courses-module {
   height: 100%;
   width: 100%;
   min-width: 1200px;
@@ -97,7 +96,7 @@
   width: 1%;
   line-height: 50px;
   font-family: "Roboto", sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 20px;
   color: white;
 }
@@ -113,8 +112,6 @@
   background: white;
 }
 
-
-
 .course-list-container .table-body {
   width: auto;
   height: 60vh;
@@ -123,12 +120,12 @@
 }
 
 .table-row {
+  opacity: .9;
   cursor: pointer;
 }
 
-
 .table-row:hover {
-  opacity:.90 !important;
+  opacity:1 !important;
 }
 
 .table-row:nth-child(4n + 1) {
@@ -147,19 +144,26 @@
   background: rgba(104, 129, 158, 1);
 }
 
-
 /* Search Bar */
-.form-style {
-  position:relative;
-  margin-top:3%;
-  width:100%;
-  padding-right:50px;
-  padding-left:50px;	
+.search-container-table {
+  margin-left: 10%;
+  opacity: .6;
+  width: 80%;
+  padding: 50px;
+  height: 150px;
+  -webkit-transition: width .5s, margin-left .5s;
+  transition: width .5s, margin-left .5s;
 }
 
+.search-container-table:hover {
+  width: 100%;
+  opacity: 1;
+  margin-left: 0%;
+}
+
+
 .input-style {
-  height:60px;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 200;
   font-size: 20px;
 }

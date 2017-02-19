@@ -71,7 +71,7 @@ function parseFileNameForCourseData (fileName) {
 
   var formattedCourse = course.split('_')[0].toUpperCase();
   var pre = formattedCourse.split(/[0-9]/)[0];
-  formattedCourse = pre + ' ' + formattedCourse.slice(pre.length);
+  formattedCourse = pre + ' ' + formattedCourse.match(/\d+/)[0];
 
   return {
     "Date": dateinMillis,
@@ -155,7 +155,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
                 videosFromCourse.push({"_id" : podcastId});
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
-                  recommender.getRecommendationsForClassNameCourseID(!hasMoreVideosInSeries, courseId, function () {
+                  recommender.getRecommendationsForCourseID(!hasMoreVideosInSeries, courseId, function () {
                     parseVideoForEach(videoFiles, videosFromCourse, index + 1);
                   });
                 });

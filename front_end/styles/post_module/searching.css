@@ -13,9 +13,8 @@
 .search-module {
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-left:20px;
-    padding-right: 20px;
     border-top: 1px solid white;
+    margin-right: 5px !IMPORTANT;
 }
 
 .main_search_container_post {

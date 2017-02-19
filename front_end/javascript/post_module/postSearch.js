@@ -95,8 +95,10 @@ var PostSearch = class PostSearch {
 
     detectTypeOfPostsToShow () {
         if (this.postFetchData['TypeOfFetch'] != "PodcastSearch") {
-            $(this.mainDiv).parent().find(".dropdownOfSlide").hide();
-            $(this.mainDiv).parent().find(".main_search_container_post").hide();
+            $(this.mainDiv).parent().find(".dropdownOfSlide").parent().hide();
+            $(this.mainDiv).parent().find(".dropdownOfSlide").css("padding", 0).hide();
+            $(this.mainDiv).parent().find(".main_search_container_post").css("padding", 0).hide();
+            $(this.mainDiv).parent().find(".search-module-main").css("padding-top", 0);
             $(this.searchModule).css("border", "none");
             this.shouldAllowNewComments = false;
         }
@@ -169,13 +171,13 @@ var PostSearch = class PostSearch {
         };
 
         if (postData["TypeOfFetch"] == "CourseGlobal") {
-            apiURL = "./javascript/fake_data/getPosts.json";
+            apiURL = "./fake_data/getPosts.json";
             requestData = {
                 "CourseID": postData["UniqueID"]
             };
         }
         else if (postData["TypeOfFetch"] == "CourseSearch") {
-            apiURL = "./javascript/fake_data/getPosts.json";
+            apiURL = "./fake_data/getPosts.json";
             requestData = {
                 "CourseID": postData["UniqueID"],
                 "SearchTerm": postData["SearchQuery"]
@@ -198,12 +200,10 @@ var PostSearch = class PostSearch {
 
     loadPost (thisClass, postData, shouldPrepend) {
         thisClass.loadPostModuleData(function (postTemplate) {
-
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
             
             thisClass.posts.push(newPostObj);
-            console.log($(thisClass.mainDiv).find(".search-module"));
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);
             else

@@ -2,7 +2,7 @@ var require = {
     baseUrl: 'javascript/',
     shim : {
         "bootstrap" : {
-            "deps" :["jquery", "local_tether"] 
+            "deps" :["jquery", "local_tether"]
         },
         "tether": {
             "deps": ['jquery'],
@@ -33,13 +33,16 @@ var require = {
             "deps": ['postLoad']
         },
         "videojs": {
-            "deps": ['jquery']
+            "deps": ['jquery'],
         },
         "podcast": {
             "deps": ['postSearch', 'video-wrapper']
         },
         "video-wrapper": {
-            "deps": ['videojs']
+            "deps": ['videojs', 'video_hotkeys']
+        },
+        "video_hotkeys":{
+            "deps": ['videojs', 'local_tether']
         },
         "director": {
             "deps": ['jquery', 'angular']
@@ -48,6 +51,18 @@ var require = {
         "angular": {},
         "navbar": {
             "deps": ['bootstrap']
+        },
+        "course-videos": {
+            "deps": ['jquery', 'bootstrap']
+        },
+        "course-homepage": {
+            "deps": ['course-videos', 'components']
+        },
+        "course-selection": {
+            "deps": ['bootstrap']
+        },
+        "searchResults":{
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap']
         }
     },
     // Note: Don't include the .js in the path
@@ -65,9 +80,16 @@ var require = {
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
         "videojs": "http://vjs.zencdn.net/5.16.0/video",
+        "video_hotkeys":"https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min",
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
-        "navbar": "menu_module/NavBarLoggedIn"
+        "navbar": "menu_module/NavBarLoggedIn",
+        "course-videos": "course_videos_module/course_videos",
+        "course-homepage": "course_homepage_module/course_homepage",
+        "course-selection": "onboarding_module/onboarding_courses",
+        "onboarding": "onboarding_module/onboarding",
+        "config": "config",
+        "searchResults": "search_module/searchResults"
     }
 };

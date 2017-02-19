@@ -1,19 +1,4 @@
-<!DOCTYPE HTML>
-<html class="html-body">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./styles/podcast_module/containerStyles.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,200,400,500" />
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="styles/onboarding_module/onboarding-courses.css" />
-    <link rel="stylesheet" type="text/css" href="./styles/menu_module/logo.css" />
-    <link rel="stylesheet" type="text/css" href="./styles/menu_module/navbar.css" />
-  </head>
-
-  <body class="html-body">
+<div class="onboarding-courses-module">
     <div class="row fill">
       <div class="col-sm-6 no-float fill onboarding-left dark">
         <img class="center-pic" src="images/onboarding_module/ResultsPageMac.png"/>
@@ -29,97 +14,19 @@
         <div id="course-table" class="course-list-container">
             <table id="myTable" class="table-style">
               <thead class="table-head">
-                <div class="search-container">
-                    <form class="form-style pure-form main_search_container form-group has-success">
+                <div class="search-container-table">
+                    <form class="pure-form main_search_container form-group has-success">
                         <input id="searchBar" onkeyup="myFunction()" class="input-style main_search form-control form-control-success text-center" type="text" placeholder="Find Your Course.">
                     </form>
                 </div>
                 <!--th class="cell-head" >Select a Course.</th-->
               </thead>
-            <tbody id="course-table" class="table-body">
-              <tr class="table-row" data-href="./course_homepage_module.html"><td class="cell">CSE 100 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 110 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 8A - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 8B - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 103 - Winter 2017</td></tr>
-            </tbody>
-          </table>
+              <tbody id="course--table" class="table-body">
+                <!--tr class="table-row" data-href="test"><td class="cell">CSE 100 - Winter 2017</td></tr-->
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
-  </body>
-
-  <footer>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="./javascript/components.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/mark.js/8.8.3/mark.es6.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="./javascript/onboarding_module/onboarding_courses.js"></script>
-    <script>
-        /*loadComponent("loader_module.html", "#loader", function () {
-                loadComponent("onboarding_course_table_module.html", "#course-table", function () {
-                    new CourseTableClass({
-                        Classes: [
-                            {
-                                classname: "CSE 100",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 110",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 1",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 2",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 3",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 4",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 4",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 4",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 4",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                            {
-                                classname: "CSE 4",
-                                classqrtr: "Winter 2017",
-                                classpage: "./course_homepage_module.html"
-                            },
-                        ]
-                    });
-                }, 0, false);
-            });  */     
-    </script>
-  </footer>
-</html>
+</div>
+ 
