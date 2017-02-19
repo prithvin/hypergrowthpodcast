@@ -55,6 +55,9 @@ var require = {
         "course-videos": {
             "deps": ['jquery', 'bootstrap']
         },
+        "search-videos": {
+            "deps": ['jquery', 'bootstrap']
+        },
         "course-homepage": {
             "deps": ['course-videos', 'components']
         },
@@ -62,7 +65,7 @@ var require = {
             "deps": ['bootstrap']
         },
         "searchResults":{
-            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap']
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
         }
     },
     // Note: Don't include the .js in the path
@@ -90,6 +93,7 @@ var require = {
         "course-selection": "onboarding_module/onboarding_courses",
         "onboarding": "onboarding_module/onboarding",
         "config": "config",
-        "searchResults": "search_module/searchResults"
+        "searchResults": "search_module/searchResults",
+        "search-videos": "search_module/search-videos"
     }
 };

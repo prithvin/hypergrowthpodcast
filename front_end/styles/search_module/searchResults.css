@@ -44,7 +44,7 @@ body{
 .imageOverVid{
   font-family: 'Roboto', sans-serif;
   color: #67809f;
-  font-size: 16px;
+  font-size: 14px;
   max-height: 10px;
   margin-left: -38;
   width: 100%;
@@ -54,7 +54,7 @@ body{
 .textUnderVid{
   font-family: 'Roboto', sans-serif;
   color:#124d87;
-  font-size: 16px;
+  font-size: 14px;
   max-height: 10px;
   margin-left: 10px;
   margin-top:10;
