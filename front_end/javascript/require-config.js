@@ -2,7 +2,7 @@ var require = {
     baseUrl: 'javascript/',
     shim : {
         "bootstrap" : {
-            "deps" :["jquery", "local_tether"] 
+            "deps" :["jquery", "local_tether"]
         },
         "tether": {
             "deps": ['jquery'],
@@ -48,6 +48,9 @@ var require = {
         "angular": {},
         "navbar": {
             "deps": ['bootstrap']
+        },
+        "searchResults":{
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap']
         }
     },
     // Note: Don't include the .js in the path
@@ -70,6 +73,7 @@ var require = {
         "loader": "loader_module/jsloader",
         "navbar": "menu_module/NavBarLoggedIn",
         "onboarding": "onboarding_module/onboarding",
-        "config": "config"
+        "config": "config",
+        "searchResults": "search_module/searchResults"
     }
 };

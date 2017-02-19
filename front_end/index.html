@@ -22,18 +22,20 @@
       };
 
 
-      var podcast = function (podcastId) { 
+      var podcast = function (podcastId) {
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
-            new PodcastPage(122, $("#page").find(".podcast-page-div"));
+            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
           });
         });
       };
 
       var search = function (courseId) {
-        /*loadComponent("course_search_module.html", $("#page"), function () {
-
-        });*/
+        loadComponent("CourseSearchModule", $("#page"), function () {
+          require(['searchResults'], function () {
+            new SearchPage(123, $("#page").find(".search-results-div"));
+          });
+        });
       };
 
 
@@ -53,14 +55,27 @@
           router.init();
         }, 500);
       });
+      loadComponent("CourseSearchModule", $("#page"), function () {
+        setTimeout(function () {
+          router.init();
+        }, 500);
+      });
     });
-    
-   
-        
-      
+
+
+
+
 
 
 
 
     </script>
+<<<<<<< HEAD
+=======
+  </head>
+
+  <body>
+
+  </body>
+>>>>>>> d41debbbd3287e14c0600ecde7749e54340ec7f2
 </html>

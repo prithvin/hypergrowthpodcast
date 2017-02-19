@@ -33,3 +33,6 @@
 @import url("./post_module/card.css");
 @import url("./post_module/searching.css");
 @import url("./post_module/switcherDropdown.css");
+
+/* course search module */
+@import url("./search_module/searchResults.css");
