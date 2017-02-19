@@ -4,6 +4,7 @@ var loadHTMLModules = {
     "CommentModule": "comment_module.html",
     "CourseHomepageModule": "course_homepage_module.html",
     "CourseSearchModule": "course_search_module.html",
+    "CourseVideosModule": "course_videos_module.html",
     "LoaderModule": "loader_module.html",
     "MenuModule": "menu_module.html",
     "OnboardingCourseTableModule": "onboarding_course_table_module.html",
@@ -29,11 +30,11 @@ function loadComponent (moduleName, divToLoad, callback) {
 function loadHTMLComponent (moduleName, callback) {
 
     if (window.appModules[moduleName] != null)  {
-        callback(window.appModules[moduleName]); 
+        callback(window.appModules[moduleName]);
         return;
     }
-    
-    var filePath = loadHTMLModules[moduleName]; 
+
+    var filePath = loadHTMLModules[moduleName];
     $.ajax({
         url: filePath,
         data: {},
@@ -41,10 +42,10 @@ function loadHTMLComponent (moduleName, callback) {
             window.appModules[moduleName] = data;
             callback(data);
         },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Something went wrong when loading " + fileName);
             console.log("Status: " + textStatus + " Error: " + errorThrown);
-        }  
+        }
     });
 }
 
@@ -56,9 +57,10 @@ function callAPI (targetURL, type, callData, callback) {
         type: type,
         success: function (data) {
             callback(data);
-          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.error("Something went wrong when loading " + targetURL);
+            console.error("Status: " + textStatus + " Error: " + errorThrown);
+        } 
     });
 }
-
-
-

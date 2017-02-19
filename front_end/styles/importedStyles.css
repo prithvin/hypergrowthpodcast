@@ -34,5 +34,8 @@
 @import url("./post_module/searching.css");
 @import url("./post_module/switcherDropdown.css");
 
+/* course-videos module */
+@import url("./course_videos_module/course_videos.css");
+
 /* course search module */
 @import url("./search_module/searchResults.css");
