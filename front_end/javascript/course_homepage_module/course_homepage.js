@@ -2,11 +2,23 @@ class CourseHomepageClass {
     constructor (courseId, mainDiv) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+        this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);
     }
     
-    
+    loadNavbar (thisClass) {
+        require(['navbar'], function () {
+            var divToLoad = $(thisClass.mainDiv).find("#navbox");
+            loadComponent("MenuModule", divToLoad, function () {
+                new NavBarLoggedInCourse(
+                    divToLoad,
+                    thisClass.courseId
+                );
+            });
+        });
+    }
+  
     dynamicWindowResize (thisClass) {
         $(window).on("resize", function() {
             if ($(thisClass.mainDiv).length == 0) {

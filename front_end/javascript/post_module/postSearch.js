@@ -95,8 +95,8 @@ var PostSearch = class PostSearch {
 
     detectTypeOfPostsToShow () {
         if (this.postFetchData['TypeOfFetch'] != "PodcastSearch") {
-            $(this.mainDiv).parent().find(".dropdownOfSlide").hide();
-            $(this.mainDiv).parent().find(".main_search_container_post").hide();
+            $(this.mainDiv).parent().remove(".dropdownOfSlide");
+            $(this.mainDiv).parent().remove(".main_search_container_post");
             $(this.searchModule).css("border", "none");
             this.shouldAllowNewComments = false;
         }
