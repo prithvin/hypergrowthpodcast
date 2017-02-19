@@ -2,7 +2,7 @@ var require = {
     baseUrl: 'javascript/',
     shim : {
         "bootstrap" : {
-            "deps" :["jquery", "local_tether"] 
+            "deps" :["jquery", "local_tether"]
         },
         "tether": {
             "deps": ['jquery'],
@@ -54,6 +54,12 @@ var require = {
         },
         "course-homepage": {
             "deps": ['course-videos', 'components']
+        },
+        "course-selection": {
+            "deps": ['bootstrap', 'tether', 'components']
+        },
+        "searchResults":{
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap']
         }
     },
     // Note: Don't include the .js in the path
@@ -75,7 +81,14 @@ var require = {
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
         "navbar": "menu_module/NavBarLoggedIn",
+<<<<<<< HEAD
         "course-videos": "course_videos_module/course_videos",
         "course-homepage": "course_homepage_module/course_homepage"
+=======
+        "course-selection": "onboarding_module/onboarding_courses",
+        "onboarding": "onboarding_module/onboarding",
+        "config": "config",
+        "searchResults": "search_module/searchResults"
+>>>>>>> a0f3819c0dcfe7a9957921adf5406d23f8b5e425
     }
 };

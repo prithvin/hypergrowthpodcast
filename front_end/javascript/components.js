@@ -29,10 +29,12 @@ function loadComponent (moduleName, divToLoad, callback) {
 
 function loadHTMLComponent (moduleName, callback) {
 
-    if (window.appModules[moduleName] != null) 
+    if (window.appModules[moduleName] != null)  {
         callback(window.appModules[moduleName]);
-    
-    var filePath = loadHTMLModules[moduleName]; 
+        return;
+    }
+
+    var filePath = loadHTMLModules[moduleName];
     $.ajax({
         url: filePath,
         data: {},
@@ -40,10 +42,10 @@ function loadHTMLComponent (moduleName, callback) {
             window.appModules[moduleName] = data;
             callback(data);
         },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("Something went wrong when loading " + fileName);
             console.log("Status: " + textStatus + " Error: " + errorThrown);
-        }  
+        }
     });
 }
 
@@ -62,6 +64,3 @@ function callAPI (targetURL, type, callData, callback) {
         } 
     });
 }
-
-
-

@@ -155,7 +155,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
                 videosFromCourse.push({"_id" : podcastId});
                 deleteRandomPodcastData(fileData, function () {
                   var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
-                  recommender.getRecommendationsForClassNameCourseID(!hasMoreVideosInSeries, courseId, function () {
+                  recommender.getRecommendationsForCourseID(!hasMoreVideosInSeries, courseId, function () {
                     parseVideoForEach(videoFiles, videosFromCourse, index + 1);
                   });
                 });

@@ -1,47 +1,58 @@
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
-    constructor (params) {
+    constructor (mainDiv, classID) {
+        this.mainDiv = mainDiv;
+        
 
-        this.params = params;
+        var self = this;
+        this.fetchUserData(function (userName, userPic) {
+            self.setUserName(userName);
+            self.setProfPic(userPic);
+        });
 
-        this.setClassName(this.getDataOrDefault("classname"));
-        this.setClassQuarter(this.getDataOrDefault("classqrtr"));
-        this.setUserName(this.getDataOrDefault("firstname"));
-        this.setProfPic(this.getDataOrDefault("profpic"));
-        this.setCoursesHyperLink(this.getDataOrDefault("userid"));
-        this.setPlaceHolder(this.getDataOrDefault("classname"), this.getDataOrDefault("classqrtr"));
+        this.fetchCourseData(classID, function (className, classQuarter) {
+            self.setClassName(className);
+            self.setClassQuarter(classQuarter);
+            self.setPlaceHolder(className, classQuarter);
+        });
+        this.setCoursesHyperLink(this);
     }
 
-    getDataOrDefault (key) {
-        if (this.params[key] == null && key != "profpic")
-            return "N/A";
-        else if (this.params[key] == null)
-            return "http://static.boredpanda.com/blog/wp-content/uploads/2016/07/fox-faces-roeselien-raimond-red-fox.jpg";
-        return decodeURIComponent(this.params[key]);
+    fetchCourseData(classID,  callback) {
+        callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
+            callback(data['CourseName'],  data['ClassQuarter']);
+        });
+    }
+
+    fetchUserData (callback) {
+        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+            callback(data['Name'], data['Pic']);
+        });
     }
 
     setClassName(className) {
-        $("#className").html(className);
+        $(this.mainDiv).find("#className").html(className);
     }
 
     setClassQuarter(classQuarter) {
-        $("#classQuarter").html(classQuarter);
+        $(this.mainDiv).find("#classQuarter").html(classQuarter);
     }
 
     setPlaceHolder(className, classQuarter) {
-        $("#searchBar").attr("placeholder", "Search in " + className + " " + classQuarter);
+        $(this.mainDiv).find("#searchBar").attr("placeholder", "Search in " + className + " " + classQuarter);
     }
+
     setUserName(userFirstName) {
-        $("#firstName").html(userFirstName);
+        $(this.mainDiv).find("#firstName").html(userFirstName);
     }
 
 
     setProfPic (userPicture) {
-        $("#userProfPic").attr("src", userPicture)
+        $(this.mainDiv).find("#userProfPic").attr("src", userPicture)
     }
 
-    setCoursesHyperLink (userID) {
-        $("#course_button").on("click", function () {
-            window.location = ("http://www.google.com/" + userID);
+    setCoursesHyperLink (thisClass) {
+        $(this.mainDiv).find("#course_button").on("click", function () {
+            $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
         })
     }
 

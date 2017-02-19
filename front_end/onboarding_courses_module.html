@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html class="html-body">
+<!--html class="html-body">
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./styles/podcast_module/containerStyles.css">
@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="./styles/menu_module/logo.css" />
     <link rel="stylesheet" type="text/css" href="./styles/menu_module/navbar.css" />
   </head>
-
-  <body class="html-body">
+  <body class="html-body"-->
+<div class=".courses-module">
     <div class="row fill">
       <div class="col-sm-6 no-float fill onboarding-left dark">
         <img class="center-pic" src="images/onboarding_module/ResultsPageMac.png"/>
@@ -36,32 +36,39 @@
                 </div>
                 <!--th class="cell-head" >Select a Course.</th-->
               </thead>
-            <tbody id="course-table" class="table-body">
-              <tr class="table-row" data-href="./course_homepage_module.html"><td class="cell">CSE 100 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 110 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 101 - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 8A - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 8B - Winter 2017</td></tr>
-              <tr class="table-row" data-href=""><td class="cell">CSE 103 - Winter 2017</td></tr>
-            </tbody>
-          </table>
+              <tbody id="course--table" class="table-body">
+                <!--tr class="table-row" data-href="./course_homepage_module.html"><td class="cell">CSE 100 - Winter 2017</td></tr>
+                <tr class="table-row" data-href=""><td class="cell">CSE 110 - Winter 2017</td></tr>
+                <tr class="table-row" data-href=""><td class="cell">CSE 101 - Winter 2017</td></tr>
+                <tr class="table-row" data-href=""><td class="cell">CSE 8A - Winter 2017</td></tr>
+                <tr class="table-row" data-href=""><td class="cell">CSE 8B - Winter 2017</td></tr>
+                <tr class="table-row" data-href=""><td class="cell">CSE 103 - Winter 2017</td></tr-->
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
-  </body>
+</div>
+  <!/body>
 
-  <footer>
+  <!footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="./javascript/components.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/mark.js/8.8.3/mark.es6.min.js"></script>
+    <!script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"><!/script>
+    <!script src="./javascript/components.js"><!/script>
+    <!script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"><!/script>
+    <!script src="https://cdn.jsdelivr.net/mark.js/8.8.3/mark.es6.min.js"><!/script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="./javascript/onboarding_module/onboarding_courses.js"></script>
-    <script>
+    <!script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"><!/script>
+    <!script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"><!/script>
+    <!script src="./javascript/onboarding_module/onboarding_courses.js"><!/script>
+    <!script>
+        /* Change Window on Click */
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
         /*loadComponent("loader_module.html", "#loader", function () {
                 loadComponent("onboarding_course_table_module.html", "#course-table", function () {
                     new CourseTableClass({
@@ -120,6 +127,6 @@
                     });
                 }, 0, false);
             });  */     
-    </script>
-  </footer>
-</html>
+    <!/script>
+  <!/footer>
+<!/html>
