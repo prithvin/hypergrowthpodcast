@@ -20,12 +20,9 @@ var OnboardingCourses = class OnboardingCourses {
                 row.className = 'table-row';
                 row.id = data[i]['Course'];
                 var att = document.createAttribute('onclick');
-                var pathArray = window.location.pathname.split( '/' );
-                var newPathname = window.location.pathname;
-                att.value = "document.location = '" + newPathname + "#/course_homepage/1'";   // Course Path
-                console.log(att);
+                var path = window.location.pathname;
+                att.value = "document.location = '" + path + "#/course_homepage/1'";   // Course Path
                 row.setAttributeNode(att);
-                console.log(row);
                 var myClass = document.createTextNode(data[i]['Course'] + ' - ' + data[i]['Quarter']);
                 cell.appendChild(myClass);
             }
