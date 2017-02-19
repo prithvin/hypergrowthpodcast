@@ -198,12 +198,10 @@ var PostSearch = class PostSearch {
 
     loadPost (thisClass, postData, shouldPrepend) {
         thisClass.loadPostModuleData(function (postTemplate) {
-
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
             
             thisClass.posts.push(newPostObj);
-            console.log($(thisClass.mainDiv).find(".search-module"));
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);
             else

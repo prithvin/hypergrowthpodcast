@@ -3,7 +3,7 @@
 }
 
 .class-name{
-    margin-top: 5px;
+    margin-top: 7px;
 }
 
 .icon_text {
@@ -29,6 +29,7 @@
 
 .text_container {
     padding-left:0px !IMPORTANT;
+    padding-right: 0px !IMPORTANT;
 }
 
 .form-control-success {
