@@ -1,34 +1,42 @@
 [ 
     {
-            "Course": "CSE 100", 
+            "Id": 1,
+            "Course": "CSE 100",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 2,
             "Course": "CSE 110",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 3,
             "Course": "CSE 103",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 4,
             "Course": "CSE 105",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 5,
             "Course": "CSE 140",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 6,
             "Course": "CSE 140L",
             "Quarter": "Winter 2017"
     },
     {
+            "Id": 7,
             "Course": "CSE 120",
             "Quarter": "Winter 2017"
     },
     {
-            "Course": "CSE 130",
+            "Id": 8,
+            "Course": "Gary's Industry Tips",
             "Quarter": "Winter 1997"
     }
 ]
