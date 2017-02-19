@@ -28,7 +28,7 @@ class CourseVideosClass {
               img.src = videos[i]['PreviewImage'];
               videoDiv.appendChild(img);
 
-              var heading = document.createElement('h5');
+              var heading = document.createElement('p');
               heading.align = 'center';
               heading.innerHTML = videos[i]['Date'];
               videoDiv.appendChild(heading);
