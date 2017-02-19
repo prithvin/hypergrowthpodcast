@@ -5,7 +5,7 @@ var PodcastPage = class PodcastPage {
         this.podcastID = podcastID;
         this.fetchUserData(this);
         this.loadNavbar(this);
-        this.loadVideo(this);
+        this.fetchVideo(this);
     }
 
     fetchUserData (thisClass) {
@@ -14,6 +14,25 @@ var PodcastPage = class PodcastPage {
             thisClass.UserPic = data['Pic'];
             thisClass.loadPosts(thisClass);
         });
+    }
+
+
+    // The two methods below must be TODO
+    fetchStartTimeBasedOnSlide () {
+
+    }
+
+    fetchStartingSlide () {
+
+    }
+
+    fetchVideo (thisClass) {
+        callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID}, 
+            function (data) {
+                 console.log(data);
+                thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
+            }
+        );
     }
 
     dynamicWindowResize (thisClass) {
@@ -56,18 +75,18 @@ var PodcastPage = class PodcastPage {
                 );
                 setTimeout(function () {
                     thisClass.updatePostHeights() 
-                }, 200);
+                }, 500);
                 thisClass.dynamicWindowResize(thisClass);
             });
         });
     }
 
-    loadVideo (thisClass){
+    loadVideo (thisClass, url, startTime, srtFile){
         require(['video-wrapper'], function(){
             var divToLoad = $(thisClass.mainDiv).find("#video-space");
 
             loadComponent("VideoModule", divToLoad, function () {
-                new videoClass("https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4", 35, divToLoad );
+                new videoClass(url, 0, divToLoad, srtFile);
             });
 
         });                
