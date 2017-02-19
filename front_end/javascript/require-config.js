@@ -68,6 +68,8 @@ var require = {
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
-        "navbar": "menu_module/NavBarLoggedIn"
+        "navbar": "menu_module/NavBarLoggedIn",
+        "onboarding": "onboarding_module/onboarding",
+        "config": "config"
     }
 };
