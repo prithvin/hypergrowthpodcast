@@ -23,7 +23,7 @@ var OnboardingCourses = class OnboardingCourses {
                 var path = window.location.pathname;
                 att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
                 row.setAttributeNode(att);
-                var course = data[i]['Course'] + ' - ' + data[i]['Quarter'];
+                var course = data[i]['Course'] + ' - ' +data[i]['Title'] + ' - ' + data[i]['Quarter'];
                 var myClass = document.createTextNode(course);
                 cell.appendChild(myClass);
             }
