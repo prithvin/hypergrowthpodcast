@@ -97,8 +97,15 @@
   line-height: 50px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 18px;
   color: white;
+  -webkit-transition: font-size .3s, line-height .3s;
+  transition: font-size .3s, line-height .3s;
+}
+
+.cell:hover {
+  font-size: 20px !important;
+  line-height: 60px !important;
 }
 
 .table-head {
