@@ -48,6 +48,9 @@ var require = {
         "angular": {},
         "navbar": {
             "deps": ['bootstrap']
+        },
+        "course-selection": {
+            "deps": ['bootstrap', 'tether', 'components']
         }
     },
     // Note: Don't include the .js in the path
@@ -68,6 +71,7 @@ var require = {
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
-        "navbar": "menu_module/NavBarLoggedIn"
+        "navbar": "menu_module/NavBarLoggedIn",
+        "course-selection": "onboarding_module/onboarding_courses"
     }
 };

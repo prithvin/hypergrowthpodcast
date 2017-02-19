@@ -2,28 +2,30 @@ var OnboardingCourses = class OnboardingCourses {
     constructor (coursesData, mainDiv) {
         this.coursesData = coursesData;
         this.mainDiv = $(mainDiv).find(".courses-module");
-        this.loadCourseTableModule(this.coursesData);
-        this.classes = coursesData['Classes'];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        this.loadCourses();
+        this.loadCoursesFromServer();
     }
-    
-    loadCourses() {
-        for(var i = 0; i < this.classes.length; i++) {
-            var row = this.tableRef.insertRow(this.tableRef.rows.length);
-            var cell = row.insertCell(0);
-            cell.className = 'cell';
-            row.className = 'table-row';
-            row.id = this.classes[i]['classname'];
-            var att = document.createAttribute('data-href');
-            att.value = this.classes[i]['classpage'];
-            row.setAttributeNode(att);
-            console.log(row);
-            var myClass = document.createTextNode(this.classes[i]['classname'] + ' - ' + this.classes[i]['classqrtr']);
-            cell.appendChild(myClass);
-        }
-    }
-       
+
+    loadCoursesFromServer() {
+        var thus = this;
+        var apiURL = "./fake_data/getCourses.json";
+        console.log(apiURL);
+        callAPI(apiURL, "GET", {}, function (data) {
+            for(var i = 0; i < data.length; i++) {
+                var row = thus.tableRef.insertRow(thus.tableRef.rows.length);
+                var cell = row.insertCell(0);
+                cell.className = 'cell';
+                row.className = 'table-row';
+                row.id = data[i]['Course'];
+                console.log(row);
+                var att = document.createAttribute('data-href');
+                //att.value = this.classes[i]['classpage'];
+                row.setAttributeNode(att);
+                var myClass = document.createTextNode(data[i]['Course'] + ' - ' + data[i]['Quarter']);
+                cell.appendChild(myClass);
+            }
+        });
+    }   
 }
 
 function myFunction() {
