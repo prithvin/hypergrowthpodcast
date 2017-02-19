@@ -5,7 +5,7 @@ var PodcastPage = class PodcastPage {
         this.podcastID = podcastID;
         this.fetchUserData(this);
         this.loadNavbar(this);
-
+        this.loadVideo(this);
     }
 
     fetchUserData (thisClass) {
@@ -63,6 +63,16 @@ var PodcastPage = class PodcastPage {
         });
     }
 
+    loadVideo (thisClass){
+        require(['video-wrapper'], function(){
+            var divToLoad = $(thisClass.mainDiv).find("#video-space");
+
+            loadComponent("VideoModule", divToLoad, function () {
+                new videoClass("https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4", 35, divToLoad );
+            });
+
+        });                
+    }
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
         $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
