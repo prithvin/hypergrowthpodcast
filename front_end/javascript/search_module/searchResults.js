@@ -68,7 +68,7 @@ var SearchPage = class SearchPage {
 
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
+        $(this.mainDiv).find("#podcast-posts").css("height",newHeight);
     }
 
 };
