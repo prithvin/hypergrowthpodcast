@@ -52,7 +52,8 @@ var SearchPage = class SearchPage {
                 new PostSearch(
                     {
                         "UniqueID": thisClass.podcastID,
-                        "TypeOfFetch": "PodcastSearch"
+                        "TypeOfFetch": "CourseSearch"
+                        //searchQuery
                     },
                     {
                         "Name": thisClass.UserName,
