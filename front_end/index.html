@@ -41,7 +41,6 @@
         loadComponent("CourseSearchModule", $("#page"), function () {
           require(['searchResults'], function () {
             new SearchPage(123, $("#page").find(".search-results-div"));
-            console.log($("#page"));
           });
         });
       };
