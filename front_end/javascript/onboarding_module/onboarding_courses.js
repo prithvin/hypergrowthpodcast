@@ -21,9 +21,10 @@ var OnboardingCourses = class OnboardingCourses {
                 row.id = data[i]['Course'];
                 var att = document.createAttribute('onclick');
                 var path = window.location.pathname;
-                att.value = "document.location = '" + path + "#/course_homepage/1'";   // Course Path
+                att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
                 row.setAttributeNode(att);
-                var myClass = document.createTextNode(data[i]['Course'] + ' - ' + data[i]['Quarter']);
+                var course = data[i]['Course'] + ' - ' + data[i]['Quarter'];
+                var myClass = document.createTextNode(course);
                 cell.appendChild(myClass);
             }
         });
