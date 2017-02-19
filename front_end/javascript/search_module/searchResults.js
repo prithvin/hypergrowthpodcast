@@ -1,10 +1,12 @@
 var SearchPage = class SearchPage {
 
     constructor (podcastID, mainDiv) {
+        console.log(mainDiv);
         console.log("hiii");
         this.mainDiv = mainDiv;
         this.podcastID = podcastID;
         this.loadPosts(this);
+        this.loadNavbar(this);
 
     }
 
@@ -27,36 +29,40 @@ var SearchPage = class SearchPage {
         });
     }
 
+    loadNavbar (thisClass) {
+        require(['navbar'], function () {
+            var divToLoad = $(thisClass.mainDiv).find("#navbox");
+            loadComponent("MenuModule", divToLoad, function () {
+              console.log("navbar");
+                new NavBarLoggedInCourse(
+                    divToLoad,
+                    thisClass.podcastID
+                );
+            });
+        });
+
+    }
 
     loadPosts (thisClass) {
         require(['postSearch'], function () {
-            // var divToLoad = $(thisClass.mainDiv).find("#podcast-posts");
-          //   loadComponent("MenuModule", #navbox, function () {
-          //     new NavBarLoggedInCourse({
-          //         firstname: "Rauhmel",
-          //         classname: "CSE 110",
-          //         classqrtr: "Fall 2017",
-          //         userid: "123123123123",
-          //         profpic: "http://3.bp.blogspot.com/-AMQ283sRFI4/VeMuQ2FeLdI/AAAAAAAC_4k/cWfG1Hmg4d8/s1600/Miley_Cyrus_E%2521_NEWS.jpg"
-          //     });
-          //     $("#navbox").show();
-          // }, 200);
-          var divToLoad = $(thisClass.mainDiv).find("#post-search");
-          loadComponent("PostSearchModule", divToLoad, function () {
-              console.log("xxxxxxxxxxxxx");
-              new PostSearch(
-                  {
-                      "UniqueID": thisClass.podcastID,
-                      "TypeOfFetch": "PodcastSearch"
-                  },
-                  {
-                      "Name": thisClass.UserName,
-                      "Pic": thisClass.Pic
-                  },
-                  divToLoad
-              );
-              thisClass.dynamicWindowResize(thisClass);
-          });
+            var divToLoad = $(thisClass.mainDiv).find("#post-search");
+            loadComponent("PostSearchModule", divToLoad, function () {
+              console.log(thisClass.mainDiv);
+              console.log("postSearch");
+                new PostSearch(
+                    {
+                        "UniqueID": thisClass.podcastID,
+                        "TypeOfFetch": "CourseSearch"
+                        //searchQuery
+                    },
+                    {
+                        "Name": thisClass.UserName,
+                        "Pic": thisClass.UserPic
+                    },
+                    divToLoad
+                );
+                thisClass.dynamicWindowResize(thisClass);
+            });
         });
     }
 
