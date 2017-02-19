@@ -34,6 +34,7 @@ function loadHTMLComponent (moduleName, callback) {
     }
 
     var filePath = loadHTMLModules[moduleName];
+
     $.ajax({
         url: filePath,
         data: {},
