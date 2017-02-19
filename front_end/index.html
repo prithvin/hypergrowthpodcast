@@ -13,14 +13,14 @@
     <script>
 
     require(['director', 'components', 'loader'], function () {
-      var loginPage = function () { 
+      var loginPage = function () {
         loadComponent("OnboardingFrontPage", $("#page"), function () {
 
         });
       };
 
 
-      var podcast = function (podcastId) { 
+      var podcast = function (podcastId) {
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
             new PodcastPage(122, $("#page").find(".podcast-page-div"));
@@ -29,9 +29,11 @@
       };
 
       var search = function (courseId) {
-        /*loadComponent("course_search_module.html", $("#page"), function () {
-
-        });*/
+        loadComponent("CourseSearchModule", $("#page"), function () {
+          require(['searchResults'], function () {
+            new SearchPage(123, $("#page").find(".search-results-div"));
+          });
+        });
       };
 
 
@@ -51,11 +53,16 @@
           router.init();
         }, 500);
       });
+      loadComponent("CourseSearchModule", $("#page"), function () {
+        setTimeout(function () {
+          router.init();
+        }, 500);
+      });
     });
-    
-   
-        
-      
+
+
+
+
 
 
 
