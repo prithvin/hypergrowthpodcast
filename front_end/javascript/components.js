@@ -4,6 +4,7 @@ var loadHTMLModules = {
     "CommentModule": "comment_module.html",
     "CourseHomepageModule": "course_homepage_module.html",
     "CourseSearchModule": "course_search_module.html",
+    "CourseVideosModule": "course_videos_module.html",
     "LoaderModule": "loader_module.html",
     "MenuModule": "menu_module.html",
     "OnboardingCourseTableModule": "onboarding_course_table_module.html",
@@ -56,6 +57,10 @@ function callAPI (targetURL, type, callData, callback) {
         type: type,
         success: function (data) {
             callback(data);
-          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.error("Something went wrong when loading " + targetURL);
+            console.error("Status: " + textStatus + " Error: " + errorThrown);
+        } 
     });
 }

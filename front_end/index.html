@@ -46,12 +46,20 @@
         });
       };
 
+      var courseHomepage = function() {
+        loadComponent("CourseHomepageModule", $("#page"), function() {
+          require(['course-homepage'], function() {
+            new CourseHomepageClass(1, $("#page").find(".course-homepage-div"));
+          });
+        });
+      }
 
       var routes = {
         '/podcast/:podcastId': podcast,
         '/search/:courseId': search,
         '/': loginPage,
         '': loginPage,
+        '/course_homepage/:courseId': courseHomepage,
         '/courses': onboardingCoursesPage
       };
 
@@ -65,18 +73,6 @@
           router.init();
         }, 500);
       });
-
-      loadComponent("CourseSearchModule", $("#page"), function () {
-        setTimeout(function () {
-          router.init();
-        }, 500);
-      });
     });
-
     </script>
-
-
-  <body>
-
-  </body>
 </html>

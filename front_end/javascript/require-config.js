@@ -49,6 +49,12 @@ var require = {
         "navbar": {
             "deps": ['bootstrap']
         },
+        "course-videos": {
+            "deps": ['jquery', 'bootstrap']
+        },
+        "course-homepage": {
+            "deps": ['course-videos', 'components']
+        },
         "course-selection": {
             "deps": ['bootstrap', 'tether', 'components']
         },
@@ -75,6 +81,8 @@ var require = {
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
         "navbar": "menu_module/NavBarLoggedIn",
+        "course-videos": "course_videos_module/course_videos",
+        "course-homepage": "course_homepage_module/course_homepage",
         "course-selection": "onboarding_module/onboarding_courses",
         "onboarding": "onboarding_module/onboarding",
         "config": "config",
