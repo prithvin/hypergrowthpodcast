@@ -17,7 +17,7 @@
 }
 
 
-.html-body {
+.courses-module {
   height: 100%;
   width: 100%;
   min-width: 1200px;
@@ -93,7 +93,7 @@
 }
 
 
-.cello, .cell-head {
+.cell, .cell-head {
   padding: 20px;
   width: 1%;
   line-height: 50px;

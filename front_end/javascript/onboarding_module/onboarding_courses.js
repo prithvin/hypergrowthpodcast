@@ -14,7 +14,7 @@ var OnboardingCourses = class OnboardingCourses {
             for(var i = 0; i < data.length; i++) {
                 var row = thus.tableRef.insertRow(thus.tableRef.rows.length);
                 var cell = row.insertCell(0);
-                cell.className = 'cello';
+                cell.className = 'cell';
                 row.className = 'table-row';
                 row.id = data[i]['Course'];
                 console.log(row);
