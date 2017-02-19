@@ -65,13 +65,7 @@ var PodcastPage = class PodcastPage {
             var divToLoad = $(thisClass.mainDiv).find("#video-space");
 
             loadComponent("VideoModule", divToLoad, function () {
-                new videoClass(
-                    {
-                        source: "https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4",
-                        time: 35 
-                    }, 
-                    divToLoad
-                );
+                new videoClass("https://podcast.ucsd.edu/Podcasts/cse100_wi17/cse100_wi17-02082017-0900.mp4", 35, divToLoad );
             });
 
         });                
