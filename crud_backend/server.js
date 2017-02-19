@@ -55,22 +55,98 @@ app.get('/login', function(req,res){
   }
 });
 
-app.get('/course/:courseId/posts',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
-    if (err) throw err; // we'll not consider error handling for now
-     res.send(JSON.parse(data));
+
+app.get('/getPostsForLecture',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+  /*use response.posts to get an array of post objects*/
+  apiFunctions.postFunctions.getPostsForLecture(request, function(response){
+    res.send(response);
   });
 });
 
-app.get('/course/:courseId/podcast/:podcastId/posts',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  fs.readFile(path.resolve("../front_end/fake_data/getPosts.json"), 'utf8', function (err, data) {
-    if (err) throw err; // we'll not consider error handling for now
-     res.send(JSON.parse(data));
+app.get('/getPostsForCourse',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    CourseId : req.query.CourseId,
+    UpperLimit : 20
+  };
+  /*use response.posts to get an array of post objects*/
+  apiFunctions.postFunctions.getPostsForCourse(request, function(response){
+    res.send(response);
   });
 });
+
+//request format should pass in a course id and an array of keywords
+app.get('/getPostsByKeyword',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    CourseId : req.query.CourseId,
+    Keywords : req.query.Keywords
+  };
+  apiFunctions.postFunctions.getPostsByKeyword(request,function(posts){
+    res.send(posts);
+  });
+});
+
+/*returns entire user object*/
+app.get('/getCurrentUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  res.send(req.user);
+});
+
+app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id,
+    PodcastId : req.query.PodcastId
+  };
+  console.log("The user is outside is" + req.user._id);
+  apiFunctions.userFunctions.getNotesForUser(request,function(notes){
+    res.send(notes);
+  });
+});
+
+app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+
+  apiFunctions.podcastFunctions.getVideoInfo(request,function(podcast){
+    res.send(podcast);
+  });
+});
+
+app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  var request = {
+    CourseId : req.query.CourseId
+  };
+  api.courseFunctions.getCourseInfo(request,function(course){
+    res.send(course);
+  });
+});
+
+app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  res.send("CREATING POST");
+});
+
+app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  res.send("Creating Comment");
+});
+
+app.get('/markWatchedLater',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  res.send("watch later marked");
+});
+
 
 app.post('/login',function(req,res){
   res.redirect("/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
+});
+
+app.get('/isUserLoggedIn',function(req,res){
+  if(req.isAuthenticated()){
+    res.send(200, {"result": true});
+  }
+  else{
+    res.send(200,{"result" : false});
+  }
 });
 
 app.get('/logout',function(req,res){
@@ -102,10 +178,12 @@ app.get('/auth/facebook', function(req,res,next){
   }
 ));
 
+
 app.get("/auth/facebook/callback",
   passport.authenticate('facebook', {
     failureRedirect : auth.errorCallbackURL,
   }),
+  /*ON SUCCESS*/
   function(req,res){
     res.redirect(auth.callbackURL);
   },
