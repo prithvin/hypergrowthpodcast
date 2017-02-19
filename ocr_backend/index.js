@@ -15,21 +15,7 @@ uploader.getPodcastList(function(podcasts) {
 
     if (counter == podcasts.length) {
       scraper.scrapePodcasts(existing, function(working) {
-        console.log("finished scraping");
-
-        working = [
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01132017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01182017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01202017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01232017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01252017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-01272017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02012017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02032017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02062017-0900.mp4",
-          "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02082017-0900.mp4",
-          // "http://podcast.ucsd.edu/Podcasts//cse101_1_wi17/cse101_1_wi17-02102017-0900.mp4"
-        ]
+        console.log("Finished scraping");
 
         exec("rm -rf tmp* contents slides unique && rm -f *.mp4", function(error, stdout, stderr) {
           videoParsing.parseVideo(working, [], 0);

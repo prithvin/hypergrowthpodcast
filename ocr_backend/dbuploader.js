@@ -124,7 +124,7 @@ module.exports = {
               console.error(err);
             }
             else {
-              CourseModel.findById(obj.id, function(err, course) {
+              CourseModel.findById(obj.CourseId, function(err, course) {
                 course.Podcasts.push({
                   PodcastId: podcast['_id'],
                   PodcastImage: tmpImage,

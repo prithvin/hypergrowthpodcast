@@ -23,6 +23,10 @@ Fake Data Available:
             Pic: 
         } RETURNED
 
+    --API ./fake_data/getVideo.json
+    Get's video data needed to play video
+    Pass in PodcastID
+
     Get notes for User
 
 
