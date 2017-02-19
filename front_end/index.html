@@ -29,7 +29,9 @@
         });
       }
 
-      var podcast = function (podcastId) {
+
+        
+      var podcast = function (podcastId) { 
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
             new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
@@ -41,7 +43,6 @@
         loadComponent("CourseSearchModule", $("#page"), function () {
           require(['searchResults'], function () {
             new SearchPage(123, $("#page").find(".search-results-div"));
-            console.log($("#page"));
           });
         });
       };
