@@ -81,14 +81,11 @@ var require = {
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
         "navbar": "menu_module/NavBarLoggedIn",
-<<<<<<< HEAD
         "course-videos": "course_videos_module/course_videos",
-        "course-homepage": "course_homepage_module/course_homepage"
-=======
+        "course-homepage": "course_homepage_module/course_homepage",
         "course-selection": "onboarding_module/onboarding_courses",
         "onboarding": "onboarding_module/onboarding",
         "config": "config",
         "searchResults": "search_module/searchResults"
->>>>>>> a0f3819c0dcfe7a9957921adf5406d23f8b5e425
     }
 };

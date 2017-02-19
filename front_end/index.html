@@ -58,11 +58,8 @@
         '/search/:courseId': search,
         '/': loginPage,
         '': loginPage,
-<<<<<<< HEAD
-        '/course_homepage/:courseId': courseHomepage
-=======
+        '/course_homepage/:courseId': courseHomepage,
         '/courses': onboardingCoursesPage
->>>>>>> a0f3819c0dcfe7a9957921adf5406d23f8b5e425
       };
 
       var router = Router(routes);
@@ -75,24 +72,6 @@
           router.init();
         }, 500);
       });
-<<<<<<< HEAD
     });
     </script>
 </html>
-=======
-
-      loadComponent("CourseSearchModule", $("#page"), function () {
-        setTimeout(function () {
-          router.init();
-        }, 500);
-      });
-    });
-
-    </script>
-
-
-  <body>
-
-  </body>
-</html>
->>>>>>> a0f3819c0dcfe7a9957921adf5406d23f8b5e425
