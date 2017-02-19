@@ -20,6 +20,9 @@ var APost = class APost {
         if (shouldAllowNewComments) {
             this.addCommentListener(this);
         }
+        else {
+            $(this.commentForm).hide();
+        }
 
     }
 

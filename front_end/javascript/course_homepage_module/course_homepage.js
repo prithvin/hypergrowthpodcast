@@ -30,7 +30,7 @@ class CourseHomepageClass {
                 new PostSearch(
                     {
                         "UniqueID": 122,
-                        "TypeOfFetch": "PodcastSearch"
+                        "TypeOfFetch": "CourseGlobal"
                     },
                     {
                         "Name": thisClass.UserName, 

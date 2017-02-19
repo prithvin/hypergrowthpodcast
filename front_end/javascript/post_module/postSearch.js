@@ -169,13 +169,13 @@ var PostSearch = class PostSearch {
         };
 
         if (postData["TypeOfFetch"] == "CourseGlobal") {
-            apiURL = "./javascript/fake_data/getPosts.json";
+            apiURL = "./fake_data/getPosts.json";
             requestData = {
                 "CourseID": postData["UniqueID"]
             };
         }
         else if (postData["TypeOfFetch"] == "CourseSearch") {
-            apiURL = "./javascript/fake_data/getPosts.json";
+            apiURL = "./fake_data/getPosts.json";
             requestData = {
                 "CourseID": postData["UniqueID"],
                 "SearchTerm": postData["SearchQuery"]

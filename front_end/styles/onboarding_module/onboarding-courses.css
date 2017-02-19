@@ -92,7 +92,8 @@
   border-collapse: collapse;
 }
 
-.cell, .cell-head {
+
+.cello, .cell-head {
   padding: 20px;
   width: 1%;
   line-height: 50px;
@@ -112,8 +113,6 @@
   color: #444;
   background: white;
 }
-
-
 
 .course-list-container .table-body {
   width: auto;
