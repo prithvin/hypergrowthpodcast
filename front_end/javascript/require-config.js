@@ -49,6 +49,9 @@ var require = {
         "navbar": {
             "deps": ['bootstrap']
         },
+        "course-selection": {
+            "deps": ['bootstrap', 'tether', 'components']
+        },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap']
         }
@@ -72,6 +75,9 @@ var require = {
         "video-wrapper": "video_module/video",
         "loader": "loader_module/jsloader",
         "navbar": "menu_module/NavBarLoggedIn",
+        "course-selection": "onboarding_module/onboarding_courses",
+        "onboarding": "onboarding_module/onboarding",
+        "config": "config",
         "searchResults": "search_module/searchResults"
     }
 };

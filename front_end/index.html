@@ -14,11 +14,20 @@
 
     require(['director', 'components', 'loader'], function () {
       var loginPage = function () {
-        loadComponent("OnboardingFrontPage", $("#page"), function () {
-
+        require(['config', 'onboarding'], function () {
+          loadComponent("OnboardingFrontPage", $("#page"), function () {
+            new Onboarding($('#page').find('.onboarding-page'));
+          });
         });
       };
 
+      var onboardingCoursesPage = function(courses) {
+        loadComponent("OnboardingCoursesModule", $("#page"), function () {
+            require(['course-selection'], function () {
+            new OnboardingCourses([], $("#page").find(".course-table"));
+          });
+        });
+      }
 
       var podcast = function (podcastId) {
         loadComponent("PodcastModule", $("#page"), function () {
@@ -41,18 +50,21 @@
         '/podcast/:podcastId': podcast,
         '/search/:courseId': search,
         '/': loginPage,
-        '': loginPage
+        '': loginPage,
+        '/courses': onboardingCoursesPage
       };
 
       var router = Router(routes);
 
       // Scripts above are required on every single page
       console.log($("#page"));
-      // loadComponent("LoaderModule", $("#page"), function () {
-      //   setTimeout(function () {
-      //     router.init();
-      //   }, 500);
-      // });
+
+      loadComponent("LoaderModule", $("#page"), function () {
+        setTimeout(function () {
+          router.init();
+        }, 500);
+      });
+
       loadComponent("CourseSearchModule", $("#page"), function () {
         setTimeout(function () {
           router.init();
@@ -60,9 +72,8 @@
       });
     });
 
-
     </script>
-  </head>
+
 
   <body>
 
