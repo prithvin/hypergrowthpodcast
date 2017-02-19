@@ -7,7 +7,6 @@ var loadHTMLModules = {
     "CourseVideosModule": "course_videos_module.html",
     "LoaderModule": "loader_module.html",
     "MenuModule": "menu_module.html",
-    "OnboardingCourseTableModule": "onboarding_course_table_module.html",
     "OnboardingCoursesModule": "onboarding_courses_module.html",
     "OnboardingFrontPage": "onboarding_module.html",
     "PodcastModule": "podcast_module.html",

@@ -55,6 +55,9 @@ var PodcastPage = class PodcastPage {
                     },
                     divToLoad
                 );
+                setTimeout(function () {
+                    thisClass.updatePostHeights() 
+                }, 200);
                 thisClass.dynamicWindowResize(thisClass);
             });
         });
