@@ -6,3 +6,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.course-videos-Hr {
+    width: 100%
+    font-size: 1px;
+    color: #F4F6F8;
+    line-height: 1px;
+    background-color: #BAC5D3;
+    margin-bottom: 0px;
+    padding-left: 10px;
+}
+
+.course-videos-Hrr {
+    width: 100%;
+    font-size: 1px;
+    color: #F4F6F8;
+    line-height: 1px;
+    background-color: #BAC5D3;
+    margin-bottom: 0px;
+}

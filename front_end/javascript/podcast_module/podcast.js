@@ -37,7 +37,6 @@ var PodcastPage = class PodcastPage {
                 );
             });
         });
-        
     }
 
     loadPosts (thisClass) {
