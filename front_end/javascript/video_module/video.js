@@ -2,15 +2,20 @@
 class videoClass {
     
     constructor (url, timestamp, mainDiv, srtFile) {
+
             this.mainDiv = mainDiv;
             this.index = 0;
+            var self = this;
+            //this.getInfo()
+        
+            this.initWithCaptions(function(){
+            self.setSource(url);
+            self.setTime(timestamp);
+            self.getTime();
+            self.initHotKeys();
+            self.initListeners();
+            });
            
-            this.setSource(url);
-            this.setTime(timestamp);
-            this.getTime();
-            this.initHotKeys();
-            this.initListeners();
-
     }
     
     initListeners(){
@@ -78,6 +83,24 @@ class videoClass {
             });
         });
     }
-
+    initWithCaptions(callback){
+        callAPI("./fake_data/getVideo.json", "GET", {}, function(data){
+            //var duri = window.URL.createObjectURL(data['SRTFile']);
+            var content = data['SRTFile'];
+            var f = new File([content], "captionFile.srt");
+            var duri = URL.createObjectURL(f);
+            //console.log(content);
+            var furi = "fake_data/sample.vtt";
+            videojs('my-video', {
+                controls:true,
+                class: 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
+                playbackRates: [1,1.5,2], 
+                autoplay: true,
+                  tracks: [
+                    { src:furi, kind:'captions', srclang:'en', label:'English' }
+                  ]
+                }, callback);
+        });
+    }
 
 }

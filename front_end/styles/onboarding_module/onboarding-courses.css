@@ -6,10 +6,12 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: relative;
+  /*-webkit-background-size: cover; 
+  -moz-background-size: cover; 
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
   background-color: rgba(100,100,100,.61);
   background-blend-mode: multiply;
   min-width: 50%;
@@ -59,7 +61,6 @@
 }
 
 .logo-container {
-  padding-top: 20%;
   padding-bottom: 5%;
   padding-left: 20%;
   padding-right: 0%;
@@ -80,7 +81,7 @@
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  position: absolute;
+  position: relative;
   width: 100%;
   bottom: 0%;
 }
