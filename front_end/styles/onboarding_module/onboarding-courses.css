@@ -131,7 +131,7 @@
 
 .cell {
   padding: 20px;
-  line-height: 40px;
+  line-height: 25px;
   font-family: "Roboto", sans-serif;
   font-weight: 200;
   font-size: 18px;
@@ -209,5 +209,5 @@
 .input-style {
   font-family: "Roboto", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 15px;
 }
