@@ -7,17 +7,21 @@ class SearchVideosClass {
           console.log(data);
           var masterDiv = document.getElementById('search-videos-div');
           document.getElementById('title').innerHTML = "Search Results for " + data['Query'] + "  in " + data['Title'];
-            
+          
+          var overallDiv = document.createElement('div');
+          masterDiv.appendChild(overallDiv);
+          overallDiv.class = 'scroll';
+          
           var row = document.createElement('div');
           row.className = 'row';
-          masterDiv.appendChild(row);
+          overallDiv.appendChild(row);
           
           var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
               if (row.childElementCount == 2) {
                   row = document.createElement('div');
                   row.className = 'row';
-                  masterDiv.appendChild(row);
+                  overallDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
               videoDiv.className = 'col-md-6';
