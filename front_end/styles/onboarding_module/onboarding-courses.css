@@ -106,16 +106,27 @@
 }
 
 .cell-head { 
-    width: 1%;
 }
 
-.cell-mid, .cell-head-mid {
-  width: 90%;
+.cell-head-mid {
+    width: 90%;
 }
 
-.cell-end, .cell-head-end {
-  padding-left: 5%;
-  padding-right: 5%;
+.cell-head-end1 {
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.cell-head-end2 {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.cell-mid {
+    width: 90%;
+}
+
+.cell-end {
+    width: 5%;
 }
 
 .cell {
