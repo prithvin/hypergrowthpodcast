@@ -178,6 +178,14 @@ app.get("/auth/facebook/callback",
   }),
   /*ON SUCCESS*/
   function(req,res){
+    if(!req.session.user || req.session.user.FBUserId != req.user.FBUserId) {
+      req.session.user = req.user;
+      req.session.save((err) => {
+        if(err)
+          console.log(err);
+      });
+    }
+
     res.redirect(auth.callbackURL);
   },
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
