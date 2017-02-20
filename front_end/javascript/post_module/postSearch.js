@@ -107,24 +107,23 @@ var PostSearch = class PostSearch {
             }.bind(this), 500);
             return;
         }
-        if (this.doneLoading) 
-            this.doneLoading();
 
-        var lastTime = new Date().getTime();
+        if (this.doneLoading) {
+            this.doneLoading();
+        }
+
         $(this.searchInputForm).on("submit", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+            if ($(thisClass.searchInputField).val().length > 1) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
-                lastTime = new Date().getTime();
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0)
                 thisClass.searchByText("");
         })
         $(this.searchInputField).on("input", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+            if ($(thisClass.searchInputField).val().length > 1) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
-                lastTime = new Date().getTime();
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0) 
                 thisClass.searchByText("");
@@ -171,7 +170,7 @@ var PostSearch = class PostSearch {
             return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
         };
         this.currentTextBeingSearched = text;
-        this.mark.mark(text, { "caseSensitive" : false, "separateWordSearch" : false})
+        
         var anyPostsShown = false;
         for (var x = 0; x < this.posts.length; x++) {
             var hasPostsShown = this.posts[x].searchForContent(text);
@@ -185,6 +184,11 @@ var PostSearch = class PostSearch {
                 $(this.noResultsOption).fadeIn(500);
         }
         else {
+            this.mark.mark(text, { 
+                "caseSensitive" : false, 
+                "separateWordSearch" : false,
+                "exclude": [".pre-slide-data", ".slide-no"]
+            })
             $(this.noResultsOption).hide();
         }
     }

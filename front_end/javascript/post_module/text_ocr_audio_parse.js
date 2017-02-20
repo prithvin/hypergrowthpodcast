@@ -3,7 +3,7 @@ var OCRAudioIndPost = class OCRAudioIndPost {
     // startTime (in SECONDS) is optional and only applicable for the sub-modules
     constructor (content, slideNum, divToAppend, startTime) {
         this.divToAppend = divToAppend;
-        this.content = content;
+        this.content = content.replace(/[\s\r\n]+$/, '');;
         this.slideNum = slideNum;
         this.startTime = startTime;
         this.loadComponentAndAddData(this, function () {});
@@ -32,39 +32,24 @@ var OCRAudioIndPost = class OCRAudioIndPost {
     }
 
     showThisPost (thisClass) {
-        this.ensureDataLoad(function () {
-            var allData = $(thisClass.entireData);
-            for (var x = 0; x < allData.length; x++)
-                $(allData[x]).show();
-             $(thisClass.entireData).show();
-        }); 
+        setTimeout(function () {
+            thisClass.ensureDataLoad(function () {
+                $(thisClass.entireData).show();
+            }); 
+        }, 0);
     }
 
     hideThisPost (thisClass) {
-        this.ensureDataLoad(function () {
-            var allData = $(thisClass.entireData);
-            for (var x = 0; x < allData.length; x++)
-                $(allData[x]).hide();
-            $(thisClass.entireData).hide();
-        }); 
-    }
-
-    checkBySlideNo (slideNo) {
-        if (slideNo == this.slideNum) {
-            this.showThisPost(this);
-            return true;
-        }
-        else {
-            this.hideThisPost(this);
-            return false;
-        }
+      setTimeout(function () {
+            thisClass.ensureDataLoad(function () {
+                $(thisClass.entireData).hide();
+            }); 
+        }, 0);
     }
 
     checkForContent (searchTerm) {
-        var isContent = $("<div>" + this.content + "</div>").is(':contains("' + searchTerm + '")');
-        var isSlide = $("<div>" + "Slide " + this.slideNum + "</div>").is(':contains("' + searchTerm + '")');
-        var isTime = $("<div>" + this.getMinutesSecondsString() + "</div>").is(':contains("' + searchTerm + '")');
-        if (isContent || isSlide || isTime) { 
+        var isContent = this.content.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0;
+        if (isContent) { 
             this.showThisPost(this);
             return true;
         }

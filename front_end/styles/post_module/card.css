@@ -73,6 +73,8 @@ mark {
 
 .slide-no {
     color: #446CB3;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .time-signature-main span {
