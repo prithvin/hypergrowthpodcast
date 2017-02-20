@@ -46,7 +46,7 @@ app.get('/', apiFunctions.userFunctions.isLoggedIn,function(req,res){
 });
 
 app.get('/login', function(req,res){
-  if(req.user){
+  if(req.session.user){
     res.redirect("/");
   }
   else {
