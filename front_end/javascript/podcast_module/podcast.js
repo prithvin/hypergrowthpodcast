@@ -5,14 +5,14 @@ var PodcastPage = class PodcastPage {
         this.podcastID = podcastID;
         this.fetchUserData(this);
         this.loadNavbar(this);
-        this.fetchVideo(this);
+        
     }
 
     fetchUserData (thisClass) {
         callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
             thisClass.UserName = data['Name'];
             thisClass.UserPic = data['Pic'];
-            thisClass.loadPosts(thisClass);
+            thisClass.fetchVideo(thisClass);
         });
     }
 
@@ -29,8 +29,12 @@ var PodcastPage = class PodcastPage {
     fetchVideo (thisClass) {
         callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID}, 
             function (data) {
-                 console.log(data);
+                thisClass.audioData = {
+                    "ParsedAudioTranscriptForSearch": data['ParsedAudioTranscriptForSearch'],
+                    "Slides": data['Slides']
+                };
                 thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
+                thisClass.loadPosts(thisClass);
             }
         );
     }
@@ -71,11 +75,14 @@ var PodcastPage = class PodcastPage {
                         "Name": thisClass.UserName, 
                         "Pic": thisClass.UserPic
                     },
-                    divToLoad
+                    divToLoad,
+                    thisClass.audioData,
+                    function () {
+                        setTimeout(function () {
+                            thisClass.updatePostHeights() 
+                        }, 500);
+                    }.bind(thisClass)
                 );
-                setTimeout(function () {
-                    thisClass.updatePostHeights() 
-                }, 500);
                 thisClass.dynamicWindowResize(thisClass);
             });
         });

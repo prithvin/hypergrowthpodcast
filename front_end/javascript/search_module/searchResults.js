@@ -7,6 +7,7 @@ var SearchPage = class SearchPage {
         this.podcastID = podcastID;
         this.loadPosts(this);
         this.loadNavbar(this);
+        this.loadVideos(this);
 
     }
 
@@ -45,15 +46,15 @@ var SearchPage = class SearchPage {
 
     loadPosts (thisClass) {
         require(['postSearch'], function () {
-            var divToLoad = $(thisClass.mainDiv).find("#post-search");
+            var divToLoad = $(thisClass.mainDiv).find("#posts");
             loadComponent("PostSearchModule", divToLoad, function () {
               console.log(thisClass.mainDiv);
               console.log("postSearch");
                 new PostSearch(
                     {
                         "UniqueID": thisClass.podcastID,
-                        "TypeOfFetch": "CourseSearch"
-                        //searchQuery
+                        "TypeOfFetch": "CourseSearch",
+                        "SearchQuery" : "Supply"
                     },
                     {
                         "Name": thisClass.UserName,
@@ -65,10 +66,20 @@ var SearchPage = class SearchPage {
             });
         });
     }
+    
+    loadVideos(thisClass) {
+      require(['search-videos'], function() {
+          console.log("TEST");
+        var divToLoad = $(thisClass.mainDiv).find("#search-videos");
+        loadComponent("SearchResultsModule", divToLoad, function() {
+            new SearchVideosClass(1, $(thisClass.mainDiv));
+        });
+      });
+    }
 
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
+        $(this.mainDiv).find("#posts").css("height",newHeight );
     }
 
 };

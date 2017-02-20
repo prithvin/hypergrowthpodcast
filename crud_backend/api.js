@@ -130,12 +130,13 @@ var apiFunctions = {
                 console.log(res);
             }
             else {
-                res.redirect('/login');
+                console.log("HERE'S THE REDIRECT URL" + req.url);
+                res.redirect('/login?callbackURL=' + req.url);
             }
 
           },
-          addUser : function(name,token,profileId,callback){
-            UserModel.create({Name:name, ProfileId: profileId, FacebookAuthToken:token}, function(err,users){
+          addUser : function(name,profileId,callback){
+            UserModel.create({Name:name, FBUserId: profileId}, function(err,users){
             if(err) {
             console.log(err);
             }
