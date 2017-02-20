@@ -4,6 +4,7 @@ var loadHTMLModules = {
     "CommentModule": "comment_module.html",
     "CourseHomepageModule": "course_homepage_module.html",
     "CourseSearchModule": "course_search_module.html",
+    "SearchResultsModule" : "search_videos_module.html",
     "CourseVideosModule": "course_videos_module.html",
     "LoaderModule": "loader_module.html",
     "MenuModule": "menu_module.html",
@@ -12,7 +13,9 @@ var loadHTMLModules = {
     "PodcastModule": "podcast_module.html",
     "PostModule": "post_module.html",
     "PostSearchModule": "post_search_module.html",
-    "VideoModule": "video_module.html"
+    "VideoModule": "video_module.html",
+    "AudioOCRSubMod": "audio_ocr_search_sub_module.html",
+    "AudioOCRMod": "audio_ocr_search_module.html"
 };
 
 function loadComponent (moduleName, divToLoad, callback) {
@@ -64,3 +67,11 @@ function callAPI (targetURL, type, callData, callback) {
         } 
     });
 }
+
+
+// GLOBAL JQUERY OVERRIDE
+$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});

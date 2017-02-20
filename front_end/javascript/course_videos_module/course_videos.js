@@ -6,6 +6,7 @@ class CourseVideosClass {
         callAPI("fake_data/courseVideos.json", "GET", {}, function(data) {
           console.log(data);
           var masterDiv = document.getElementById('course-videos-div');
+//          console.log(masterDiv);
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
 
           var row = document.createElement('div');

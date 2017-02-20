@@ -25,6 +25,14 @@ var PostSearch = class PostSearch {
                 } // DB will be uploaded by user session token
 
             mainDiv (jquery object containing element where all elements on this page interact with)
+    
+            ocrAudioData --> again optional parameter
+                -Only open for Prithvi/ Allen to use, no docs needed
+            {
+                "ParsedAudioTranscriptForSearch":
+                "Slides":
+            }
+
 
             <TODO> must implement still last paramtere stuff
             videoData (optional parameter if the video has already started playing)
@@ -32,11 +40,15 @@ var PostSearch = class PostSearch {
                 {
                     CurrentSlideNum: 
                 }
+    
+             callback forwhen post page is loaded (only for post page)
+
     */
-    constructor (postFetchData, userData, mainDiv, videoData) {
+    constructor (postFetchData, userData, mainDiv, ocrAudioData, videoData, callback) {
         this.postFetchData = postFetchData;
         this.userData = userData;
         this.mainDiv = $(mainDiv).find(".search-module");
+        this.doneLoading = callback;
 
         // Default to current slide as one
         this.posts = [];
@@ -58,6 +70,12 @@ var PostSearch = class PostSearch {
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
+
+        if (ocrAudioData) {
+            this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
+                this.OCRAudioLoaded = true;
+            }.bind(this));
+        }
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
         this.loadPostsFromServer(this);
@@ -83,13 +101,33 @@ var PostSearch = class PostSearch {
     }
 
     startFormListeners (thisClass) {
+        if (!this.OCRAudioLoaded) {
+            setTimeout(function () {
+                this.startFormListeners(this);
+            }.bind(this), 500);
+            return;
+        }
+        if (this.doneLoading) 
+            this.doneLoading();
+
+        var lastTime = new Date().getTime();
         $(this.searchInputForm).on("submit", function (ev) {
             ev.preventDefault();
-            thisClass.searchByText($(thisClass.searchInputField).val())
+            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+                thisClass.searchByText($(thisClass.searchInputField).val());
+                lastTime = new Date().getTime();
+            }
+            else if ($(thisClass.searchInputField).val().trim().length == 0)
+                thisClass.searchByText("");
         })
         $(this.searchInputField).on("input", function (ev) {
             ev.preventDefault();
-            thisClass.searchByText($(thisClass.searchInputField).val())
+            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+                thisClass.searchByText($(thisClass.searchInputField).val());
+                lastTime = new Date().getTime();
+            }
+            else if ($(thisClass.searchInputField).val().trim().length == 0) 
+                thisClass.searchByText("");
         })
     }
 
@@ -139,6 +177,9 @@ var PostSearch = class PostSearch {
             var hasPostsShown = this.posts[x].searchForContent(text);
             anyPostsShown = (anyPostsShown || hasPostsShown );
         }
+        var audioResults = this.ocrModule.doSearchInAudio(text);
+        var ocrResults = this.ocrModule.doSearchInOCR(text);
+        anyPostsShown = anyPostsShown || audioResults || ocrResults;
         if (!anyPostsShown) {
             if (!$(this.noResultsOption).is(":visible"))
                 $(this.noResultsOption).fadeIn(500);
