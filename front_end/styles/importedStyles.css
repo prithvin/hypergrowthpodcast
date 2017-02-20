@@ -40,3 +40,5 @@
 /* course search module */
 @import url("./search_module/searchResults.css");
 
+/* ocr search module */
+@import url("./ocr_audio_module/ocr_text.css");

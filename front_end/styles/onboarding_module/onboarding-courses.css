@@ -6,10 +6,12 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: relative;
+  /*-webkit-background-size: cover; 
+  -moz-background-size: cover; 
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
   background-color: rgba(100,100,100,.61);
   background-blend-mode: multiply;
   min-width: 50%;
@@ -59,7 +61,6 @@
 }
 
 .logo-container {
-  padding-top: 20%;
   padding-bottom: 5%;
   padding-left: 20%;
   padding-right: 0%;
@@ -80,7 +81,7 @@
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  position: absolute;
+  position: relative;
   width: 100%;
   bottom: 0%;
 }
@@ -106,13 +107,32 @@
 }
 
 .cell-head { 
-    width: 1%;
+}
+
+.cell-head-mid {
+    width: 90%;
+}
+
+.cell-head-end1 {
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.cell-head-end2 {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.cell-mid {
+    width: 90%;
+}
+
+.cell-end {
+    width: 5%;
 }
 
 .cell {
   padding: 20px;
-  width: 1%;
-  line-height: 50px;
+  line-height: 25px;
   font-family: "Roboto", sans-serif;
   font-weight: 200;
   font-size: 18px;
@@ -190,5 +210,5 @@
 .input-style {
   font-family: "Roboto", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 15px;
 }

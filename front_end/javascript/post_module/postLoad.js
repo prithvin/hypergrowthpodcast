@@ -10,6 +10,7 @@ var APost = class APost {
         this.mainDiv = $(mainDiv);
         this.commentDiv = $(this.mainDiv).find(".comments");
         this.commentForm = $(this.mainDiv).find(".comment-form");
+        this.numOfComments = this.postData["Comments"].length;
 
 
         this.loadHeader(this.postData["Name"], this.postData["ProfilePic"]);
@@ -38,6 +39,10 @@ var APost = class APost {
         })
     }
 
+    getNumComments () {
+        return this.numOfComments;
+    }
+
     addComment (inputForm, userPic, userName, timeOfComment) {
         this.loadIndividualComment({
             "Pic": userPic,
@@ -45,6 +50,7 @@ var APost = class APost {
             "Content": $(inputForm).val(),
             "Time": timeOfComment
         });
+        this.numOfComments++;
         $( this.mainDiv ).trigger( "commentAdded", [] );
         $(inputForm).val("");
     }
@@ -88,7 +94,7 @@ var APost = class APost {
 
         this.slideNo = slideOfPost;
 
-        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost);
+        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost).attr("data-slide", slideOfPost);
         
         $(this.mainDiv).find(".post-main-content").find("span").html(content);
     }
@@ -100,8 +106,7 @@ var APost = class APost {
             for (var x = 0; x < comments.length; x++) {
                 thisClass.loadIndividualComment(comments[x]);
             }
-        });
-            
+        });       
     }
 
     loadIndividualComment (commentData) {
