@@ -1,11 +1,12 @@
 #course-videos-div {
     background-color: #F4F6F8;
-    height: 100%;
+    height: auto;
     padding-top: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow: auto;
+    border-collapse: collapse;
 }
 
 .course-videos-Hr {
@@ -25,4 +26,8 @@
     line-height: 1px;
     background-color: #BAC5D3;
     margin-bottom: 0px;
+}
+
+.course-videos-preview-images {
+  
 }

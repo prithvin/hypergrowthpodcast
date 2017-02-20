@@ -25,7 +25,7 @@ class CourseVideosClass {
               row.appendChild(videoDiv);
 
               var img = document.createElement('img');
-              img.className = 'img-fluid';
+              img.className = 'img-fluid course-videos-preview-images';
               img.src = videos[i]['PreviewImage'];
               videoDiv.appendChild(img);
 
