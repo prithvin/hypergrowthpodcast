@@ -58,6 +58,9 @@ function callAPI (targetURL, type, callData, callback) {
         url: targetURL,
         data: callData,
         type: type,
+        xhrFields: {
+          withCredentials: true
+        },
         success: function (data) {
             callback(data);
         },
