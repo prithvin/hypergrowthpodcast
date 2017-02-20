@@ -5,6 +5,7 @@ var PodcastPage = class PodcastPage {
         this.podcastID = podcastID;
         this.fetchUserData(this);
         this.loadNavbar(this);
+        this.getSlideClicks();
         
     }
 
@@ -16,7 +17,14 @@ var PodcastPage = class PodcastPage {
         });
     }
 
-
+    getSlideClicks () {
+        $(this.mainDiv).on("click", ".slide-no", function (ev) {
+            var target = ev.currentTarget;
+            console.log($(ev.currentTarget).attr("data-slide"));
+            console.log($(ev.currentTarget).attr("data-time"));
+            console.log("CLICKED ON SLIDE NO");
+        })
+    }
     // The two methods below must be TODO
     fetchStartTimeBasedOnSlide () {
 
