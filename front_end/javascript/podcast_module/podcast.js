@@ -131,7 +131,7 @@ var PodcastPage = class PodcastPage {
         require(['video-wrapper'], function(){
             var divToLoad = $(thisClass.mainDiv).find("#video-space");
 
-            loadComponent("VideoModule", divToLoad, function () 
+            loadComponent("VideoModule", divToLoad, function () {
                 thisClass.videoClass = new videoClass(url, 0, divToLoad, srtFile);
                 thisClass.getSlideClicks();
             });
