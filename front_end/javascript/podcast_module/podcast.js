@@ -102,6 +102,7 @@ var PodcastPage = class PodcastPage {
 
             loadComponent("VideoModule", divToLoad, function () {
                 new videoClass(url, 0, divToLoad, srtFile);
+
             });
 
         });                
