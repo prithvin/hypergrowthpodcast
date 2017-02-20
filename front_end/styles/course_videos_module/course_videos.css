@@ -1,6 +1,7 @@
 #course-videos-div {
     background-color: #F4F6F8;
     height: auto;
+    max-height: 80%;
     padding-top: 30px;
     width: 100%;
     display: flex;
@@ -29,5 +30,10 @@
 }
 
 .course-videos-preview-images {
-  
+    max-width: 100%;
+    height: auto;
+}
+
+.videos-row {
+    min-height: 200px;
 }

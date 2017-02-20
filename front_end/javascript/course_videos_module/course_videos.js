@@ -10,14 +10,14 @@ class CourseVideosClass {
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
 
           var row = document.createElement('div');
-          row.className = 'row';
+          row.className = 'row videos-row';
           masterDiv.appendChild(row);
 
           var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
               if (row.childElementCount == 3) {
                   row = document.createElement('div');
-                  row.className = 'row';
+                  row.className = 'row videos-row';
                   masterDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
