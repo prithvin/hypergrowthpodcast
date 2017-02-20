@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad']
+            "deps": ['postLoad',  'ocr_module']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -66,6 +66,12 @@ var require = {
         },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
+        },
+        "ocr_module": {
+            "deps": ['jquery', 'ocr_txt_mod']
+        },
+        "ocr_txt_mod": {
+            "deps": ['jquery']
         }
     },
     // Note: Don't include the .js in the path
@@ -94,6 +100,8 @@ var require = {
         "onboarding": "onboarding_module/onboarding",
         "config": "config",
         "searchResults": "search_module/searchResults",
-        "search-videos": "search_module/search-videos"
+        "search-videos": "search_module/search-videos",
+        "ocr_module": "post_module/ocr_audio_parse",
+        "ocr_txt_mod": "post_module/text_ocr_audio_parse"
     }
 };

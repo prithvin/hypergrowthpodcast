@@ -1,7 +1,7 @@
 
 class videoClass {
     
-    constructor (url, timestamp, mainDiv) {
+    constructor (url, timestamp, mainDiv, srtFile) {
             this.mainDiv = mainDiv;
             this.index = 0;
            
