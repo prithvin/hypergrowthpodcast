@@ -6,10 +6,12 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: relative;
+  /*-webkit-background-size: cover; 
+  -moz-background-size: cover; 
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */
   background-color: rgba(100,100,100,.61);
   background-blend-mode: multiply;
   min-width: 50%;
@@ -59,7 +61,6 @@
 }
 
 .logo-container {
-  padding-top: 20%;
   padding-bottom: 5%;
   padding-left: 20%;
   padding-right: 0%;
@@ -80,7 +81,7 @@
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  position: absolute;
+  position: relative;
   width: 100%;
   bottom: 0%;
 }
@@ -131,7 +132,7 @@
 
 .cell {
   padding: 20px;
-  line-height: 40px;
+  line-height: 25px;
   font-family: "Roboto", sans-serif;
   font-weight: 200;
   font-size: 18px;
@@ -159,18 +160,25 @@
 
 .course-list-container .table-body {
   width: auto;
-  height: 60vh;
-  overflow: auto;
+  height: 385px;
+  overflow-y: scroll;
   display: block;
 }
 
 .table-row {
-  opacity: .9;
+  display: block;
+  opacity: 1;
   cursor: pointer;
+  padding-left: 10px;
+  padding-right: 5px;
+  -webkit-transition: padding-left .3s, padding-right .3s;
+  transition: padding-left .3s, padding-right .3s;
 }
 
 .table-row:hover {
-  opacity:1 !important;
+  padding-left: 5px !important;
+  padding-right: 0px !important;
+  opacity: .95 !important;
 }
 
 .table-row:nth-child(4n + 1) {
@@ -209,5 +217,5 @@
 .input-style {
   font-family: "Roboto", sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 15px;
 }

@@ -3,6 +3,8 @@ var UserModel = require('./models/userModel.js');
 var PostModel = require('./models/postModel.js');
 var CourseModel = require('./models/courseModel.js');
 var mongoose = require('mongoose');
+var fs = require('fs');
+var srt2vtt = require('srt2vtt');
 
 //API Functions
 var apiFunctions = {
@@ -47,7 +49,7 @@ var apiFunctions = {
               UpperLimit :
             }
           */
-          /*findPodcastsByKeyword: function(courseKey,keywordParams,callback){
+          findPodcastsByKeyword: function(request,callback){
             PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
               var arrayOfPodcasts = [];
               for(var i = 0; i < podcasts.length; i++){
@@ -60,7 +62,7 @@ var apiFunctions = {
                 Podcasts : arrayOfPodcasts
               });
             });
-          },*/
+          },
 
           /*
             request{
@@ -72,23 +74,15 @@ var apiFunctions = {
               if(err) {
                 console.log("error");
               } else {
-                callback(podcast);
+                srt2vtt(srtData, function(err, vttData) {
+                  if (err)
+                    console.log("ERROR" + err);
+                  podcast.SRTBlob = vttData;
+                  callback(podcast);
+                });
               }
             })
           },
-
-          getVideoForUser: function(lectureId, fbAuthId, callback) {
-            UserModel.find({FacebookAuthToken:fbAuthId}, function(err, users) {
-              if(err) {
-                console.log("error");
-              } else {
-                var response = {
-                  NotesForLecture: users[0].WatchHistory
-                };
-                callback(response);
-              }
-            });
-          }
         },
 
         //functions to retrieve and create user information
@@ -118,7 +112,7 @@ var apiFunctions = {
             });
           },
           addUser : function(name,profileId,callback){
-            UserModel.create({Name:name, FBUserId: profileId}, function(err,users){
+            UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
             if(err) {
             console.log(err);
             }
@@ -185,10 +179,7 @@ var apiFunctions = {
               callback(posts);
             });
           },
-          createPost: function(classnamecoursekey,fbauthid,commentCont,callback) {
-              var cnameckey = classnamecoursekey;
-              var FBAuthID = fbauthid;
-              var postContent = postContent;
+          createPost: function(request,callback) {
 
               PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
                 PostModel.create({Content: postContent}, function(err,post){
@@ -205,11 +196,7 @@ var apiFunctions = {
               // @response should be true or false on successful/unsuccessful comment
           },
 
-          createComment: function(postid,fbauthid,content,callback) {
-            var postID = postid;
-            var FBAuthID = fbauthid;
-            var commentContent = content;
-
+          createComment: function(request,callback) {
             PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
               PostModel.create({Content: postContent}, function(err,post){
                 apiFunctions.userFunctions.getUserInfo(FBAuthID,function(user){
