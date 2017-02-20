@@ -160,18 +160,25 @@
 
 .course-list-container .table-body {
   width: auto;
-  height: 60vh;
-  overflow: auto;
+  height: 385px;
+  overflow-y: scroll;
   display: block;
 }
 
 .table-row {
-  opacity: .9;
+  display: block;
+  opacity: 1;
   cursor: pointer;
+  padding-left: 10px;
+  padding-right: 5px;
+  -webkit-transition: padding-left .3s, padding-right .3s;
+  transition: padding-left .3s, padding-right .3s;
 }
 
 .table-row:hover {
-  opacity:1 !important;
+  padding-left: 5px !important;
+  padding-right: 0px !important;
+  opacity: .95 !important;
 }
 
 .table-row:nth-child(4n + 1) {
