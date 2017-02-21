@@ -6,8 +6,6 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  background-repeat: no-repeat;
-  background-position: relative;
   /*-webkit-background-size: cover; 
   -moz-background-size: cover; 
   -o-background-size: cover;
@@ -81,7 +79,7 @@
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  position: relative;
+  position: absolute;
   width: 100%;
   bottom: 0%;
 }
@@ -158,7 +156,7 @@
   background: white;
 }
 
-.course-list-container .table-body {
+.table-body {
   width: auto;
   height: 385px;
   overflow-y: scroll;
