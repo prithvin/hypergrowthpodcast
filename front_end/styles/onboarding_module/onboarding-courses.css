@@ -158,7 +158,7 @@
 
 .table-body {
   width: auto;
-  height: 385px;
+  height: 60vh;
   overflow-y: scroll;
   display: block;
 }
