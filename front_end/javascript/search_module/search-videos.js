@@ -15,7 +15,7 @@ class SearchVideosClass {
 
           var row = document.createElement('div');
           row.className = 'row';
-          row.style="height:60%";
+          row.style="height:284px";
           overallDiv.appendChild(row);
 
           var videos = data['Videos'];
@@ -23,7 +23,7 @@ class SearchVideosClass {
               if (row.childElementCount == 2) {
                   row = document.createElement('div');
                   row.className = 'row';
-                  row.style="height:60%";
+                  row.style="height:284";
                   overallDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
@@ -62,9 +62,8 @@ class SearchVideosClass {
               heading.className = 'textUnderVid';
               heading.innerHTML = "Lecture on " + videos[i]['Date'];
               videoDiv.appendChild(heading);
-
-
           }
+
         });
     }
 }
