@@ -113,12 +113,7 @@
     width: 90%;
 }
 
-.cell-head-end1 {
-    padding-left: 6%;
-    padding-right: 6%;
-}
-
-.cell-head-end2 {
+.cell-head-end {
     padding-left: 5%;
     padding-right: 5%;
 }
