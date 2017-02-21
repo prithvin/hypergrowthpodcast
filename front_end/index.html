@@ -67,12 +67,11 @@
       var router = Router(routes);
 
       // Scripts above are required on every single page
-      console.log($("#page"));
 
       loadComponent("LoaderModule", $("#page"), function () {
         setTimeout(function () {
           router.init();
-        }, 500);
+        }, 1000);
       });
     });
     </script>

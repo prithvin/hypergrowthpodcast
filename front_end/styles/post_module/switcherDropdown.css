@@ -30,16 +30,3 @@
 }
 
 .red{border-top:4px solid red;}
-
-.dropdown-post-left {
-  float: left;
-  font-weight: 400;
-}
-
-.dropdown-post-right {
-  float: right;
-}
-
-.dropdown-post-caret {
-  font-size: 135%;
-}

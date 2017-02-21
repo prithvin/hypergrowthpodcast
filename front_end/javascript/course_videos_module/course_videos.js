@@ -10,14 +10,14 @@ class CourseVideosClass {
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
 
           var row = document.createElement('div');
-          row.className = 'row';
+          row.className = 'row videos-row';
           masterDiv.appendChild(row);
 
           var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
               if (row.childElementCount == 3) {
                   row = document.createElement('div');
-                  row.className = 'row';
+                  row.className = 'row videos-row';
                   masterDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
@@ -25,11 +25,11 @@ class CourseVideosClass {
               row.appendChild(videoDiv);
 
               var img = document.createElement('img');
-              img.className = 'img-fluid';
+              img.className = 'img-fluid course-videos-preview-images';
               img.src = videos[i]['PreviewImage'];
               videoDiv.appendChild(img);
 
-              var heading = document.createElement('h5');
+              var heading = document.createElement('p');
               heading.align = 'center';
               heading.innerHTML = videos[i]['Date'];
               videoDiv.appendChild(heading);
