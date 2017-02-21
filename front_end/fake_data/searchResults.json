@@ -1,46 +1,50 @@
- [
- {
-    "Id" : 1,
-    "Date" : "Saturday, December 3rd, 2017",
-    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
-    "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
-    "OCRMatch" :
-        {
-            "Slide" : 7,
-            "Quote" : "Supply is elastic"
-        }
- },
- {
-    "Id" : 2,
-    "Date" : "Saturday, December 3rd, 2017",
-    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
-    "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
-    "OCRMatch" :
-        {
-            "Slide" : 7,
-            "Quote" : "Supply is elastic"
-        }
- },
- {
-    "Id" : 3,
-    "Date" : "Saturday, December 3rd, 2017",
-    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
-    "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
-    "OCRMatch" :
-        {
-            "Slide" : 7,
-            "Quote" : "Supply is elastic"
-        }
- },
- {
-    "Id" : 4,
-    "Date" : "Saturday, December 3rd, 2017",
-    "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
-    "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
-    "OCRMatch" :
-        {
-            "Slide" : 7,
-            "Quote" : "Supply is elastic"
-        }
- }
-]
+{
+    "Title" : "CSE 100 - Advanced Data Structures - Winter 2017",
+    "Query" : "Supply",
+    "Videos": [
+         {
+            "Id" : 1,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
+         },
+         {
+            "Id" : 2,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
+         },
+         {
+            "Id" : 3,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
+         },
+         {
+            "Id" : 4,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
+         }
+        ]
+}

@@ -1,7 +1,10 @@
 var Onboarding = class Onboarding {
   constructor(mainDiv) {
     $(mainDiv).find('.fb-login-button')[0].onclick = () => {
-      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + login_origins.callback + '/onboarding_courses_module.html&errorCallbackURL=http://yahoo.com';
+      var baseURL = window.location.origin + window.location.pathname;
+      var targetCallbackURL = encodeURIComponent(baseURL + "/#/courses");
+      var errorCallbackURL = encodeURIComponent(baseURL + "/#");
+      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
     }
   }
 }
