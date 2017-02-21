@@ -58,9 +58,11 @@
   font-weight: 400;
 }
 
-.logo-container {
+.logo-container2 {
+  position: absolute;
+  bottom: 95%;
   padding-bottom: 5%;
-  padding-left: 20%;
+  padding-left: 19%;
   padding-right: 0%;
 }
 
@@ -200,7 +202,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
