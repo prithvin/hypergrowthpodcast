@@ -9,12 +9,13 @@ class SearchVideosClass {
           document.getElementById('title').innerHTML = "Search Results for " + data['Query'] + "  in " + data['Title'];
 
           var overallDiv = document.createElement('div');
-          overallDiv.style="overflow-y:scroll; height:70%";
+          overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:70%";
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
 
           var row = document.createElement('div');
           row.className = 'row';
+          row.style="height:60%";
           overallDiv.appendChild(row);
 
           var videos = data['Videos'];
@@ -22,6 +23,7 @@ class SearchVideosClass {
               if (row.childElementCount == 2) {
                   row = document.createElement('div');
                   row.className = 'row';
+                  row.style="height:60%";
                   overallDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
@@ -57,7 +59,7 @@ class SearchVideosClass {
               imageTextDiv.appendChild(ocrMatch);
 
               var heading = document.createElement('p');
-              heading.className = 'testUnderVid';
+              heading.className = 'textUnderVid';
               heading.innerHTML = "Lecture on " + videos[i]['Date'];
               videoDiv.appendChild(heading);
 

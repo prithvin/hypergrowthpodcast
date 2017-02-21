@@ -1,46 +1,23 @@
-.results-body{
+/*.results-body{
   margin-top: 20px;
   margin-left: 100px;
   margin-right: 50px;
-}
+}*/
 
 * {
   font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  font-family: 'Roboto', sans-serif;
+
+/*::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space
+    background: transparent;  /* optional: just make scrollbar invisible
 }
-/*
-html {
-    overflow: scroll;
-    overflow-x: hidden;
-}
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space *
-    background: transparent;  /* optional: just make scrollbar invisible *
-}
-/* optional: show position indicator in red *
+/* optional: show position indicator in red
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
-}
+}*/
 
-html, body{
-  height:100%;
-  width:100%;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background-color: #F4F6F8;
-}
-
-.container{
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-*/
 .imageOverVid{
   font-family: 'Roboto', sans-serif;
   color: #67809f;
@@ -78,230 +55,9 @@ body{
     font-size: 1px;
     color: #F4F6F8;
     line-height: 1px;
+    margin-left: 26px;
 
     background-color: #BAC5D3;
     margin-top: -6px;
     margin-bottom: 0px;
 }
-
-/*body {
-  padding-top: 55px;
-  background: transparent;
-}
-
-.search-container {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 10000;
-  width: 490px;
-  display: block;
-  margin: 0 auto;
-}
-
-input#search-bar {
-  margin: 0 auto;
-  width: 100%;
-  height: 45px;
-  padding: 0 20px;
-  font-size: 2rem;
-  border: 1px solid #D0CFCE;
-  outline: none;
-}
-input#search-bar:focus {
-  border: 1px solid #008ABF;
-  transition: 0.35s ease;
-  color: #008ABF;
-}
-input#search-bar:focus::-webkit-input-placeholder {
-  transition: opacity 0.45s ease;
-  opacity: 0;
-}
-input#search-bar:focus::-moz-placeholder {
-  transition: opacity 0.45s ease;
-  opacity: 0;
-}
-input#search-bar:focus:-ms-placeholder {
-  transition: opacity 0.45s ease;
-  opacity: 0;
-}
-
-.search-icon {
-  position: relative;
-  float: right;
-  width: 75px;
-  height: 75px;
-  top: -62px;
-  right: -15px;
-}
-
-.crop-logo {
-  width: 300px;
-  height: 100px;
-  overflow: hidden;
-  margin: 0 0;
-  padding: 20px;
-}
-
-.crop-pic {
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-
-#global-nav {
-  position: fixed;
-  top: 0;
-  z-index: 9999;
-  height: 150px;
-  width: 100%;
-  background: #FFFFFF;
-  color: #fff;
-  line-height: 150px;
-  -webkit-transition: height .5s, line-height .5s;
-  transition: height .5s, line-height .5s;
-}
-
-.site-title {
-  display: inline-block;
-  -webkit-transition: all .5s;
-  transition: all .5s;
-}
-
-.scrolled-nav .site-title  {
-  font-size: 16px;
-}
-
-.nav-list {
-  list-style: none;
-}
-
-.nav-list li {
-  list-style: none;
-  display: inline-block;
-  padding-left: 20px;
-}
-
-.cont-section,
-.fav-section,
-.rec-section {
-  height: 400px;
-  padding: 25px;
-}
-
-.content-text {
-  max-width: 100%;
-  padding-top: 90px;
-  height: 100%;
-}
-
-.cont-section h1,
-.fav-section h1,
-.rec-section h1 {
-  color: #333;
-}
-
-.cont-section p {
-  color: #333;
-}
-
-.cont-section {
-  background: #F0F5F9;
-  height: auto;
-}
-
-.fav-section {
-  background: #F0F5F9;
-  padding-top: 0px;
-}
-
-.rec-section {
-  background: #F0F5F9;
-  padding-top: 0px;
-}
-
-.scrolled-nav {
-  height: 60px !important;
-  line-height: 60px !important;
-}
-
-.counter {
-  width: 20px;
-  height: 20px;
-  background: black;
-  color: #fff;
-  position: fixed;
-  top: 120px;
-  right: 0;
-}
-
-footer {
-  height: 30px;
-  background: #F0F5F9;
-  color: #333;
-  padding-top: 0px;
-}
-
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,700);
-
-#tab
-{
-  background: url('../img/geisel.jpg') no-repeat center;
-  background-size: cover;
-  height: 100%;
-  font-size: 18px;
-  color: #333;
-  text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.4);
-  padding-top: 90px;
-  margin: auto auto;
-  padding: auto auto;
-}
-
-caption
-{
-  float:left;
-  font-size: 45px;
-  margin: 25px;
-  color: #222;
-  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
-}
-
-table
-{
-  table-layout: fixed;
-  text-align: right;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border-collapse: separate;
-    border-spacing: 0 1em;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-td, th
-{
-  padding: 16px;
-  width: 100%;
-  line-height: 18px;
-  font-weight: 300;
-}
-
-
-tr{
-  background-color: #d2e4f9;
-}
-
-th
-{
-  border-bottom: 0;
-  color: white;
-  color: #444;
-  font-weight: 700;
-  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.7);
-}
-
-tr:nth-child(even) {
-    background-color: #d2e4f9;
-}*/
