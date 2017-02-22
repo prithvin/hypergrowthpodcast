@@ -9,6 +9,7 @@ class BoyMor{
         if (needle.length == 0) {
             return 0;
         }
+        
         for (var i = needle.length - 1, j; i < haystack.length;) {
             for (j = needle.length - 1; needle.charAt(j) == haystack.charAt(i); --i, --j) {
                 if (j == 0) {
@@ -16,7 +17,7 @@ class BoyMor{
                 }
             }
             // i += needle.length - j; // For naive method
-            i += Math.max(offsetTable[needle.length - 1 - j], charTable[haystack.charAt(i)]);
+            i += Math.max(this.offsetTable[needle.length - 1 - j], this.charTable[haystack.charAt(i)]);
         }
         return -1;
     }
