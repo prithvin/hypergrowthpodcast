@@ -8,7 +8,6 @@ class CourseVideosClass {
           var masterDiv = document.getElementById('course-videos-div');
 //          console.log(masterDiv);
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
-
           var row = document.createElement('div');
           row.className = 'row videos-row';
           masterDiv.appendChild(row);
