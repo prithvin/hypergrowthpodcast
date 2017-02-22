@@ -7,7 +7,7 @@
     )*/
 var PostSearch = class PostSearch {
 
-    /* 
+    /*
         Parameters:
             postFetchData (JSON Object, make sure all keys and values are valid)
                 {
@@ -38,7 +38,7 @@ var PostSearch = class PostSearch {
             videoData (optional parameter if the video has already started playing)
                 IF NOT USING, PLEASE PASS AS NULL, DONT PASS EMPTY JSON OBJECT PLZ
                 {
-                    CurrentSlideNum: 
+                    CurrentSlideNum:
                 }
     
              callback forwhen post page is loaded (only for post page)
@@ -160,7 +160,7 @@ var PostSearch = class PostSearch {
     }
 
     searchForSlide (slideNo) {
-        for (var x = 0; x < this.posts.length; x++) 
+        for (var x = 0; x < this.posts.length; x++)
             this.posts[x].fetchBySlide(slideNo);
     }
 
@@ -197,9 +197,9 @@ var PostSearch = class PostSearch {
         if (this.currentTextBeingSearched != null) {
             this.mark.unmark();
             this.mark.mark(
-                this.currentTextBeingSearched, 
-                { 
-                    "caseSensitive" : false, 
+                this.currentTextBeingSearched,
+                {
+                    "caseSensitive" : false,
                     "separateWordSearch" : false
                 }
             );
@@ -247,7 +247,7 @@ var PostSearch = class PostSearch {
         thisClass.loadPostModuleData(function (postTemplate) {
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
-            
+
             thisClass.posts.push(newPostObj);
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);
@@ -262,5 +262,3 @@ var PostSearch = class PostSearch {
 
     }
 }
-
-

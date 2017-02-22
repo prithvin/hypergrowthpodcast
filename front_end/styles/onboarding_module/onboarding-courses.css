@@ -6,8 +6,6 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  background-repeat: no-repeat;
-  background-position: relative;
   /*-webkit-background-size: cover; 
   -moz-background-size: cover; 
   -o-background-size: cover;
@@ -60,9 +58,11 @@
   font-weight: 400;
 }
 
-.logo-container {
+.logo-container2 {
+  position: absolute;
+  bottom: 95%;
   padding-bottom: 5%;
-  padding-left: 20%;
+  padding-left: 19%;
   padding-right: 0%;
 }
 
@@ -81,7 +81,7 @@
 /* Second Onboarding Style */
 .course-list-container {
   /*padding-top: 10%;*/
-  position: relative;
+  position: absolute;
   width: 100%;
   bottom: 0%;
 }
@@ -113,12 +113,7 @@
     width: 90%;
 }
 
-.cell-head-end1 {
-    padding-left: 6%;
-    padding-right: 6%;
-}
-
-.cell-head-end2 {
+.cell-head-end {
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -158,9 +153,9 @@
   background: white;
 }
 
-.course-list-container .table-body {
+.table-body {
   width: auto;
-  height: 385px;
+  height: 60vh;
   overflow-y: scroll;
   display: block;
 }
@@ -202,7 +197,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
