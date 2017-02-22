@@ -122,7 +122,7 @@ var PostSearch = class PostSearch {
         })
         $(this.searchInputField).on("input", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 1) {
+            if ($(thisClass.searchInputField).val().length > 2) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0) 
@@ -166,8 +166,11 @@ var PostSearch = class PostSearch {
 
     searchByText (text) {
         this.mark.unmark();
+        var bm = new BoyMor(text.toUpperCase());
         jQuery.expr[':'].contains = function(a,i,m){
-            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+            return
+            bm.bmIndexOf(jQuery(a).text().toUpperCase())>=0;
+            //jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
         };
         this.currentTextBeingSearched = text;
         

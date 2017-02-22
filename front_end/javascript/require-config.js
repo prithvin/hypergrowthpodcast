@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -85,6 +85,7 @@ var require = {
         "markjs": "post_module/mark",
         "postLoad": "post_module/postLoad",
         "postSearch": "post_module/postSearch",
+        "BoyerMoore": "post_module/BoyerMoore",
         "components": "components",
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
