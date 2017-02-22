@@ -120,14 +120,14 @@ var PostSearch = class PostSearch {
             else if ($(thisClass.searchInputField).val().trim().length == 0)
                 thisClass.searchByText("");
         })
-        $(this.searchInputField).on("input", function (ev) {
+       /* $(this.searchInputField).on("input", function (ev) {
             ev.preventDefault();
             if ($(thisClass.searchInputField).val().length > 1) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0) 
                 thisClass.searchByText("");
-        })
+        })*/
     }
 
     detectTypeOfPostsToShow () {
