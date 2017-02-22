@@ -45,6 +45,7 @@ var PostSearch = class PostSearch {
 
     */
     constructor (postFetchData, userData, mainDiv, ocrAudioData, videoData, callback) {
+        this.currWord = 0;
         this.postFetchData = postFetchData;
         this.userData = userData;
         this.mainDiv = $(mainDiv).find(".search-module");
@@ -122,11 +123,20 @@ var PostSearch = class PostSearch {
                 thisClass.searchByText("");
         })
         $(this.searchInputField).on("input", function (ev) {
+            var inputVal = $(thisClass.searchInputField).val();
+            
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 1) {
-                thisClass.searchByText($(thisClass.searchInputField).val());
+            if (inputVal.length > 2) {
+                this.currWord = inputVal;
+                setTimeout(function(input){
+                    if(input == this.currWord){
+                        console.log("searching for: " + input);
+                        thisClass.searchByText(input);
+                    }
+                    
+                }.bind(this, inputVal), 200);
             }
-            else if ($(thisClass.searchInputField).val().trim().length == 0) 
+            else if (inputVal.trim().length == 0) 
                 thisClass.searchByText("");
         })
     }
@@ -167,8 +177,11 @@ var PostSearch = class PostSearch {
 
     searchByText (text) {
         this.mark.unmark();
+        var bm = new BoyMor(text.toUpperCase());
         jQuery.expr[':'].contains = function(a,i,m){
-            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+            return
+            bm.bmIndexOf(jQuery(a).text().toUpperCase())>=0;
+            //jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
         };
         this.currentTextBeingSearched = text;
         

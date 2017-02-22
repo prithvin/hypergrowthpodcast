@@ -31,12 +31,22 @@ var apiFunctions = {
           }
           */
           getVideosForCourse: function(request, callback){
-            CourseModel.findOne({_id:response.CourseId}, function(err,course){
+            CourseModel.findOne({_id: request.CourseId}, function(err,course){
               if(err) {
                 console.log("error finding course");
               } else {
+                var copy = [];
+                for(var i = 0; i < course.Podcasts.length; i++){
+                  var arrayObject = {
+                    Id : course.Podcasts[i].PodcastId,
+                    Time : course.Podcasts[i].Time,
+                    PreviewImage : course.Podcasts[i].PodcastImage
+                  };
+                  copy.push(arrayObject);
+                }
                 var response = {
-                  Podcasts : course.Podcasts
+                  CourseTitle : course.Name + " " + course.Quarter,
+                  Videos : copy
                 };
                 callback(response)
               }
@@ -70,15 +80,21 @@ var apiFunctions = {
             }
           */
           getVideoInfo: function(request, callback) {
-            PodcastModel.findOne({_id : request.PodcastId}, function(err,podcast) {
+            PodcastModel.findOne({"_id" : request.PodcastId}, function(err,podcast) {
               if(err) {
                 console.log("error");
               } else {
-                srt2vtt(srtData, function(err, vttData) {
+                srt2vtt(podcast.SRTBlob, function(err, vttData) {
                   if (err)
                     console.log("ERROR" + err);
-                  podcast.SRTBlob = vttData;
-                  callback(podcast);
+                  var response = {
+                    VideoURL : podcast.PodcastUrl,
+                    VideoDate : podcast.Time,
+                    SRTFile : vttData.toString('utf8'),
+                    ParsedAudioTranscriptForSearch : podcast.AudioTranscript,
+                    Slides : podcast.Slides
+                  };
+                  callback(response);
                 });
               }
             })
@@ -98,6 +114,16 @@ var apiFunctions = {
                 res.redirect('/login?callbackURL=' + req.url);
             }
 
+          },
+          getUser : function(req,callback){
+            UserModel.findOne({"_id":req.UserId},function(err,user){
+              var response = {
+                Name : user.Name,
+                Pic : user.ProfilePicture
+              }
+
+              callback(response);
+            });
           },
           getNotesForUser : function(req,callback){
               console.log("The user is inside is" + req.UserId);
@@ -132,82 +158,87 @@ var apiFunctions = {
         courseFunctions :{
           getCourses : function(callback){
             CourseModel.find({},function(err,courses){
-              console.log(courses);
+              for(var i = 0; i < courses.length; i++){
+                var object = {
+                  Id : courses[i]._id,
+                  Course : courses[i].Name,
+                  Quarter : courses[i].Quarter
+                };
+                courses[i] = object;
+              }
               callback(courses);
             });
 
           },
           getCourseInfo : function(request,callback){
             CourseModel.findOne({CourseId : request.courseId},function(err,course){
-              var response = {
-                CourseName : course.Name,
-                ClassQuarter : course.Quarter
-              }
-              callback(response);
+                var courseToRet = {
+                  Id : course._id,
+                  Course : course.Name,
+                  Quarter : course.Quarter
+                };
+
+              callback(courseToRet);
             });
           }
         },
         postFunctions:{
           getPostsForCourse : function(request, callback){
-            PostModel.find({CourseId: request.CourseId , $orderby : {Time: -1}},function(err,posts){
+            PostModel.find({/*CourseId: request.CourseId ,*/$query : {},$orderby : {TimeOfPost: -1}},function(err,posts){
               var response;
               if(posts.length >= request.UpperLimit){
-                response = {
-                  Posts : posts.slice(0,request.UpperLimit)
-                };
+                  posts = posts.slice(0,request.UpperLimit);
               }
-              else{
-                response = {
-                  Posts : posts
-                };
+
+              for(var i = 0; i < posts.length; i++){
+                var copy = JSON.parse(JSON.stringify(posts[i]));
+                copy.PostId = copy._id;
+                delete copy._id;
+                copy.PodcastId = undefined;
+                copy.CourseId = undefined;
+                posts[i] = copy;
+                console.log(posts[i]);
               }
-              callback(response);
-            });
-          },
-          getPostsForLecture : function(request, callback){
-            PostModel.find({PodcastId: request.podcastId , $orderby : {Time: -1}},function(err,posts){
-              var response = {
-                  Posts : posts
-              };
-              callback(response);
-            });
-          },
-          getPostsByKeyword : function(request,callback){
-            PostModel.find({PodcastId:request.PodcastId,CourseId:request.CourseId,
-              $or : [{$elemMatch : {Content: {$in : request.Keywords}}},
-              {Comments : {$elemMatch : {Content : {$in : request.Keywords}}}}]}, function (err, posts) {
               callback(posts);
             });
           },
+          getPostsForLecture : function(request, callback){
+            PostModel.find({$query : {PodcastId: request.podcastId} , $orderby : {TimeOfPost: -1}},function(err,posts){
+              for(var i = 0; i < posts.length; i++){
+                var copy = JSON.parse(JSON.stringify(posts[i]));
+                copy.PostId = copy._id;
+                delete copy._id;
+                copy.PodcastId = undefined;
+                copy.CourseId = undefined;
+                posts[i] = copy;
+                console.log(posts[i]);
+              }
+              callback(posts);
+            });
+          },
+          getPostsByKeyword : function(request,callback){
+            PostModel.find({$query : {PodcastId:request.PodcastId,CourseId:request.CourseId,
+              $or : [{$elemMatch : {Content: {$in : request.Keywords}}},
+              {Comments : {$elemMatch : {Content : {$in : request.Keywords}}}}]}, $orderby : {TimeOfPost: -1}}, function (err, posts) {
+                for(var i = 0; i < posts.length; i++){
+                  var copy = JSON.parse(JSON.stringify(posts[i]));
+                  copy.PostId = copy._id;
+                  delete copy._id;
+                  copy.PodcastId = undefined;
+                  copy.CourseId = undefined;
+                  posts[i] = copy;
+                  console.log(posts[i]);
+                }
+                callback(posts);
+            });
+          },
           createPost: function(request,callback) {
-
-              PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
-                PostModel.create({Content: postContent}, function(err,post){
-                  apiFunctions.userFunctions.getUserInfo(FBAuthID,function(user){
-                    post.NameOfUser = user.Name;
-                    post.ProfilePicture = user.ProfilePicture;
-                    post.Content = postContent;
-                    podcast.LecturePost.push(post);
-                    callback({successful:true});
-                  });
-                });
-              });
 
               // @response should be true or false on successful/unsuccessful comment
           },
 
           createComment: function(request,callback) {
-            PodcastModel.findOne({ClassNameCourseKey : cnameckey}, function(err,podcast){
-              PostModel.create({Content: postContent}, function(err,post){
-                apiFunctions.userFunctions.getUserInfo(FBAuthID,function(user){
-                  post.NameOfUser = user.Name;
-                  post.ProfilePicture = user.ProfilePicture;
-                  post.Content = postContent;
-                  podcast.LecturePost.push(post);
-                  callback({successful:true});
-                });
-              });
-            });
+
             // @response should be true or false on successful/unsuccessful post
           }
         }
