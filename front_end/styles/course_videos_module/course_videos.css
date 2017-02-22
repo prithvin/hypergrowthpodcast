@@ -32,6 +32,9 @@
 .course-videos-preview-images {
     max-width: 100%;
     height: auto;
+    max-height: 80%;
+    display: block;
+    margin: auto;
 }
 
 .videos-row {
