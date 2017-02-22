@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var apiFunctions = require('./api.js');
 var routes = require('./routes.js');
 var passport = require('passport');
-var cors = require('cors');
+var cors = require('express-cors')
 var session = require('express-session');
 var auth = require('./config/auth.js');
 var path = require('path');
@@ -33,7 +33,12 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
   }
 });
 
-app.use(cors());
+app.use(cors({
+    allowedOrigins: [
+        'localhost:7888'
+    ]
+}))
+
 
 app.listen(3000, function() {
   console.log('listening on 3000')
@@ -46,7 +51,7 @@ app.get('/', apiFunctions.userFunctions.isLoggedIn,function(req,res){
 });
 
 app.get('/login', function(req,res){
-  if(req.user){
+  if(req.session.user){
     res.redirect("/");
   }
   else {
@@ -88,7 +93,7 @@ app.get('/getPostsByKeyword',apiFunctions.userFunctions.isLoggedIn,function(req,
 });
 
 /*returns entire user object*/
-app.get('/getCurrentUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.get('/getCurrentUser', apiFunctions.userFunctions.isLoggedIn,function(req,res){
   res.send(req.user);
 });
 
@@ -139,7 +144,7 @@ app.post('/login',function(req,res){
   res.redirect("/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
 });
 
-app.get('/isUserLoggedIn',function(req,res){
+app.get('/isUserLoggedIn', function(req,res){
   if(req.isAuthenticated()){
     res.send(200, {"result": true});
   }

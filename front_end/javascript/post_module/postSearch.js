@@ -7,7 +7,7 @@
     )*/
 var PostSearch = class PostSearch {
 
-    /* 
+    /*
         Parameters:
             postFetchData (JSON Object, make sure all keys and values are valid)
                 {
@@ -38,7 +38,7 @@ var PostSearch = class PostSearch {
             videoData (optional parameter if the video has already started playing)
                 IF NOT USING, PLEASE PASS AS NULL, DONT PASS EMPTY JSON OBJECT PLZ
                 {
-                    CurrentSlideNum: 
+                    CurrentSlideNum:
                 }
     
              callback forwhen post page is loaded (only for post page)
@@ -107,24 +107,23 @@ var PostSearch = class PostSearch {
             }.bind(this), 500);
             return;
         }
-        if (this.doneLoading) 
-            this.doneLoading();
 
-        var lastTime = new Date().getTime();
+        if (this.doneLoading) {
+            this.doneLoading();
+        }
+
         $(this.searchInputForm).on("submit", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+            if ($(thisClass.searchInputField).val().length > 1) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
-                lastTime = new Date().getTime();
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0)
                 thisClass.searchByText("");
         })
         $(this.searchInputField).on("input", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 2 && new Date().getTime() - lastTime > 10) {
+            if ($(thisClass.searchInputField).val().length > 1) {
                 thisClass.searchByText($(thisClass.searchInputField).val());
-                lastTime = new Date().getTime();
             }
             else if ($(thisClass.searchInputField).val().trim().length == 0) 
                 thisClass.searchByText("");
@@ -161,7 +160,7 @@ var PostSearch = class PostSearch {
     }
 
     searchForSlide (slideNo) {
-        for (var x = 0; x < this.posts.length; x++) 
+        for (var x = 0; x < this.posts.length; x++)
             this.posts[x].fetchBySlide(slideNo);
     }
 
@@ -171,7 +170,7 @@ var PostSearch = class PostSearch {
             return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
         };
         this.currentTextBeingSearched = text;
-        this.mark.mark(text, { "caseSensitive" : false, "separateWordSearch" : false})
+        
         var anyPostsShown = false;
         for (var x = 0; x < this.posts.length; x++) {
             var hasPostsShown = this.posts[x].searchForContent(text);
@@ -185,6 +184,11 @@ var PostSearch = class PostSearch {
                 $(this.noResultsOption).fadeIn(500);
         }
         else {
+            this.mark.mark(text, { 
+                "caseSensitive" : false, 
+                "separateWordSearch" : false,
+                "exclude": [".pre-slide-data", ".slide-no"]
+            })
             $(this.noResultsOption).hide();
         }
     }
@@ -193,9 +197,9 @@ var PostSearch = class PostSearch {
         if (this.currentTextBeingSearched != null) {
             this.mark.unmark();
             this.mark.mark(
-                this.currentTextBeingSearched, 
-                { 
-                    "caseSensitive" : false, 
+                this.currentTextBeingSearched,
+                {
+                    "caseSensitive" : false,
                     "separateWordSearch" : false
                 }
             );
@@ -243,7 +247,7 @@ var PostSearch = class PostSearch {
         thisClass.loadPostModuleData(function (postTemplate) {
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
-            
+
             thisClass.posts.push(newPostObj);
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);
@@ -258,5 +262,3 @@ var PostSearch = class PostSearch {
 
     }
 }
-
-

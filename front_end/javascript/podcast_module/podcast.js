@@ -5,7 +5,6 @@ var PodcastPage = class PodcastPage {
         this.podcastID = podcastID;
         this.fetchUserData(this);
         this.loadNavbar(this);
-        this.getSlideClicks();
         
     }
 
@@ -17,13 +16,40 @@ var PodcastPage = class PodcastPage {
         });
     }
 
+    parseSlides (slides) {
+        // Note that the slides themselves are indexed starting at 1
+        var slideTimes = [];
+        for (var x = 0; x < slides.length; x++) {
+            slideTimes.push(slides[x]["StartTime"]/1000);
+        }
+        this.slideTimes = slideTimes;
+    }
+
+    getTimeForSlide (slideNum) {
+        if (slideNum <= 0) {
+            console.error("Remember that slide numbers start at 1, not 0");
+            return 0;
+        }
+        slideNum -= 1;
+        if (slideNum >= this.slideTimes.length)
+            return 0;
+        else
+            return this.slideTimes[slideNum];
+    }
+
+
     getSlideClicks () {
         $(this.mainDiv).on("click", ".slide-no", function (ev) {
             var target = ev.currentTarget;
-            console.log($(ev.currentTarget).attr("data-slide"));
-            console.log($(ev.currentTarget).attr("data-time"));
-            console.log("CLICKED ON SLIDE NO");
-        })
+            var slideNo = $(ev.currentTarget).attr("data-slide");
+            var slideTime = $(ev.currentTarget).attr("data-time");
+            if (slideTime)
+                this.videoClass.setTime(slideTime);
+            else {
+                this.videoClass.setTime(this.getTimeForSlide(slideNo));
+            }
+         
+        }.bind(this))
     }
     // The two methods below must be TODO
     fetchStartTimeBasedOnSlide () {
@@ -41,6 +67,7 @@ var PodcastPage = class PodcastPage {
                     "ParsedAudioTranscriptForSearch": data['ParsedAudioTranscriptForSearch'],
                     "Slides": data['Slides']
                 };
+                thisClass.parseSlides(data['Slides']);
                 thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
                 thisClass.loadPosts(thisClass);
             }
@@ -55,6 +82,9 @@ var PodcastPage = class PodcastPage {
             else {
                 thisClass.updatePostHeights();
             }
+        });
+        $(thisClass.mainDiv).find("#podcast-posts").bind("DOMSubtreeModified", function() {
+            thisClass.updatePostHeights();
         });
     }
 
@@ -85,6 +115,7 @@ var PodcastPage = class PodcastPage {
                     },
                     divToLoad,
                     thisClass.audioData,
+                    {},
                     function () {
                         setTimeout(function () {
                             thisClass.updatePostHeights() 
@@ -101,8 +132,8 @@ var PodcastPage = class PodcastPage {
             var divToLoad = $(thisClass.mainDiv).find("#video-space");
 
             loadComponent("VideoModule", divToLoad, function () {
-                new videoClass(url, 0, divToLoad, srtFile);
-
+                thisClass.videoClass = new videoClass(url, 0, divToLoad, srtFile);
+                thisClass.getSlideClicks();
             });
 
         });                

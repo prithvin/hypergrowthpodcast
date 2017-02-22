@@ -1,14 +1,14 @@
 
 class videoClass {
     
-    constructor (url, timestamp, mainDiv, srtFile) {
+    constructor (url, timestamp, mainDiv, srtData) {
 
             this.mainDiv = mainDiv;
             this.index = 0;
             var self = this;
             //this.getInfo()
         
-            this.initWithCaptions(function(){
+            this.initWithCaptions(srtData, function(){
             self.setSource(url);
             self.setTime(timestamp);
             self.getTime();
@@ -83,24 +83,25 @@ class videoClass {
             });
         });
     }
-    initWithCaptions(callback){
-        callAPI("./fake_data/getVideo.json", "GET", {}, function(data){
-            //var duri = window.URL.createObjectURL(data['SRTFile']);
-            var content = data['SRTFile'];
-            var f = new File([content], "captionFile.srt");
+    initWithCaptions(srtData, callback){
+       
+            var f = new File([srtData], "captionFile.srt");
             var duri = URL.createObjectURL(f);
-            //console.log(content);
-            var furi = "fake_data/sample.vtt";
+            
+            //reinit videojs 
+            if(videojs.getPlayers()['my-video']) {
+                delete videojs.getPlayers()['my-video'];
+            }
             videojs('my-video', {
                 controls:true,
                 class: 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
-                playbackRates: [1,1.5,2], 
+                playbackRates: [1,1.25,1.5,1.75,2], 
                 autoplay: true,
                   tracks: [
-                    { src:furi, kind:'captions', srclang:'en', label:'English' }
+                    { src:duri, kind:'captions', srclang:'en', label:'English' }
                   ]
                 }, callback);
-        });
+
     }
 
 }

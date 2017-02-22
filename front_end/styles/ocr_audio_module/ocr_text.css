@@ -1,5 +1,6 @@
 .content-of-ocr-text {
     padding-top: 10px;
+    white-space: pre-wrap;
 }
 .ocr-module-hr {
     margin: 0;
