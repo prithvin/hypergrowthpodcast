@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module']
+            "deps": ['postLoad',  'ocr_module', 'jquery', 'jquery-ui','auto-correct']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -50,7 +50,7 @@ var require = {
         "loader": {},
         "angular": {},
         "navbar": {
-            "deps": ['bootstrap']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap']
@@ -72,11 +72,15 @@ var require = {
         },
         "ocr_txt_mod": {
             "deps": ['jquery']
-        }
+        },
+        "auto-correct": {
+            "deps": ['path']
+        },
     },
     // Note: Don't include the .js in the path
     paths: {
         "jquery" : "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
+        "jquery-ui" : "https://code.jquery.com/ui/1.12.1/jquery-ui",
         "tether": "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min",
         "local_tether": "bootstrap_js/tether",
         "bootstrap" :  "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min",
@@ -102,6 +106,8 @@ var require = {
         "searchResults": "search_module/searchResults",
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
-        "ocr_txt_mod": "post_module/text_ocr_audio_parse"
+        "ocr_txt_mod": "post_module/text_ocr_audio_parse",
+        "auto-correct": "post_module/autocorrect",
+        "path": "post_module/path",
     }
 };

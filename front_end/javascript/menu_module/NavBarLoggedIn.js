@@ -15,6 +15,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.loadAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
@@ -55,5 +56,34 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
         })
     }
+    
+    loadAutocomplete() {
+        var apiURL = "./fake_data/searchResults.json";
+        var availableTags = [];
+        callAPI(apiURL, "GET", {}, function (data) {
+            for(var x = 0; x < data["Videos"].length; x++) {
+                $.extend(availableTags, data["Videos"][x]["Keywords"]);
+            }
+        });
+        $( "#searchBar" ).autocomplete({
+            source: availableTags,
+            minLength: 3
+        });
+    }
+}
 
+/* Recent Search */
+var availableTags = [];
+function recentSearch() {
+    var text = document.getElementById('searchBar').value;
+    if ($.inArray(text, availableTags) == -1)
+        availableTags.push(text);
+    $( "#searchBar" ).autocomplete({
+        source: availableTags,
+        minLength: 3
+    });
+    $( "#secondary-search-bar" ).autocomplete({
+        source: availableTags,
+        minLength: 3
+    });
 }

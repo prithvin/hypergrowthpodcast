@@ -81,6 +81,7 @@ var PostSearch = class PostSearch {
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
+        this.loadAutocomplete();
     }
 
     noPostsNewPostHandling (thisClass) {
@@ -261,4 +262,41 @@ var PostSearch = class PostSearch {
         });
 
     }
+    
+    loadAutocomplete() {
+        var apiURL = "./fake_data/getVideo.json";
+        var availableTags = [];
+        callAPI(apiURL, "GET", {}, function (data) {
+            $.extend(availableTags, data["Keywords"]);
+        });
+        console.log(availableTags);
+        $( "#secondary-search-bar" ).autocomplete({
+            source: availableTags,
+            minLength: 2
+        });
+    }
+    /*
+    loadAutocorrect() {
+        var userText = document.getElementById('secondary-search-bar').value;
+        var correctText = correct(userText);
+        console.log(correctText);
+    }*/
 }
+function autocorrect() {
+    var userText = document.getElementById('secondary-search-bar').value;
+    var correctText = correct(userText);
+    console.log(correctText);
+}
+var availableTags = [];
+function recentSearch() {
+    var text = document.getElementById('secondary-search-bar').value;
+    if ($.inArray(text, availableTags) == -1)
+        availableTags.push(text);
+    $( "#secondary-search-bar" ).autocomplete({
+        source: availableTags,
+        minLength: 2
+    });
+}
+
+
+

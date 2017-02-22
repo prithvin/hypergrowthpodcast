@@ -12,8 +12,7 @@
 .video-js .vjs-play-progress,
 .video-js .vjs-volume-level,
 .video-js .vjs-slider-bar {
-  background: rgb(56, 142, 247);
-
+  background: rgb(75, 119, 190);
 }
 
 .video-js .vjs-control-bar { 
@@ -21,6 +20,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  border-radius: 5px;
 }
 .video-js .vjs-control-bar,
 .video-js .vjs-big-play-button,
@@ -52,25 +52,27 @@
     min-width: 380px;
 
 }
+
 .videocontent{
     width: auto;
     max-width: 1500px;
     min-width: 600px;
     margin: auto;
 }
+
 .crop-pic-vid {
   width: 35px;
   height: 35px;
 }
+
 .prev-button {
   background-image:url(../../images/video_module/prev.png);
   background-repeat:no-repeat;
-  height:15%;
+  height: 8%;
+  width: 5%;
   position:absolute;
-  left:3%;
-  top:0%;
-  bottom:0%;
-  margin:auto;
+  left: 3%;
+  top: 37%;
   background-size:contain;
   background-position: center;
   opacity: .75;
@@ -82,15 +84,14 @@
 .next-button {
   background-image:url(../../images/video_module/next.png);
   background-repeat:no-repeat;
-  height:15%;
+  height: 8%;
+  width: 5%;
   position:absolute;
-  right:3%;
-  top:0%;
-  bottom:0%;
-  margin:auto;
+  right: 3%;
+  top: 37%;
   background-size:contain;
   background-position: center;
-    opacity: .75;
+  opacity: .75;
 }
 .next-button:hover {
     opacity: 1;
