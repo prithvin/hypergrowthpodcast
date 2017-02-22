@@ -27,4 +27,4 @@ var PodcastModel = new mongoose.Schema({
 // Create a model based on the schema
 var PodcastModel = mongoose.model('PodcastModel', PodcastModel);
 
-module.exports = {PodcastModel: PodcastModel};
+module.exports = PodcastModel;

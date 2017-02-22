@@ -1,4 +1,5 @@
 var express = require('express');
+var ObjectId = require('mongodb').ObjectId;
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -88,8 +89,14 @@ app.get('/getPostsByKeyword',apiFunctions.userFunctions.isLoggedIn,function(req,
 });
 
 /*returns entire user object*/
-app.get('/getCurrentUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  res.send(req.user);
+app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id
+  }
+
+  apiFunctions.userFunctions.getUser(request,function(user){
+    res.send(user);
+  });
 });
 
 app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
@@ -113,11 +120,29 @@ app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   });
 });
 
+app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+
+  var request = {
+    CourseId : req.query.CourseId
+  };
+
+  apiFunctions.podcastFunctions.getVideosForCourse(request,function(courseVideos){
+    res.send(courseVideos);
+  });
+
+});
+
+app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  apiFunctions.courseFunctions.getCourses(function(courses){
+    res.send(courses);
+  });
+});
+
 app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res){
   var request = {
     CourseId : req.query.CourseId
   };
-  api.courseFunctions.getCourseInfo(request,function(course){
+  apiFunctions.courseFunctions.getCourseInfo(request,function(course){
     res.send(course);
   });
 });

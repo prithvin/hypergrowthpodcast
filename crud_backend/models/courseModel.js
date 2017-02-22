@@ -14,4 +14,4 @@ var CourseModel = mongoose.Schema({
 // Create a model based on the schema
 var CourseModel = mongoose.model('CourseModel', CourseModel);
 
-module.exports = {CourseModel: CourseModel};
+module.exports = CourseModel;
