@@ -2,6 +2,7 @@ class CourseHomepageClass {
     constructor (courseId, mainDiv) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+      
         this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);

@@ -8,7 +8,6 @@ class CourseVideosClass {
           var masterDiv = document.getElementById('course-videos-div');
 //          console.log(masterDiv);
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
-
           var row = document.createElement('div');
           row.className = 'row videos-row';
           masterDiv.appendChild(row);
@@ -21,11 +20,11 @@ class CourseVideosClass {
                   masterDiv.appendChild(row);
               }
               var videoDiv = document.createElement('div');
-              videoDiv.className = 'col-md-4';
+              videoDiv.className = 'col-4';
               row.appendChild(videoDiv);
 
               var img = document.createElement('img');
-              img.className = 'img-fluid course-videos-preview-images';
+              img.className = 'course-videos-preview-images';
               img.src = videos[i]['PreviewImage'];
               videoDiv.appendChild(img);
 
