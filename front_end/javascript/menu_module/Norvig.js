@@ -1,7 +1,7 @@
 class Norvig {
   constructor(dictionary) {
     this.dictionary = dictionary;
-    this.WORD_COUNTS = this.getWordCounts(dictionary);
+    this.WORD_COUNTS = this.getWordCounts(this.dictionary);
     console.log(this.WORD_COUNTS);
     this.alphabet = "abcdefghijklmnopqrstuvwxyz";
   }

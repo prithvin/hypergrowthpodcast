@@ -83,6 +83,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         callAPI(apiURL2, "GET", {}, function (data) {
             self.norvig = new Norvig(data["Dictionary"]);
         });
+        
         document.getElementById("searchBar").addEventListener("change", function() {
             self.autocorrect();
             var text = document.getElementById('searchBar').value.toLowerCase();
