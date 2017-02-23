@@ -1,4 +1,5 @@
 #course-videos-div {
+    margin-top: 6px;
     background-color: #F4F6F8;
     height: auto;
     max-height: 70%;
@@ -35,8 +36,9 @@
 }
 
 .course-videos-preview-images {
+    width: 250px;
     max-width: 100%;
-    height: auto;
+    height: 150px;
     max-height: 80%;
     display: block;
     margin: auto;
@@ -44,6 +46,10 @@
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
+}
+
+.course-videos-preview-images:hover {
+    cursor: pointer;
 }
 
 .videos-row {
