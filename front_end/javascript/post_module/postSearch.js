@@ -292,11 +292,11 @@ var PostSearch = class PostSearch {
         });
         
         document.getElementById("secondary-search-bar").addEventListener("change", function() {
-            var text = document.getElementById('secondary-search-bar').value;
+            var text = document.getElementById('secondary-search-bar').value.toLowerCase();
             if ($.inArray(text, self.autokeys) == -1)
                 self.autokeys.push(text);
             console.log(self.autokeys);
-        });                           
+        });                   
     }
 }
 

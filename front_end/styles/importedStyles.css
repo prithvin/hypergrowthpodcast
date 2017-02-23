@@ -25,6 +25,7 @@
 @import url("./menu_module/logo.css");
 @import url("./menu_module/navbar.css");
 @import url("./menu_module/searchbar.css");
+@import url("./menu_module/autocomplete.css");
 
 /* search module */
 @import url("./search_module/searchResults.css");

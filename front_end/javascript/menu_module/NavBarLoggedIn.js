@@ -72,21 +72,46 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         });
         document.getElementById("searchBar").addEventListener("change", function() {
             self.autocorrect();
-            var text = document.getElementById('searchBar').value;
-            if ($.inArray(text, self.autokeys) == -1)
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, self.autokeys) == -1 && text.length > 2)
                 self.autokeys.push(text);
             console.log(self.autokeys);
         });                   
     }
     
     autocorrect() {
-        var userText = document.getElementById('searchBar').value;
-        var correction = correct(userText);
-        if (typeof correction == "undefined" || correction.lengh < 2) {
-            return;
-        } else {
-            document.getElementById('searchBar').value = correction;
-            console.log("correction: " + correction);
-        }  
+        var text = document.getElementById('searchBar').value;
+        if (text.length > 2) {
+            var splitText = text.split(" ");
+            var correction = "";
+            var corrected = "";
+            var x = 0;
+
+            /* Correct each word */
+            for (; x < splitText.length - 1; x++) {
+                console.log("user: " + splitText[x]);
+                corrected = correct(splitText[x]);
+                console.log("corrected: " + corrected);
+                if (typeof corrected == "undefined")
+                    corrected = splitText[x];       // keep user's word
+                correction += corrected + " ";
+            }
+
+            /* Last Word */
+            console.log("user: " + splitText[x])
+            corrected = correct(splitText[x]);
+            console.log("corrected: " + corrected);
+            if (typeof corrected == "undefined")
+                corrected = splitText[x];           // keep user's word
+            correction += corrected;
+
+            correction = correction.toLowerCase();
+            if (typeof correction == "undefined") {
+                return;
+            } else {
+                document.getElementById('searchBar').value = correction;
+                console.log("correction: " + correction);
+            }  
+        }
     }
 }
