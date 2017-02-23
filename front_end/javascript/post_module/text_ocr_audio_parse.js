@@ -35,7 +35,7 @@ var OCRAudioIndPost = class OCRAudioIndPost {
         setTimeout(function () {
             thisClass.ensureDataLoad(function () {
                 $(thisClass.entireData).show();
-            }); 
+            });
         }, 0);
     }
 
@@ -43,13 +43,13 @@ var OCRAudioIndPost = class OCRAudioIndPost {
       setTimeout(function () {
             thisClass.ensureDataLoad(function () {
                 $(thisClass.entireData).hide();
-            }); 
+            });
         }, 0);
     }
 
     checkForContent (searchTerm) {
         var isContent = this.content.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0;
-        if (isContent) { 
+        if (isContent) {
             this.showThisPost(this);
             return true;
         }

@@ -5,6 +5,7 @@
 
     <body>
         <div id="page" style="width:100%;height:100%;position:fixed;top:0;left:0;"></div>
+        <div id="loader-animation"  style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:100"></div>
     </body>
 
     <script src="./javascript/require-config.js"></script>
@@ -12,19 +13,35 @@
 
     <script>
 
+
     require(['director', 'components', 'loader'], function () {
+
+          function timeToHideLoader (time) {
+      if (!time)
+        time = 0;
+      setTimeout(function () {
+         $("#loader-animation").hide();
+      }, time);
+    }
+
+
+
       var loginPage = function () {
+        $("#loader-animation").show();
         require(['config', 'onboarding'], function () {
           loadComponent("OnboardingFrontPage", $("#page"), function () {
             new Onboarding($('#page').find('.onboarding-page'));
+            $("#loader-animation").hide();
           });
         });
       };
 
       var onboardingCoursesPage = function(courses) {
+        $("#loader-animation").show();
         loadComponent("OnboardingCoursesModule", $("#page"), function () {
             require(['course-selection'], function () {
             new OnboardingCourses([], $("#page").find(".course-table"));
+            $("#loader-animation").hide();
           });
         });
       }
@@ -32,25 +49,31 @@
 
         
       var podcast = function (podcastId) { 
+        $("#loader-animation").show();
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
             new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
+            timeToHideLoader(500);
           });
         });
       };
 
       var search = function (courseId) {
+        $("#loader-animation").show();
         loadComponent("CourseSearchModule", $("#page"), function () {
           require(['searchResults'], function () {
             new SearchPage(123, $("#page").find(".search-results-div"));
+            $("#loader-animation").hide();
           });
         });
       };
 
       var courseHomepage = function() {
+        $("#loader-animation").show();
         loadComponent("CourseHomepageModule", $("#page"), function() {
           require(['course-homepage'], function() {
             new CourseHomepageClass(1, $("#page").find(".course-homepage-div"));
+            $("#loader-animation").hide();
           });
         });
       }
@@ -68,10 +91,10 @@
 
       // Scripts above are required on every single page
 
-      loadComponent("LoaderModule", $("#page"), function () {
+      loadComponent("LoaderModule", $("#loader-animation"), function () {
         setTimeout(function () {
           router.init();
-        }, 1000);
+        }, 20);
       });
     });
     </script>

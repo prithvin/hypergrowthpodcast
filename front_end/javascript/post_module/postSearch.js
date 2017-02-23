@@ -7,7 +7,7 @@
     )*/
 var PostSearch = class PostSearch {
 
-    /* 
+    /*
         Parameters:
             postFetchData (JSON Object, make sure all keys and values are valid)
                 {
@@ -38,13 +38,14 @@ var PostSearch = class PostSearch {
             videoData (optional parameter if the video has already started playing)
                 IF NOT USING, PLEASE PASS AS NULL, DONT PASS EMPTY JSON OBJECT PLZ
                 {
-                    CurrentSlideNum: 
+                    CurrentSlideNum:
                 }
     
              callback forwhen post page is loaded (only for post page)
 
     */
     constructor (postFetchData, userData, mainDiv, ocrAudioData, videoData, callback) {
+        this.currWord = 0;
         this.postFetchData = postFetchData;
         this.userData = userData;
         this.mainDiv = $(mainDiv).find(".search-module");
@@ -56,6 +57,7 @@ var PostSearch = class PostSearch {
         this.currentSlide = 1;
         if (videoData)
             this.currentSlide = videoData['CurrentSlideNum'];
+        this.setUpSlideTransitionModule();
 
         // DOM Elements
         this.searchModule = $(this.mainDiv).parent().find(".search-module");
@@ -64,7 +66,8 @@ var PostSearch = class PostSearch {
         this.searchInputField = $(this.searchInputForm).find("#secondary-search-bar");
         this.viewAllPostsButton =  $(this.mainDiv).find(".all-posts-view");
         this.newPostButton = $(this.mainDiv).prev().find(".new-post-img");
-
+        this.loadingModule = $(this.mainDiv).parent().find("#slide-transition-data");
+        this.loadingModule.hide();
         // Package loads
         this.mark = new Mark($(this.searchModule)[0]);
 
@@ -114,20 +117,31 @@ var PostSearch = class PostSearch {
 
         $(this.searchInputForm).on("submit", function (ev) {
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 1) {
-                thisClass.searchByText($(thisClass.searchInputField).val());
+            if ($(this.searchInputField).val().length > 1) {
+                this.loadingModule.show();
+                this.searchByText($(this.searchInputField).val());
             }
-            else if ($(thisClass.searchInputField).val().trim().length == 0)
-                thisClass.searchByText("");
-        })
-       /* $(this.searchInputField).on("input", function (ev) {
+            else if ($(this.searchInputField).val().trim().length == 0)
+                this.searchByText("");
+        }.bind(this))
+        $(this.searchInputField).on("input", function (ev) {
+            var inputVal = $(this.searchInputField).val();
+            
             ev.preventDefault();
-            if ($(thisClass.searchInputField).val().length > 1) {
-                thisClass.searchByText($(thisClass.searchInputField).val());
+            if (inputVal.length > 1) {
+                this.currWord = inputVal;
+                setTimeout(function(input){
+                    this.loadingModule.show();
+                    if(input == this.currWord){
+                        console.log("searching for: " + input);
+                        this.searchByText(input);
+                    }
+                    
+                }.bind(this, inputVal), 200);
             }
-            else if ($(thisClass.searchInputField).val().trim().length == 0) 
-                thisClass.searchByText("");
-        })*/
+            else if (inputVal.trim().length == 0) 
+                this.searchByText("");
+        }.bind(this));
     }
 
     detectTypeOfPostsToShow () {
@@ -160,15 +174,21 @@ var PostSearch = class PostSearch {
     }
 
     searchForSlide (slideNo) {
-        for (var x = 0; x < this.posts.length; x++) 
+        for (var x = 0; x < this.posts.length; x++)
             this.posts[x].fetchBySlide(slideNo);
     }
 
+    setUpSlideTransitionModule () {
+        loadHTMLComponent("SlideTransitionModule", function (data) {
+            $(this.mainDiv).parent().find("#slide-transition-data").html(data);
+        }.bind(this));
+    }
+
+
     searchByText (text) {
         this.mark.unmark();
-        jQuery.expr[':'].contains = function(a,i,m){
-            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
-        };
+        var bm = new BoyMor(text.toUpperCase());
+
         this.currentTextBeingSearched = text;
         
         var anyPostsShown = false;
@@ -191,16 +211,22 @@ var PostSearch = class PostSearch {
             })
             $(this.noResultsOption).hide();
         }
+
+        setTimeout(function () {
+            this.loadingModule.hide(); 
+        }.bind(this), 500);
+        
     }
 
     remarkText () {
         if (this.currentTextBeingSearched != null) {
             this.mark.unmark();
             this.mark.mark(
-                this.currentTextBeingSearched, 
-                { 
-                    "caseSensitive" : false, 
-                    "separateWordSearch" : false
+                this.currentTextBeingSearched,
+                {
+                    "caseSensitive" : false,
+                    "separateWordSearch" : false,
+                     "exclude": [".pre-slide-data", ".slide-no"]
                 }
             );
         }
@@ -247,7 +273,7 @@ var PostSearch = class PostSearch {
         thisClass.loadPostModuleData(function (postTemplate) {
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
-            
+
             thisClass.posts.push(newPostObj);
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);
@@ -262,5 +288,3 @@ var PostSearch = class PostSearch {
 
     }
 }
-
-

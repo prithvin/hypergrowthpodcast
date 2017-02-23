@@ -45,6 +45,28 @@
                     "Slide" : 7,
                     "Quote" : "Supply is elastic"
                 }
+         },
+         {
+            "Id" : 5,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
+         },
+         {
+            "Id" : 5,
+            "Date" : "Saturday, December 3rd, 2017",
+            "PreviewImage": "https://image.ibb.co/fLk5Dv/slide.jpg",
+            "Keywords" : ["HashMap", "Supply", "Demand", "Elastic"],
+            "OCRMatch" :
+                {
+                    "Slide" : 7,
+                    "Quote" : "Supply is elastic"
+                }
          }
         ]
 }

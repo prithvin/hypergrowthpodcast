@@ -37,7 +37,8 @@
 }
 
 .video-js .vjs-menu-button-popup .vjs-menu{
-    width: 100%;
+    left: -50%;
+    width: 200%;
     bottom: 15px;
 }
 

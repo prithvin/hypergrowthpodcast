@@ -1,0 +1,42 @@
+.load-3 div {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #446cb3;
+    border: 1px solid rgba(255, 255, 255, 0.68);
+}
+
+.thinking-text {
+    color: black;
+    padding-top: 30px;
+    font-weight: 200;
+    font-size: 1.76em;
+}
+
+.load-3 div:nth-last-child(1) {animation: loadingC .6s .1s linear infinite;}
+.load-3 div:nth-last-child(2) {animation: loadingC .6s .2s linear infinite;}
+.load-3 div:nth-last-child(3) {animation: loadingC .6s .3s linear infinite;}
+
+
+#slide-transition-data {
+    position: absolute;
+    z-index: 1000;
+    width: 105%;
+    text-align: center;
+    background-color: rgba(244, 246, 248, 0.66);
+    padding-top: 50px;
+    height: 100%;
+}
+
+.l-3 {animation-delay: .72s;}
+
+
+
+
+@keyframes loadingC {
+    0 {transform: translate(0,0);}
+    50% {transform: translate(0,15px);}
+    100% {transform: translate(0,0);}
+}
+

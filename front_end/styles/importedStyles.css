@@ -19,6 +19,7 @@
 
 /* loader module */
 @import url("./loader_module/loading.css");
+@import url("./loader_module/thinking.css");
 
 /* menu module */
 @import url("./menu_module/logo.css");

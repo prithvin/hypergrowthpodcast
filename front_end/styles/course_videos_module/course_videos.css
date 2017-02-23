@@ -2,12 +2,15 @@
     background-color: #F4F6F8;
     height: auto;
     max-height: 80%;
-    padding-top: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow: auto;
     border-collapse: collapse;
+}
+
+#course-title {
+  text-align: center;
 }
 
 .course-videos-Hr {
@@ -32,6 +35,9 @@
 .course-videos-preview-images {
     max-width: 100%;
     height: auto;
+    max-height: 80%;
+    display: block;
+    margin: auto;
 }
 
 .videos-row {

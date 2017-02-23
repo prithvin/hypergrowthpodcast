@@ -15,7 +15,8 @@ var loadHTMLModules = {
     "PostSearchModule": "post_search_module.html",
     "VideoModule": "video_module.html",
     "AudioOCRSubMod": "audio_ocr_search_sub_module.html",
-    "AudioOCRMod": "audio_ocr_search_module.html"
+    "AudioOCRMod": "audio_ocr_search_module.html",
+    "SlideTransitionModule": "slide_transition_module.html"
 };
 
 function loadComponent (moduleName, divToLoad, callback) {

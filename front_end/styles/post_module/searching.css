@@ -5,6 +5,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .form-control-success {
     background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7LE9IY2mTREC1zYoRyyo182eoXd6EH-EV4IGRXDYYnMvAaYoN") !IMPORTANT;
