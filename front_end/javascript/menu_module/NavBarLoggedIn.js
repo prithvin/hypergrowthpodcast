@@ -77,6 +77,14 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
+                open: function () { 
+                    $('ul.ui-autocomplete').removeClass('closed');
+                    $('ul.ui-autocomplete').addClass('opened');  
+                },
+                close: function () {
+                    $('ul.ui-autocomplete').removeClass('opened').css('display', 'block');
+                    $('ul.ui-autocomplete').addClass('closed');
+                },
             });
         });
         

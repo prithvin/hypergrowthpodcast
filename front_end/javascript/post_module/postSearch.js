@@ -84,7 +84,7 @@ var PostSearch = class PostSearch {
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
-        this.initAutocomplete();
+        //this.initAutocomplete();
     }
 
     noPostsNewPostHandling (thisClass) {
@@ -288,7 +288,7 @@ var PostSearch = class PostSearch {
         });
 
     }
-    
+    /*
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
@@ -298,6 +298,14 @@ var PostSearch = class PostSearch {
             $("#secondary-search-bar").autocomplete({
                 source: autokeys,
                 minLength: 2,
+                open: function () { 
+                    $('ul.ui-autocomplete-post').removeClass('closed');
+                    $('ul.ui-autocomplete-post').addClass('opened-post');  
+                },
+                close: function () {
+                    $('ul.ui-autocomplete-post').removeClass('opened-post').css('display', 'block');
+                    $('ul.ui-autocomplete-post').addClass('closed');
+                },
             });
         });
         
@@ -307,7 +315,7 @@ var PostSearch = class PostSearch {
                 autokeys.push(text);
             console.log(autokeys);
         });                   
-    }
+    }*/
 }
 
 
