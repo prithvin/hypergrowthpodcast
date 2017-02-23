@@ -53,6 +53,14 @@ var OnboardingCourses = class OnboardingCourses {
             $("#searchBar").autocomplete({
                 source: self.autokeys,
                 minLength: 2,
+                open: function () { 
+                    $('ul.ui-autocomplete').removeClass('closed');
+                    $('ul.ui-autocomplete').addClass('opened');  
+                },
+                close: function () {
+                    $('ul.ui-autocomplete').removeClass('opened').css('display', 'block');
+                    $('ul.ui-autocomplete').addClass('closed');
+                },
             });
         });
         

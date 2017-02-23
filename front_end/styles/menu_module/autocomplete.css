@@ -1,38 +1,73 @@
 .ui-autocomplete {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  float: left;
-  display: none;
-  padding: 4px 0;
-  margin: 2px 0 0 0;
-  list-style: none;
-  background-color: #ffffff;
-  border-color: #ccc;
-  border-color: rgba(0, 0, 0, 0.2);
-  border-style: solid;
-  border-width: 100px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  border-right-width: 2px;
-  border-bottom-width: 2px;
+    position: absolute;
+    left: 5%;
+    z-index: 1000;
+    min-width: 160px;   
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(68, 108, 169, 0.7);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    opacity: 0;
+    display: none;
+    height: 0px; 
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+    transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
+    -moz-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
+    -webkit-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
+    -o-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
 }
 
-.ui-autocomplete li.ui-menu-item {
-    padding: 1px;  
+.ui-menu-item > a.ui-corner-all {
+    display: block;
     font-family: "Roboto", sans-serif;
     font-weight: normal;
     font-size: 15px;
+    line-height: 20px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    align-content: center;
 }
 
-.ui-autocomplete a.ui-state-hover {
-    font-weight: 500 !important;
+.ui-state-hover, .ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: rgba(15, 43, 92, 0.95); 
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-image: none;
+}
+
+.ui-autocomplete.opened {
+    opacity: 1;
+    height: 75px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/*
+.ui-autocomplete.opened-post {
+    opacity: 1;
+    height: 50px;
+    padding-left: 0px;
+    padding-right: 5px;
+}*/
+
+.ui-autocomplete.closed {
+    height: 0px;
 }
