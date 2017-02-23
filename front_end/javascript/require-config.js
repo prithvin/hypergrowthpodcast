@@ -1,5 +1,6 @@
 var require = {
     baseUrl: 'javascript/',
+    waitSeconds: 60,
     shim : {
         "bootstrap" : {
             "deps" :["jquery", "local_tether"]
@@ -106,5 +107,6 @@ var require = {
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "auto-correct": "post_module/Norvig",
+        "search-results": "search_module/search-results"
     }
 };

@@ -29,7 +29,8 @@
 @import url("./menu_module/autocomplete.css");
 
 /* search module */
-@import url("./search_module/searchResults.css");
+/*@import url("./search_module/searchResults.css");*/
+@import url("./search_module/search.css");
 
 /* post module */
 @import url("./post_module/alertBox.css");
