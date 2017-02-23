@@ -90,6 +90,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             /* Correct each word */
             for (; x < splitText.length - 1; x++) {
                 console.log("user: " + splitText[x]);
+                if (splitText[x].length > 13) {
+                    console.log("Cannot autocorrect: " + splitText[x]);
+                    continue;
+                }
                 corrected = correct(splitText[x]);
                 console.log("corrected: " + corrected);
                 if (typeof corrected == "undefined")
@@ -99,11 +103,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
             /* Last Word */
             console.log("user: " + splitText[x])
-            corrected = correct(splitText[x]);
-            console.log("corrected: " + corrected);
-            if (typeof corrected == "undefined")
-                corrected = splitText[x];           // keep user's word
-            correction += corrected;
+            if (splitText[x].length > 13) {
+                console.log("Cannot autocorrect: " + splitText[x])
+            } else {
+                corrected = correct(splitText[x]);
+                console.log("corrected: " + corrected);
+                if (typeof corrected == "undefined")
+                    corrected = splitText[x];           // keep user's word
+                correction += corrected;
+            }
 
             correction = correction.toLowerCase();
             if (typeof correction == "undefined") {

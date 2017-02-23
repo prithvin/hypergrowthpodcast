@@ -5,8 +5,6 @@
   z-index: 1000;
   float: left;
   display: none;
-  min-width: 160px;
-  width: 160px;
   padding: 4px 0;
   margin: 2px 0 0 0;
   list-style: none;
@@ -24,8 +22,8 @@
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
   background-clip: padding-box;
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
 }
 
 .ui-autocomplete li.ui-menu-item {
