@@ -27,11 +27,13 @@
 
 
       var loginPage = function () {
-        $("#loader-animation").show();
+        $("#loader-animation").fadeIn();
         require(['config', 'onboarding'], function () {
           loadComponent("OnboardingFrontPage", $("#page"), function () {
             new Onboarding($('#page').find('.onboarding-page'));
-            $("#loader-animation").hide();
+            setTimeout(function () {
+              $("#loader-animation").fadeOut();
+            }, 500);
           });
         });
       };
