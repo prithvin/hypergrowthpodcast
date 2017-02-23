@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar']
         },
         "videojs": {
             "deps": ['jquery'],

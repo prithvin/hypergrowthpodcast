@@ -1,9 +1,13 @@
+var autokeys = [];
+
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
         
         /* Autocomplete keys */
-        this.autokeys = [];
+    
+        /* Autocorrect */
+        this.norvig;
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -62,24 +66,35 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
+        var apiURL2 = "./fake_data/dictionary.json";
+        
         callAPI(apiURL, "GET", {}, function (data) {
-            $.extend(self.autokeys, data["Keywords"]);
-            console.log(self.autokeys);
+            var keys = localStorage.getItem("autokeys");
+            console.log(keys);
+            if (keys !== null) autokeys = keys.split(",");
+            $.extend(autokeys, data["Keywords"]);
+            console.log(autokeys);
             $("#searchBar").autocomplete({
-                source: self.autokeys,
+                source: autokeys,
                 minLength: 2,
             });
+        });
+        
+        callAPI(apiURL2, "GET", {}, function (data) {
+            self.norvig = new Norvig(data["Dictionary"]);
         });
         document.getElementById("searchBar").addEventListener("change", function() {
             self.autocorrect();
             var text = document.getElementById('searchBar').value.toLowerCase();
-            if ($.inArray(text, self.autokeys) == -1 && text.length > 2)
-                self.autokeys.push(text);
-            console.log(self.autokeys);
+            if ($.inArray(text, autokeys) == -1 && text.length > 2)
+                autokeys.push(text);
+            console.log(autokeys);
+            localStorage.setItem("autokeys", autokeys);
         });                   
     }
     
     autocorrect() {
+        var self = this;
         var text = document.getElementById('searchBar').value;
         if (text.length > 2) {
             var splitText = text.split(" ");
@@ -94,9 +109,9 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                     console.log("Cannot autocorrect: " + splitText[x]);
                     continue;
                 }
-                corrected = correct(splitText[x]);
+                corrected = self.norvig.correct(splitText[x]);
                 console.log("corrected: " + corrected);
-                if (typeof corrected == "undefined")
+                if (typeof corrected === "undefined")
                     corrected = splitText[x];       // keep user's word
                 correction += corrected + " ";
             }
@@ -106,15 +121,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             if (splitText[x].length > 13) {
                 console.log("Cannot autocorrect: " + splitText[x])
             } else {
-                corrected = correct(splitText[x]);
+                corrected = self.norvig.correct(splitText[x]);
                 console.log("corrected: " + corrected);
-                if (typeof corrected == "undefined")
+                if (typeof corrected === "undefined")
                     corrected = splitText[x];           // keep user's word
                 correction += corrected;
             }
 
             correction = correction.toLowerCase();
-            if (typeof correction == "undefined") {
+            if (typeof correction === "undefined") {
                 return;
             } else {
                 document.getElementById('searchBar').value = correction;
