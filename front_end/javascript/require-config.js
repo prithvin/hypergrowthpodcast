@@ -62,7 +62,7 @@ var require = {
             "deps": ['course-videos', 'components']
         },
         "course-selection": {
-            "deps": ['bootstrap']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui']
         },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']

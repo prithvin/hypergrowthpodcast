@@ -1,9 +1,11 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (coursesData, mainDiv) {
         this.coursesData = coursesData;
+        this.autokeys = [];
         this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
+        this.initAutocomplete();
     }
 
     fetchCourses() {
@@ -39,7 +41,39 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.appendChild(quarter);
         } 
     }
+    
+    initAutocomplete() {
+        var self = this;
+        var apiURL = "./fake_data/getCourses.json";
+        callAPI(apiURL, "GET", {}, function (data) {
+            for (var x = 0; x < data.length; x++) {
+                self.autokeys.push(data[x]['Course']);
+            }
+            console.log(self.autokeys);
+            $("#searchBar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
+        });
+        
+        document.getElementById("searchBar").addEventListener("change", function() {
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, self.autokeys) == -1)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                   
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
 /*
 $(".table-row").click(function() {
