@@ -57,9 +57,16 @@ var PostSearch = class PostSearch {
         // Autcomplete Keywords
         this.autokeys = [];
 
-        this.currentSlide = 1;
-        if (videoData)
-            this.currentSlide = videoData['CurrentSlideNum'];
+        this.currentViewData = {
+            "PageType": "Slide", // could also be notes, search, unanswered questions
+            "SlideNo": 1    // only if SlideNo called, tohewrise slide defaults to video slide
+        };
+
+        if (videoData != null && videoData['CurrentSlideNum'] != null)  {
+            this.videoCurrentSlide = videoData['CurrentSlideNum'];
+            this.currentViewData['SlideNo'] = this.videoCurrentSlide;
+        }
+        
         this.setUpSlideTransitionModule();
 
         // DOM Elements
@@ -81,14 +88,28 @@ var PostSearch = class PostSearch {
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
             }.bind(this));
+            this.numberOfSlides = ocrAudioData["Slides"].length;
+            this.initAutocomplete();
         }
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
-        this.initAutocomplete();
+
+        this.generateDropdownMenu();
+        
     }
+
+    getCurrentSlideOfNewPost () {
+        if (this.currentViewData["PageType"] != "Slide") {
+            return this.videoCurrentSlide
+        }
+        else {
+            return this.currentViewData['SlideNo'];
+        }
+    }
+
 
     noPostsNewPostHandling (thisClass) {
 
@@ -98,13 +119,27 @@ var PostSearch = class PostSearch {
         });
 
         $(this.newPostButton).on("click", function (ev) {
-            var newPostVal = $(thisClass.searchInputField).val();
+            var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
                 swal("Please ask a question to search for!");   // Alert library
             else {
-                thisClass.generateNewPost(newPostVal, new Date().getTime(), thisClass.currentSlide); // <TODO> FIX THIS WITH CURRENT SLIDE
+                this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }
-        });
+        }.bind(this));
+    }
+
+    updateCurrentVideoSlide  (slideNo) {
+        this.videoCurrentSlide = slideNo;
+        console.log("post search got the updated slide as " + slideNo);
+
+        /*
+        Add slide transition code here
+        if (this.currentViewData["PageType"] != "Slide") {
+            return this.videoCurrentSlide
+        }
+        else {
+            return this.currentViewData['SlideNo'];
+        }*/
     }
 
     startFormListeners (thisClass) {
@@ -128,7 +163,7 @@ var PostSearch = class PostSearch {
             else if ($(this.searchInputField).val().trim().length == 0)
                 this.searchByText("");
         }.bind(this))
-        $(this.searchInputField).on("input", function (ev) {
+        $(this.searchInputField).on("input change", function (ev) {
             var inputVal = $(this.searchInputField).val();
             
             ev.preventDefault();
@@ -137,7 +172,6 @@ var PostSearch = class PostSearch {
                 setTimeout(function(input){
                     this.loadingModule.show();
                     if(input == this.currWord){
-                        console.log("searching for: " + input);
                         this.searchByText(input);
                     }
                     
@@ -236,6 +270,13 @@ var PostSearch = class PostSearch {
         }
     }
 
+    generateDropdownMenu () {
+        if (this.postFetchData["TypeOfFetch"] == "PodcastSearch") {
+            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"));
+        }
+        
+    }
+
     loadPostsFromServer (thisClass) {
         var postData = this.postFetchData;
 
@@ -297,7 +338,6 @@ var PostSearch = class PostSearch {
         var apiURL = "./fake_data/getVideo.json";
         callAPI(apiURL, "GET", {}, function (data) {
             $.extend(self.autokeys, data["Keywords"]);
-            console.log(self.autokeys);
             $("#secondary-search-bar").autocomplete({
                 source: self.autokeys,
                 minLength: 2,
@@ -308,7 +348,6 @@ var PostSearch = class PostSearch {
             var text = document.getElementById('secondary-search-bar').value.toLowerCase();
             if ($.inArray(text, self.autokeys) == -1)
                 self.autokeys.push(text);
-            console.log(self.autokeys);
         });                   
     }
 }

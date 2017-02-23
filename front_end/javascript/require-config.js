@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'post-dropdown']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -49,6 +49,7 @@ var require = {
         },
         "loader": {},
         "angular": {},
+        "post-dropdown": {},
         "navbar": {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
         },
@@ -106,5 +107,6 @@ var require = {
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "auto-correct": "post_module/Norvig",
+        "post-dropdown": "post_module/PodcastDropdownMenu"
     }
 };
