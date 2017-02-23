@@ -1,45 +1,84 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (coursesData, mainDiv) {
         this.coursesData = coursesData;
+        this.autokeys = [];
         this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        this.loadCoursesFromServer();
-        $(".table-row").click(function() {
-            window.location = this.data("link");
-        })
+        this.fetchCourses();
+        this.initAutocomplete();
     }
 
-    loadCoursesFromServer() {
-        var thus = this;
+    fetchCourses() {
         var apiURL = "./fake_data/getCourses.json";
         callAPI(apiURL, "GET", {}, function (data) {
-            for(var i = 0; i < data.length; i++) {
-                var row = thus.tableRef.insertRow(thus.tableRef.rows.length);
-                var cell = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell.className = 'cell cell-end';
-                cell2.className = 'cell cell-mid';
-                cell3.className = 'cell cell-end';
-                row.className = 'table-row';
-                row.id = data[i]['Course'];
-                var att = document.createAttribute('onclick');
-                var path = window.location.pathname;
-                att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
-                row.setAttributeNode(att);
-                var course_str = data[i]['Course'];
-                var title_str = data[i]['Title'];
-                var quarter_str =  data[i]['Quarter'];
-                var course = document.createTextNode(course_str);
-                var title = document.createTextNode(title_str);
-                var quarter = document.createTextNode(quarter_str);
-                cell.appendChild(course);
-                cell2.appendChild(title);
-                cell3.appendChild(quarter);
+            this.loadCourses(data);
+        }.bind(this));
+    }
+    
+    loadCourses(data) {
+        for(var i = 0; i < data.length; i++) {
+            var row = this.tableRef.insertRow(this.tableRef.rows.length);
+            var cell = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell.className = 'cell cell-end';
+            cell2.className = 'cell cell-mid';
+            cell3.className = 'cell cell-end';
+            row.className = 'table-row';
+            row.id = data[i]['Course'];
+            var att = document.createAttribute('onclick');
+            var path = window.location.pathname;
+            att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
+            row.setAttributeNode(att);
+            var course_str = data[i]['Course'];
+            var title_str = data[i]['Title'];
+            var quarter_str =  data[i]['Quarter'];
+            var course = document.createTextNode(course_str);
+            var title = document.createTextNode(title_str);
+            var quarter = document.createTextNode(quarter_str);
+            cell.appendChild(course);
+            cell2.appendChild(title);
+            cell3.appendChild(quarter);
+        } 
+    }
+    
+    initAutocomplete() {
+        var self = this;
+        var apiURL = "./fake_data/getCourses.json";
+        callAPI(apiURL, "GET", {}, function (data) {
+            for (var x = 0; x < data.length; x++) {
+                self.autokeys.push(data[x]['Course']);
             }
+            console.log(self.autokeys);
+            $("#searchBar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
         });
-    }   
+        
+        document.getElementById("searchBar").addEventListener("change", function() {
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, self.autokeys) == -1)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                   
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+/*
+$(".table-row").click(function() {
+     window.location = this.data("link");
+    });*/
 
 /* Search Function */
 function myFunction() {
