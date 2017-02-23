@@ -36,7 +36,8 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 
 app.use(cors({
     allowedOrigins: [
-        'localhost:7888'
+        'localhost:7888',
+        'localhost:8000'
     ]
 }))
 
@@ -178,6 +179,14 @@ app.get('/isUserLoggedIn', function(req,res){
   else{
     res.send(200,{"result" : false});
   }
+});
+
+app.get('/getUserSession', function(req,res) {
+  res.send(200, {'user': req.session.user});
+});
+
+app.get('/setUserFromSession', function(req,res) {
+  req.user = req.session.user;
 });
 
 app.get('/logout',function(req,res){
