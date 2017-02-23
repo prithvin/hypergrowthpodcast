@@ -35,6 +35,7 @@ class CourseVideosClass {
               var heading = document.createElement('p');
               heading.align = 'center';
               heading.innerHTML = curr['Date'];
+              heading.className = 'text-title';
               videoDiv.appendChild(heading);
           }
         });

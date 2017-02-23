@@ -11,6 +11,8 @@
 
 #course-title {
   text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
 }
 
 .course-videos-Hr {
@@ -38,8 +40,19 @@
     max-height: 80%;
     display: block;
     margin: auto;
+    border-color: rgba(66, 100, 155, .7);
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
 }
 
 .videos-row {
     min-height: 200px;
+}
+
+.text-title {
+  margin-top: 10px;
+  color: rgba(66, 100, 155, 1);
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
 }
