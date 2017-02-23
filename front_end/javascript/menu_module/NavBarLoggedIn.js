@@ -2,6 +2,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
         
+        /* Autocomplete keys */
+        this.autokeys = [];
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -15,6 +17,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
@@ -55,5 +58,68 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
         })
     }
+    
+    initAutocomplete() {
+        var self = this;
+        var apiURL = "./fake_data/getVideo.json";
+        callAPI(apiURL, "GET", {}, function (data) {
+            $.extend(self.autokeys, data["Keywords"]);
+            console.log(self.autokeys);
+            $("#searchBar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
+        });
+        document.getElementById("searchBar").addEventListener("change", function() {
+            self.autocorrect();
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, self.autokeys) == -1 && text.length > 2)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                   
+    }
+    
+    autocorrect() {
+        var text = document.getElementById('searchBar').value;
+        if (text.length > 2) {
+            var splitText = text.split(" ");
+            var correction = "";
+            var corrected = "";
+            var x = 0;
 
+            /* Correct each word */
+            for (; x < splitText.length - 1; x++) {
+                console.log("user: " + splitText[x]);
+                if (splitText[x].length > 13) {
+                    console.log("Cannot autocorrect: " + splitText[x]);
+                    continue;
+                }
+                corrected = correct(splitText[x]);
+                console.log("corrected: " + corrected);
+                if (typeof corrected == "undefined")
+                    corrected = splitText[x];       // keep user's word
+                correction += corrected + " ";
+            }
+
+            /* Last Word */
+            console.log("user: " + splitText[x])
+            if (splitText[x].length > 13) {
+                console.log("Cannot autocorrect: " + splitText[x])
+            } else {
+                corrected = correct(splitText[x]);
+                console.log("corrected: " + corrected);
+                if (typeof corrected == "undefined")
+                    corrected = splitText[x];           // keep user's word
+                correction += corrected;
+            }
+
+            correction = correction.toLowerCase();
+            if (typeof correction == "undefined") {
+                return;
+            } else {
+                document.getElementById('searchBar').value = correction;
+                console.log("correction: " + correction);
+            }  
+        }
+    }
 }

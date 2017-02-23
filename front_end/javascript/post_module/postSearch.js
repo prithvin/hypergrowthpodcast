@@ -53,6 +53,9 @@ var PostSearch = class PostSearch {
 
         // Default to current slide as one
         this.posts = [];
+        
+        // Autcomplete Keywords
+        this.autokeys = [];
 
         this.currentSlide = 1;
         if (videoData)
@@ -82,6 +85,7 @@ var PostSearch = class PostSearch {
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
+        this.initAutocomplete();
     }
 
     noPostsNewPostHandling (thisClass) {
@@ -274,4 +278,28 @@ var PostSearch = class PostSearch {
         });
 
     }
+    
+    initAutocomplete() {
+        var self = this;
+        var apiURL = "./fake_data/getVideo.json";
+        callAPI(apiURL, "GET", {}, function (data) {
+            $.extend(self.autokeys, data["Keywords"]);
+            console.log(self.autokeys);
+            $("#secondary-search-bar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
+        });
+        
+        document.getElementById("secondary-search-bar").addEventListener("change", function() {
+            var text = document.getElementById('secondary-search-bar').value.toLowerCase();
+            if ($.inArray(text, self.autokeys) == -1)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                   
+    }
 }
+
+
+
+
