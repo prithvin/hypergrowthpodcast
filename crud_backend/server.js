@@ -23,14 +23,16 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 var myPassport = require('./config/passport.js');
 
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', function(error){
+mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', options, function(error){
   if(error){
     console.log("Error Connecting" + error);
   }
   else{
     console.log("Connection Successful");
-    apiFunctions.podcastFunctions.createPodcasts();
+    // apiFunctions.podcastFunctions.createPodcasts();
   }
 });
 

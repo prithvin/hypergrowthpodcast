@@ -184,7 +184,7 @@ var apiFunctions = {
         },
         postFunctions:{
           getPostsForCourse : function(request, callback){
-            PostModel.find({/*CourseId: request.CourseId ,*/$query : {},$orderby : {TimeOfPost: -1}},function(err,posts){
+            PostModel.find({'CourseId': request.CourseId}, {TimeOfPost: -1}, function(err,posts){
               var response;
               if(posts.length >= request.UpperLimit){
                   posts = posts.slice(0,request.UpperLimit);
@@ -194,8 +194,8 @@ var apiFunctions = {
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
                 delete copy._id;
-                copy.PodcastId = undefined;
-                copy.CourseId = undefined;
+                delete copy.PodcastId;
+                delete copy.CourseId;
                 posts[i] = copy;
                 console.log(posts[i]);
               }
@@ -203,13 +203,13 @@ var apiFunctions = {
             });
           },
           getPostsForLecture : function(request, callback){
-            PostModel.find({$query : {PodcastId: request.podcastId} , $orderby : {TimeOfPost: -1}},function(err,posts){
+            PostModel.find({'PodcastId': request.PodcastId} , {TimeOfPost: -1}, function(err,posts){
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
                 delete copy._id;
-                copy.PodcastId = undefined;
-                copy.CourseId = undefined;
+                delete copy.PodcastId;
+                delete copy.CourseId;
                 posts[i] = copy;
                 console.log(posts[i]);
               }
@@ -217,15 +217,20 @@ var apiFunctions = {
             });
           },
           getPostsByKeyword : function(request,callback){
-            PostModel.find({$query : {PodcastId:request.PodcastId,CourseId:request.CourseId,
-              $or : [{$elemMatch : {Content: {$in : request.Keywords}}},
-              {Comments : {$elemMatch : {Content : {$in : request.Keywords}}}}]}, $orderby : {TimeOfPost: -1}}, function (err, posts) {
+            PostModel.find({'CourseId' : request.CourseId,
+              $or : [{Content: {$regex : request.Keywords, $options: 'i'}},
+              {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]},
+              {TimeOfPost: -1}, function (err, posts) {
+                if (!posts) {
+                  callback([]);
+                  return;
+                }
                 for(var i = 0; i < posts.length; i++){
                   var copy = JSON.parse(JSON.stringify(posts[i]));
                   copy.PostId = copy._id;
                   delete copy._id;
-                  copy.PodcastId = undefined;
-                  copy.CourseId = undefined;
+                  delete copy.PodcastId;
+                  delete copy.CourseId;
                   posts[i] = copy;
                   console.log(posts[i]);
                 }
