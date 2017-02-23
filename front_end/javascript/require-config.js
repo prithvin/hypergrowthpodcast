@@ -105,6 +105,6 @@ var require = {
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
-        "auto-correct": "post_module/Norvig",
+        "auto-correct": "menu_module/Norvig",
     }
 };
