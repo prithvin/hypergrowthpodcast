@@ -2,6 +2,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
         
+        /* Autocomplete keys */
+        this.autokeys = [];
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -15,7 +17,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
-        this.loadAutocomplete();
+        this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
@@ -57,33 +59,34 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         })
     }
     
-    loadAutocomplete() {
-        var apiURL = "./fake_data/searchResults.json";
-        var availableTags = [];
+    initAutocomplete() {
+        var self = this;
+        var apiURL = "./fake_data/getVideo.json";
         callAPI(apiURL, "GET", {}, function (data) {
-            for(var x = 0; x < data["Videos"].length; x++) {
-                $.extend(availableTags, data["Videos"][x]["Keywords"]);
-            }
+            $.extend(self.autokeys, data["Keywords"]);
+            console.log(self.autokeys);
+            $("#searchBar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
         });
-        $( "#searchBar" ).autocomplete({
-            source: availableTags,
-            minLength: 3
-        });
+        document.getElementById("searchBar").addEventListener("change", function() {
+            self.autocorrect();
+            var text = document.getElementById('searchBar').value;
+            if ($.inArray(text, self.autokeys) == -1)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                   
     }
-}
-
-/* Recent Search */
-var availableTags = [];
-function recentSearch() {
-    var text = document.getElementById('searchBar').value;
-    if ($.inArray(text, availableTags) == -1)
-        availableTags.push(text);
-    $( "#searchBar" ).autocomplete({
-        source: availableTags,
-        minLength: 3
-    });
-    $( "#secondary-search-bar" ).autocomplete({
-        source: availableTags,
-        minLength: 3
-    });
+    
+    autocorrect() {
+        var userText = document.getElementById('searchBar').value;
+        var correction = correct(userText);
+        if (typeof correction == "undefined" || correction.lengh < 2) {
+            return;
+        } else {
+            document.getElementById('searchBar').value = correction;
+            console.log("correction: " + correction);
+        }  
+    }
 }

@@ -53,6 +53,9 @@ var PostSearch = class PostSearch {
 
         // Default to current slide as one
         this.posts = [];
+        
+        // Autcomplete Keywords
+        this.autokeys = [];
 
         this.currentSlide = 1;
         if (videoData)
@@ -82,7 +85,7 @@ var PostSearch = class PostSearch {
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
-        this.loadAutocomplete();
+        this.initAutocomplete();
     }
 
     noPostsNewPostHandling (thisClass) {
@@ -276,40 +279,27 @@ var PostSearch = class PostSearch {
 
     }
     
-    loadAutocomplete() {
+    initAutocomplete() {
+        var self = this;
         var apiURL = "./fake_data/getVideo.json";
-        var availableTags = [];
         callAPI(apiURL, "GET", {}, function (data) {
-            $.extend(availableTags, data["Keywords"]);
+            $.extend(self.autokeys, data["Keywords"]);
+            console.log(self.autokeys);
+            $("#secondary-search-bar").autocomplete({
+                source: self.autokeys,
+                minLength: 2,
+            });
         });
-        console.log(availableTags);
-        $( "#secondary-search-bar" ).autocomplete({
-            source: availableTags,
-            minLength: 2
-        });
+        
+        document.getElementById("secondary-search-bar").addEventListener("change", function() {
+            var text = document.getElementById('secondary-search-bar').value;
+            if ($.inArray(text, self.autokeys) == -1)
+                self.autokeys.push(text);
+            console.log(self.autokeys);
+        });                           
     }
-    /*
-    loadAutocorrect() {
-        var userText = document.getElementById('secondary-search-bar').value;
-        var correctText = correct(userText);
-        console.log(correctText);
-    }*/
 }
-function autocorrect() {
-    var userText = document.getElementById('secondary-search-bar').value;
-    var correctText = correct(userText);
-    console.log(correctText);
-}
-var availableTags = [];
-function recentSearch() {
-    var text = document.getElementById('secondary-search-bar').value;
-    if ($.inArray(text, availableTags) == -1)
-        availableTags.push(text);
-    $( "#secondary-search-bar" ).autocomplete({
-        source: availableTags,
-        minLength: 2
-    });
-}
+
 
 
 

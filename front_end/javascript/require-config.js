@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui','auto-correct', ]
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -50,7 +50,7 @@ var require = {
         "loader": {},
         "angular": {},
         "navbar": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap']
@@ -72,9 +72,6 @@ var require = {
         },
         "ocr_txt_mod": {
             "deps": ['jquery']
-        },
-        "auto-correct": {
-            "deps": ['path']
         },
     },
     // Note: Don't include the .js in the path
@@ -108,7 +105,6 @@ var require = {
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
-        "auto-correct": "post_module/autocorrect",
-        "path": "post_module/path",
+        "auto-correct": "post_module/Norvig",
     }
 };
