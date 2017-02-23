@@ -1,6 +1,5 @@
 var require = {
     baseUrl: 'javascript/',
-    waitSeconds: 60,
     shim : {
         "bootstrap" : {
             "deps" :["jquery", "local_tether"]
