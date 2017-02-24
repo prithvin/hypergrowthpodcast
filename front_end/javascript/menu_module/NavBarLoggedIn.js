@@ -72,7 +72,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             var keys = localStorage.getItem("autokeys");
             if (keys !== null) autokeys = keys.split(",");
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,

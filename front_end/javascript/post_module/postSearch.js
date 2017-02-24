@@ -58,7 +58,7 @@ var PostSearch = class PostSearch {
         this.posts = [];
 
         this.currentViewData = {
-            "PageType": "Lecture" // could also be notes, search, lecture, unanswered questions
+            "PageType": "Lecture" // could also be Notes, Lecture, Unanswered
             //"SlideNo": 1    // only if SlideNo called, tohewrise slide defaults to video slide
         };
 
@@ -81,11 +81,11 @@ var PostSearch = class PostSearch {
         this.loadingModule.hide();
         // Package loads
         this.mark = new Mark($(this.searchModule)[0]);
-        //this.notes = new Notes($(this.notesModule), "NOTES");
+        
+        //this.notes = new Notes($(this.notesModule), "NOTES\nMORENOTES");
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
-        //$(this.notesModule).hide();
         if (ocrAudioData) {
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
@@ -99,7 +99,10 @@ var PostSearch = class PostSearch {
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
 
+        // dropdown related stuff
         this.generateDropdownMenu();
+        this.handleAllLectureTrigger();
+        this.handleUnresolvedLectureTrigger();
 
     }
 
@@ -115,7 +118,7 @@ var PostSearch = class PostSearch {
 
         $(this.viewAllPostsButton).on("click", function (ev) {
             ev.preventDefault();
-            thisClass.searchByText("");
+            thisClass.showAllPostsOfLecture();
         });
 
         $(this.newPostButton).on("click", function (ev) {
@@ -140,12 +143,53 @@ var PostSearch = class PostSearch {
             "SlideNo": slideNo
         };
         this.dropdownMenu.switchToSlide(slideNo);
+        this.cleanUpSearch();
         this.searchForSlide(slideNo);
+
+    }
+
+    handleAllLectureTrigger () {
+        $(this.mainDiv).parent().find(".dropdownOfSlide").on("AllLecture", function () {
+            this.showAllPostsOfLecture();
+        }.bind(this));
+    }
+
+    handleUnresolvedLectureTrigger () {
+        $(this.mainDiv).parent().find(".dropdownOfSlide").on("UnresolvedLecture", function () {
+            this.showAllPostsUnresolved();
+        }.bind(this));
+    }
+
+    showAllPostsUnresolved () {
+        this.currentViewData = {
+            "PageType": "Unanswered"
+        };
+        this.updateCurrentVideoSlide();
+        this.cleanUpSearch();
+        this.findUnresolved();
+    }
+
+    showAllPostsOfLecture () {
+        this.currentViewData = {
+            "PageType": "Lecture"
+        };
+        $(this.searchInputField).val("");
+        this.searchByText("");
+        this.updateCurrentVideoSlide();
+    }
+
+    cleanUpSearch () {
+        this.currWord = 0;
+        $(this.searchInputField).val("");
+        this.searchNoText();
+        this.mark.unmark();
     }
 
 
+    // Optional param
     updateCurrentVideoSlide  (slideNo) {
-        this.videoCurrentSlide = slideNo;
+        if (slideNo)
+            this.videoCurrentSlide = slideNo;
         if (this.currentViewData["PageType"] != "Slide") {
             this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
         }
@@ -187,7 +231,7 @@ var PostSearch = class PostSearch {
             else if ($(this.searchInputField).val().trim().length == 0)
                 this.searchByText("");
         }.bind(this))
-        $(this.searchInputField).on("input change", function (ev) {
+        $(this.searchInputField).on("input", function (ev) {
             var inputVal = $(this.searchInputField).val();
             
             ev.preventDefault();
@@ -205,6 +249,7 @@ var PostSearch = class PostSearch {
                 this.searchByText("");
         }.bind(this));
     }
+
 
     detectTypeOfPostsToShow () {
         if (this.postFetchData['TypeOfFetch'] != "PodcastSearch") {
@@ -231,20 +276,39 @@ var PostSearch = class PostSearch {
             "Comments": []
         };
         $(this.searchInputField).val("");
-        this.searchByText("");
         this.loadPost(this, newPost, true);
+        this.showAllPostsOfLecture();
     }
 
     searchForSlide (slideNo) {
         var anyPostsShown = false;
         $(this.noResultsOption).hide();
-        for (var x = 0; x < this.posts.length; x++)
-            anyPostsShown = anyPostsShown || this.posts[x].fetchBySlide(slideNo);
+        for (var x = 0; x < this.posts.length; x++) {
+            anyPostsShown = this.posts[x].fetchBySlide(slideNo) || anyPostsShown;
+        }
         if (!anyPostsShown) {
             if (!$(this.noResultsOption).is(":visible"))
                 $(this.noResultsOption).fadeIn();
         }
     }
+
+    findUnresolved () {
+        var anyPostsShown = false;
+        $(this.noResultsOption).hide();
+        for (var x = 0; x < this.posts.length; x++) {
+            if (this.posts[x].getNumComments() == 0) {
+                this.posts[x].showThisPost();
+                anyPostsShown = true;
+            }
+            else 
+                this.posts[x].hideThisPost();
+        }
+        if (!anyPostsShown) {
+            if (!$(this.noResultsOption).is(":visible"))
+                $(this.noResultsOption).fadeIn();
+        }
+    }
+
 
     setUpSlideTransitionModule () {
         loadHTMLComponent("SlideTransitionModule", function (data) {
@@ -252,6 +316,16 @@ var PostSearch = class PostSearch {
         }.bind(this));
     }
 
+
+    searchNoText () {
+        this.mark.unmark();
+        this.currentTextBeingSearched = 0;
+        for (var x = 0; x < this.posts.length; x++) {
+            this.posts[x].hideThisPost();
+        }
+        this.ocrModule.doSearchInAudio("");
+        this.ocrModule.doSearchInOCR("");
+    }
 
     searchByText (text) {
         this.mark.unmark();
@@ -287,7 +361,7 @@ var PostSearch = class PostSearch {
     }
 
     remarkText () {
-        if (this.currentTextBeingSearched != null) {
+        if (this.currentTextBeingSearched != null && this.currentTextBeingSearched != 0) {
             this.mark.unmark();
             this.mark.mark(
                 this.currentTextBeingSearched,

@@ -41,7 +41,7 @@
   height: auto;
   background-color: #fff;
   border-radius: 6px;
-    border: 1px solid #BAC5D3;
+border: 1px solid #BAC5D3;
 
   box-shadow: none !IMPORTANT;
   position: relative;
@@ -108,6 +108,7 @@
   position: relative;
 }
 .notes-wrapper .notes-content {
+    white-space: pre;
   padding: 10px 30px;
   padding-bottom: 15px;
   font-weight: 400;
@@ -137,7 +138,7 @@
   color: #999EAC;
   position: relative;
 }
-.notes-wrapper .getImg {
+.notes-wrapper .save {
   width: 60px;
   height: 60px;
   position: absolute;
@@ -145,7 +146,7 @@
   right: -15px;
   cursor: pointer;
 }
-.notes-wrapper .getImg .material-icons {
+.notes-wrapper .save .material-icons {
   line-height: 60px;
   color: #999EAC;
 }

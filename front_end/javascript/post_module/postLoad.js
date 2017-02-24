@@ -54,6 +54,7 @@ var APost = class APost {
         });
         this.numOfComments++;
         $( this.mainDiv ).trigger( "commentAdded", [] );
+        console.log(inputForm);
         $(inputForm).val("");
     }
 
@@ -82,11 +83,11 @@ var APost = class APost {
     }
 
     hideThisPost () {
-        $(this.mainDiv).fadeOut(500);
+        $(this.mainDiv).hide();
     }
 
     showThisPost () {
-        $(this.mainDiv).fadeIn(500);
+        $(this.mainDiv).show();
     }
 
     loadHeader (name, pic) {
