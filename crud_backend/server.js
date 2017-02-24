@@ -143,6 +143,7 @@ app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req
 });
 
 app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  console.log("GETTING COURSES");
   apiFunctions.courseFunctions.getCourses(function(courses){
     res.send(courses);
   });
