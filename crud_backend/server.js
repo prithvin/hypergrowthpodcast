@@ -23,14 +23,16 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 var myPassport = require('./config/passport.js');
 
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', function(error){
+mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', options, function(error){
   if(error){
     console.log("Error Connecting" + error);
   }
   else{
     console.log("Connection Successful");
-    apiFunctions.podcastFunctions.createPodcasts();
+    // apiFunctions.podcastFunctions.createPodcasts();
   }
 });
 
@@ -156,11 +158,33 @@ app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res
 });
 
 app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  res.send("CREATING POST");
+  var request = {
+    PodcastId : req.query.PodcastId,
+    SlideOfPost : req.query.SlideOfPost,
+    TimeOfPost : req.query.TimeOfPost,
+    Content : req.query.Content,
+    CourseId : req.query.CourseId,
+    ProfilePic : req.user.ProfilePicture,
+    Name : req.user.Name
+  };
+
+  apiFunctions.postFunctions.createPost(request,function(status){
+    res.send(status);
+  });
 });
 
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  res.send("Creating Comment");
+  var request = {
+    PostId : req.query.PostId,
+    Time : req.query.Time,
+    Content : req.query.Content,
+    Pic : req.user.ProfilePicture,
+    PosterName : req.user.Name
+  };
+
+  apiFunctions.postFunctions.createComment(request, function(status){
+    res.send(status);
+  });
 });
 
 app.get('/markWatchedLater',apiFunctions.userFunctions.isLoggedIn,function(req,res){

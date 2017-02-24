@@ -27,11 +27,13 @@
 
 
       var loginPage = function () {
-        $("#loader-animation").show();
+        $("#loader-animation").fadeIn();
         require(['config', 'onboarding'], function () {
           loadComponent("OnboardingFrontPage", $("#page"), function () {
             new Onboarding($('#page').find('.onboarding-page'));
-            $("#loader-animation").hide();
+            setTimeout(function () {
+              $("#loader-animation").fadeOut();
+            }, 500);
           });
         });
       };
@@ -60,9 +62,9 @@
 
       var search = function (courseId) {
         $("#loader-animation").show();
-        loadComponent("CourseSearchModule", $("#page"), function () {
-          require(['searchResults'], function () {
-            new SearchPage(123, $("#page").find(".search-results-div"));
+        require(['search-results'], function () {
+          loadComponent("CourseSearchModule", $("#page"), function () {
+            new SearchResults($("#page").find(".search-results-div"));
             $("#loader-animation").hide();
           });
         });

@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'post-dropdown']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', 'post-dropdown']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -106,7 +106,12 @@ var require = {
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
+<<<<<<< HEAD
         "auto-correct": "post_module/Norvig",
         "post-dropdown": "post_module/PodcastDropdownMenu"
+=======
+        "auto-correct": "menu_module/Norvig",
+        "search-results": "search_module/search-results"
+>>>>>>> dfa1f3fdf9d0bd64eef6bc48190014af82cfea96
     }
 };

@@ -56,9 +56,6 @@ var PostSearch = class PostSearch {
 
         // Default to current slide as one
         this.posts = [];
-        
-        // Autcomplete Keywords
-        this.autokeys = [];
 
         this.currentViewData = {
             "PageType": "Lecture" // could also be notes, search, lecture, unanswered questions
@@ -101,7 +98,7 @@ var PostSearch = class PostSearch {
         this.startFormListeners(this);
 
         this.generateDropdownMenu();
-        
+        //this.initAutocomplete();
     }
 
     getCurrentSlideOfNewPost () {
@@ -359,24 +356,43 @@ var PostSearch = class PostSearch {
         });
 
     }
-    
+    /*
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
         callAPI(apiURL, "GET", {}, function (data) {
+<<<<<<< HEAD
             $.extend(self.autokeys, data["Keywords"]);
+=======
+            $.extend(autokeys, data["Keywords"]);
+            console.log(autokeys);
+>>>>>>> dfa1f3fdf9d0bd64eef6bc48190014af82cfea96
             $("#secondary-search-bar").autocomplete({
-                source: self.autokeys,
+                source: autokeys,
                 minLength: 2,
+                open: function () { 
+                    $('ul.ui-autocomplete-post').removeClass('closed');
+                    $('ul.ui-autocomplete-post').addClass('opened-post');  
+                },
+                close: function () {
+                    $('ul.ui-autocomplete-post').removeClass('opened-post').css('display', 'block');
+                    $('ul.ui-autocomplete-post').addClass('closed');
+                },
             });
         });
         
         document.getElementById("secondary-search-bar").addEventListener("change", function() {
             var text = document.getElementById('secondary-search-bar').value.toLowerCase();
+<<<<<<< HEAD
             if ($.inArray(text, self.autokeys) == -1)
                 self.autokeys.push(text);
+=======
+            if ($.inArray(text, autokeys) == -1)
+                autokeys.push(text);
+            console.log(autokeys);
+>>>>>>> dfa1f3fdf9d0bd64eef6bc48190014af82cfea96
         });                   
-    }
+    }*/
 }
 
 
