@@ -19,15 +19,16 @@
     background-clip: padding-box;
     opacity: 0;
     display: none;
-    height: 0px; 
+    
+    max-height: 0;
     overflow-y: scroll;
     overflow-x: hidden;
     padding-left: 0px;
     padding-right: 0px;
-    transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
-    -moz-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
-    -webkit-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
-    -o-transition: opacity .5s, height 0.5s ease-in-out, padding-left .5s, padding-right .5s;
+    transition: opacity .3s, max-height 2s ease-in-out;
+    -moz-transition: opacity .3s, max-height 2s ease-in-out;
+    -webkit-transition: opacity .3s, max-height 2s ease-in-out;
+    -o-transition: opacity .3s, max-height 2s ease-in-out;
 }
 
 .ui-menu-item > a.ui-corner-all {
@@ -55,7 +56,7 @@
 
 .ui-autocomplete.opened {
     opacity: 1;
-    height: 75px;
+    max-height: 3000px;
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -69,5 +70,4 @@
 }*/
 
 .ui-autocomplete.closed {
-    height: 0px;
 }
