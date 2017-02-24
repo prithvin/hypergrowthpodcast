@@ -21,13 +21,16 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.setHomeHyperLink(this);
         this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
         callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
             callback(data['CourseName'],  data['ClassQuarter']);
-        });
+            console.log(classID);
+            this.setHomeHyperLink(classID, this);
+        }.bind(this));
     }
 
     fetchUserData (callback) {
@@ -63,6 +66,20 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         })
     }
     
+    setHomeHyperLink (classID, thisClass) {
+        $(this.mainDiv).find("#home_button").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/course_homepage/" + classID; 
+            //$(thisClass.mainDiv).trigger( "goToCourseHome", [] );
+        })
+        $(this.mainDiv).find("#home_button2").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/course_homepage/" + classID; 
+            //$(thisClass.mainDiv).trigger( "goToCourseHome", [] );
+        })
+    }
+    
+    
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
@@ -86,12 +103,13 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             });
         });
         
+        /*
         callAPI(apiURL2, "GET", {}, function (data) {
             self.norvig = new Norvig(data["Dictionary"]);
-        });
+        });*/
         
         document.getElementById("searchBar").addEventListener("change", function() {
-            self.autocorrect();
+            //self.autocorrect();
             var text = document.getElementById('searchBar').value.toLowerCase();
             if ($.inArray(text, autokeys) == -1 && text.length > 2)
                 autokeys.push(text);

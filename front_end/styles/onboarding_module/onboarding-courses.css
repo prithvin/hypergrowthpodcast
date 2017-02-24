@@ -1,6 +1,7 @@
 .no-results-courses  {
     position: absolute;
     z-index: -1;
+    display: flex;
     text-align: center;
     width: 100%;
     padding-left: 100px;
@@ -8,6 +9,10 @@
     font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-size: 42px;
+}
+
+.no-results-hide {
+    display: none;
 }
 
 .onboarding-right {
@@ -18,10 +23,10 @@
 
 .onboarding-left {
   background: url('../../images/onboarding_module/Material-Design2.jpg'), rgba(0,0,0,0.6);
-  /*-webkit-background-size: cover; 
+  -webkit-background-size: cover; 
   -moz-background-size: cover; 
   -o-background-size: cover;
-  background-size: cover; */
+  background-size: cover; 
   background-color: rgba(100,100,100,.61);
   background-blend-mode: multiply;
   min-width: 50%;

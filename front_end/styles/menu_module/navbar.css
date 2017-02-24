@@ -76,3 +76,7 @@
     font-weight: 100 !IMPORTANT;
     font-size:0.85em !IMPORTANT;
 }
+
+.home-button:hover {
+    cursor: pointer;
+}
