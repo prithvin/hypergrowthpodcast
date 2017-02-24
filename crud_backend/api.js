@@ -10,26 +10,6 @@ var srt2vtt = require('srt2vtt');
 var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
-          //dummy function
-          createPodcasts: function(){/*
-            PodcastModel.create({ClassName: "CSE100", QuarterOfCourse: "Winter", ClassNameCourseKey:"CSE100" + "Winter", PodcastUrl:'https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3743&l=6&v=1',
-            OCRTranscriptionFreq: [{word:'BST', freq: 2}, {word: "Iterator", freq: 3}]}, function(err, podcasts){
-            if(err) console.log(err);
-              else console.log(podcasts);
-            });*/
-          },
-          //get all posts for course sorted
-          /*
-          var response{
-            ClassNameCourseKey : value
-          }
-
-        }*/
-          /*
-          request{
-            CourseId
-          }
-          */
           getVideosForCourse: function(request, callback){
             CourseModel.findOne({_id: request.CourseId}, function(err,course){
               if(err) {
