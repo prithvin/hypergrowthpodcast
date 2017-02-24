@@ -75,7 +75,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
             var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; // temporary link
+            window.location = path + "#/course_homepage/" + classID; // temporary lin
             $(this.mainDiv).trigger( "goToCourseHome", [] );
         }.bind(this))
     }
