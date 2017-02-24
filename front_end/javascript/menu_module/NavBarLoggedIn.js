@@ -28,8 +28,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     fetchCourseData(classID,  callback) {
         callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
             callback(data['CourseName'],  data['ClassQuarter']);
-            console.log(classID);
-            this.setHomeHyperLink(classID, this);
+            this.setHomeHyperLink(classID);
         }.bind(this));
     }
 
@@ -62,21 +61,23 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/courses";  // temporary link
             $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
         })
     }
     
-    setHomeHyperLink (classID, thisClass) {
+    setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
             var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; 
-            //$(thisClass.mainDiv).trigger( "goToCourseHome", [] );
-        })
+            window.location = path + "#/course_homepage/" + classID; // temporary link
+            $(this.mainDiv).trigger( "goToCourseHome", [] );
+        }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
             var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; 
-            //$(thisClass.mainDiv).trigger( "goToCourseHome", [] );
-        })
+            window.location = path + "#/course_homepage/" + classID; // temporary link
+            $(this.mainDiv).trigger( "goToCourseHome", [] );
+        }.bind(this))
     }
     
     
