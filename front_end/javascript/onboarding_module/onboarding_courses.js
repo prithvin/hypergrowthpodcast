@@ -5,7 +5,7 @@ var OnboardingCourses = class OnboardingCourses {
         this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
-        this.initAutocomplete();
+        //this.initAutocomplete();
     }
 
     fetchCourses() {
@@ -28,20 +28,25 @@ var OnboardingCourses = class OnboardingCourses {
             row.id = data[i]['Course'];
             var att = document.createAttribute('onclick');
             var path = window.location.pathname;
-            att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
+            att.value = "window.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
             row.setAttributeNode(att);
             var course_str = data[i]['Course'];
-            var title_str = data[i]['Title'];
+            //var title_str = "";//data[i]['Title'];
             var quarter_str =  data[i]['Quarter'];
             var course = document.createTextNode(course_str);
-            var title = document.createTextNode(title_str);
+            //var title = document.createTextNode(title_str);
+            var sym = document.createElement('i');
+            att = document.createAttribute('aria-hidden');
+            att.value = 'true';
+            sym.setAttributeNode(att);
+            sym.className = 'fa fa-graduation-cap sym'; //fa-graduation-cap
             var quarter = document.createTextNode(quarter_str);
             cell.appendChild(course);
-            cell2.appendChild(title);
+            cell2.appendChild(sym);
             cell3.appendChild(quarter);
         } 
     }
-    
+    /*
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getCourses.json";
@@ -50,7 +55,7 @@ var OnboardingCourses = class OnboardingCourses {
                 self.autokeys.push(data[x]['Course']);
             }
             console.log(self.autokeys);
-            $("#searchBar").autocomplete({
+            $("#searchBar1").autocomplete({
                 source: self.autokeys,
                 minLength: 2,
                 open: function () { 
@@ -64,13 +69,13 @@ var OnboardingCourses = class OnboardingCourses {
             });
         });
         
-        document.getElementById("searchBar").addEventListener("change", function() {
-            var text = document.getElementById('searchBar').value.toLowerCase();
+        document.getElementById("searchBar1").addEventListener("change", function() {
+            var text = document.getElementById('searchBar1').value.toLowerCase();
             if ($.inArray(text, self.autokeys) == -1)
                 self.autokeys.push(text);
             console.log(self.autokeys);
         });                   
-    }
+    }*/
 }
 
 
@@ -91,10 +96,11 @@ $(".table-row").click(function() {
 /* Search Function */
 function myFunction() {
   var input, filter, table, tr, td, td1, td2, i;
-  input = document.getElementById("searchBar");
+  input = document.getElementById("searchBar1");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
+  var count = 0;
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     td1 = tr[i].getElementsByTagName("td")[1];
@@ -106,8 +112,14 @@ function myFunction() {
           tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
+        count++;
       }
     }    
+  }
+  if (count == tr.length - 1) {
+      $('.no-results-courses').removeClass('no-results-hide');
+  } else {
+      $('.no-results-courses').addClass('no-results-hide');
   }
 }
 /* Sort Function */

@@ -158,11 +158,33 @@ app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res
 });
 
 app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  res.send("CREATING POST");
+  var request = {
+    PodcastId : req.query.PodcastId,
+    SlideOfPost : req.query.SlideOfPost,
+    TimeOfPost : req.query.TimeOfPost,
+    Content : req.query.Content,
+    CourseId : req.query.CourseId,
+    ProfilePic : req.user.ProfilePicture,
+    Name : req.user.Name
+  };
+
+  apiFunctions.postFunctions.createPost(request,function(status){
+    res.send(status);
+  });
 });
 
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
-  res.send("Creating Comment");
+  var request = {
+    PostId : req.query.PostId,
+    Time : req.query.Time,
+    Content : req.query.Content,
+    Pic : req.user.ProfilePicture,
+    PosterName : req.user.Name
+  };
+
+  apiFunctions.postFunctions.createComment(request, function(status){
+    res.send(status);
+  });
 });
 
 app.get('/markWatchedLater',apiFunctions.userFunctions.isLoggedIn,function(req,res){

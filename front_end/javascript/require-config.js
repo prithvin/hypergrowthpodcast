@@ -30,7 +30,10 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', "notes", 'post-dropdown']
+        },
+        "notes":{
+            "deps":["jquery"]
         },
         "videojs": {
             "deps": ['jquery'],
@@ -49,6 +52,7 @@ var require = {
         },
         "loader": {},
         "angular": {},
+        "post-dropdown": {},
         "navbar": {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
         },
@@ -87,6 +91,7 @@ var require = {
         "postLoad": "post_module/postLoad",
         "postSearch": "post_module/postSearch",
         "BoyerMoore": "post_module/BoyerMoore",
+        "notes": "notes_module/notes",
         "components": "components",
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
@@ -105,6 +110,7 @@ var require = {
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
+        "post-dropdown": "post_module/PodcastDropdownMenu",
         "auto-correct": "menu_module/Norvig",
         "search-results": "search_module/search-results"
     }

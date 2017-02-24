@@ -21,13 +21,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.setHomeHyperLink(this);
         this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
         callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
             callback(data['CourseName'],  data['ClassQuarter']);
-        });
+            this.setHomeHyperLink(classID);
+        }.bind(this));
     }
 
     fetchUserData (callback) {
@@ -59,9 +61,25 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/courses";  // temporary link
             $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
         })
     }
+    
+    setHomeHyperLink (classID) {
+        $(this.mainDiv).find("#home_button").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/course_homepage/" + classID; // temporary link
+            $(this.mainDiv).trigger( "goToCourseHome", [] );
+        }.bind(this))
+        $(this.mainDiv).find("#home_button2").on("click", function () {
+            var path = window.location.pathname;
+            window.location = path + "#/course_homepage/" + classID; // temporary lin
+            $(this.mainDiv).trigger( "goToCourseHome", [] );
+        }.bind(this))
+    }
+    
     
     initAutocomplete() {
         var self = this;
@@ -70,10 +88,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         
         callAPI(apiURL, "GET", {}, function (data) {
             var keys = localStorage.getItem("autokeys");
-            console.log(keys);
             if (keys !== null) autokeys = keys.split(",");
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
@@ -88,12 +104,13 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             });
         });
         
+        /*
         callAPI(apiURL2, "GET", {}, function (data) {
             self.norvig = new Norvig(data["Dictionary"]);
-        });
+        });*/
         
         document.getElementById("searchBar").addEventListener("change", function() {
-            self.autocorrect();
+            //self.autocorrect();
             var text = document.getElementById('searchBar').value.toLowerCase();
             if ($.inArray(text, autokeys) == -1 && text.length > 2)
                 autokeys.push(text);

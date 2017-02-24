@@ -16,15 +16,18 @@
               <thead class="table-head">
                 <div class="search-container-table">
                     <form class="pure-form main_search_container form-group has-success">
-                        <input id="searchBar" onkeyup="myFunction()" class="input-style main_search form-control form-control-success text-center" type="text" placeholder="Find Your Course.">
+                        <input id="searchBar1" onkeyup="myFunction()" class="input-style main_search form-control form-control-success text-center" type="text" placeholder="Find Your Course.">
                     </form>
                 </div>
                 <th class="cell-head cell-head-end" onclick="sortTable(0)"><img class="pic-filter" src="images/onboarding_module/filter.png"></th>
-                <th class="cell-head cell-head-mid" onclick="sortTable(1)"><img class="pic-filter" src="images/onboarding_module/filter.png"></th>
+                <!--th class="cell-head cell-head-mid" onclick="sortTable(1)"><img class="pic-filter" src="images/onboarding_module/filter.png"></th-->
                 <th class="cell-head cell-head-end" onclick="sortTable(2)"><img class="pic-filter" src="images/onboarding_module/filter.png"></th>
               </thead>
               <tbody id="course--table" class="table-body">
                 <!--tr class="table-row" data-href="test"><td class="cell">CSE 100 - Winter 2017</td></tr-->
+                  <div id="courses-results" class="no-results-courses no-results-hide">
+                    <br><br>Sorry, we don't have you're course 😱
+                  </div>
               </tbody>
             </table>
         </div>

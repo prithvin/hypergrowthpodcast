@@ -36,6 +36,12 @@
 @import url("./post_module/card.css");
 @import url("./post_module/searching.css");
 @import url("./post_module/switcherDropdown.css");
+@import url("./post_module/notification-post-search.css");
+
+/*notes*/
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
+@import url(./post_module/notes.css);
 
 /* course-videos module */
 @import url("./course_videos_module/course_videos.css");
