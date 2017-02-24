@@ -1,0 +1,15 @@
+<div class="notes-wrapper">
+    <div class="saver-wrap" contenteditable="false">
+        <div class="notes-dot" contenteditable="false"></div>
+        <div class="rest" contenteditable="false"></div>
+    </div>
+    <div class="notes-title" contenteditable="true" onpaste="OnPaste_StripFormatting(this, event);" data-placeholder="Title"></div>
+    <div class="notes-content" contenteditable="true" onpaste="OnPaste_StripFormatting(this, event);" data-placeholder="Start your notes here"></div>
+    <div class="line"></div>
+    <div class="comment"></div>
+    <!--input type="file" onchange="previewFile()" id="selectedFile" style="display: none;" /-->
+    <input type="file" id="selectedFile" style="display: none;" />
+    <div class="getImg" onclick="document.getElementById('selectedFile').click();">
+        <i class="material-icons">insert_photo</i>
+    </div>
+</div>

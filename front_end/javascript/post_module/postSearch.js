@@ -71,6 +71,7 @@ var PostSearch = class PostSearch {
 
         // DOM Elements
         this.searchModule = $(this.mainDiv).parent().find(".search-module");
+        //this.notesModule = $(this.mainDiv).find(".notes-wrapper");
         this.noResultsOption = $(this.mainDiv).find(".no-results");
         this.searchInputForm = $(this.mainDiv).prev();
         this.searchInputField = $(this.searchInputForm).find("#secondary-search-bar");
@@ -80,10 +81,11 @@ var PostSearch = class PostSearch {
         this.loadingModule.hide();
         // Package loads
         this.mark = new Mark($(this.searchModule)[0]);
+        //this.notes = new Notes($(this.notesModule), "NOTES");
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
-
+        //$(this.notesModule).hide();
         if (ocrAudioData) {
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
@@ -109,8 +111,6 @@ var PostSearch = class PostSearch {
             return this.currentViewData['SlideNo'];
         }
     }
-
-
     noPostsNewPostHandling (thisClass) {
 
         $(this.viewAllPostsButton).on("click", function (ev) {
@@ -390,6 +390,7 @@ var PostSearch = class PostSearch {
 
         });                   
     }
+
 }
 
 

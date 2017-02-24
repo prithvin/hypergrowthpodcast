@@ -26,7 +26,9 @@ var APost = class APost {
         }
 
     }
-
+    
+    
+    
     addCommentListener (thisClass) {
         $(this.commentForm).on("submit", function (ev) {
             ev.preventDefault();
