@@ -18,10 +18,11 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     }
 
     generateNonSlideOptions () {
-        for (var x = 1; x <= this.numSlides; x++) {
-            var nextSlide = this.generateOneDropdownForSlide(x);
-            this.slideDropdownItems[x] = nextSlide;
-            this.dropdownMenuOptions.append(nextSlide);
+        var nonSlideOptions = ["Entire Lecture", "Unresolved Posts"];
+        for (var x = 0; x < nonSlideOptions.length; x++) {
+            var nextOpt = this.generateDropdownWithType(nonSlideOptions[x]);
+            this.slideDropdownItems[nextOpt[x]] = nextOpt;
+            this.dropdownMenuOptions.append(nextOpt);
         }
     }
 
@@ -42,7 +43,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     }
 
     switchToSlide (slideNo) {
-        this.slideDropdownItems[slideNo].click();
+        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(this.slideDropdownItems[slideNo]).html());
     }
 
     generateDropdownWithType (type) {

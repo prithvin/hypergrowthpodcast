@@ -51,6 +51,9 @@ var PostSearch = class PostSearch {
         this.mainDiv = $(mainDiv).find(".search-module");
         this.doneLoading = callback;
 
+        this.slideTransitionDiv = $(this.mainDiv).parent().find(".rectangle").hide();
+        $(this.slideTransitionDiv).hide();
+
         // Default to current slide as one
         this.posts = [];
         
@@ -58,8 +61,8 @@ var PostSearch = class PostSearch {
         this.autokeys = [];
 
         this.currentViewData = {
-            "PageType": "Slide", // could also be notes, search, unanswered questions
-            "SlideNo": 1    // only if SlideNo called, tohewrise slide defaults to video slide
+            "PageType": "Lecture" // could also be notes, search, lecture, unanswered questions
+            //"SlideNo": 1    // only if SlideNo called, tohewrise slide defaults to video slide
         };
 
         if (videoData != null && videoData['CurrentSlideNum'] != null)  {
@@ -103,7 +106,7 @@ var PostSearch = class PostSearch {
 
     getCurrentSlideOfNewPost () {
         if (this.currentViewData["PageType"] != "Slide") {
-            return this.videoCurrentSlide
+            return this.videoCurrentSlide;
         }
         else {
             return this.currentViewData['SlideNo'];
@@ -128,10 +131,30 @@ var PostSearch = class PostSearch {
         }.bind(this));
     }
 
+    changeSlideCompletely (slideNo) {
+        if (slideNo != this.videoCurrentSlide) {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
+        else {
+            this.slideTransitionDiv.hide();
+        }
+        this.currentViewData = {
+            "PageType": "Slide",
+            "SlideNo": slideNo
+        };
+        this.dropdownMenu.switchToSlide(slideNo);
+        this.searchForSlide(slideNo);
+    }
+
+
     updateCurrentVideoSlide  (slideNo) {
         this.videoCurrentSlide = slideNo;
-        console.log("post search got the updated slide as " + slideNo);
-
+        if (this.currentViewData["PageType"] != "Slide") {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
+        else if (this.currentViewData["SlideNo"] != this.videoCurrentSlide) {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
         /*
         Add slide transition code here
         if (this.currentViewData["PageType"] != "Slide") {
@@ -142,6 +165,10 @@ var PostSearch = class PostSearch {
         }*/
     }
 
+    showNotifcationToUserForSlideTransition (slideNo) {
+        this.slideTransitionDiv.show();
+        this.slideTransitionDiv.find(".rectangle-notif-slide-data").html("Slide " + slideNo).attr("data-slide", slideNo);
+    }
     startFormListeners (thisClass) {
         if (!this.OCRAudioLoaded) {
             setTimeout(function () {

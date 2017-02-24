@@ -51,17 +51,11 @@ var PodcastPage = class PodcastPage {
             else {
                 this.videoClass.setTime(this.getTimeForSlide(slideNo));
             }
-         
+            this.postSearch.updateCurrentVideoSlide(slideNo);
+            this.postSearch.changeSlideCompletely(slideNo);
         }.bind(this))
     }
-    // The two methods below must be TODO
-    fetchStartTimeBasedOnSlide () {
 
-    }
-
-    fetchStartingSlide () {
-
-    }
 
     fetchVideo (thisClass) {
         callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID}, 
@@ -87,7 +81,7 @@ var PodcastPage = class PodcastPage {
                 thisClass.updatePostHeights();
             }
         });
-        $(thisClass.mainDiv).find("#podcast-posts").bind("DOMSubtreeModified", function() {
+        $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
             thisClass.updatePostHeights();
         });
     }
