@@ -48,7 +48,7 @@
 .ui-state-hover, .ui-state-active {
     color: #ffffff;
     text-decoration: none;
-    background-color: rgba(15, 43, 92, 0.95); 
+    background-color: rgba(15, 43, 92, 1); 
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     background-image: none;

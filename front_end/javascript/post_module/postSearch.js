@@ -81,6 +81,8 @@ var PostSearch = class PostSearch {
         this.loadingModule.hide();
         // Package loads
         this.mark = new Mark($(this.searchModule)[0]);
+        
+        //this.notes = new Notes($(this.notesModule), "NOTES\nMORENOTES");
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
