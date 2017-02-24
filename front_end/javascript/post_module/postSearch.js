@@ -236,8 +236,14 @@ var PostSearch = class PostSearch {
     }
 
     searchForSlide (slideNo) {
+        var anyPostsShown = false;
+        $(this.noResultsOption).hide();
         for (var x = 0; x < this.posts.length; x++)
-            this.posts[x].fetchBySlide(slideNo);
+            anyPostsShown = anyPostsShown || this.posts[x].fetchBySlide(slideNo);
+        if (!anyPostsShown) {
+            if (!$(this.noResultsOption).is(":visible"))
+                $(this.noResultsOption).fadeIn();
+        }
     }
 
     setUpSlideTransitionModule () {
@@ -263,7 +269,7 @@ var PostSearch = class PostSearch {
         anyPostsShown = anyPostsShown || audioResults || ocrResults;
         if (!anyPostsShown) {
             if (!$(this.noResultsOption).is(":visible"))
-                $(this.noResultsOption).fadeIn(500);
+                $(this.noResultsOption).fadeIn();
         }
         else {
             this.mark.mark(text, { 
