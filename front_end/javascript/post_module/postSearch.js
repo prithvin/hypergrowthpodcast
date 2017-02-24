@@ -51,12 +51,22 @@ var PostSearch = class PostSearch {
         this.mainDiv = $(mainDiv).find(".search-module");
         this.doneLoading = callback;
 
+        this.slideTransitionDiv = $(this.mainDiv).parent().find(".rectangle").hide();
+        $(this.slideTransitionDiv).hide();
+
         // Default to current slide as one
         this.posts = [];
 
-        this.currentSlide = 1;
-        if (videoData)
-            this.currentSlide = videoData['CurrentSlideNum'];
+        this.currentViewData = {
+            "PageType": "Lecture" // could also be notes, search, lecture, unanswered questions
+            //"SlideNo": 1    // only if SlideNo called, tohewrise slide defaults to video slide
+        };
+
+        if (videoData != null && videoData['CurrentSlideNum'] != null)  {
+            this.videoCurrentSlide = videoData['CurrentSlideNum'];
+            this.currentViewData['SlideNo'] = this.videoCurrentSlide;
+        }
+        
         this.setUpSlideTransitionModule();
 
         // DOM Elements
@@ -78,14 +88,28 @@ var PostSearch = class PostSearch {
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
             }.bind(this));
+            this.numberOfSlides = ocrAudioData["Slides"].length;
+            this.initAutocomplete();
         }
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
         this.loadPostsFromServer(this);
         this.noPostsNewPostHandling(this);
         this.startFormListeners(this);
-        //this.initAutocomplete();
+
+        this.generateDropdownMenu();
+
     }
+
+    getCurrentSlideOfNewPost () {
+        if (this.currentViewData["PageType"] != "Slide") {
+            return this.videoCurrentSlide;
+        }
+        else {
+            return this.currentViewData['SlideNo'];
+        }
+    }
+
 
     noPostsNewPostHandling (thisClass) {
 
@@ -95,15 +119,53 @@ var PostSearch = class PostSearch {
         });
 
         $(this.newPostButton).on("click", function (ev) {
-            var newPostVal = $(thisClass.searchInputField).val();
+            var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
                 swal("Please ask a question to search for!");   // Alert library
             else {
-                thisClass.generateNewPost(newPostVal, new Date().getTime(), thisClass.currentSlide); // <TODO> FIX THIS WITH CURRENT SLIDE
+                this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }
-        });
+        }.bind(this));
     }
 
+    changeSlideCompletely (slideNo) {
+        if (slideNo != this.videoCurrentSlide) {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
+        else {
+            this.slideTransitionDiv.hide();
+        }
+        this.currentViewData = {
+            "PageType": "Slide",
+            "SlideNo": slideNo
+        };
+        this.dropdownMenu.switchToSlide(slideNo);
+        this.searchForSlide(slideNo);
+    }
+
+
+    updateCurrentVideoSlide  (slideNo) {
+        this.videoCurrentSlide = slideNo;
+        if (this.currentViewData["PageType"] != "Slide") {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
+        else if (this.currentViewData["SlideNo"] != this.videoCurrentSlide) {
+            this.showNotifcationToUserForSlideTransition(this.videoCurrentSlide);
+        }
+        /*
+        Add slide transition code here
+        if (this.currentViewData["PageType"] != "Slide") {
+            return this.videoCurrentSlide
+        }
+        else {
+            return this.currentViewData['SlideNo'];
+        }*/
+    }
+
+    showNotifcationToUserForSlideTransition (slideNo) {
+        this.slideTransitionDiv.show();
+        this.slideTransitionDiv.find(".rectangle-notif-slide-data").html("Slide " + slideNo).attr("data-slide", slideNo);
+    }
     startFormListeners (thisClass) {
         if (!this.OCRAudioLoaded) {
             setTimeout(function () {
@@ -125,7 +187,7 @@ var PostSearch = class PostSearch {
             else if ($(this.searchInputField).val().trim().length == 0)
                 this.searchByText("");
         }.bind(this))
-        $(this.searchInputField).on("input", function (ev) {
+        $(this.searchInputField).on("input change", function (ev) {
             var inputVal = $(this.searchInputField).val();
             
             ev.preventDefault();
@@ -134,7 +196,6 @@ var PostSearch = class PostSearch {
                 setTimeout(function(input){
                     this.loadingModule.show();
                     if(input == this.currWord){
-                        console.log("searching for: " + input);
                         this.searchByText(input);
                     }
                     
@@ -175,8 +236,14 @@ var PostSearch = class PostSearch {
     }
 
     searchForSlide (slideNo) {
+        var anyPostsShown = false;
+        $(this.noResultsOption).hide();
         for (var x = 0; x < this.posts.length; x++)
-            this.posts[x].fetchBySlide(slideNo);
+            anyPostsShown = anyPostsShown || this.posts[x].fetchBySlide(slideNo);
+        if (!anyPostsShown) {
+            if (!$(this.noResultsOption).is(":visible"))
+                $(this.noResultsOption).fadeIn();
+        }
     }
 
     setUpSlideTransitionModule () {
@@ -202,7 +269,7 @@ var PostSearch = class PostSearch {
         anyPostsShown = anyPostsShown || audioResults || ocrResults;
         if (!anyPostsShown) {
             if (!$(this.noResultsOption).is(":visible"))
-                $(this.noResultsOption).fadeIn(500);
+                $(this.noResultsOption).fadeIn();
         }
         else {
             this.mark.mark(text, { 
@@ -231,6 +298,13 @@ var PostSearch = class PostSearch {
                 }
             );
         }
+    }
+
+    generateDropdownMenu () {
+        if (this.postFetchData["TypeOfFetch"] == "PodcastSearch") {
+            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"));
+        }
+        
     }
 
     loadPostsFromServer (thisClass) {
@@ -288,13 +362,12 @@ var PostSearch = class PostSearch {
         });
 
     }
-    /*
+    
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
         callAPI(apiURL, "GET", {}, function (data) {
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
             $("#secondary-search-bar").autocomplete({
                 source: autokeys,
                 minLength: 2,
@@ -314,8 +387,9 @@ var PostSearch = class PostSearch {
             if ($.inArray(text, autokeys) == -1)
                 autokeys.push(text);
             console.log(autokeys);
+
         });                   
-    }*/
+    }
 }
 
 

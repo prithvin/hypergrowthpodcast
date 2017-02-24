@@ -4,7 +4,7 @@
     height: 15px;
     border-radius: 15px;
     background-color: #446cb3;
-    border: 1px solid rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.86);
 }
 
 .thinking-text {
@@ -22,7 +22,7 @@
 #slide-transition-data {
     position: absolute;
     z-index: 1000;
-    width: 105%;
+    width: 100%;
     text-align: center;
     background-color: rgba(244, 246, 248, 0.66);
     padding-top: 50px;

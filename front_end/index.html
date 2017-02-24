@@ -54,8 +54,8 @@
         $("#loader-animation").show();
         loadComponent("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
-            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"));
-            timeToHideLoader(500);
+            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), 10);
+            timeToHideLoader(1000);
           });
         });
       };
