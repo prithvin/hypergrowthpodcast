@@ -31,13 +31,18 @@ var OnboardingCourses = class OnboardingCourses {
             att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
             row.setAttributeNode(att);
             var course_str = data[i]['Course'];
-            var title_str = data[i]['Title'];
+            //var title_str = "";//data[i]['Title'];
             var quarter_str =  data[i]['Quarter'];
             var course = document.createTextNode(course_str);
-            var title = document.createTextNode(title_str);
+            //var title = document.createTextNode(title_str);
+            var sym = document.createElement('i');
+            att = document.createAttribute('aria-hidden');
+            att.value = 'true';
+            sym.setAttributeNode(att);
+            sym.className = 'fa fa-podcast sym'; //fa-graduation-cap
             var quarter = document.createTextNode(quarter_str);
             cell.appendChild(course);
-            cell2.appendChild(title);
+            cell2.appendChild(sym);
             cell3.appendChild(quarter);
         } 
     }

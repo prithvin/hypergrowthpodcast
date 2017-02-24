@@ -107,6 +107,7 @@
 }
 
 .cell-head { 
+    width: 1%;
 }
 
 .cell-head-mid {
@@ -114,29 +115,44 @@
 }
 
 .cell-head-end {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 .cell-mid {
-    width: 90%;
+    width: 10%;/*width: 90%;*/
 }
 
 .cell-end {
-    width: 5%;
+    width: 80%;
 }
 
 .cell {
   padding: 20px;
-  line-height: 25px;
+  line-height: 35px;
   font-family: "Roboto", sans-serif;
   font-weight: 200;
   font-size: 18px;
   color: white;
+  //width: 100%;
   /*-webkit-transition: font-size .3s;
   transition: font-size .3s;*/
   /*white-space:nowrap;*/
 }
 
+.sym {
+    padding-top: 10px;
+    opacity: .2;
+    -webkit-transition: opacity 1s, padding-top .1s;
+    transition: opacity 1s, padding-top .1s;
+}
+
+.table-row:hover .sym {
+    opacity: 1;
+}
+
+.table-row:active .sym {
+    padding-top: 0px;
+}
 /*
 .cell:hover {
   font-size: 20;
@@ -161,17 +177,18 @@
 }
 
 .table-row {
-  display: block;
+  display: flex;
   opacity: 1;
+  width: 100%;
   cursor: pointer;
   padding-left: 10px;
-  padding-right: 5px;
+  padding-right: 10px;
   -webkit-transition: padding-left .3s, padding-right .3s;
   transition: padding-left .3s, padding-right .3s;
 }
 
 .table-row:hover {
-  padding-left: 5px !important;
+  padding-left: 0px !important;
   padding-right: 0px !important;
   opacity: .95 !important;
 }

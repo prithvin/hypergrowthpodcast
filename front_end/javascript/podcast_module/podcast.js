@@ -1,8 +1,11 @@
 var PodcastPage = class PodcastPage {
 
-    constructor (podcastID, mainDiv) {
+    constructor (podcastID, mainDiv, startingSlide) {
         this.mainDiv = mainDiv;
         this.podcastID = podcastID;
+        this.startingSlide = startingSlide;
+        if (!this.startingSlide)
+            this.startingSlide = 1;
         this.fetchUserData(this);
         this.loadNavbar(this);
         
@@ -48,17 +51,11 @@ var PodcastPage = class PodcastPage {
             else {
                 this.videoClass.setTime(this.getTimeForSlide(slideNo));
             }
-         
+            this.postSearch.updateCurrentVideoSlide(slideNo);
+            this.postSearch.changeSlideCompletely(slideNo);
         }.bind(this))
     }
-    // The two methods below must be TODO
-    fetchStartTimeBasedOnSlide () {
 
-    }
-
-    fetchStartingSlide () {
-
-    }
 
     fetchVideo (thisClass) {
         callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID}, 
@@ -68,8 +65,9 @@ var PodcastPage = class PodcastPage {
                     "Slides": data['Slides']
                 };
                 thisClass.parseSlides(data['Slides']);
-                thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
-                thisClass.loadPosts(thisClass);
+                thisClass.loadPosts(thisClass, function () {
+                    thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
+                });
             }
         );
     }
@@ -83,7 +81,7 @@ var PodcastPage = class PodcastPage {
                 thisClass.updatePostHeights();
             }
         });
-        $(thisClass.mainDiv).find("#podcast-posts").bind("DOMSubtreeModified", function() {
+        $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
             thisClass.updatePostHeights();
         });
     }
@@ -100,11 +98,11 @@ var PodcastPage = class PodcastPage {
         });
     }
 
-    loadPosts (thisClass) {
+    loadPosts (thisClass, callback) {
         require(['postSearch'], function () {
             var divToLoad = $(thisClass.mainDiv).find("#podcast-posts");
             loadComponent("PostSearchModule", divToLoad, function () {
-                new PostSearch(
+                thisClass.postSearch = new PostSearch(
                     {
                         "UniqueID": thisClass.podcastID,
                         "TypeOfFetch": "PodcastSearch"
@@ -115,11 +113,14 @@ var PodcastPage = class PodcastPage {
                     },
                     divToLoad,
                     thisClass.audioData,
-                    {},
+                    {
+                        "CurrentSlideNum": thisClass.startingSlide
+                    },
                     function () {
                         setTimeout(function () {
                             thisClass.updatePostHeights() 
                         }, 500);
+                        callback();
                     }.bind(thisClass)
                 );
                 thisClass.dynamicWindowResize(thisClass);
@@ -132,11 +133,20 @@ var PodcastPage = class PodcastPage {
             var divToLoad = $(thisClass.mainDiv).find("#video-space");
 
             loadComponent("VideoModule", divToLoad, function () {
-                thisClass.videoClass = new videoClass(url, 0, divToLoad, srtFile);
-                thisClass.getSlideClicks();
+                thisClass.videoClass = new videoClass(url, 0, divToLoad, srtFile, thisClass.slideTimes, function () {
+                    thisClass.getSlideClicks();
+                    thisClass.videoClass.setTime(thisClass.getTimeForSlide(thisClass.startingSlide));
+                    thisClass.updateSlideNumberFromVideo();
+                });
             });
 
         });                
+    }
+
+    updateSlideNumberFromVideo () {
+        $(this.mainDiv).find("#video-space").on("slideChange", function (ev, newSlide) {
+            this.postSearch.updateCurrentVideoSlide(newSlide);
+        }.bind(this));
     }
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();

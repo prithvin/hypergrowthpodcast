@@ -1,7 +1,7 @@
 .search-module-main {
     background-color: #F4F6F8;
     height: 100%;
-    padding-top: 30px;
+    padding-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -11,6 +11,13 @@
     background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7LE9IY2mTREC1zYoRyyo182eoXd6EH-EV4IGRXDYYnMvAaYoN") !IMPORTANT;
 }
 
+.slide-transition-notifyer {
+    width: 82.5%;
+    right: 0.5%;
+    position: relative;
+    height: 30px;
+    margin-bottom:5px;
+}
 .search-module {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -23,9 +30,11 @@
     margin-right: 35px;
     margin-left: 9.45% !IMPORTANT;
     padding-bottom: 10px;
+    margin-bottom:0px !IMPORTANT;
+    padding-top:10px;
 }
 .post_main_search {
-    height:2.75em;
+    height:2.5em;
     box-shadow: none !IMPORTANT;
     border-radius: 3px !IMPORTANT;
     border-color: #C0C9D7 !IMPORTANT;
@@ -55,7 +64,7 @@
 }
 
 .new-post-img{
-    height: 40px;
+    height: 35px;
     min-width: 40px;
     background-color:#4A76BD !IMPORTANT;
     padding: 10px !IMPORTANT;

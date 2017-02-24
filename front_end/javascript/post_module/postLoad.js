@@ -71,10 +71,14 @@ var APost = class APost {
 
     fetchBySlide (slideNo) {
         var isGoodSlide = $($(this.mainDiv).find(".slide-no")).is(':contains("Slide ' + slideNo + '")');
-        if (isGoodSlide)
+        if (isGoodSlide) {
             this.showThisPost();
-        else
+            return true;
+        }
+        else {
             this.hideThisPost();
+            return false;
+        }
     }
 
     hideThisPost () {
