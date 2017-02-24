@@ -10,29 +10,10 @@ var srt2vtt = require('srt2vtt');
 var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
-          //dummy function
-          createPodcasts: function(){/*
-            PodcastModel.create({ClassName: "CSE100", QuarterOfCourse: "Winter", ClassNameCourseKey:"CSE100" + "Winter", PodcastUrl:'https://podcast.ucsd.edu/podcasts/default.aspx?PodcastId=3743&l=6&v=1',
-            OCRTranscriptionFreq: [{word:'BST', freq: 2}, {word: "Iterator", freq: 3}]}, function(err, podcasts){
-            if(err) console.log(err);
-              else console.log(podcasts);
-            });*/
-          },
-          //get all posts for course sorted
-          /*
-          var response{
-            ClassNameCourseKey : value
-          }
-
-        }*/
-          /*
-          request{
-            CourseId
-          }
-          */
           getVideosForCourse: function(request, callback){
             CourseModel.findOne({_id: request.CourseId}, function(err,course){
-              if(err) {
+              if(course == null) {
+                callback({});
                 console.log("error finding course");
               } else {
                 var copy = [];
@@ -52,26 +33,6 @@ var apiFunctions = {
               }
             });
 
-          },
-          /*
-            request{
-              CourseId :
-              UpperLimit :
-            }
-          */
-          findPodcastsByKeyword: function(request,callback){
-            PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
-              var arrayOfPodcasts = [];
-              for(var i = 0; i < podcasts.length; i++){
-                var podcastObject = {
-                  //Todo
-                }
-                arrayOfPodcasts.push(podcastObject);
-              }
-              callback({
-                Podcasts : arrayOfPodcasts
-              });
-            });
           },
 
           /*
@@ -171,7 +132,12 @@ var apiFunctions = {
 
           },
           getCourseInfo : function(request,callback){
-            CourseModel.findOne({CourseId : request.courseId},function(err,course){
+            CourseModel.findOne({'_id': request.CourseId},function(err,course){
+                if (course == null) {
+                  callback({});
+                  return;
+                }
+
                 var courseToRet = {
                   Id : course._id,
                   Course : course.Name,
@@ -238,13 +204,30 @@ var apiFunctions = {
             });
           },
           createPost: function(request,callback) {
-
-              // @response should be true or false on successful/unsuccessful comment
+            PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
+            Content : request.Content, CourseId : request.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+              if(err)
+                callback(false);
+              else {
+                callback(true);
+              }
+            });
           },
 
           createComment: function(request,callback) {
+            PostModel.find({"_id" : request.PostId}, function(err, post){
+                if(err)
+                  return callback(false);
+                var commentObject = {
+                  Pic : request.Pic,
+                  PosterName : request.PosterName,
+                  Time  : request.Time,
+                  Content : request.Content
+                };
 
-            // @response should be true or false on successful/unsuccessful post
+                post.Comments.push(commentObject);
+                return callback(true);
+            });
           }
         }
 }
