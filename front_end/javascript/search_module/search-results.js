@@ -15,7 +15,7 @@ var SearchResults = class SearchResults {
   }
 
   displayResults(mainDiv, videoDiv, postDiv) {
-    callAPI('/fake_data/searchResults.json', 'GET', {}, (data) => {
+    callAPI('/fake_data/search-results.json', 'GET', {}, (data) => {
       var query = data['Query'];
       var course_title = data['Title'];
       var video_results = data['Videos'];
@@ -40,39 +40,15 @@ var SearchResults = class SearchResults {
         video_preview_img.src = video_result['PreviewImage'];
         $(video_preview_img).addClass('preview-img');
 
+        var video_title = document.createElement('div');
+        $(video_title).addClass('video-title');
+        video_title.textContent = video_result['Date'];
+
         $(video_result_div).append(video_preview_img);
+        $(video_result_div).append(video_title);
 
         $(curr_row).append(video_result_div);
       }
-    });
-  }
-
-  loadPosts (thisClass) {
-    require(['postSearch'], function () {
-      var divToLoad = $(thisClass.mainDiv).find("#posts");
-      loadComponent("PostSearchModule", divToLoad, function () {
-        console.log(thisClass.mainDiv);
-        console.log("postSearch");
-        new PostSearch({
-          "UniqueID": thisClass.podcastID,
-          "TypeOfFetch": "CourseSearch",
-          "SearchQuery" : "Supply"
-        },
-        {
-          "Name": thisClass.UserName,
-          "Pic": thisClass.UserPic
-        }, divToLoad);
-      });
-    });
-  }
-
-  loadVideos(thisClass) {
-    require(['search-videos'], function() {
-        console.log("TEST");
-      var divToLoad = $(thisClass.mainDiv).find("#search-videos");
-      loadComponent("SearchResultsModule", divToLoad, function() {
-        new SearchVideosClass(1, $(thisClass.mainDiv));
-      });
     });
   }
 }
