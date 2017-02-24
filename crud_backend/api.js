@@ -32,7 +32,8 @@ var apiFunctions = {
           */
           getVideosForCourse: function(request, callback){
             CourseModel.findOne({_id: request.CourseId}, function(err,course){
-              if(err) {
+              if(course == null) {
+                callback({});
                 console.log("error finding course");
               } else {
                 var copy = [];
@@ -171,7 +172,12 @@ var apiFunctions = {
 
           },
           getCourseInfo : function(request,callback){
-            CourseModel.findOne({CourseId : request.courseId},function(err,course){
+            CourseModel.findOne({'_id': request.CourseId},function(err,course){
+                if (course == null) {
+                  callback({});
+                  return;
+                }
+
                 var courseToRet = {
                   Id : course._id,
                   Course : course.Name,
