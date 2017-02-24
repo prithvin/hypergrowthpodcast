@@ -1,5 +1,11 @@
 /*body {
 }*/
+.video-js {
+    width: 100% !important;
+    padding: 23% !important;
+    height: auto!important;
+    
+}
 .vjs-default-skin .vjs-big-play-button {
   font-size: 0em;
 }
@@ -68,13 +74,13 @@
 .prev-button {
   background-image:url(../../images/video_module/prev.png);
   background-repeat:no-repeat;
-  height: 8%;
-  width: 5%;
-  position:absolute;
-  left: 3%;
-  top: 37%;
   background-size:contain;
   background-position: center;
+  height: 15%;
+  width: 15%;
+  position:absolute;
+  left: 0%;
+  top: 37%;
   opacity: .75;
 
 }
@@ -84,13 +90,13 @@
 .next-button {
   background-image:url(../../images/video_module/next.png);
   background-repeat:no-repeat;
-  height: 8%;
-  width: 5%;
-  position:absolute;
-  right: 3%;
-  top: 37%;
   background-size:contain;
   background-position: center;
+  height: 15%;
+  width: 15%;
+  position:absolute;
+  right: 2%;
+  top: 37%;
   opacity: .75;
 }
 .next-button:hover {
