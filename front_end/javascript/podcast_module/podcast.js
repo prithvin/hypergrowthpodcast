@@ -40,6 +40,30 @@ var PodcastPage = class PodcastPage {
             return this.slideTimes[slideNum];
     }
 
+    getSlideForTime (timeValueInSeconds) {
+        var targetSlide = this.getSlideForTimeHelper(this.slideTimes, function(x){
+            return x-timeValueInSeconds;
+        });
+        return targetSlide + 1; // slides start at index 1!!
+    }
+
+    getSlideForTimeHelper (arr, compare) {
+        var l = 0,
+        r = arr.length - 1;
+        while (l <= r) {
+            var m = l + ((r - l) >> 1);
+            var comp = compare(arr[m]);
+            if (comp < 0) // arr[m] comes before the element
+                l = m + 1;
+            else if (comp > 0) // arr[m] comes after the element
+                r = m - 1;
+            else // arr[m] equals the element
+                return m;
+        }
+        return l-1; // return the index of the next left item
+                    // usually you would just return -1 in case nothing is found
+    }
+
 
     getSlideClicks () {
         $(this.mainDiv).on("click", ".slide-no", function (ev) {
@@ -143,11 +167,17 @@ var PodcastPage = class PodcastPage {
         });                
     }
 
+    nextPreVideoListeners () {
+        //this.slideTimes
+        //this.getSlideForTime
+    }
+
     updateSlideNumberFromVideo () {
         $(this.mainDiv).find("#video-space").on("slideChange", function (ev, newSlide) {
             this.postSearch.updateCurrentVideoSlide(newSlide);
         }.bind(this));
     }
+
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
         $(this.mainDiv).find("#podcast-posts").css("height",newHeight );

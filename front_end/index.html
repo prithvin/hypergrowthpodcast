@@ -13,16 +13,15 @@
 
     <script>
 
-
     require(['director', 'components', 'loader'], function () {
 
-          function timeToHideLoader (time) {
-      if (!time)
-        time = 0;
-      setTimeout(function () {
-         $("#loader-animation").hide();
-      }, time);
-    }
+      function timeToHideLoader (time) {
+        if (!time)
+          time = 0;
+        setTimeout(function () {
+           $("#loader-animation").hide();
+        }, time);
+      }
 
 
 
@@ -95,7 +94,7 @@
 
       loadComponent("LoaderModule", $("#loader-animation"), function () {
         setTimeout(function () {
-          router.init();
+          router.init('/');
         }, 20);
       });
     });
