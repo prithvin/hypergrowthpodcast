@@ -140,15 +140,17 @@
 }
 
 .sym {
-    margin-top: 55%;
-    padding-top: 2px;
+    padding-top: 10px;
     opacity: .2;
-    -webkit-transition: opacity 1s, padding-top .3s;
-   transition: opacity 1s, padding-top .3s;
+    -webkit-transition: opacity 1s, padding-top .1s;
+    transition: opacity 1s, padding-top .1s;
 }
 
 .table-row:hover .sym {
     opacity: 1;
+}
+
+.table-row:active .sym {
     padding-top: 0px;
 }
 /*
