@@ -70,10 +70,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         
         callAPI(apiURL, "GET", {}, function (data) {
             var keys = localStorage.getItem("autokeys");
-            console.log(keys);
             if (keys !== null) autokeys = keys.split(",");
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
