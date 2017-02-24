@@ -54,26 +54,6 @@ var apiFunctions = {
             });
 
           },
-          /*
-            request{
-              CourseId :
-              UpperLimit :
-            }
-          */
-          findPodcastsByKeyword: function(request,callback){
-            PodcastModel.find({ClassNameCourseKey:courseKey, OCRTranscriptionFreq:{$elemMatch : {word: {$in : keywordParams.split(" ")}}}}, function (err, podcasts) {
-              var arrayOfPodcasts = [];
-              for(var i = 0; i < podcasts.length; i++){
-                var podcastObject = {
-                  //Todo
-                }
-                arrayOfPodcasts.push(podcastObject);
-              }
-              callback({
-                Podcasts : arrayOfPodcasts
-              });
-            });
-          },
 
           /*
             request{
@@ -244,13 +224,30 @@ var apiFunctions = {
             });
           },
           createPost: function(request,callback) {
-
-              // @response should be true or false on successful/unsuccessful comment
+            PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
+            Content : request.Content, CourseId : request.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+              if(err)
+                callback(false);
+              else {
+                callback(true);
+              }
+            });
           },
 
           createComment: function(request,callback) {
+            PostModel.find({"_id" : request.PostId}, function(err, post){
+                if(err)
+                  return callback(false);
+                var commentObject = {
+                  Pic : request.Pic,
+                  PosterName : request.PosterName,
+                  Time  : request.Time,
+                  Content : request.Content
+                };
 
-            // @response should be true or false on successful/unsuccessful post
+                post.Comments.push(commentObject);
+                return callback(true);
+            });
           }
         }
 }

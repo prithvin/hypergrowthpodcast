@@ -25,14 +25,16 @@ var SearchResults = class SearchResults {
 
       var curr_row;
       for(var i = 0, len = video_results.length; i < len; i++) {
-        var row = document.createElement('div');
-        $(row).addClass('video-result-row row');
-        $(videoDiv).append(row);
-        curr_row = row;
+        if(i % 3 === 0) {
+          var row = document.createElement('div');
+          $(row).addClass('video-result-row row');
+          $(videoDiv).append(row);
+          curr_row = row;
+        }
 
         var video_result = video_results[i];
         var video_result_div = document.createElement('div');
-        $(video_result_div).addClass('video-result');
+        $(video_result_div).addClass('video-result col-sm-4');
 
         var video_preview_img = document.createElement('img');
         video_preview_img.src = video_result['PreviewImage'];
