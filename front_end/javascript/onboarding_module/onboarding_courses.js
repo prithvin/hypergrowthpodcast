@@ -39,7 +39,7 @@ var OnboardingCourses = class OnboardingCourses {
             att = document.createAttribute('aria-hidden');
             att.value = 'true';
             sym.setAttributeNode(att);
-            sym.className = 'fa fa-podcast sym'; //fa-graduation-cap
+            sym.className = 'fa fa-graduation-cap sym'; //fa-graduation-cap
             var quarter = document.createTextNode(quarter_str);
             cell.appendChild(course);
             cell2.appendChild(sym);
