@@ -98,7 +98,7 @@ var PostSearch = class PostSearch {
         this.startFormListeners(this);
 
         this.generateDropdownMenu();
-        //this.initAutocomplete();
+
     }
 
     getCurrentSlideOfNewPost () {
@@ -356,17 +356,12 @@ var PostSearch = class PostSearch {
         });
 
     }
-    /*
+    
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
         callAPI(apiURL, "GET", {}, function (data) {
-<<<<<<< HEAD
-            $.extend(self.autokeys, data["Keywords"]);
-=======
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
->>>>>>> dfa1f3fdf9d0bd64eef6bc48190014af82cfea96
             $("#secondary-search-bar").autocomplete({
                 source: autokeys,
                 minLength: 2,
@@ -383,16 +378,12 @@ var PostSearch = class PostSearch {
         
         document.getElementById("secondary-search-bar").addEventListener("change", function() {
             var text = document.getElementById('secondary-search-bar').value.toLowerCase();
-<<<<<<< HEAD
-            if ($.inArray(text, self.autokeys) == -1)
-                self.autokeys.push(text);
-=======
             if ($.inArray(text, autokeys) == -1)
                 autokeys.push(text);
             console.log(autokeys);
->>>>>>> dfa1f3fdf9d0bd64eef6bc48190014af82cfea96
+
         });                   
-    }*/
+    }
 }
 
 
