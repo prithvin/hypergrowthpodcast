@@ -3,6 +3,7 @@
 @import url("https://unpkg.com/purecss@0.6.2/build/pure-min.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
+
 /* Video module */
 @import url("http://vjs.zencdn.net/5.16.0/video-js.css");
 @import url("./video_module/index.css");
@@ -19,14 +20,17 @@
 
 /* loader module */
 @import url("./loader_module/loading.css");
+@import url("./loader_module/thinking.css");
 
 /* menu module */
 @import url("./menu_module/logo.css");
 @import url("./menu_module/navbar.css");
 @import url("./menu_module/searchbar.css");
+@import url("./menu_module/autocomplete.css");
 
 /* search module */
-@import url("./search_module/searchResults.css");
+/*@import url("./search_module/searchResults.css");*/
+@import url("./search_module/search.css");
 
 /* post module */
 @import url("./post_module/alertBox.css");

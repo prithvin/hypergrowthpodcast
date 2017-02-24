@@ -23,20 +23,23 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 var myPassport = require('./config/passport.js');
 
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', function(error){
+mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', options, function(error){
   if(error){
     console.log("Error Connecting" + error);
   }
   else{
     console.log("Connection Successful");
-    apiFunctions.podcastFunctions.createPodcasts();
+    // apiFunctions.podcastFunctions.createPodcasts();
   }
 });
 
 app.use(cors({
     allowedOrigins: [
-        'localhost:7888'
+        'localhost:7888',
+        'localhost:8000'
     ]
 }))
 
@@ -200,6 +203,14 @@ app.get('/isUserLoggedIn', function(req,res){
   else{
     res.send(200,{"result" : false});
   }
+});
+
+app.get('/getUserSession', function(req,res) {
+  res.send(200, {'user': req.session.user});
+});
+
+app.get('/setUserFromSession', function(req,res) {
+  req.user = req.session.user;
 });
 
 app.get('/logout',function(req,res){

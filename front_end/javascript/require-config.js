@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar']
         },
         "videojs": {
             "deps": ['jquery'],
@@ -50,7 +50,7 @@ var require = {
         "loader": {},
         "angular": {},
         "navbar": {
-            "deps": ['bootstrap']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap']
@@ -62,7 +62,7 @@ var require = {
             "deps": ['course-videos', 'components']
         },
         "course-selection": {
-            "deps": ['bootstrap']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui']
         },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
@@ -72,11 +72,12 @@ var require = {
         },
         "ocr_txt_mod": {
             "deps": ['jquery']
-        }
+        },
     },
     // Note: Don't include the .js in the path
     paths: {
         "jquery" : "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
+        "jquery-ui" : "https://code.jquery.com/ui/1.12.1/jquery-ui",
         "tether": "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min",
         "local_tether": "bootstrap_js/tether",
         "bootstrap" :  "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min",
@@ -85,6 +86,7 @@ var require = {
         "markjs": "post_module/mark",
         "postLoad": "post_module/postLoad",
         "postSearch": "post_module/postSearch",
+        "BoyerMoore": "post_module/BoyerMoore",
         "components": "components",
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
@@ -102,6 +104,8 @@ var require = {
         "searchResults": "search_module/searchResults",
         "search-videos": "search_module/search-videos",
         "ocr_module": "post_module/ocr_audio_parse",
-        "ocr_txt_mod": "post_module/text_ocr_audio_parse"
+        "ocr_txt_mod": "post_module/text_ocr_audio_parse",
+        "auto-correct": "menu_module/Norvig",
+        "search-results": "search_module/search-results"
     }
 };
