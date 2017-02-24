@@ -100,6 +100,7 @@ function myFunction() {
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
+  var count = 0;
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     td1 = tr[i].getElementsByTagName("td")[1];
@@ -111,8 +112,14 @@ function myFunction() {
           tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
+        count++;
       }
     }    
+  }
+  if (count == tr.length - 1) {
+      document.getElementById("courses-results").style.display = "";
+  } else {
+      document.getElementById("courses-results").style.display = "none";
   }
 }
 /* Sort Function */
