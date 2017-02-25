@@ -296,6 +296,7 @@ var PostSearch = class PostSearch {
         $(this.mainDiv).parent().find(".dropdownOfSlide").on("ShowNotes", function () {
             this.cleanUpSearch();
             this.notesWrapper.show();
+            $(this.noResultsOption).hide();
         }.bind(this));
     }
 
