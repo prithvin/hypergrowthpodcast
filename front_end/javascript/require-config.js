@@ -24,7 +24,7 @@ var require = {
             "deps": ['jquery']
         },
         "components": {
-            "deps": ['jquery']
+            "deps": ['jquery', 'config']
         },
         "postLoad": {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']

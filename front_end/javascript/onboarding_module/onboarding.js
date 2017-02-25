@@ -14,7 +14,7 @@ var Onboarding = class Onboarding {
         callAPI(login_origins.backend + '/getUserSession', 'GET', {}, (data) => {
           if(data['user']) {
             callAPI(login_origins.backend + '/setUserFromSession', 'GET', {}, (data) => {
-              indow.location.hash =  '/#/courses';
+              window.location.hash =  '/#/courses';
             });
           }
         });

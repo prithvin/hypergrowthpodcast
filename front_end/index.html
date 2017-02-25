@@ -39,7 +39,7 @@
 
       var onboardingCoursesPage = function(courses) {
         $("#loader-animation").show();
-        loadComponent("OnboardingCoursesModule", $("#page"), function () {
+        loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
             require(['course-selection'], function () {
             new OnboardingCourses([], $("#page").find(".course-table"));
             $("#loader-animation").hide();
