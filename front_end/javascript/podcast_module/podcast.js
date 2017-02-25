@@ -12,7 +12,7 @@ var PodcastPage = class PodcastPage {
     }
 
     fetchUserData (thisClass) {
-        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+        callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             thisClass.UserName = data['Name'];
             thisClass.UserPic = data['Pic'];
             thisClass.fetchVideo(thisClass);

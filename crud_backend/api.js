@@ -214,10 +214,10 @@ var apiFunctions = {
             });
 
           },
-          getCourseInfo : function(request,callback){
+          getCourseInfo : function(request,callback, neverBefore){
             CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
                 if (course == null) {
-                  callback({});
+                  this.getPodcastInfo(request, callback, neverBefore);
                   return;
                 }
 
@@ -228,7 +228,24 @@ var apiFunctions = {
                 };
 
               callback(courseToRet);
-            });
+            }.bind(this));
+          },
+          getPodcastInfo: function (request, callback, neverBefore) {
+            if (neverBefore) {
+              callback({});
+              return;
+            }
+
+            PodcastModel.findById(request.CourseId, '_id CourseId', function(err,course){
+              console.log(err);
+              console.log(course);
+              if (course == null) {
+                callback({});
+                return;
+              }
+              request.CourseId = course['CourseId'];
+              this.getCourseInfo(request, callback, true);
+            }.bind(this));
           }
         },
         postFunctions:{
