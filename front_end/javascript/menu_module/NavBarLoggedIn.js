@@ -6,8 +6,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         this.quarter = "";
         
         /* Autocorrect */
+        console.log(classID);
         this.norvig;
-        console.log('hew');
         var self = this;
         this.fetchUserData(function (userName, userPic) {
             self.setUserName(userName);
@@ -25,16 +25,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     fetchCourseData(classID,  callback) {
-        callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, (data) => {
-            console.log(data);
+        callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, function(data) {
             this.course = data['Course'];
             this.quarter = data['Quarter'];
             callback(data['Course'], data['Quarter']);
-        });
+        }.bind(this));
     }
 
     fetchUserData (callback) {
-        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+        callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             callback(data['Name'], data['Pic']);
         });
     }
@@ -62,7 +61,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
-            console.log("Going to course selection page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/courses";
             window.location.href = targetURL;
@@ -72,7 +70,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
-            console.log("Reloading " + this.course + " course homepage...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/course_homepage/" + classID;
             window.location.href = targetURL;
@@ -122,7 +119,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             var text = document.getElementById('searchBar').value.toLowerCase();
             if ($.inArray(text, autokeys) == -1 && text.length > 2)
                 autokeys.push(text);
-            console.log(autokeys);
             localStorage.setItem("autokeys", autokeys);
         });                   
     }
@@ -138,13 +134,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
             /* Correct each word */
             for (; x < splitText.length - 1; x++) {
-                console.log("user: " + splitText[x]);
                 if (splitText[x].length > 13) {
-                    console.log("Cannot autocorrect: " + splitText[x]);
                     continue;
                 }
                 corrected = self.norvig.correct(splitText[x]);
-                console.log("corrected: " + corrected);
                 if (typeof corrected === "undefined")
                     corrected = splitText[x];       // keep user's word
                 correction += corrected + " ";
