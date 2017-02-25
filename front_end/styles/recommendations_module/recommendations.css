@@ -22,4 +22,10 @@
 .rec-title {
   margin-top: 1.45%;
   text-align: center;
+  color: #3a5c9b;
+  font-size: 90%;
+}
+
+.recommendations-header {
+  color: #405a74;
 }
