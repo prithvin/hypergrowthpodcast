@@ -34,7 +34,7 @@ var Recommendations = class Recommendations {
   }
 
   getRecommendations(callback) {
-    callAPI('../fake_data/recommendations.json', 'GET', {}, (data) => {
+    callAPI('./fake_data/recommendations.json', 'GET', {}, (data) => {
       callback(data['Recommendations']);
     });
   }

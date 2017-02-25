@@ -17,7 +17,8 @@ var loadHTMLModules = {
     "AudioOCRSubMod": "audio_ocr_search_sub_module.html",
     "AudioOCRMod": "audio_ocr_search_module.html",
     "SlideTransitionModule": "slide_transition_module.html",
-    "RecommendationsModule": "recommendations_module.html"
+    "RecommendationsModule": "recommendations_module.html",
+    "NotesModule": "notes_module.html"
 };
 
 function loadComponent (moduleName, divToLoad, callback) {
