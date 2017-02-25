@@ -29,8 +29,7 @@
 @import url("./menu_module/autocomplete.css");
 
 /* search module */
-/*@import url("./search_module/searchResults.css");*/
-@import url("./search_module/search.css");
+@import url("./search_module/searchResults.css");
 
 /* post module */
 @import url("./post_module/alertBox.css");
@@ -47,9 +46,8 @@
 /* course-videos module */
 @import url("./course_videos_module/course_videos.css");
 
-/* course search module */
-@import url("./search_module/searchResults.css");
-
 /* ocr search module */
 @import url("./ocr_audio_module/ocr_text.css");
 
+/* recommendations module */
+@import url("./recommendations_module/recommendations.css");

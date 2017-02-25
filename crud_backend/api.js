@@ -60,6 +60,87 @@ var apiFunctions = {
               }
             })
           },
+
+          searchByKeywords: function(request, callback){
+            CourseModel.findById(request.CourseId,
+                                'Podcasts',
+                                function(err, course) {
+              var callbackFired = false;
+              var results = [];
+              var count = 0;
+              var keywordSuggestions = [];
+
+              // Find the 6 most frequent keywords of length >= 5 for this course
+              //////////////////////////////////////////////////////////////////
+              for (var i = 0; i < course.Podcasts.length; i++) {
+                var arr = course.Podcasts[i].OCRKeywords;
+                for (var x = 0; x < 6; x++) keywordSuggestions.push(arr[i]);
+              }
+              var frequency = {};
+              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
+              keywordSuggestions = keywordSuggestions.filter(
+                (value) => {
+                  return value != undefined && value.length >= 5 && ++frequency[value] == 1;
+                }
+              );
+              keywordSuggestions = keywordSuggestions.sort(
+                (a, b) => {return frequency[b] - frequency[a];}
+              );
+              keywordSuggestions = keywordSuggestions.slice(0, 6);
+              //////////////////////////////////////////////////////////////////
+
+              for(var i = 0; i < course.Podcasts.length; i++){
+                PodcastModel.findById(course.Podcasts[i].PodcastId,
+                                      '_id Slides AudioTranscript',
+                                      function(err, podcast) {
+                  for (var j = 0; j < podcast.Slides.length; j++) {
+                    var slide = podcast.Slides[j];
+
+                    if (slide.OCRTranscription.includes(request.Keywords)) {
+                      results.push({
+                        'PodcastID': podcast._id,
+                        'Type': 'OCR',
+                        'Data': slide
+                      });
+
+                      if (!callbackFired && results.length >= request.count) {
+                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callbackFired = true;
+                        return;
+                      }
+                    }
+                  }
+
+                  for (var k = 0; k < podcast.AudioTranscript.length; k++) {
+                    var transcript = podcast.AudioTranscript[k];
+
+                    if (transcript.Content.includes(request.Keywords)) {
+                      results.push({
+                        'PodcastID': podcast._id,
+                        'Type': 'Audio',
+                        'Data': transcript
+                      });
+
+                      if (!callbackFired && results.length >= request.count) {
+                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callbackFired = true;
+                        return;
+                      }
+                    }
+                  }
+
+                  count++;
+
+                  // exhausted
+                  if (!callbackFired && count == course.Podcasts.length) {
+                    callback({'Keywords': keywordSuggestions, 'Results': results});
+                    callbackFired = true;
+                  }
+                });
+                if (callbackFired) break;
+              }
+            });
+          }
         },
 
         //functions to retrieve and create user information
@@ -118,7 +199,7 @@ var apiFunctions = {
         },
         courseFunctions :{
           getCourses : function(callback){
-            CourseModel.find({},function(err,courses){
+            CourseModel.find({}, '_id Name Quarter', function(err,courses){
               for(var i = 0; i < courses.length; i++){
                 var object = {
                   Id : courses[i]._id,
