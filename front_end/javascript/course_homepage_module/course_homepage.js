@@ -32,12 +32,13 @@ class CourseHomepageClass {
   
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
+        $(this.mainDiv).find("#course-posts").css("height", newHeight);
     }
+    
     
     loadPostSearch(thisClass) {
         require(['postSearch'], function () {
-            var divToLoad = $(thisClass.mainDiv).find("#posts");
+            var divToLoad = $(thisClass.mainDiv).find("#course-posts");
             loadComponent("PostSearchModule", divToLoad, function () {
                 new PostSearch(
                     {
