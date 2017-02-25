@@ -69,11 +69,11 @@
         });
       };
 
-      var courseHomepage = function() {
+      var courseHomepage = function(courseId) {
         $("#loader-animation").show();
         loadComponent("CourseHomepageModule", $("#page"), function() {
           require(['course-homepage'], function() {
-            new CourseHomepageClass(1, $("#page").find(".course-homepage-div"));
+            new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"));
             $("#loader-animation").hide();
           });
         });

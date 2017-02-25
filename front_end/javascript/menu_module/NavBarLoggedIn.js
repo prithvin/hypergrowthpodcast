@@ -1,11 +1,10 @@
 var autokeys = [];
-
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
+        this.course = "";
+        this.quarter = "";
         
-        /* Autocomplete keys */
-    
         /* Autocorrect */
         this.norvig;
 
@@ -21,14 +20,16 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
-        this.setHomeHyperLink(this);
+        this.setHomeHyperLink(classID);
         this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
-        callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
-            callback(data['CourseName'],  data['ClassQuarter']);
-            this.setHomeHyperLink(classID);
+        callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, (data) => {
+            console.log(data);
+            this.course = data['Course'];
+            this.quarter = data['Quarter'];
+            callback(data['Course'],  data['Quarter']);
         }.bind(this));
     }
 
@@ -61,22 +62,29 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/courses";  // temporary link
-            $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
+            console.log("Going to course selection page...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetCallbackURL = encodeURIComponent(baseURL + "#/courses/");
+            window.location.href = login_origins.backend + targetCallbackURL;
+            window.location.hash =  "/courses/";
         })
     }
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; // temporary link
-            $(this.mainDiv).trigger( "goToCourseHome", [] );
+            console.log("Reloading " + this.course + " homepage...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/course_homepage/" + classID;
+            window.location.href = targetURL;
+            window.location.hash =  "/course_homepage/" + classID;
+            //$(this.mainDiv).trigger( "goToCourseHome", [] );
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; // temporary lin
-            $(this.mainDiv).trigger( "goToCourseHome", [] );
+            console.log("Reloading " + this.course + " homepage...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/course_homepage/" + classID;
+            window.location.href = targetURL;
+            window.location.hash =  "/course_homepage/" + classID;
         }.bind(this))
     }
     
