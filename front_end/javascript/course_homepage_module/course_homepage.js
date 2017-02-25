@@ -25,14 +25,18 @@ class CourseHomepageClass {
                 $('#myimage').off('click.mynamespace');
             }
             else {
-                thisClass.updatePostHeights();
+                thisClass.updateComponentHeights();
             }
+        });
+        $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
+            thisClass.updateComponentHeights();
         });
     }
   
-    updatePostHeights() {
+    updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#course-posts").css("height", newHeight);
+        $(this.mainDiv).find("#course-posts").css("height", newHeight - 75);
+        $(this.mainDiv).find("#course-videos").css("height", newHeight - 75);
     }
     
     
