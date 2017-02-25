@@ -63,7 +63,7 @@
         $("#loader-animation").show();
         require(['searchResults'], function () {
           loadComponent("CourseSearchModule", $("#page"), function () {
-            new SearchPage(courseId, $("#page").find(".search-results-div"));
+            new SearchPage(123, $("#page").find(".search-results-div"));
             $("#loader-animation").hide();
           });
         });

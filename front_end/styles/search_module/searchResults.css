@@ -8,6 +8,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/*.recClass{padding-bottom:15;padding-left: 10; padding-right: 10;overflow:hidden; height: 40; width:100%; display:flex; justify-content:space-between;text-align: center}*/
 
 /*::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space
@@ -44,7 +45,6 @@
     font-size: 1px;
     color: #F4F6F8;
     line-height: 1px;
-
     background-color: #BAC5D3;
     margin-top: -6px;
     margin-bottom: 0px;
