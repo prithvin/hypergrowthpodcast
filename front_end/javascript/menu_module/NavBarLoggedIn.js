@@ -5,9 +5,9 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         this.course = "";
         this.quarter = "";
         
-        /* Autocorrect */
-        this.norvig;
-        console.log('hew');
+        /* Autocorrect 
+        this.norvig;*/
+
         var self = this;
         this.fetchUserData(function (userName, userPic) {
             self.setUserName(userName);
@@ -27,8 +27,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     fetchCourseData(classID,  callback) {
         callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, (data) => {
             console.log(data);
-            this.course = data['Course'];
-            this.quarter = data['Quarter'];
             callback(data['Course'], data['Quarter']);
         });
     }
@@ -40,10 +38,12 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     setClassName(className) {
+        this.course = className;
         $(this.mainDiv).find("#className").html(className);
     }
 
     setClassQuarter(classQuarter) {
+        this.quarter = classQuarter;
         $(this.mainDiv).find("#classQuarter").html(classQuarter);
     }
 
@@ -72,7 +72,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
-            console.log("Reloading " + this.course + " course homepage...");
+            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/course_homepage/" + classID;
             window.location.href = targetURL;
@@ -80,7 +80,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             //$(this.mainDiv).trigger( "goToCourseHome", [] );
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
-            console.log("Reloading " + this.course + " homepage...");
+            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/course_homepage/" + classID;
             window.location.href = targetURL;
@@ -92,7 +92,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     initAutocomplete() {
         var self = this;
         var apiURL = "./fake_data/getVideo.json";
-        var apiURL2 = "./fake_data/dictionary.json";
+        //var apiURL2 = "./fake_data/dictionary.json";
         
         callAPI(apiURL, "GET", {}, function (data) {
             var keys = localStorage.getItem("autokeys");
