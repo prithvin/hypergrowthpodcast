@@ -15,7 +15,7 @@
 
 .rectangle {
   display: none;
-  margin-top: 10px;
+  margin-bottom: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
