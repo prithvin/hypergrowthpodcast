@@ -11,7 +11,7 @@ var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
           getVideosForCourse: function(request, callback){
-            CourseModel.findOne({_id: request.CourseId}, function(err,course){
+            CourseModel.findById(request.CourseId, function(err,course){
               if(course == null) {
                 callback({});
                 console.log("error finding course");
@@ -41,7 +41,9 @@ var apiFunctions = {
             }
           */
           getVideoInfo: function(request, callback) {
-            PodcastModel.findOne({"_id" : request.PodcastId}, function(err,podcast) {
+            PodcastModel.findById(request.PodcastId,
+                                  'SRTBlob PodcastUrl Time AudioTranscript Slides',
+                                  function(err,podcast) {
               if(err) {
                 console.log("error");
               } else {
@@ -60,6 +62,87 @@ var apiFunctions = {
               }
             })
           },
+
+          searchByKeywords: function(request, callback){
+            CourseModel.findById(request.CourseId,
+                                'Podcasts',
+                                function(err, course) {
+              var callbackFired = false;
+              var results = [];
+              var count = 0;
+              var keywordSuggestions = [];
+
+              // Find the 6 most frequent keywords of length >= 5 for this course
+              //////////////////////////////////////////////////////////////////
+              for (var i = 0; i < course.Podcasts.length; i++) {
+                var arr = course.Podcasts[i].OCRKeywords;
+                for (var x = 0; x < 6; x++) keywordSuggestions.push(arr[i]);
+              }
+              var frequency = {};
+              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
+              keywordSuggestions = keywordSuggestions.filter(
+                (value) => {
+                  return value != undefined && value.length >= 5 && ++frequency[value] == 1;
+                }
+              );
+              keywordSuggestions = keywordSuggestions.sort(
+                (a, b) => {return frequency[b] - frequency[a];}
+              );
+              keywordSuggestions = keywordSuggestions.slice(0, 6);
+              //////////////////////////////////////////////////////////////////
+
+              for(var i = 0; i < course.Podcasts.length; i++){
+                PodcastModel.findById(course.Podcasts[i].PodcastId,
+                                      '_id Slides AudioTranscript',
+                                      function(err, podcast) {
+                  for (var j = 0; j < podcast.Slides.length; j++) {
+                    var slide = podcast.Slides[j];
+
+                    if (slide.OCRTranscription.includes(request.Keywords)) {
+                      results.push({
+                        'PodcastID': podcast._id,
+                        'Type': 'OCR',
+                        'Data': slide
+                      });
+
+                      if (!callbackFired && results.length >= request.count) {
+                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callbackFired = true;
+                        return;
+                      }
+                    }
+                  }
+
+                  for (var k = 0; k < podcast.AudioTranscript.length; k++) {
+                    var transcript = podcast.AudioTranscript[k];
+
+                    if (transcript.Content.includes(request.Keywords)) {
+                      results.push({
+                        'PodcastID': podcast._id,
+                        'Type': 'Audio',
+                        'Data': transcript
+                      });
+
+                      if (!callbackFired && results.length >= request.count) {
+                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callbackFired = true;
+                        return;
+                      }
+                    }
+                  }
+
+                  count++;
+
+                  // exhausted
+                  if (!callbackFired && count == course.Podcasts.length) {
+                    callback({'Keywords': keywordSuggestions, 'Results': results});
+                    callbackFired = true;
+                  }
+                });
+                if (callbackFired) break;
+              }
+            });
+          }
         },
 
         //functions to retrieve and create user information
@@ -77,7 +160,7 @@ var apiFunctions = {
 
           },
           getUser : function(req,callback){
-            UserModel.findOne({"_id":req.UserId},function(err,user){
+            UserModel.findById(req.UserId, 'Name ProfilePicture', function(err,user){
               var response = {
                 Name : user.Name,
                 Pic : user.ProfilePicture
@@ -132,7 +215,7 @@ var apiFunctions = {
 
           },
           getCourseInfo : function(request,callback){
-            CourseModel.findOne({'_id': request.CourseId}, "_id Name Quarter", function(err,course){
+            CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
                 if (course == null) {
                   callback({});
                   return;
@@ -215,19 +298,22 @@ var apiFunctions = {
           },
 
           createComment: function(request,callback) {
-            PostModel.find({"_id" : request.PostId}, function(err, post){
-                if(err)
-                  return callback(false);
-                var commentObject = {
-                  Pic : request.Pic,
-                  PosterName : request.PosterName,
-                  Time  : request.Time,
-                  Content : request.Content
-                };
+            var commentObject = {
+              Pic : request.Pic,
+              PosterName : request.PosterName,
+              Time  : request.Time,
+              Content : request.Content
+            };
 
-                post.Comments.push(commentObject);
-                return callback(true);
-            });
+            PostModel.findByIdAndUpdate(
+              request.PostId,
+              {$push: {'Comments': commentObject}},
+              function(err, model) {
+                if (err) return callback(false);
+                else return callback(true);
+              }
+            );
+
           }
         }
 }

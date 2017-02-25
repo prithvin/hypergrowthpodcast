@@ -61,9 +61,9 @@
 
       var search = function (courseId) {
         $("#loader-animation").show();
-        require(['search-results'], function () {
+        require(['searchResults'], function () {
           loadComponent("CourseSearchModule", $("#page"), function () {
-            new SearchResults($("#page").find(".search-results-div"));
+            new SearchPage(courseId, $("#page").find(".search-results-div"));
             $("#loader-animation").hide();
           });
         });

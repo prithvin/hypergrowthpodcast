@@ -59,7 +59,7 @@ app.get('/login', function(req,res){
     res.redirect("/");
   }
   else {
-    res.sendfile('./index.html', {root: __dirname });
+    res.sendFile('./index.html', {root: __dirname });
   }
 });
 
@@ -140,6 +140,18 @@ app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req
     res.send(courseVideos);
   });
 
+});
+
+app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    count: req.query.count,
+    CourseId: req.query.CourseId,
+    Keywords: req.query.Keywords
+  };
+
+  apiFunctions.podcastFunctions.searchByKeywords(request, function(response) {
+    res.send(response);
+  });
 });
 
 app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){

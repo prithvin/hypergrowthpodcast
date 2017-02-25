@@ -5,7 +5,7 @@ var OnboardingCourses = class OnboardingCourses {
         this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
-        this.initAutocomplete();
+        //this.initAutocomplete();
     }
 
     fetchCourses() {
@@ -30,7 +30,7 @@ var OnboardingCourses = class OnboardingCourses {
             row.id = data[i]['Course'];
             var att = document.createAttribute('onclick');
             var path = window.location.pathname;
-            att.value = "document.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
+            att.value = "window.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
             row.setAttributeNode(att);
             var course_str = data[i]['Course'];
             //var title_str = "";//data[i]['Title'];
@@ -48,7 +48,7 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.appendChild(quarter);
         } 
     }
-    
+    /*
     initAutocomplete() {
         var self = this;
         var apiURL = login_origins.backend + "/getCourses";
@@ -56,7 +56,12 @@ var OnboardingCourses = class OnboardingCourses {
             for (var x = 0; x < data.length; x++) {
                 self.autokeys.push(data[x]['Course']);
             }
+<<<<<<< HEAD
             $("#searchBar").autocomplete({
+=======
+            console.log(self.autokeys);
+            $("#searchBar1").autocomplete({
+>>>>>>> c60ca172c00003612dcee349a1533dfcac362b81
                 source: self.autokeys,
                 minLength: 2,
                 open: function () { 
@@ -70,13 +75,13 @@ var OnboardingCourses = class OnboardingCourses {
             });
         });
         
-        document.getElementById("searchBar").addEventListener("change", function() {
-            var text = document.getElementById('searchBar').value.toLowerCase();
+        document.getElementById("searchBar1").addEventListener("change", function() {
+            var text = document.getElementById('searchBar1').value.toLowerCase();
             if ($.inArray(text, self.autokeys) == -1)
                 self.autokeys.push(text);
             console.log(self.autokeys);
         });                   
-    }
+    }*/
 }
 
 
@@ -97,7 +102,7 @@ $(".table-row").click(function() {
 /* Search Function */
 function myFunction() {
   var input, filter, table, tr, td, td1, td2, i;
-  input = document.getElementById("searchBar");
+  input = document.getElementById("searchBar1");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
@@ -118,9 +123,9 @@ function myFunction() {
     }    
   }
   if (count == tr.length - 1) {
-      document.getElementById("courses-results").style.display = "";
+      $('.no-results-courses').removeClass('no-results-hide');
   } else {
-      document.getElementById("courses-results").style.display = "none";
+      $('.no-results-courses').addClass('no-results-hide');
   }
 }
 /* Sort Function */
