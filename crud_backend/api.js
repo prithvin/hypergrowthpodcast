@@ -11,7 +11,7 @@ var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
           getVideosForCourse: function(request, callback){
-            CourseModel.findOne({_id: request.CourseId}, function(err,course){
+            CourseModel.findById(request.CourseId, function(err,course){
               if(course == null) {
                 callback({});
                 console.log("error finding course");
@@ -41,7 +41,9 @@ var apiFunctions = {
             }
           */
           getVideoInfo: function(request, callback) {
-            PodcastModel.findOne({"_id" : request.PodcastId}, function(err,podcast) {
+            PodcastModel.findById(request.PodcastId,
+                                  'SRTBlob PodcastUrl Time AudioTranscript Slides',
+                                  function(err,podcast) {
               if(err) {
                 console.log("error");
               } else {
@@ -158,7 +160,7 @@ var apiFunctions = {
 
           },
           getUser : function(req,callback){
-            UserModel.findOne({"_id":req.UserId},function(err,user){
+            UserModel.findById(req.UserId, 'Name ProfilePicture', function(err,user){
               var response = {
                 Name : user.Name,
                 Pic : user.ProfilePicture
@@ -213,7 +215,7 @@ var apiFunctions = {
 
           },
           getCourseInfo : function(request,callback){
-            CourseModel.findOne({'_id': request.CourseId},function(err,course){
+            CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
                 if (course == null) {
                   callback({});
                   return;
@@ -296,19 +298,22 @@ var apiFunctions = {
           },
 
           createComment: function(request,callback) {
-            PostModel.find({"_id" : request.PostId}, function(err, post){
-                if(err)
-                  return callback(false);
-                var commentObject = {
-                  Pic : request.Pic,
-                  PosterName : request.PosterName,
-                  Time  : request.Time,
-                  Content : request.Content
-                };
+            var commentObject = {
+              Pic : request.Pic,
+              PosterName : request.PosterName,
+              Time  : request.Time,
+              Content : request.Content
+            };
 
-                post.Comments.push(commentObject);
-                return callback(true);
-            });
+            PostModel.findByIdAndUpdate(
+              request.PostId,
+              {$push: {'Comments': commentObject}},
+              function(err, model) {
+                if (err) return callback(false);
+                else return callback(true);
+              }
+            );
+
           }
         }
 }
