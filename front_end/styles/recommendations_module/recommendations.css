@@ -8,3 +8,18 @@
 .podcast-recommendations {
   margin-top: 12px;
 }
+
+.preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+}
+
+.rec-container {
+  padding-right: 2.375%;
+}
+
+.rec-title {
+  margin-top: 1.45%;
+  text-align: center;
+}

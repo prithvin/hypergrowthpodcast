@@ -8,7 +8,7 @@ var PodcastPage = class PodcastPage {
             this.startingSlide = 1;
         this.fetchUserData(this);
         this.loadNavbar(this);
-        
+        this.loadRecommendations(mainDiv);
     }
 
     fetchUserData (thisClass) {
@@ -165,6 +165,16 @@ var PodcastPage = class PodcastPage {
             });
 
         });                
+    }
+
+		loadRecommendations(mainDiv) {
+      require(['recommendations'], function() {
+        var rec_div = $(mainDiv).find('#recommendations-container')
+
+        loadComponent('RecommendationsModule', rec_div, function() {
+          new Recommendations(mainDiv);
+        });
+      });
     }
 
     nextPreVideoListeners () {
