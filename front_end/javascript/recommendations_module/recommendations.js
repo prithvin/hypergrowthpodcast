@@ -6,17 +6,20 @@ var Recommendations = class Recommendations {
   }
 
   displayRecomm(rec_div, recommendations) {
-    for(var recommendation in recommendations) {
+    for(var recommendation of recommendations) {
       var id = recommendation['PodcastId'];
       var preview_src = recommendation['PodcastImage'];
       var title = recommendation['Date'];
 
+      var link_anchor = document.createElement('a');
+      link_anchor.href = document.documentURI.substring(0, document.documentURI.lastIndexOf('/') + 1) + id;
+
       var rec_container = document.createElement('div');
-      $(rec_container).addClass('rec-container col-sm-3');
+      $(rec_container).addClass('rec-container pure-u-6-24');
 
       var preview_img = document.createElement('img');
-      preivew_img.src = preview_src;
-      $(preivew_img).addClass('preview-img');
+      preview_img.src = preview_src;
+      $(preview_img).addClass('preview-img');
 
       var rec_title = document.createElement('div');
       rec_title.textContent = title;
@@ -25,7 +28,8 @@ var Recommendations = class Recommendations {
       $(rec_container).append(preview_img);
       $(rec_container).append(rec_title);
 
-      $(rec_div).append(rec_container);
+      $(link_anchor).append(rec_container);
+      $(rec_div).append(link_anchor);
     }
   }
 
