@@ -41,7 +41,7 @@
         $("#loader-animation").show();
         loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
             require(['course-selection'], function () {
-            new OnboardingCourses([], $("#page").find(".course-table"));
+            new OnboardingCourses($("#page").find(".onboarding-courses-page"));
             $("#loader-animation").hide();
           });
         });

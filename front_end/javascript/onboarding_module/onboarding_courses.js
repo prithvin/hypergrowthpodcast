@@ -1,11 +1,8 @@
 var OnboardingCourses = class OnboardingCourses {
-    constructor (coursesData, mainDiv) {
-        this.coursesData = coursesData;
+    constructor (mainDiv) {
         this.autokeys = [];
-        this.mainDiv = $(mainDiv).find(".onboarding-courses-module");
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
-        //this.initAutocomplete();
     }
 
     fetchCourses() {
@@ -27,22 +24,20 @@ var OnboardingCourses = class OnboardingCourses {
             cell2.className = 'cell cell-mid';
             cell3.className = 'cell cell-end';
             row.className = 'table-row';
-            row.id = data[i]['Course'];
-            var att = document.createAttribute('onclick');
-            var path = window.location.pathname;
-            att.value = "window.location = '" + path + "#/course_homepage/" + data[i]['Id'] + "'";   
-            row.setAttributeNode(att);
-            var course_str = data[i]['Course'];
-            //var title_str = "";//data[i]['Title'];
-            var quarter_str =  data[i]['Quarter'];
-            var course = document.createTextNode(course_str);
-            //var title = document.createTextNode(title_str);
+            row.id = data[i]['Id'];
+            
+            row.addEventListener("click", function() {
+                var path = window.location.pathname;
+                window.location.href = path + "#/course_homepage/" + this.id; 
+            });  
+            
+            var course = document.createTextNode(data[i]['Course']);
+            var quarter = document.createTextNode(data[i]['Quarter']);
             var sym = document.createElement('i');
-            att = document.createAttribute('aria-hidden');
+            var att = document.createAttribute('aria-hidden');
             att.value = 'true';
             sym.setAttributeNode(att);
             sym.className = 'fa fa-graduation-cap sym'; //fa-graduation-cap
-            var quarter = document.createTextNode(quarter_str);
             cell.appendChild(course);
             cell2.appendChild(sym);
             cell3.appendChild(quarter);
@@ -56,12 +51,8 @@ var OnboardingCourses = class OnboardingCourses {
             for (var x = 0; x < data.length; x++) {
                 self.autokeys.push(data[x]['Course']);
             }
-<<<<<<< HEAD
-            $("#searchBar").autocomplete({
-=======
             console.log(self.autokeys);
             $("#searchBar1").autocomplete({
->>>>>>> c60ca172c00003612dcee349a1533dfcac362b81
                 source: self.autokeys,
                 minLength: 2,
                 open: function () { 
@@ -83,21 +74,6 @@ var OnboardingCourses = class OnboardingCourses {
         });                   
     }*/
 }
-
-
-
-
-
-
-
-
-
-
-
-/*
-$(".table-row").click(function() {
-     window.location = this.data("link");
-    });*/
 
 /* Search Function */
 function myFunction() {
