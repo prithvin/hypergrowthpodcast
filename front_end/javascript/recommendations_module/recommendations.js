@@ -12,7 +12,7 @@ var Recommendations = class Recommendations {
       var title = recommendation['Date'];
 
       var link_anchor = document.createElement('a');
-      link_anchor.href = document.documentURI.substring(0, document.documentURI.lastIndexOf('/') + 1) + id;
+      link_anchor.href = window.location.hash.substring(0, window.location.hash.lastIndexOf('/') + 1) + id;
 
       var rec_container = document.createElement('div');
       $(rec_container).addClass('rec-container pure-u-6-24');
