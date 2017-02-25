@@ -8,16 +8,13 @@ var Onboarding = class Onboarding {
     }
 
     callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
-      console.log("isuser");
       if(data.result === true) {
-        window.location.href = window.location.origin + '/#/courses';
+        window.location.hash =  '/#/courses';
       } else {
         callAPI(login_origins.backend + '/getUserSession', 'GET', {}, (data) => {
-          console.log("getuser");
           if(data['user']) {
             callAPI(login_origins.backend + '/setUserFromSession', 'GET', {}, (data) => {
-              console.log("setuser");
-              window.location.href = window.location.origin + '/#/courses';
+              indow.location.hash =  '/#/courses';
             });
           }
         });

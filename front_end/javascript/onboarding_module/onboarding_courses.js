@@ -9,8 +9,10 @@ var OnboardingCourses = class OnboardingCourses {
     }
 
     fetchCourses() {
-        var apiURL = "./fake_data/getCourses.json";
+        var apiURL = login_origins.backend + "/getCourses";
+        console.log("GETTING COURSES");
         callAPI(apiURL, "GET", {}, function (data) {
+            console.log(data);
             this.loadCourses(data);
         }.bind(this));
     }
@@ -49,12 +51,11 @@ var OnboardingCourses = class OnboardingCourses {
     
     initAutocomplete() {
         var self = this;
-        var apiURL = "./fake_data/getCourses.json";
+        var apiURL = login_origins.backend + "/getCourses";
         callAPI(apiURL, "GET", {}, function (data) {
             for (var x = 0; x < data.length; x++) {
                 self.autokeys.push(data[x]['Course']);
             }
-            console.log(self.autokeys);
             $("#searchBar").autocomplete({
                 source: self.autokeys,
                 minLength: 2,
