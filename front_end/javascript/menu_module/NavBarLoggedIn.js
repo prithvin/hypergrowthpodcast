@@ -7,7 +7,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         
         /* Autocorrect */
         this.norvig;
-
+        console.log('hew');
         var self = this;
         this.fetchUserData(function (userName, userPic) {
             self.setUserName(userName);
@@ -29,8 +29,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             console.log(data);
             this.course = data['Course'];
             this.quarter = data['Quarter'];
-            callback(data['Course'],  data['Quarter']);
-        }.bind(this));
+            callback(data['Course'], data['Quarter']);
+        });
     }
 
     fetchUserData (callback) {
@@ -64,15 +64,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         $(this.mainDiv).find("#course_button").on("click", function () {
             console.log("Going to course selection page...");
             var baseURL = window.location.origin + window.location.pathname;
-            var targetCallbackURL = encodeURIComponent(baseURL + "#/courses/");
-            window.location.href = login_origins.backend + targetCallbackURL;
-            window.location.hash =  "/courses/";
+            var targetURL = baseURL + "#/courses";
+            window.location.href = targetURL;
+            window.location.hash =  "/courses";
         })
     }
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
-            console.log("Reloading " + this.course + " homepage...");
+            console.log("Reloading " + this.course + " course homepage...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/course_homepage/" + classID;
             window.location.href = targetURL;
