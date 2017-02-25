@@ -11,7 +11,6 @@
 }
 
 .main-container {
-
     margin:0px !IMPORTANT;
     margin-top:5px !IMPORTANT;
     height: 100px !IMPORTANT;
@@ -75,4 +74,8 @@
     font-family: 'Roboto', sans-serif !IMPORTANT;
     font-weight: 100 !IMPORTANT;
     font-size:0.85em !IMPORTANT;
+}
+
+.home-button:hover {
+    cursor: pointer;
 }

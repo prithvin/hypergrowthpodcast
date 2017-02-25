@@ -26,7 +26,9 @@ var APost = class APost {
         }
 
     }
-
+    
+    
+    
     addCommentListener (thisClass) {
         $(this.commentForm).on("submit", function (ev) {
             ev.preventDefault();
@@ -52,6 +54,7 @@ var APost = class APost {
         });
         this.numOfComments++;
         $( this.mainDiv ).trigger( "commentAdded", [] );
+        console.log(inputForm);
         $(inputForm).val("");
     }
 
@@ -69,18 +72,22 @@ var APost = class APost {
 
     fetchBySlide (slideNo) {
         var isGoodSlide = $($(this.mainDiv).find(".slide-no")).is(':contains("Slide ' + slideNo + '")');
-        if (isGoodSlide)
+        if (isGoodSlide) {
             this.showThisPost();
-        else
+            return true;
+        }
+        else {
             this.hideThisPost();
+            return false;
+        }
     }
 
     hideThisPost () {
-        $(this.mainDiv).fadeOut(500);
+        $(this.mainDiv).hide();
     }
 
     showThisPost () {
-        $(this.mainDiv).fadeIn(500);
+        $(this.mainDiv).show();
     }
 
     loadHeader (name, pic) {

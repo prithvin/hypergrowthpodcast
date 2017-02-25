@@ -20,7 +20,11 @@
     text-align:left;
     width: 101.5%;
 }
-
+.dropdown-item:active {
+    background-color: #6f92ca;
+    color: white;
+    font-weight: 200;
+}
 .show-fa {
     font: normal normal normal 14px/1 FontAwesome !IMPORTANT;
     float:right;
@@ -30,3 +34,10 @@
 }
 
 .red{border-top:4px solid red;}
+
+
+.dropdownOfSlide .dropdown-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}

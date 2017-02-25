@@ -1,14 +1,13 @@
 var autokeys = [];
-
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
+        this.course = "";
+        this.quarter = "";
         
-        /* Autocomplete keys */
-    
         /* Autocorrect */
         this.norvig;
-
+        console.log('hew');
         var self = this;
         this.fetchUserData(function (userName, userPic) {
             self.setUserName(userName);
@@ -21,12 +20,16 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.setHomeHyperLink(classID);
         this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
-        callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
-            callback(data['CourseName'],  data['ClassQuarter']);
+        callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, (data) => {
+            console.log(data);
+            this.course = data['Course'];
+            this.quarter = data['Quarter'];
+            callback(data['Course'], data['Quarter']);
         });
     }
 
@@ -59,9 +62,32 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
-            $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
+            console.log("Going to course selection page...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/courses";
+            window.location.href = targetURL;
+            window.location.hash =  "/courses";
         })
     }
+    
+    setHomeHyperLink (classID) {
+        $(this.mainDiv).find("#home_button").on("click", function () {
+            console.log("Reloading " + this.course + " course homepage...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/course_homepage/" + classID;
+            window.location.href = targetURL;
+            window.location.hash =  "/course_homepage/" + classID;
+            //$(this.mainDiv).trigger( "goToCourseHome", [] );
+        }.bind(this))
+        $(this.mainDiv).find("#home_button2").on("click", function () {
+            console.log("Reloading " + this.course + " homepage...");
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/course_homepage/" + classID;
+            window.location.href = targetURL;
+            window.location.hash =  "/course_homepage/" + classID;
+        }.bind(this))
+    }
+    
     
     initAutocomplete() {
         var self = this;
@@ -70,10 +96,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         
         callAPI(apiURL, "GET", {}, function (data) {
             var keys = localStorage.getItem("autokeys");
-            console.log(keys);
             if (keys !== null) autokeys = keys.split(",");
             $.extend(autokeys, data["Keywords"]);
-            console.log(autokeys);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
@@ -88,12 +112,13 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             });
         });
         
+        /*
         callAPI(apiURL2, "GET", {}, function (data) {
             self.norvig = new Norvig(data["Dictionary"]);
-        });
+        });*/
         
         document.getElementById("searchBar").addEventListener("change", function() {
-            self.autocorrect();
+            //self.autocorrect();
             var text = document.getElementById('searchBar').value.toLowerCase();
             if ($.inArray(text, autokeys) == -1 && text.length > 2)
                 autokeys.push(text);

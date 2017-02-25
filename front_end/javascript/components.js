@@ -3,7 +3,7 @@ window.appModules = {};
 var loadHTMLModules = {
     "CommentModule": "comment_module.html",
     "CourseHomepageModule": "course_homepage_module.html",
-    "CourseSearchModule": "search_module.html",
+    "CourseSearchModule": "course_search_module.html",
     "SearchResultsModule" : "search_videos_module.html",
     "CourseVideosModule": "course_videos_module.html",
     "LoaderModule": "loader_module.html",
@@ -16,7 +16,9 @@ var loadHTMLModules = {
     "VideoModule": "video_module.html",
     "AudioOCRSubMod": "audio_ocr_search_sub_module.html",
     "AudioOCRMod": "audio_ocr_search_module.html",
-    "SlideTransitionModule": "slide_transition_module.html"
+    "SlideTransitionModule": "slide_transition_module.html",
+    "RecommendationsModule": "recommendations_module.html",
+    "NotesModule": "notes_module.html"
 };
 
 function loadComponent (moduleName, divToLoad, callback) {
@@ -27,6 +29,17 @@ function loadComponent (moduleName, divToLoad, callback) {
     loadHTMLComponent(moduleName, function (data) {
         $(divToLoad).html(data);
         callback();
+    });
+}
+
+function loadComponentOrLogin (moduleName, divToLoad, callback) {   
+    callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (loginStatus) {
+        if(loginStatus.result === true) {
+            loadComponent(moduleName, divToLoad, callback);
+        }
+        else {
+            window.location.hash = "";
+        }
     });
 }
 
