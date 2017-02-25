@@ -28,9 +28,9 @@ var OnboardingCourses = class OnboardingCourses {
             
             row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
-                var targetURL = baseURL + "#/course_homepage/" + this.id;
+                var targetURL = baseURL + "#/courses/" + this.id;
                 window.location.href = targetURL;
-                window.location.hash =  "/course_homepage/" + this.id;
+                window.location.hash =  "/courses/" + this.id;
             });  
             
             var course = document.createTextNode(data[i]['Course']);
