@@ -132,7 +132,7 @@ var apiFunctions = {
 
           },
           getCourseInfo : function(request,callback){
-            CourseModel.findOne({'_id': request.CourseId},function(err,course){
+            CourseModel.findOne({'_id': request.CourseId}, "_id Name Quarter", function(err,course){
                 if (course == null) {
                   callback({});
                   return;
