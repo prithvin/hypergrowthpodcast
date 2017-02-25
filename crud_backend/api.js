@@ -99,7 +99,7 @@ var apiFunctions = {
             });
           },
           addUser : function(name,profileId,callback){
-            UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+            UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=large'}, function(err,users){
             if(err) {
             console.log(err);
             }
