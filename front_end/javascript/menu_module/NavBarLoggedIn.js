@@ -26,10 +26,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     fetchCourseData(classID,  callback) {
-
         callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, function(data) {
-            this.course = data['Course'];
-            this.quarter = data['Quarter'];
             callback(data['Course'], data['Quarter']);
         }.bind(this));
     }
@@ -74,6 +71,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
+            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/courses/" + classID;
             window.location.href = targetURL;
