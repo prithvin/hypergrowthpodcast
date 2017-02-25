@@ -201,7 +201,7 @@ var apiFunctions = {
         },
         courseFunctions :{
           getCourses : function(callback){
-            CourseModel.find({}, '_id Name Quarter', function(err,courses){
+            CourseModel.find({}, "_id Name Quarter", function(err,courses){
               for(var i = 0; i < courses.length; i++){
                 var object = {
                   Id : courses[i]._id,

@@ -24,7 +24,7 @@ var require = {
             "deps": ['jquery']
         },
         "components": {
-            "deps": ['jquery']
+            "deps": ['jquery', 'config']
         },
         "postLoad": {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
@@ -66,7 +66,7 @@ var require = {
             "deps": ['course-videos', 'components']
         },
         "course-selection": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']

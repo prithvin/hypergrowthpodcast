@@ -71,18 +71,18 @@ var PostSearch = class PostSearch {
 
         // DOM Elements
         this.searchModule = $(this.mainDiv).parent().find(".search-module");
-        //this.notesModule = $(this.mainDiv).find(".notes-wrapper");
         this.noResultsOption = $(this.mainDiv).find(".no-results");
         this.searchInputForm = $(this.mainDiv).prev();
         this.searchInputField = $(this.searchInputForm).find("#secondary-search-bar");
         this.viewAllPostsButton =  $(this.mainDiv).find(".all-posts-view");
         this.newPostButton = $(this.mainDiv).prev().find(".new-post-img");
         this.loadingModule = $(this.mainDiv).parent().find("#slide-transition-data");
+        this.notesWrapper = $(this.mainDiv).find(".notes-module");
         this.loadingModule.hide();
         // Package loads
         this.mark = new Mark($(this.searchModule)[0]);
+
         
-        //this.notes = new Notes($(this.notesModule), "NOTES\nMORENOTES");
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
@@ -92,6 +92,13 @@ var PostSearch = class PostSearch {
             }.bind(this));
             this.numberOfSlides = ocrAudioData["Slides"].length;
             this.initAutocomplete();
+
+            loadHTMLComponent("NotesModule", function (data) {
+                var notesDiv = $(this.mainDiv).find(".notes-module").html(data);
+                this.notesModule = $(notesDiv).find(".notes-wrapper");
+                this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"]);
+                this.showNotes();
+            }.bind(this));
         }
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
@@ -174,12 +181,14 @@ var PostSearch = class PostSearch {
             "PageType": "Lecture"
         };
         $(this.searchInputField).val("");
+        this.dropdownMenu.switchToAllLecture();
         this.searchByText("");
         this.updateCurrentVideoSlide();
     }
 
     cleanUpSearch () {
         this.currWord = 0;
+        this.notesWrapper.hide();
         $(this.searchInputField).val("");
         this.searchNoText();
         this.mark.unmark();
@@ -280,6 +289,16 @@ var PostSearch = class PostSearch {
         this.showAllPostsOfLecture();
     }
 
+    showNotes () {
+        this.currentViewData = {
+            "PageType": "Notes"
+        };
+        $(this.mainDiv).parent().find(".dropdownOfSlide").on("ShowNotes", function () {
+            this.cleanUpSearch();
+            this.notesWrapper.show();
+        }.bind(this));
+    }
+
     searchForSlide (slideNo) {
         var anyPostsShown = false;
         $(this.noResultsOption).hide();
@@ -329,6 +348,7 @@ var PostSearch = class PostSearch {
 
     searchByText (text) {
         this.mark.unmark();
+        this.notesWrapper.hide();
         var bm = new BoyMor(text.toUpperCase());
 
         this.currentTextBeingSearched = text;
