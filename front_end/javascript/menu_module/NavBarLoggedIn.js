@@ -99,7 +99,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $.extend(autokeys, data);
             $("#searchBar").autocomplete({
                 source: autokeys,
-                minLength: 2,
+                minLength: 1,
                 open: function () { 
                     $('ul.ui-autocomplete').addClass('opened');  
                 },
