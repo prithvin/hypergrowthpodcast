@@ -23,14 +23,6 @@ class videoClass {
     initListeners(){
         var self = this;
 
-        $('#prevButton').click(function(){
-            var event = new CustomEvent('changeVideo', {'detail': "previous"});
-            self.mainDiv.trigger('changeVideo', ["prev"]);
-        });
-        $('#nextButton').click(function(){
-            self.mainDiv.trigger('changeVideo', ["next"]);
-        });
-            
         //when to change video
         this.mainDiv.on('changeVideo', function(e, deet){
             videojs('my-video').ready(function() {
@@ -49,7 +41,7 @@ class videoClass {
     initHotKeys(){
       
         videojs('my-video').hotkeys({
-            volumeStep: 0.1,
+          //  volumeStep: 0.1,
             seekStep: 5,
             enableModifiersForNumbers: false
         });
