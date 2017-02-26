@@ -30,7 +30,7 @@ class CourseVideosClass {
               img.className = 'course-videos-preview-images';
               img.src = 'data:image/png;base64,' + curr['PreviewImage'];
               img.addEventListener('click', function() {
-                window.location.href = '/front_end/#/podcast/' + this['Id']; 
+                window.location.hash = '#/podcast/' + this['Id']; 
               }.bind(curr));
               videoDiv.appendChild(img);
 
