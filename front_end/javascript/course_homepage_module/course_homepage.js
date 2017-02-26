@@ -1,7 +1,8 @@
 class CourseHomepageClass {
-    constructor (courseId, mainDiv) {
+    constructor (courseId, mainDiv, loadingCallback) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+        this.loadingCallback = loadingCallback;
         this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);
@@ -64,7 +65,7 @@ class CourseHomepageClass {
       require(['course-videos'], function() {
         var divToLoad = $(thisClass.mainDiv).find("#course-videos");
         loadComponent("CourseVideosModule", divToLoad, function() {
-            new CourseVideosClass(1, $(thisClass.mainDiv));
+            new CourseVideosClass(thisClass.courseId, $(thisClass.mainDiv), thisClass.loadingCallback);
         });
       });
     }
