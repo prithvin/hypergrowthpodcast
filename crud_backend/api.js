@@ -280,7 +280,7 @@ var apiFunctions = {
         },
         postFunctions:{
           getPostsForCourse : function(request, callback){
-            PostModel.find({'CourseId': request.CourseId}, {TimeOfPost: -1}, function(err,posts){
+            PostModel.find({'CourseId': request.CourseId}).sort({TimeOfPost: -1}).exec(function(err,posts){
               if(posts.length >= request.UpperLimit){
                   posts = posts.slice(0,request.UpperLimit);
               }

@@ -188,7 +188,6 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
     TimeOfPost : req.query.TimeOfPost,
     Content : req.query.Content,
     CourseId : req.query.CourseId,
-    //todo find course id
     ProfilePic : req.user.ProfilePicture,
     Name : req.user.Name
   };
@@ -198,7 +197,7 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   });
 });
 
-app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     UserId : req.user._id,
     PodcastId : req.query.PodcastId,
