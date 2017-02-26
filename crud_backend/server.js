@@ -122,6 +122,14 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
   });
 });
 
+app.get('/getRecommendations', apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+  apiFunctions.podcastFunctions.getRecommendations(request,function(recommendations){
+    res.send(recommendations);
+  });
+});
 app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     PodcastId : req.query.PodcastId

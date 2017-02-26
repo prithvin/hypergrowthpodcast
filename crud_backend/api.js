@@ -10,6 +10,11 @@ var srt2vtt = require('srt2vtt');
 var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
+    getRecommendations : function(request,callback){
+      PodcastModel.findById(request.PodcastId,"Recommendations",function(err,recommendations){
+        callback(recommendations.Recommendations);
+      });
+    },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
         if(course == null) {
