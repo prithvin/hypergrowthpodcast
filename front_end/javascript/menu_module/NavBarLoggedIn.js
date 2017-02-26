@@ -24,7 +24,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         });
         this.setCoursesHyperLink(this);
         
-        this.initAutocomplete();
+        this.initAutocomplete(classID);
     }
 
     fetchCourseData(classID,  callback) {
@@ -86,15 +86,14 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
     
     
-    initAutocomplete() {
+    initAutocomplete(classID) {
         var self = this;
-        var apiURL = "./fake_data/getKeyword.json";
-        //var apiURL2 = "./fake_data/dictionary.json";
         
-        callAPI(apiURL, "GET", {}, function (data) {
+        callAPI(login_origins.backend + '/getKeywordSuggestions', "GET", {'count': 50, 'minKeywordLength': 5, 'CourseId': classID}, function (data) {
+            console.log(data);
             var keys = localStorage.getItem("autokeys");
             if (keys !== null) autokeys = keys.split(",");
-            $.extend(autokeys, data["Keywords"]);
+            $.extend(autokeys, data);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
