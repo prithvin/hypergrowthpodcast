@@ -11,13 +11,12 @@ var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
     getVideosForCourse: function(request, callback){
-      CourseModel.find({"_id" : request.CourseId}, function(err,course){
+      CourseModel.findById( request.CourseId, function(err,course){
         if(course == null) {
           callback({});
           console.log("error finding course");
         } else {
           var copy = [];
-          console.log(course);
           for(var i = 0; i < course.Podcasts.length; i++){
             var arrayObject = {
               Id : course.Podcasts[i].PodcastId,
