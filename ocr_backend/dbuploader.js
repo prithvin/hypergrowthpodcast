@@ -209,5 +209,43 @@ module.exports = {
         }
       });
     });
+  },
+
+  validateURLs: function (id, callback) {
+    connectMongo(function () {
+      PodcastModel.find({CourseId: id}, function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          var prefix = 'http://podcast-media.ucsd.edu.s3-website-us-west-2.amazonaws.com/Podcasts/';
+          for (let i = 0; i < podcasts.length; i++) {
+            podcasts[i].PodcastUrl = prefix + podcasts[i].PodcastUrl.slice(34);
+            console.log(podcasts[i].PodcastUrl);
+            if (i == podcasts.length - 1) callback();
+          }
+        }
+      });
+    });
+  },
+
+  fixURLs: function (id, callback) {
+    connectMongo(function () {
+      PodcastModel.find({CourseId: id}, function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          var prefix = 'http://podcast-media.ucsd.edu.s3-website-us-west-2.amazonaws.com/Podcasts/';
+          for (let i = 0; i < podcasts.length; i++) {
+            podcasts[i].PodcastUrl = prefix + podcasts[i].PodcastUrl.slice(34);
+            podcasts[i].save((err, updated) => {console.log(i);});
+            if (i == podcasts.length - 1) callback();
+          }
+        }
+      });
+    });
   }
 }
