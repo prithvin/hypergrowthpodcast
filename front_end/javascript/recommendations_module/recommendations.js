@@ -1,12 +1,22 @@
 var Recommendations = class Recommendations {
-  constructor(mainDiv) {
-    this.getRecommendations((recommendations) => {
+  constructor(mainDiv, podcastid) {
+    this.podcastid = podcastid;
+
+    this.getRecommendations(function (recommendations, lecturedate) {
+      
       this.displayRecomm($(mainDiv).find('.podcast-recommendations'), recommendations);
-    });
+      $(mainDiv).find(".lecture-date").html(new Date(lecturedate).toDateString());
+
+    }.bind(this));
+   
   }
 
   displayRecomm(rec_div, recommendations) {
+    var numRecs = 0;
     for(var recommendation of recommendations) {
+      numRecs++;
+      if (numRecs == 5)
+        return;
       var id = recommendation['PodcastId'];
       var preview_src = recommendation['PodcastImage'];
       var title = recommendation['Date'];
@@ -18,7 +28,7 @@ var Recommendations = class Recommendations {
       $(rec_container).addClass('rec-container pure-u-6-24');
 
       var preview_img = document.createElement('img');
-      preview_img.src = preview_src;
+      preview_img.src = "data:image/png;base64," + preview_src;
       $(preview_img).addClass('rec-preview-img');
 
       var rec_title = document.createElement('div');
@@ -34,8 +44,10 @@ var Recommendations = class Recommendations {
   }
 
   getRecommendations(callback) {
-    callAPI('localhost:3000/getRecommendations', 'GET', {}, (data) => {
-      callback(data);
+    callAPI(login_origins.backend + '/getRecommendations', 'GET', {"PodcastId": this.podcastid}, (data) => {
+
+      callback(data['Recommendations'], data['Time']);
+
     });
   }
 }
