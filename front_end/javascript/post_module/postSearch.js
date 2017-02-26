@@ -44,12 +44,13 @@ var PostSearch = class PostSearch {
              callback forwhen post page is loaded (only for post page)
 
     */
-    constructor (postFetchData, userData, mainDiv, ocrAudioData, videoData, callback) {
+    constructor (postFetchData, userData, mainDiv, ocrAudioData, videoData, podcastid, callback) {
         this.currWord = 0;
         this.postFetchData = postFetchData;
         this.userData = userData;
         this.mainDiv = $(mainDiv).find(".search-module");
         this.doneLoading = callback;
+        this.podcastid = podcastid; // ONLY NEEDED FOR POST PAGE
 
         this.slideTransitionDiv = $(this.mainDiv).parent().find(".rectangle").hide();
         $(this.slideTransitionDiv).hide();
@@ -91,7 +92,6 @@ var PostSearch = class PostSearch {
                 this.OCRAudioLoaded = true;
             }.bind(this));
             this.numberOfSlides = ocrAudioData["Slides"].length;
-            this.initAutocomplete();
 
             loadHTMLComponent("NotesModule", function (data) {
                 var notesDiv = $(this.mainDiv).find(".notes-module").html(data);
@@ -275,18 +275,29 @@ var PostSearch = class PostSearch {
     }
 
     generateNewPost(text, timeOfPost, slideOfPost) {
-        var newPost = {
-            "Name": this.userData["Name"],
-            "PostId": "12312312", // get from callback
-            "ProfilePic": this.userData["Pic"],
-            "Content": text,
-            "TimeOfPost": timeOfPost,
+        var obj = {
+            "PodcastId": this.podcastid,
             "SlideOfPost": slideOfPost,
-            "Comments": []
+            "TimeOfPost": timeOfPost,
+            "Content": text
         };
-        $(this.searchInputField).val("");
-        this.loadPost(this, newPost, true);
-        this.showAllPostsOfLecture();
+        callAPI(login_origins.backend + "/createPost", "POST", obj, function (postID) {
+            console.log("Post is created" + postID);
+            var newPost = {
+                "Name": this.userData["Name"],
+                "PostId": postID, // get from callback
+                "ProfilePic": this.userData["Pic"],
+                "Content": text,
+                "TimeOfPost": timeOfPost,
+                "SlideOfPost": slideOfPost,
+                "Comments": []
+            };
+
+            $(this.searchInputField).val("");
+            this.loadPost(this, newPost, true);
+            this.showAllPostsOfLecture();
+        }.bind(this));
+   
     }
 
     showNotes () {
@@ -406,24 +417,25 @@ var PostSearch = class PostSearch {
         var postData = this.postFetchData;
 
         // Default to podcast search assumption
-        var apiURL = "./fake_data/getPosts.json";
+        var apiURL = login_origins.backend + "/getPostsForLecture";
         var requestData = {
-            "PodcastID": postData["UniqueID"]
+            "PodcastId": postData["UniqueID"]
         };
 
         if (postData["TypeOfFetch"] == "CourseGlobal") {
-            apiURL = "./fake_data/getPosts.json";
+            apiURL = login_origins.backend + "/getPostsForCourse";
             requestData = {
-                "CourseID": postData["UniqueID"]
+                "CourseId": postData["UniqueID"]
             };
         }
         else if (postData["TypeOfFetch"] == "CourseSearch") {
-            apiURL = "./fake_data/getPosts.json";
+            apiURL = login_origins.backend + "/getPostsByKeyword";
             requestData = {
-                "CourseID": postData["UniqueID"],
+                "CourseId": postData["UniqueID"],
                 "SearchTerm": postData["SearchQuery"]
             };
         }
+
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned
             for (var x = 0; x < data.length; x++) {
@@ -458,33 +470,6 @@ var PostSearch = class PostSearch {
 
     }
     
-    initAutocomplete() {
-        var self = this;
-        var apiURL = "./fake_data/getKeyword.json";
-        callAPI(apiURL, "GET", {}, function (data) {
-            $.extend(autokeys, data["Keywords"]);
-            $("#secondary-search-bar").autocomplete({
-                source: autokeys,
-                minLength: 2,
-                open: function () { 
-                    $('ul.ui-autocomplete-post').removeClass('closed');
-                    $('ul.ui-autocomplete-post').addClass('opened-post');  
-                },
-                close: function () {
-                    $('ul.ui-autocomplete-post').removeClass('opened-post').css('display', 'block');
-                    $('ul.ui-autocomplete-post').addClass('closed');
-                },
-            });
-        });
-        
-        document.getElementById("secondary-search-bar").addEventListener("change", function() {
-            var text = document.getElementById('secondary-search-bar').value.toLowerCase();
-            if ($.inArray(text, autokeys) == -1)
-                autokeys.push(text);
-            console.log(autokeys);
-
-        });                   
-    }
 
 }
 

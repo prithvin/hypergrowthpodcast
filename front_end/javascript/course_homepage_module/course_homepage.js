@@ -1,7 +1,8 @@
 class CourseHomepageClass {
-    constructor (courseId, mainDiv) {
+    constructor (courseId, mainDiv, loadingCallback) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+        this.loadingCallback = loadingCallback;
         this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);
@@ -27,7 +28,7 @@ class CourseHomepageClass {
             else {
                 thisClass.updateComponentHeights();
             }
-        });
+        })
         $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
             thisClass.updateComponentHeights();
         });
@@ -35,8 +36,8 @@ class CourseHomepageClass {
   
     updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#course-posts").css("height", newHeight - 75);
-        $(this.mainDiv).find("#course-videos").css("height", newHeight - 75);
+        $(this.mainDiv).find("#course-posts").css("height", newHeight - 35);
+        $(this.mainDiv).find("#course-videos").css("height", newHeight - 35);
     }
     
     
@@ -46,7 +47,7 @@ class CourseHomepageClass {
             loadComponent("PostSearchModule", divToLoad, function () {
                 new PostSearch(
                     {
-                        "UniqueID": 122,
+                        "UniqueID": thisClass.courseId,
                         "TypeOfFetch": "CourseGlobal"
                     },
                     {
@@ -64,7 +65,7 @@ class CourseHomepageClass {
       require(['course-videos'], function() {
         var divToLoad = $(thisClass.mainDiv).find("#course-videos");
         loadComponent("CourseVideosModule", divToLoad, function() {
-            new CourseVideosClass(1, $(thisClass.mainDiv));
+            new CourseVideosClass(thisClass.courseId, $(thisClass.mainDiv), thisClass.loadingCallback);
         });
       });
     }

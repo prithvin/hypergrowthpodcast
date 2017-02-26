@@ -65,7 +65,7 @@
       var search = function (courseId) {
         $("#loader-animation").show();
         require(['searchResults'], function () {
-          loadComponent("CourseSearchModule", $("#page"), function () {
+          loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
             new SearchPage(courseId, $("#page").find(".search-results-div"));
             $("#loader-animation").hide();
           });
@@ -73,11 +73,12 @@
       };
 
       var courseHomepage = function(courseId) {
-        $("#loader-animation").show();
-        loadComponent("CourseHomepageModule", $("#page"), function() {
+        $("#loader-animation").fadeIn();
+        loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
           require(['course-homepage'], function() {
-            new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"));
-            $("#loader-animation").hide();
+            new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
+              $("#loader-animation").fadeOut();  
+            });
           });
         });
       }

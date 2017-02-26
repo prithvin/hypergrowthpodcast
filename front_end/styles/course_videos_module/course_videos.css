@@ -46,17 +46,15 @@
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
-    -webkit-transition: width 0.5s, height 0.5s, margin-left 0.5s, margin-top 0.5s; /* Safari */
-    transition: width 0.5s, height 0.5s, margin-left 0.5s, margin-top 0.5s;
+    -webkit-transition: all 0.5s; /* Safari */
+    transition: all 0.5s;
 }
 
 .course-videos-preview-images:hover {
     cursor: pointer;
     position:relative;
-    width: 105%;
-    height: 85%;
-    margin-left: -2.5%;
-    margin-top: 5px;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .videos-row {
@@ -64,7 +62,7 @@
 }
 
 .text-title {
-  margin-top: 10px;
+  margin-top: 5px;
   color: rgba(66, 100, 155, 1);
   font-family: "Roboto", sans-serif;
   font-weight: normal;

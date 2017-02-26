@@ -9,10 +9,12 @@
   margin-bottom: 10.3664%;
 }
 
-.preview-img {
+.rec-preview-img {
   max-width: 100%;
   max-height: 100%;
   border-radius: 5px;
+  -webkit-transition: all 0.5s; /* Safari */
+  transition: all 0.5s;
 }
 
 .rec-container {
@@ -24,6 +26,13 @@
   text-align: center;
   color: #3a5c9b;
   font-size: 90%;
+}
+
+.rec-preview-img:hover {
+    cursor: pointer;
+    position: relative;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .recommendations-header {
