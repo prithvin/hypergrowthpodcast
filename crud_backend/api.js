@@ -313,8 +313,8 @@ var apiFunctions = {
           getPostsByKeyword : function(request,callback){
             PostModel.find({'CourseId' : request.CourseId,
               $or : [{Content: {$regex : request.Keywords, $options: 'i'}},
-              {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]},
-              {TimeOfPost: -1}, function (err, posts) {
+              {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]}).sort(
+              {TimeOfPost: -1}).exec(function (err, posts) {
                 if (!posts) {
                   callback([]);
                   return;
