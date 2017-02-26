@@ -153,7 +153,7 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
               var image = base64encode(fileData["DirName"] + '/1.jpg');
 
               base64resize({
-                'src': 'data:image/jpeg;base64,' + image;
+                'src': 'data:image/jpeg;base64,' + image,
                 'width': 160,
                 'height': 100
               }, (error, shrunk) => {
