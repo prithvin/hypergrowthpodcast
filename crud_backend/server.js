@@ -142,6 +142,18 @@ app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req
 
 });
 
+app.get('/getKeywordSuggestions', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    count: req.query.count,
+    minKeywordLength: req.query.minKeywordLength,
+    CourseId: req.query.CourseId
+  };
+
+  apiFunctions.podcastFunctions.getKeywordSuggestions(request, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
   var request = {
     count: req.query.count,
