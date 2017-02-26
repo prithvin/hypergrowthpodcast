@@ -101,14 +101,17 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                 source: autokeys,
                 minLength: 2,
                 open: function () { 
-                    $('ul.ui-autocomplete').removeClass('closed');
                     $('ul.ui-autocomplete').addClass('opened');  
                 },
                 close: function () {
                     $('ul.ui-autocomplete').removeClass('opened').css('display', 'block');
-                    $('ul.ui-autocomplete').addClass('closed');
                 },
-            });
-        });              
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li class='li-key'></li>")
+                        .data("item.autocomplete", item)
+                        .append("<span class='key'>" + item.label + "</span>")
+                        .appendTo(ul);;
+            };    
+        });
     }
 }
