@@ -3,6 +3,7 @@
 }
 
 .li-key:hover {
+    color: #ffffff;
     background-color: rgba(15, 43, 92, 1);
 }
 
@@ -50,8 +51,6 @@
 }
 
 .ui-state-hover, .ui-state-active {
-    color: #ffffff;
-    background-color: rgba(15, 43, 92, 1); 
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
 }
