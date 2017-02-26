@@ -155,7 +155,6 @@ app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req
 });
 
 app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
-  console.log("GETTING COURSES");
   apiFunctions.courseFunctions.getCourses(function(courses){
     res.send(courses);
   });
@@ -163,7 +162,7 @@ app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
 
 app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res){
   var request = {
-    CourseId : req.query.CourseId
+    CourseId : req.query.CourseId   // This might be a course Id, this might be a podcast id.
   };
   apiFunctions.courseFunctions.getCourseInfo(request,function(course){
     res.send(course);

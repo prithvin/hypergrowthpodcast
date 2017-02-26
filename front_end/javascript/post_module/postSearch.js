@@ -296,6 +296,7 @@ var PostSearch = class PostSearch {
         $(this.mainDiv).parent().find(".dropdownOfSlide").on("ShowNotes", function () {
             this.cleanUpSearch();
             this.notesWrapper.show();
+            $(this.noResultsOption).hide();
         }.bind(this));
     }
 
@@ -459,7 +460,7 @@ var PostSearch = class PostSearch {
     
     initAutocomplete() {
         var self = this;
-        var apiURL = "./fake_data/getVideo.json";
+        var apiURL = "./fake_data/getKeyword.json";
         callAPI(apiURL, "GET", {}, function (data) {
             $.extend(autokeys, data["Keywords"]);
             $("#secondary-search-bar").autocomplete({

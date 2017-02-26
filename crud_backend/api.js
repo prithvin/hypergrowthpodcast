@@ -42,10 +42,12 @@ var apiFunctions = {
           */
           getVideoInfo: function(request, callback) {
             PodcastModel.findById(request.PodcastId,
-                                  'SRTBlob PodcastUrl Time AudioTranscript Slides',
+                                  'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                                   function(err,podcast) {
-              if(err) {
+              if(err || podcast == null) {
                 console.log("error");
+                callback("ERROR");
+                return;
               } else {
                 srt2vtt(podcast.SRTBlob, function(err, vttData) {
                   if (err)
@@ -55,7 +57,9 @@ var apiFunctions = {
                     VideoDate : podcast.Time,
                     SRTFile : vttData.toString('utf8'),
                     ParsedAudioTranscriptForSearch : podcast.AudioTranscript,
-                    Slides : podcast.Slides
+                    Slides : podcast.Slides,
+                    NextVideo: podcast.NextVideo,
+                    PrevVideo: podcast.PrevVideo
                   };
                   callback(response);
                 });
@@ -224,10 +228,10 @@ var apiFunctions = {
             });
 
           },
-          getCourseInfo : function(request,callback){
+          getCourseInfo : function(request,callback, neverBefore){
             CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
                 if (course == null) {
-                  callback({});
+                  this.getPodcastInfo(request, callback, neverBefore);
                   return;
                 }
 
@@ -238,7 +242,24 @@ var apiFunctions = {
                 };
 
               callback(courseToRet);
-            });
+            }.bind(this));
+          },
+          getPodcastInfo: function (request, callback, neverBefore) {
+            if (neverBefore) {
+              callback({});
+              return;
+            }
+
+            PodcastModel.findById(request.CourseId, '_id CourseId', function(err,course){
+              console.log(err);
+              console.log(course);
+              if (course == null) {
+                callback({});
+                return;
+              }
+              request.CourseId = course['CourseId'];
+              this.getCourseInfo(request, callback, true);
+            }.bind(this));
           }
         },
         postFunctions:{

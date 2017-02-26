@@ -20,3 +20,7 @@
   overflow-x: hidden;
   height: 100%;
 }
+
+#recommendations-container {
+  padding-bottom: 50px;
+}
