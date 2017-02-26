@@ -276,13 +276,14 @@ var PostSearch = class PostSearch {
     }
 
     generateNewPost(text, timeOfPost, slideOfPost) {
-        callAPI(login_origins.backend + "/createPost", "POST", {
+        var obj = {
             "PodcastId": this.podcastid,
             "SlideOfPost": slideOfPost,
             "TimeOfPost": timeOfPost,
             "Content": text
-        },
-        function (postID) {
+        };
+        console.log(obj);
+        callAPI(login_origins.backend + "/createPost", "POST", obj, function (postID) {
             var newPost = {
                 "Name": this.userData["Name"],
                 "PostId": postID, // get from callback

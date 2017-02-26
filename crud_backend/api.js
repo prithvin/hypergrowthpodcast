@@ -281,7 +281,6 @@ var apiFunctions = {
         postFunctions:{
           getPostsForCourse : function(request, callback){
             PostModel.find({'CourseId': request.CourseId}, {TimeOfPost: -1}, function(err,posts){
-              var response;
               if(posts.length >= request.UpperLimit){
                   posts = posts.slice(0,request.UpperLimit);
               }
@@ -293,13 +292,13 @@ var apiFunctions = {
                 delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
-                console.log(posts[i]);
               }
               callback(posts);
             });
           },
           getPostsForLecture : function(request, callback){
-            PostModel.find({'PodcastId': request.PodcastId} , {TimeOfPost: -1}, function(err,posts){
+            PostModel.find({'PodcastId': request.PodcastId}).sort({TimeOfPost: -1}).exec(function(err,posts){
+              console.log(posts);
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
@@ -307,7 +306,6 @@ var apiFunctions = {
                 delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
-                console.log(posts[i]);
               }
               callback(posts);
             });
