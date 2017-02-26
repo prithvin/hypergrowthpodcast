@@ -2,6 +2,8 @@
     position: absolute;
     z-index: -1;
     display: flex;
+    visibility: visible;
+    opacity: 0;
     text-align: center;
     width: 100%;
     padding-left: 100px;
@@ -9,10 +11,13 @@
     font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-size: 42px;
+    -webkit-transition: visibility 0s, opacity 2s;
+    transition: visibility 0s, opacity 2s;
 }
 
-.no-results-hide {
-    display: none;
+.no-results-show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .onboarding-right {
@@ -33,7 +38,7 @@
   padding: 0px;
 }
 
-.onboarding-courses-module {
+.onboarding-courses-page {
   height: 100%;
   width: 100%;
   min-width: 1200px;

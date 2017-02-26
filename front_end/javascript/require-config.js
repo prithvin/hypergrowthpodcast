@@ -24,7 +24,7 @@ var require = {
             "deps": ['jquery']
         },
         "components": {
-            "deps": ['jquery']
+            "deps": ['jquery', 'config']
         },
         "postLoad": {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
@@ -54,10 +54,10 @@ var require = {
         "angular": {},
         "post-dropdown": {},
         "navbar": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui']
         },
         "course-videos": {
-            "deps": ['jquery', 'bootstrap']
+            "deps": ['jquery', 'bootstrap', 'moment']
         },
         "search-videos": {
             "deps": ['jquery', 'bootstrap']
@@ -66,7 +66,7 @@ var require = {
             "deps": ['course-videos', 'components']
         },
         "course-selection": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
             "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
@@ -111,7 +111,7 @@ var require = {
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "post-dropdown": "post_module/PodcastDropdownMenu",
-        "auto-correct": "menu_module/Norvig",
-        "search-results": "search_module/search-results"
+        "search-results": "search_module/search-results",
+        "recommendations": "recommendations_module/recommendations"
     }
 };

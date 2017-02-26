@@ -8,11 +8,11 @@ var PodcastPage = class PodcastPage {
             this.startingSlide = 1;
         this.fetchUserData(this);
         this.loadNavbar(this);
-        
+        this.loadRecommendations(mainDiv);
     }
 
     fetchUserData (thisClass) {
-        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+        callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             thisClass.UserName = data['Name'];
             thisClass.UserPic = data['Pic'];
             thisClass.fetchVideo(thisClass);
@@ -82,18 +82,20 @@ var PodcastPage = class PodcastPage {
 
 
     fetchVideo (thisClass) {
-        callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID}, 
-            function (data) {
-                thisClass.audioData = {
-                    "ParsedAudioTranscriptForSearch": data['ParsedAudioTranscriptForSearch'],
-                    "Slides": data['Slides']
-                };
+        callAPI(login_origins.backend + '/getVideoInfo', "GET", {"PodcastId": this.podcastID},  function (data) {
+            thisClass.audioData = {
+                "ParsedAudioTranscriptForSearch": data['ParsedAudioTranscriptForSearch'],
+                "Slides": data['Slides'],
+                "PodcastID": thisClass.podcastID
+            };
+            callAPI(login_origins.backend + '/getNotesForUser', "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
+                thisClass.audioData["Notes"] = notes["Notes"];
                 thisClass.parseSlides(data['Slides']);
                 thisClass.loadPosts(thisClass, function () {
                     thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
                 });
-            }
-        );
+            });
+        });
     }
 
     dynamicWindowResize (thisClass) {
@@ -140,6 +142,7 @@ var PodcastPage = class PodcastPage {
                     {
                         "CurrentSlideNum": thisClass.startingSlide
                     },
+                    thisClass.podcastID,
                     function () {
                         setTimeout(function () {
                             thisClass.updatePostHeights() 
@@ -165,6 +168,17 @@ var PodcastPage = class PodcastPage {
             });
 
         });                
+    }
+
+	loadRecommendations(mainDiv) {
+        var thisClass = this;
+      require(['recommendations'], function() {
+        var rec_div = $(mainDiv).find('#recommendations-container')
+
+        loadComponent('RecommendationsModule', rec_div, function() {
+          new Recommendations(mainDiv, thisClass.podcastID);
+        });
+      });
     }
 
     nextPreVideoListeners () {

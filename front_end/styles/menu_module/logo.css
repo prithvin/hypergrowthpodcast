@@ -1,5 +1,7 @@
 .podcast_icon {
     width:90%;
+    max-width:100%;
+    max-height:100%;
 }
 
 .class-name{
@@ -8,6 +10,8 @@
 
 .icon_text {
     width:100%;
+    max-width:100%;
+    max-height:100%;
 }
 
 .class_text {

@@ -1,13 +1,9 @@
 var autokeys = [];
-
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
+
+    // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
-        
-        /* Autocomplete keys */
-    
-        /* Autocorrect */
-        this.norvig;
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -21,19 +17,18 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
-        this.setHomeHyperLink(this);
-        this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
-        callAPI("./fake_data/getCourse.json", "GET", {}, function (data) {
-            callback(data['CourseName'],  data['ClassQuarter']);
-            this.setHomeHyperLink(classID);
+        callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, function(data) {
+            callback(data['Course'], data['Quarter']);
+            this.setHomeHyperLink(data['Id']);
+            this.initAutocomplete(data['Id']);
         }.bind(this));
     }
 
     fetchUserData (callback) {
-        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+        callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             callback(data['Name'], data['Pic']);
         });
     }
@@ -51,7 +46,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     setUserName(userFirstName) {
-        $(this.mainDiv).find("#firstName").html(userFirstName);
+        $(this.mainDiv).find("#firstName").html(userFirstName.substring(0, userFirstName.indexOf(' ')));
     }
 
 
@@ -61,106 +56,62 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setCoursesHyperLink (thisClass) {
         $(this.mainDiv).find("#course_button").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/courses";  // temporary link
-            $(thisClass.mainDiv).trigger( "goToCourseOnboarding", [] );
+            var baseURL = window.location.origin + window.location.pathname;
+            var targetURL = baseURL + "#/courses";
+            window.location.href = targetURL;
+            window.location.hash =  "/courses";
         })
     }
     
     setHomeHyperLink (classID) {
+        var windowHash = "#/courses/" + classID;
+        if (classID == null) {
+            windowHash = "#/courses";
+        }
         $(this.mainDiv).find("#home_button").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; // temporary link
-            $(this.mainDiv).trigger( "goToCourseHome", [] );
+            window.location.hash = windowHash;
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
-            var path = window.location.pathname;
-            window.location = path + "#/course_homepage/" + classID; // temporary lin
-            $(this.mainDiv).trigger( "goToCourseHome", [] );
+            window.location.hash = windowHash;
         }.bind(this))
     }
     
     
-    initAutocomplete() {
-        var self = this;
-        var apiURL = "./fake_data/getVideo.json";
-        var apiURL2 = "./fake_data/dictionary.json";
+    initAutocomplete(classID) {
+        // Keep user searches if they are worthwhile
+        document.getElementById("searchBar").addEventListener("change", function() {
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, autokeys) == -1 && text.length > 2)
+                autokeys.push(text);
+            //console.log(autokeys);
+            localStorage.setItem("autokeys", autokeys);
+        });     
         
-        callAPI(apiURL, "GET", {}, function (data) {
+        if (classID == null) {
+            return;             // we don't want a podcast id here so exit!
+        }
+        
+        // Get Keywords for entire course
+        callAPI(login_origins.backend + '/getKeywordSuggestions', "GET", {'count': 100, 'minKeywordLength': 3, 'CourseId': classID}, function (data) {
             var keys = localStorage.getItem("autokeys");
             if (keys !== null) autokeys = keys.split(",");
-            $.extend(autokeys, data["Keywords"]);
+            // Merge keywords
+            $.extend(autokeys, data);
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
                 open: function () { 
-                    $('ul.ui-autocomplete').removeClass('closed');
                     $('ul.ui-autocomplete').addClass('opened');  
                 },
                 close: function () {
                     $('ul.ui-autocomplete').removeClass('opened').css('display', 'block');
-                    $('ul.ui-autocomplete').addClass('closed');
                 },
-            });
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    return $("<li class='li-key'></li>")
+                        .data("item.autocomplete", item)
+                        .append("<span class='key'>" + item.label + "</span>")
+                        .appendTo(ul);;
+            };    
         });
-        
-        /*
-        callAPI(apiURL2, "GET", {}, function (data) {
-            self.norvig = new Norvig(data["Dictionary"]);
-        });*/
-        
-        document.getElementById("searchBar").addEventListener("change", function() {
-            //self.autocorrect();
-            var text = document.getElementById('searchBar').value.toLowerCase();
-            if ($.inArray(text, autokeys) == -1 && text.length > 2)
-                autokeys.push(text);
-            console.log(autokeys);
-            localStorage.setItem("autokeys", autokeys);
-        });                   
-    }
-    
-    autocorrect() {
-        var self = this;
-        var text = document.getElementById('searchBar').value;
-        if (text.length > 2) {
-            var splitText = text.split(" ");
-            var correction = "";
-            var corrected = "";
-            var x = 0;
-
-            /* Correct each word */
-            for (; x < splitText.length - 1; x++) {
-                console.log("user: " + splitText[x]);
-                if (splitText[x].length > 13) {
-                    console.log("Cannot autocorrect: " + splitText[x]);
-                    continue;
-                }
-                corrected = self.norvig.correct(splitText[x]);
-                console.log("corrected: " + corrected);
-                if (typeof corrected === "undefined")
-                    corrected = splitText[x];       // keep user's word
-                correction += corrected + " ";
-            }
-
-            /* Last Word */
-            console.log("user: " + splitText[x])
-            if (splitText[x].length > 13) {
-                console.log("Cannot autocorrect: " + splitText[x])
-            } else {
-                corrected = self.norvig.correct(splitText[x]);
-                console.log("corrected: " + corrected);
-                if (typeof corrected === "undefined")
-                    corrected = splitText[x];           // keep user's word
-                correction += corrected;
-            }
-
-            correction = correction.toLowerCase();
-            if (typeof correction === "undefined") {
-                return;
-            } else {
-                document.getElementById('searchBar').value = correction;
-                console.log("correction: " + correction);
-            }  
-        }
     }
 }

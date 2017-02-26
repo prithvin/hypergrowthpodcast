@@ -16,8 +16,17 @@ var loadHTMLModules = {
     "VideoModule": "video_module.html",
     "AudioOCRSubMod": "audio_ocr_search_sub_module.html",
     "AudioOCRMod": "audio_ocr_search_module.html",
-    "SlideTransitionModule": "slide_transition_module.html"
+    "SlideTransitionModule": "slide_transition_module.html",
+    "RecommendationsModule": "recommendations_module.html",
+    "NotesModule": "notes_module.html"
 };
+
+preloadComponents();
+function preloadComponents () {
+    for (key in loadHTMLModules) {
+        loadHTMLComponent(key, function () { });
+    }
+}
 
 function loadComponent (moduleName, divToLoad, callback) {
     if (loadHTMLModules[moduleName] == null) {
@@ -27,6 +36,17 @@ function loadComponent (moduleName, divToLoad, callback) {
     loadHTMLComponent(moduleName, function (data) {
         $(divToLoad).html(data);
         callback();
+    });
+}
+
+function loadComponentOrLogin (moduleName, divToLoad, callback) {   
+    callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (loginStatus) {
+        if(loginStatus.result === true) {
+            loadComponent(moduleName, divToLoad, callback);
+        }
+        else {
+          window.location.href = window.location.origin + window.location.pathname + '/#/?redirectURL=' + encodeURIComponent(window.location.href);
+        }
     });
 }
 

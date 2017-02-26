@@ -39,7 +39,9 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 app.use(cors({
     allowedOrigins: [
         'localhost:7888',
-        'localhost:8000'
+        'localhost:8000',
+        '104.131.147.159',
+        '104.131.147.159:80'
     ]
 }))
 
@@ -59,7 +61,7 @@ app.get('/login', function(req,res){
     res.redirect("/");
   }
   else {
-    res.sendfile('./index.html', {root: __dirname });
+    res.sendFile('./index.html', {root: __dirname });
   }
 });
 
@@ -120,6 +122,14 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
   });
 });
 
+app.get('/getRecommendations', apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+  apiFunctions.podcastFunctions.getRecommendations(request,function(recommendations){
+    res.send(recommendations);
+  });
+});
 app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     PodcastId : req.query.PodcastId
@@ -142,6 +152,30 @@ app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req
 
 });
 
+app.get('/getKeywordSuggestions', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    count: req.query.count,
+    minKeywordLength: req.query.minKeywordLength,
+    CourseId: req.query.CourseId
+  };
+
+  apiFunctions.podcastFunctions.getKeywordSuggestions(request, function(response) {
+    res.send(response);
+  });
+});
+
+app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    count: req.query.count,
+    CourseId: req.query.CourseId,
+    Keywords: req.query.Keywords
+  };
+
+  apiFunctions.podcastFunctions.searchByKeywords(request, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
   apiFunctions.courseFunctions.getCourses(function(courses){
     res.send(courses);
@@ -150,7 +184,7 @@ app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
 
 app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res){
   var request = {
-    CourseId : req.query.CourseId
+    CourseId : req.query.CourseId   // This might be a course Id, this might be a podcast id.
   };
   apiFunctions.courseFunctions.getCourseInfo(request,function(course){
     res.send(course);
@@ -159,25 +193,36 @@ app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res
 
 app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PodcastId : req.query.PodcastId,
-    SlideOfPost : req.query.SlideOfPost,
-    TimeOfPost : req.query.TimeOfPost,
-    Content : req.query.Content,
-    CourseId : req.query.CourseId,
+    PodcastId : req.body.PodcastId,
+    SlideOfPost : req.body.SlideOfPost,
+    TimeOfPost : req.body.TimeOfPost,
+    Content : req.body.Content,
+    CourseId : req.body.CourseId,
     ProfilePic : req.user.ProfilePicture,
     Name : req.user.Name
   };
 
-  apiFunctions.postFunctions.createPost(request,function(status){
+  apiFunctions.postFunctions.createPost(request,function(postId){
+    res.send(postId);
+  });
+});
+
+app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id,
+    PodcastId : req.query.PodcastId,
+    Content : req.query.Content
+  };
+  apiFunctions.userFunctions.createNotes(request,function(status){
     res.send(status);
   });
 });
 
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PostId : req.query.PostId,
-    Time : req.query.Time,
-    Content : req.query.Content,
+    PostId : req.body.PostId,
+    Time : req.body.Time,
+    Content : req.body.Content,
     Pic : req.user.ProfilePicture,
     PosterName : req.user.Name
   };
@@ -218,23 +263,36 @@ app.get('/logout',function(req,res){
   res.send("LOGGED OUT");
 });
 
+var realCallbackUrl = 'http://www.google.com';
+
 /***************************************FACEBOOK AUTH****************************************************/
 app.get('/auth/facebook', function(req,res,next){
   if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
     res.send("Error. Invalid params");
     return;
   }
-  auth.callbackURL = req.query.callbackURL;
-  auth.errorCallback = req.query.errorCallbackURL;
-  next();
-},
-  passport.authenticate('facebook',
-  {
+  req.session.callbackURL = req.query.callbackURL;
+  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+  realCallbackUrl = req.protocol + '://' + req.get('host') + auth.facebookAuth.callbackURL;
+  //console.log(realCallbackUrl);
+  req.session.save(function (err) {
+    auth.callbackURL = req.query.callbackURL;
+    auth.errorCallback = req.query.errorCallbackURL;
+    //next();
+    putStuff(req, res, next);
+    //res.redirect('/auth/facebook/newcallback');
+  });
+});
+
+function putStuff (req, res, next) {  
+  var object = {
+      callbackURL: realCallbackUrl,
       display: 'popup',
       scope: [ 'email', 'basic_info'],
       profileFields: ['id', 'displayName', 'photos', 'email', 'birthday']
-  }
-));
+  };
+  passport.authenticate('facebook', object)(req, res, next);
+ }
 
 
 app.get("/auth/facebook/callback",
@@ -250,8 +308,8 @@ app.get("/auth/facebook/callback",
           console.log(err);
       });
     }
-
-    res.redirect(auth.callbackURL);
+    console.log('req.session.callbackURL is ' + req.session.callbackURL);
+    res.redirect(req.session.callbackURL);
   },
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {

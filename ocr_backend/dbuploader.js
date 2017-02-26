@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var PodcastModel = require('./podcastModel.js').PodcastModel;
 var CourseModel = require('./courseModel.js').CourseModel;
+var base64resize = require('base64resize');
 
 var isMongoConnected = false;
 
@@ -163,6 +164,86 @@ module.exports = {
         }
         else {
           callback(courses);
+        }
+      });
+    });
+  },
+
+  getOneImage: function(id, callback) {
+    connectMongo(function () {
+      CourseModel.findById(id, 'Podcasts', function (err, course){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+
+        else {
+          callback(course.Podcasts[0].PodcastImage);
+        }
+      });
+    });
+  },
+
+  shrinkImages: function (id, callback) {
+    connectMongo(function () {
+      CourseModel.findById(id, 'Podcasts', function (err, course){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+
+        else {
+          for (let i = 0; i < course.Podcasts.length; i++) {
+            base64resize({
+              'src': 'data:image/jpeg;base64,' + course.Podcasts[i].PodcastImage,
+              'width': 160,
+              'height': 100
+            }, (e, s) => {
+              course.Podcasts[i].PodcastImage = s;
+              console.log(i);
+              if (i == course.Podcasts.length - 1) {
+                course.save((err, updated) => {callback();});
+              }
+            });
+          }
+        }
+      });
+    });
+  },
+
+  validateURLs: function (id, callback) {
+    connectMongo(function () {
+      PodcastModel.find({CourseId: id}, function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          var prefix = 'http://podcast-media.ucsd.edu.s3-website-us-west-2.amazonaws.com/Podcasts/';
+          for (let i = 0; i < podcasts.length; i++) {
+            podcasts[i].PodcastUrl = prefix + podcasts[i].PodcastUrl.slice(34);
+            console.log(podcasts[i].PodcastUrl);
+            if (i == podcasts.length - 1) callback();
+          }
+        }
+      });
+    });
+  },
+
+  fixURLs: function (id, callback) {
+    connectMongo(function () {
+      PodcastModel.find({CourseId: id}, function (err, podcasts){
+        if (err) {
+          console.error("Issue connecting to database");
+          console.error(err);
+        }
+        else {
+          var prefix = 'http://podcast-media.ucsd.edu.s3-website-us-west-2.amazonaws.com/Podcasts/';
+          for (let i = 0; i < podcasts.length; i++) {
+            podcasts[i].PodcastUrl = prefix + podcasts[i].PodcastUrl.slice(34);
+            podcasts[i].save((err, updated) => {console.log(i);});
+            if (i == podcasts.length - 1) callback();
+          }
         }
       });
     });

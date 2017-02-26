@@ -1,10 +1,56 @@
 .podcast-recommendations-module {
   width: 100%;
-  height: 100%;
   padding-left: 2.5%;
   padding-right: 2.5%;
+  margin-top: 10px;
 }
 
 .podcast-recommendations {
   margin-top: 12px;
+  margin-bottom: 10.3664%;
+}
+
+.lecture-title {
+  font-size: 1.19em;
+}
+
+#recommendations-container {
+  padding-bottom: 50px;
+}
+
+.rec-preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+  -webkit-transition: all 0.5s; /* Safari */
+  transition: all 0.5s;
+}
+
+.rec-container {
+  padding-right: 2.375%;
+  text-align:center;
+}
+
+.rec-title {
+  margin-top: 1.45%;
+  text-align: center;
+  color: #3a5c9b;
+  font-size: 90%;
+}
+
+.lecture-title {
+  padding-bottom: 10px;
+  padding-top: 7px;
+}
+
+.rec-preview-img:hover {
+    cursor: pointer;
+    position: relative;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.recommendations-header {
+  color: #405a74;
+  font-size: 0.8em;
 }

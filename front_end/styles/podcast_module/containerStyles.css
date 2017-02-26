@@ -1,6 +1,7 @@
 .podcast-row {
     padding: 0;
     margin: 0;
+    height: 100%;
 }
 
 .podcast-cont {
@@ -9,7 +10,27 @@
     background-color:#F4F6F8;
 }
 
+.prev-button {
+  display:none;
+}
+
+.next-button {
+  display:none;
+}
 
 #podcast-posts {
     height: 80%;
+}
+
+.video-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+#video-title {
+  margin-top: 1.5%;
+  margin-bottom: 2.5%;
+  margin-left: 1.25%;
+  font-size: 135%;
 }

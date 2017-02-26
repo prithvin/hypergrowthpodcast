@@ -1,8 +1,8 @@
 class CourseHomepageClass {
-    constructor (courseId, mainDiv) {
+    constructor (courseId, mainDiv, loadingCallback) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
-      
+        this.loadingCallback = loadingCallback;
         this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);
@@ -26,23 +26,28 @@ class CourseHomepageClass {
                 $('#myimage').off('click.mynamespace');
             }
             else {
-                thisClass.updatePostHeights();
+                thisClass.updateComponentHeights();
             }
+        })
+        $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
+            thisClass.updateComponentHeights();
         });
     }
   
-    updatePostHeights() {
+    updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
+        $(this.mainDiv).find("#course-posts").css("height", newHeight - 35);
+        $(this.mainDiv).find("#course-videos").css("height", newHeight - 35);
     }
+    
     
     loadPostSearch(thisClass) {
         require(['postSearch'], function () {
-            var divToLoad = $(thisClass.mainDiv).find("#posts");
+            var divToLoad = $(thisClass.mainDiv).find("#course-posts");
             loadComponent("PostSearchModule", divToLoad, function () {
                 new PostSearch(
                     {
-                        "UniqueID": 122,
+                        "UniqueID": thisClass.courseId,
                         "TypeOfFetch": "CourseGlobal"
                     },
                     {
@@ -60,7 +65,7 @@ class CourseHomepageClass {
       require(['course-videos'], function() {
         var divToLoad = $(thisClass.mainDiv).find("#course-videos");
         loadComponent("CourseVideosModule", divToLoad, function() {
-            new CourseVideosClass(1, $(thisClass.mainDiv));
+            new CourseVideosClass(thisClass.courseId, $(thisClass.mainDiv), thisClass.loadingCallback);
         });
       });
     }

@@ -1,3 +1,3 @@
 var login_origins = {
-  backend: 'http://localhost:3000'
+  backend: "http://" + window.location.hostname + ':3000'
 }

@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "base64resize": "1.0.0",
     "check-word": "^1.1.0",
     "count-words": "^1.0.5",
     "download-file": "0.1.5",

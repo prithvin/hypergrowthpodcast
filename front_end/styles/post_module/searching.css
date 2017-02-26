@@ -1,7 +1,6 @@
 .search-module-main {
     background-color: #F4F6F8;
     height: 100%;
-    padding-top: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -43,6 +42,7 @@
     font-weight: 200;
     color: black;
     display:inline !IMPORTANT;
+    padding-right: 32px !IMPORTANT;
 }
 
 .main_search_container_post {
