@@ -3,7 +3,7 @@ var OCRAudioIndPost = class OCRAudioIndPost {
     // startTime (in SECONDS) is optional and only applicable for the sub-modules
     constructor (content, slideNum, divToAppend, startTime) {
         this.divToAppend = divToAppend;
-        this.content = content.replace(/[\s\r\n]+$/, '');;
+        this.content = content.replace(/\n\s*\n/g, '\n');        
         this.slideNum = slideNum;
         this.startTime = startTime;
         this.loadComponentAndAddData(this, function () {});
