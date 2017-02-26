@@ -71,7 +71,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     setHomeHyperLink (classID) {
         $(this.mainDiv).find("#home_button").on("click", function () {
-            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
+            //console.log("Reloading " + this.course + " " + this.quarter + " course page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/courses/" + classID;
             window.location.href = targetURL;
@@ -79,7 +79,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             //$(this.mainDiv).trigger( "goToCourseHome", [] );
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
-            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
+            //console.log("Reloading " + this.course + " " + this.quarter + " course page...");
             var baseURL = window.location.origin + window.location.pathname;
             var targetURL = baseURL + "#/courses/" + classID;
             window.location.href = targetURL;

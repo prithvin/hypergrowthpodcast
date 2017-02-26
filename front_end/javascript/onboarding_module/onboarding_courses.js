@@ -101,9 +101,10 @@ function myFunction() {
     }    
   }
   if (count == tr.length - 1) {
-      $('.no-results-courses').removeClass('no-results-hide');
+      // No results
+      $('.no-results-courses').addClass('no-results-show');
   } else {
-      $('.no-results-courses').addClass('no-results-hide');
+      $('.no-results-courses').removeClass('no-results-show');
   }
 }
 /* Sort Function */
