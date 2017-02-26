@@ -28,7 +28,7 @@ class CourseVideosClass {
             
               var img = document.createElement('img');
               img.className = 'course-videos-preview-images';
-              img.src = 'data:image/png;base64,' + curr['PreviewImage'];
+              img.src = curr['PreviewImage'];
               img.addEventListener('click', function() {
                 window.location.hash = '#/podcast/' + this['Id']; 
               }.bind(curr));

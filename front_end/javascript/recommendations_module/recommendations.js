@@ -28,7 +28,7 @@ var Recommendations = class Recommendations {
       $(rec_container).addClass('rec-container pure-u-6-24');
 
       var preview_img = document.createElement('img');
-      preview_img.src = "data:image/png;base64," + preview_src;
+      preview_img.src = preview_src;
       $(preview_img).addClass('rec-preview-img');
 
       var rec_title = document.createElement('div');
