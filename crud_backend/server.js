@@ -183,11 +183,11 @@ app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res
 
 app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PodcastId : req.query.PodcastId,
-    SlideOfPost : req.query.SlideOfPost,
-    TimeOfPost : req.query.TimeOfPost,
-    Content : req.query.Content,
-    CourseId : req.query.CourseId,
+    PodcastId : req.body.PodcastId,
+    SlideOfPost : req.body.SlideOfPost,
+    TimeOfPost : req.body.TimeOfPost,
+    Content : req.body.Content,
+    CourseId : req.body.CourseId,
     ProfilePic : req.user.ProfilePicture,
     Name : req.user.Name
   };
@@ -200,8 +200,8 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     UserId : req.user._id,
-    PodcastId : req.query.PodcastId,
-    Content : req.query.Content
+    PodcastId : req.body.PodcastId,
+    Content : req.body.Content
   };
   apiFunctions.userFunctions.createNotesForUser(request,function(status){
     res.send(status);
@@ -210,9 +210,9 @@ app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PostId : req.query.PostId,
-    Time : req.query.Time,
-    Content : req.query.Content,
+    PostId : req.body.PostId,
+    Time : req.body.Time,
+    Content : req.body.Content,
     Pic : req.user.ProfilePicture,
     PosterName : req.user.Name
   };

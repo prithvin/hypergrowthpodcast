@@ -250,7 +250,6 @@ var apiFunctions = {
             this.getPodcastInfo(request, callback, neverBefore);
             return;
           }
-
           var courseToRet = {
             Id : course._id,
             Course : course.Name,
@@ -332,13 +331,13 @@ var apiFunctions = {
       });
     },
     createPost: function(request,callback) {
-      PodcastModel.find({PodcastId : request.PodcastId}, function(err,podcast){
+      PodcastModel.findById(request.PodcastId,"CourseId", function(err,podcast){
         PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
         Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
           if(err)
-            callback(false);
+            return callback(false);
           else {
-            callback(post._id);
+            return callback(post._id);
           }
         });
       });

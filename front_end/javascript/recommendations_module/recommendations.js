@@ -19,7 +19,7 @@ var Recommendations = class Recommendations {
 
       var preview_img = document.createElement('img');
       preview_img.src = preview_src;
-      $(preview_img).addClass('preview-img');
+      $(preview_img).addClass('rec-preview-img');
 
       var rec_title = document.createElement('div');
       rec_title.textContent = title;
