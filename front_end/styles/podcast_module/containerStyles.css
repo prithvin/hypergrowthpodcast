@@ -10,6 +10,13 @@
     background-color:#F4F6F8;
 }
 
+.prev-button {
+  display:none;
+}
+
+.next-button {
+  display:none;
+}
 
 #podcast-posts {
     height: 80%;
