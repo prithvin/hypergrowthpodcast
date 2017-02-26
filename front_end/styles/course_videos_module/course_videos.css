@@ -37,9 +37,8 @@
 }
 
 .course-videos-preview-images {
-    width: 250px;
     width: 100%;
-    height: 80%;
+    height: 150px;
     display: block;
     margin-top: 10px;
     border-color: rgba(66, 100, 155, .7);
