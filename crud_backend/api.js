@@ -10,6 +10,11 @@ var srt2vtt = require('srt2vtt');
 var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
+    getRecommendations : function(request,callback){
+      PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
+        callback(info);
+      });
+    },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
         if(course == null) {
@@ -73,10 +78,8 @@ var apiFunctions = {
 
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
-          for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[i]);
+          for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[x]);
         }
-
-        console.log(keywordSuggestions);
 
         var frequency = {};
         keywordSuggestions.forEach((value) => {frequency[value] = 0;});
@@ -86,15 +89,12 @@ var apiFunctions = {
             return value != undefined && value.length >= request.minKeywordLength && ++frequency[value] == 1;
           }
         );
-        console.log(keywordSuggestions);
 
         keywordSuggestions = keywordSuggestions.sort(
           (a, b) => {return frequency[b] - frequency[a];}
         );
-        console.log(keywordSuggestions);
 
         keywordSuggestions = keywordSuggestions.slice(0, request.count);
-        console.log(keywordSuggestions);
         callback(keywordSuggestions);
       });
     },
@@ -190,29 +190,29 @@ var apiFunctions = {
         //query commented out, don't remove
         UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},{"Notes.Content" : 1},function(err,notes){
         if(notes.length == 0)
-          return callback({Content : ""});
+          return callback({Notes : ""});
         var response = {
-          Content : notes[0].Notes[0].Content
+          Notes : notes[0].Notes[0].Content
         };
-        callback(reponse);
+        callback(response);
       });
     },
-    createNotesForUser : function(request,callback){
+    createNotes : function(request,callback){
       UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
         if(user){
           UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content},function(err){
-            callback(true);
+            return callback(true);
           });
         }
         else{
-          UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
-            callback(true);
+          UserModel.update({_id : request.UserId},{$push : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
+            return callback(true);
           });
         }
       });
     },
     addUser : function(name,profileId,callback){
-      UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+      UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
       if(err) {
       console.log(err);
       }
@@ -331,13 +331,13 @@ var apiFunctions = {
       });
     },
     createPost: function(request,callback) {
-      PodcastModel.find({PodcastId : request.PodcastId}, function(err,podcast){
+      PodcastModel.findById(request.PodcastId,"CourseId", function(err,podcast){
         PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
         Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
           if(err)
-            callback(false);
+            return callback(false);
           else {
-            callback(post._id);
+            return callback(post._id);
           }
         });
       });

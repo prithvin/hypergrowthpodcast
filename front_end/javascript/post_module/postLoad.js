@@ -46,16 +46,23 @@ var APost = class APost {
     }
 
     addComment (inputForm, userPic, userName, timeOfComment) {
-        this.loadIndividualComment({
-            "Pic": userPic,
-            "PosterName": userName,
+        var obj = {
             "Content": $(inputForm).val(),
-            "Time": timeOfComment
-        });
-        this.numOfComments++;
-        $( this.mainDiv ).trigger( "commentAdded", [] );
-        console.log(inputForm);
-        $(inputForm).val("");
+            "Time": timeOfComment,
+            "PostId": this.postID
+        };
+        callAPI(login_origins.backend + "/createComment", "POST", obj, function () {
+            this.loadIndividualComment({
+                "Pic": userPic,
+                "PosterName": userName,
+                "Content": $(inputForm).val(),
+                "Time": timeOfComment
+            });
+            this.numOfComments++;
+            $( this.mainDiv ).trigger( "commentAdded", [] );
+            console.log(inputForm);
+            $(inputForm).val("");
+        }.bind(this));
     }
 
     searchForContent (searchTerm) {

@@ -88,7 +88,7 @@ var PodcastPage = class PodcastPage {
                 "Slides": data['Slides'],
                 "PodcastID": thisClass.podcastID
             };
-            callAPI("./fake_data/getUserNotesForPodcast.json", "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
+            callAPI(login_origins.backend + '/getNotesForUser', "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
                 thisClass.audioData["Notes"] = notes["Notes"];
                 thisClass.parseSlides(data['Slides']);
                 thisClass.loadPosts(thisClass, function () {
@@ -171,11 +171,12 @@ var PodcastPage = class PodcastPage {
     }
 
 	loadRecommendations(mainDiv) {
+        var thisClass = this;
       require(['recommendations'], function() {
         var rec_div = $(mainDiv).find('#recommendations-container')
 
         loadComponent('RecommendationsModule', rec_div, function() {
-          new Recommendations(mainDiv);
+          new Recommendations(mainDiv, thisClass.podcastID);
         });
       });
     }
