@@ -1,8 +1,9 @@
 class Notes{
     
-    constructor(mainDiv, text){
+    constructor(mainDiv, text, podcastid){
         this.text = text;
         this.mainDiv = mainDiv;
+        this.podcastid = podcastid;
 
         this.getTime();
         this.initListeners();
@@ -58,34 +59,20 @@ class Notes{
             if(!textToSave){
                 textToSave = $(".notes-content").html().trim().replace(/<br\s*\/*>/ig, '\n') .replace(/(<(p|div))/ig, '\n$1') .replace(/(<([^>]+)>)/ig, "");
             }
-            console.log(textToSave);
-            if(textToSave != this.text){
-                this.text = textToSave;
-                console.log("saved");
-                this.getTime();
-                $('.comment').html('Last updated on ' + this.month + '/' + this.day + ' at ' + this.hour + ":" + this.min + " " + this.ap);
 
+            if(textToSave != this.text){
+                var obj = {
+                    "PodcastId": this.podcastid,
+                    "Content": textToSave
+                };
+                callAPI(login_origins.backend + "/createNotes", "POST", obj, function (postID) {
+                    this.text = textToSave;
+                    this.getTime();
+                    $('.comment').html('Last updated on ' + this.month + '/' + this.day + ' at ' + this.hour + ":" + this.min + " " + this.ap);
+                }.bind(this));
             }
         }.bind(this));
-        
-        /*
-        document.onpaste = function(event){
-            var items = (event.clipboardData || event.originalEvent.clipboardData).items;
-            console.log(JSON.stringify(items)); // will give you the mime types
-            for (index in items) {
-                var item = items[index];
-                if (item.kind === 'file') {
-                var blob = item.getAsFile();
-                var reader = new FileReader();
-                reader.onload = function(event){
-                        console.log(event.target.result); // data url!
-                        $('.notes-content').append('<img src="' + event.target.result + '" />');
-                        $('.comment').html('Last updated by you on ' + this.m + '/' + this.d +'')
-                    }.bind(this);
-                reader.readAsDataURL(blob);
-                }
-            }
-        }*/
+    
     }
     
     

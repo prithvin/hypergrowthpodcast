@@ -96,7 +96,7 @@ var PostSearch = class PostSearch {
             loadHTMLComponent("NotesModule", function (data) {
                 var notesDiv = $(this.mainDiv).find(".notes-module").html(data);
                 this.notesModule = $(notesDiv).find(".notes-wrapper");
-                this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"]);
+                this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"], this.podcastid);
                 this.showNotes();
             }.bind(this));
         }
