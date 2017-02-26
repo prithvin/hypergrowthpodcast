@@ -65,7 +65,7 @@
       var search = function (courseId) {
         $("#loader-animation").show();
         require(['searchResults'], function () {
-          loadComponent("CourseSearchModule", $("#page"), function () {
+          loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
             new SearchPage(courseId, $("#page").find(".search-results-div"));
             $("#loader-animation").hide();
           });
@@ -74,7 +74,7 @@
 
       var courseHomepage = function(courseId) {
         $("#loader-animation").fadeIn();
-        loadComponent("CourseHomepageModule", $("#page"), function() {
+        loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
           require(['course-homepage'], function() {
             new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
               $("#loader-animation").fadeOut();  

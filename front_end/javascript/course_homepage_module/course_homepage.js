@@ -47,7 +47,7 @@ class CourseHomepageClass {
             loadComponent("PostSearchModule", divToLoad, function () {
                 new PostSearch(
                     {
-                        "UniqueID": 122,
+                        "UniqueID": thisClass.courseId,
                         "TypeOfFetch": "CourseGlobal"
                     },
                     {
