@@ -17,6 +17,7 @@ var apiFunctions = {
           console.log("error finding course");
         } else {
           var copy = [];
+          console.log(course);
           for(var i = 0; i < course.Podcasts.length; i++){
             var arrayObject = {
               Id : course.Podcasts[i].PodcastId,
