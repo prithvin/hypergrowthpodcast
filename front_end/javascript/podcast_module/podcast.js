@@ -82,13 +82,13 @@ var PodcastPage = class PodcastPage {
 
 
     fetchVideo (thisClass) {
-        callAPI("./fake_data/getVideo.json", "GET", {"PodcastID": this.podcastID},  function (data) {
+        callAPI(login_origins.backend + '/getVideoInfo', "GET", {"PodcastId": this.podcastID},  function (data) {
             thisClass.audioData = {
                 "ParsedAudioTranscriptForSearch": data['ParsedAudioTranscriptForSearch'],
                 "Slides": data['Slides'],
                 "PodcastID": thisClass.podcastID
             };
-            callAPI("./fake_data/getUserNotesForPodcast.json", "GET", {"PodcastID": thisClass.podcastID},  function (notes) {
+            callAPI("./fake_data/getUserNotesForPodcast.json", "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
                 thisClass.audioData["Notes"] = notes["Notes"];
                 thisClass.parseSlides(data['Slides']);
                 thisClass.loadPosts(thisClass, function () {

@@ -92,7 +92,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     initAutocomplete() {
         var self = this;
-        var apiURL = "./fake_data/getVideo.json";
+        var apiURL = "./fake_data/getKeyword.json";
         //var apiURL2 = "./fake_data/dictionary.json";
         
         callAPI(apiURL, "GET", {}, function (data) {
