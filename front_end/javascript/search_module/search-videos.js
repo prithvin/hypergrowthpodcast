@@ -14,10 +14,13 @@ class SearchVideosClass {
           masterDiv.appendChild(recKeywords);
           for (var i = 0; i < 6; i++){
             var recs = document.createElement('button');
-            recs.innerHTML = `rec #${i}`;
+            recs.innerHTML = `keyrec #${i}`;
             recs.style="font-size:14;height:80%; width: 80%; border-radius:8px; margin-left: 8; margin-top:8;display: inline-block;text-align:center;border:2px solid #124d87; background-color:#124d87; color:white";
             recKeywords.appendChild(recs);
 
+            recs.onclick = function(){
+              //run new search with selected keyword;
+            }
           }
 
           var overallDiv = document.createElement('div');
