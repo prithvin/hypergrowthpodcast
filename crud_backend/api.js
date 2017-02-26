@@ -78,10 +78,8 @@ var apiFunctions = {
 
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
-          for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[i]);
+          for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[x]);
         }
-
-        console.log(keywordSuggestions);
 
         var frequency = {};
         keywordSuggestions.forEach((value) => {frequency[value] = 0;});
@@ -91,15 +89,12 @@ var apiFunctions = {
             return value != undefined && value.length >= request.minKeywordLength && ++frequency[value] == 1;
           }
         );
-        console.log(keywordSuggestions);
 
         keywordSuggestions = keywordSuggestions.sort(
           (a, b) => {return frequency[b] - frequency[a];}
         );
-        console.log(keywordSuggestions);
 
         keywordSuggestions = keywordSuggestions.slice(0, request.count);
-        console.log(keywordSuggestions);
         callback(keywordSuggestions);
       });
     },
