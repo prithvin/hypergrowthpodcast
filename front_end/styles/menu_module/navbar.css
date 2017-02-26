@@ -21,17 +21,16 @@
     position:relative;
     left:30px;
 }
-.text-name {
 
-  
+.text-name {
     font-size: 0.9em;
     height: 40px;
     font-family: 'Roboto', sans-serif !IMPORTANT;
     font-weight: 500;
     text-align:center !IMPORTANT;
     color: #2D4761;
-
 }
+
 .profile-pic {
     width:2.7em;
     height:2.7em;
