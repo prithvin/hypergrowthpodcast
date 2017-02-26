@@ -39,7 +39,8 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 app.use(cors({
     allowedOrigins: [
         'localhost:7888',
-        'localhost:8000'
+        'localhost:8000',
+        '104.131.147.159'
     ]
 }))
 
