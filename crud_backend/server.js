@@ -207,13 +207,13 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   });
 });
 
-app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     UserId : req.user._id,
-    PodcastId : req.body.PodcastId,
-    Content : req.body.Content
+    PodcastId : req.query.PodcastId,
+    Content : req.query.Content
   };
-  apiFunctions.userFunctions.createNotesForUser(request,function(status){
+  apiFunctions.userFunctions.createNotes(request,function(status){
     res.send(status);
   });
 });
