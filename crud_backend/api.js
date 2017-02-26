@@ -188,10 +188,14 @@ var apiFunctions = {
           createNotesForUser : function(request,callback){
             UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
               if(user){
-                UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content});
+                UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content},function(err){
+                  callback(true);
+                });
               }
               else{
-                UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}});
+                UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
+                  callback(true);
+                });
               }
             });
           },
@@ -318,13 +322,15 @@ var apiFunctions = {
             });
           },
           createPost: function(request,callback) {
-            PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
-            Content : request.Content, CourseId : request.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
-              if(err)
-                callback(false);
-              else {
-                callback(true);
-              }
+            PodcastModel.find({PodcastId : request.PodcastId}, function(err,podcast){
+              PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
+              Content : request.Content, CourseId : request.podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+                if(err)
+                  callback(false);
+                else {
+                  callback(post._id);
+                }
+              });
             });
           },
 
