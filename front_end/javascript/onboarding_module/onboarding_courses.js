@@ -9,7 +9,6 @@ var OnboardingCourses = class OnboardingCourses {
         var apiURL = login_origins.backend + "/getCourses";
         console.log("GETTING COURSES");
         callAPI(apiURL, "GET", {}, function (data) {
-            console.log(data);
             this.loadCourses(data);
         }.bind(this));
     }
@@ -45,36 +44,6 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.appendChild(quarter);
         } 
     }
-    /*
-    initAutocomplete() {
-        var self = this;
-        var apiURL = login_origins.backend + "/getCourses";
-        callAPI(apiURL, "GET", {}, function (data) {
-            for (var x = 0; x < data.length; x++) {
-                self.autokeys.push(data[x]['Course']);
-            }
-            console.log(self.autokeys);
-            $("#searchBar1").autocomplete({
-                source: self.autokeys,
-                minLength: 2,
-                open: function () { 
-                    $('ul.ui-autocomplete').removeClass('closed');
-                    $('ul.ui-autocomplete').addClass('opened');  
-                },
-                close: function () {
-                    $('ul.ui-autocomplete').removeClass('opened').css('display', 'block');
-                    $('ul.ui-autocomplete').addClass('closed');
-                },
-            });
-        });
-        
-        document.getElementById("searchBar1").addEventListener("change", function() {
-            var text = document.getElementById('searchBar1').value.toLowerCase();
-            if ($.inArray(text, self.autokeys) == -1)
-                self.autokeys.push(text);
-            console.log(self.autokeys);
-        });                   
-    }*/
 }
 
 /* Search Function */
@@ -107,6 +76,7 @@ function myFunction() {
       $('.no-results-courses').removeClass('no-results-show');
   }
 }
+
 /* Sort Function */
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
