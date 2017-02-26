@@ -142,6 +142,18 @@ app.get('/getVideosForCourse',apiFunctions.userFunctions.isLoggedIn,function(req
 
 });
 
+app.get('/getKeywordSuggestions', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    count: req.query.count,
+    minKeywordLength: req.query.minKeywordLength,
+    CourseId: req.query.CourseId
+  };
+
+  apiFunctions.podcastFunctions.getKeywordSuggestions(request, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
   var request = {
     count: req.query.count,
@@ -176,11 +188,23 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
     TimeOfPost : req.query.TimeOfPost,
     Content : req.query.Content,
     CourseId : req.query.CourseId,
+    //todo find course id
     ProfilePic : req.user.ProfilePicture,
     Name : req.user.Name
   };
 
-  apiFunctions.postFunctions.createPost(request,function(status){
+  apiFunctions.postFunctions.createPost(request,function(postId){
+    res.send(postId);
+  });
+});
+
+app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id,
+    PodcastId : req.query.PodcastId,
+    Content : req.query.Content
+  };
+  apiFunctions.userFunctions.createNotesForUser(request,function(status){
     res.send(status);
   });
 });

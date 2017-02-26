@@ -57,7 +57,7 @@ var require = {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
         },
         "course-videos": {
-            "deps": ['jquery', 'bootstrap']
+            "deps": ['jquery', 'bootstrap', 'moment']
         },
         "search-videos": {
             "deps": ['jquery', 'bootstrap']
