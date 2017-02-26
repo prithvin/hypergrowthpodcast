@@ -21,6 +21,13 @@ var loadHTMLModules = {
     "NotesModule": "notes_module.html"
 };
 
+preloadComponents();
+function preloadComponents () {
+    for (key in loadHTMLModules) {
+        loadHTMLComponent(key, function () { });
+    }
+}
+
 function loadComponent (moduleName, divToLoad, callback) {
     if (loadHTMLModules[moduleName] == null) {
         console.log("Invalid module");
