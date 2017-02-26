@@ -20,10 +20,16 @@ var Onboarding = class Onboarding {
     }
 
     if(queries && queries.hasOwnProperty('redirectURL')) {
-      var baseURL = window.location.origin + window.location.pathname;
-      var errorCallbackURL = encodeURIComponent(baseURL + "#");
-      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + encodeURIComponent(queries['redirectURL']) + '&errorCallbackURL=' + errorCallbackURL;
-      //window.location.href = encodeURI(window.location.origin + '/#/' +  queries['redirectURL']);
+      callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
+        if(!data.result) {
+          var baseURL = window.location.origin + window.location.pathname;
+          var targetCallbackURL = encodeURIComponent(baseURL + '#/?redirectURL=' + queries['redirectURL']);
+          var errorCallbackURL = encodeURIComponent(baseURL + "#");
+          window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
+        } else {
+          window.location.href = decodeURIComponent(queries['redirectURL']);
+        }
+      });
     } else {
       callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
         if(data.result === true) {

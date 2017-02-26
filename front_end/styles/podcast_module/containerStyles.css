@@ -20,3 +20,10 @@
   overflow-x: hidden;
   height: 100%;
 }
+
+#video-title {
+  margin-top: 1.5%;
+  margin-bottom: 2.5%;
+  margin-left: 1.25%;
+  font-size: 135%;
+}

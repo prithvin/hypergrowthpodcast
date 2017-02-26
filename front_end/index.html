@@ -13,7 +13,7 @@
 
     <script>
 
-    require(['director', 'components', 'loader'], function () {
+    require(['director', 'components', 'loader', 'config'], function () {
 
       function timeToHideLoader (time) {
         if (!time)
@@ -27,7 +27,7 @@
 
       var loginPage = function () {
         $("#loader-animation").fadeIn();
-        require(['config', 'onboarding'], function () {
+        require(['onboarding'], function () {
           loadComponent("OnboardingFrontPage", $("#page"), function () {
             new Onboarding($('#page').find('.onboarding-page'));
             setTimeout(function () {
@@ -38,11 +38,11 @@
       };
 
       var onboardingCoursesPage = function(courses) {
-        $("#loader-animation").show();
+        $("#loader-animation").fadeIn();
         loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
             require(['course-selection'], function () {
             new OnboardingCourses($("#page").find(".onboarding-courses-page"));
-            $("#loader-animation").hide();
+            timeToHideLoader(1000);
           });
         });
       }
@@ -63,11 +63,11 @@
       };
 
       var search = function (courseId) {
-        $("#loader-animation").show();
+        $("#loader-animation").fadeIn();
         require(['searchResults'], function () {
           loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
             new SearchPage(courseId, $("#page").find(".search-results-div"));
-            $("#loader-animation").hide();
+            timeToHideLoader(1000);
           });
         });
       };
