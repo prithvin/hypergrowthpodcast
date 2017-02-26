@@ -142,6 +142,7 @@ var PodcastPage = class PodcastPage {
                     {
                         "CurrentSlideNum": thisClass.startingSlide
                     },
+                    thisClass.podcastID,
                     function () {
                         setTimeout(function () {
                             thisClass.updatePostHeights() 
@@ -169,7 +170,7 @@ var PodcastPage = class PodcastPage {
         });                
     }
 
-		loadRecommendations(mainDiv) {
+	loadRecommendations(mainDiv) {
       require(['recommendations'], function() {
         var rec_div = $(mainDiv).find('#recommendations-container')
 
