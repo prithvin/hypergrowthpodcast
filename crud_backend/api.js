@@ -197,22 +197,22 @@ var apiFunctions = {
         callback(response);
       });
     },
-    createNotesForUser : function(request,callback){
+    createNotes : function(request,callback){
       UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
         if(user){
           UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content},function(err){
-            callback(true);
+            return callback(true);
           });
         }
         else{
-          UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
-            callback(true);
+          UserModel.update({_id : request.UserId},{$push : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
+            return callback(true);
           });
         }
       });
     },
     addUser : function(name,profileId,callback){
-      UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+      UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
       if(err) {
       console.log(err);
       }
