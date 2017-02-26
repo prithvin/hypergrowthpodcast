@@ -10,6 +10,11 @@ var srt2vtt = require('srt2vtt');
 var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
+    getRecommendations : function(request,callback){
+      PodcastModel.findById(request.PodcastId,"Recommendations",function(err,recommendations){
+        callback(recommendations.Recommendations);
+      });
+    },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
         if(course == null) {
@@ -190,11 +195,11 @@ var apiFunctions = {
         //query commented out, don't remove
         UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},{"Notes.Content" : 1},function(err,notes){
         if(notes.length == 0)
-          return callback({Content : ""});
+          return callback({Notes : ""});
         var response = {
-          Content : notes[0].Notes[0].Content
+          Notes : notes[0].Notes[0].Content
         };
-        callback(reponse);
+        callback(response);
       });
     },
     createNotesForUser : function(request,callback){

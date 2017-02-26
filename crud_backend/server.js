@@ -39,7 +39,9 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 app.use(cors({
     allowedOrigins: [
         'localhost:7888',
-        'localhost:8000'
+        'localhost:8000',
+        '104.131.147.159',
+        '104.131.147.159:80'
     ]
 }))
 
@@ -120,6 +122,14 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
   });
 });
 
+app.get('/getRecommendations', apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+  apiFunctions.podcastFunctions.getRecommendations(request,function(recommendations){
+    res.send(recommendations);
+  });
+});
 app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     PodcastId : req.query.PodcastId
