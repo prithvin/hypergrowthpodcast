@@ -46,8 +46,7 @@
       }
 
 
-        
-      var podcast = function (podcastId, slide) { 
+      var podcast = function (podcastId, slide) {
         $("#loader-animation").show();
         if (!slide)
           slide = 0;
@@ -63,6 +62,9 @@
       var search = function (courseId) {
         $("#loader-animation").show();
         require(['searchResults'], function () {
+          // loadComponent("CourseSearchModule", $("#page"), function () {
+          //   new SearchPage(123, $("#page").find(".search-results-div"));
+          //   $("#loader-animation").hide();
           loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
             new SearchPage(courseId, $("#page").find(".search-results-div"));
             timeToHideLoader(1000);
