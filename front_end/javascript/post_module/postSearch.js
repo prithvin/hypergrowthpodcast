@@ -305,6 +305,7 @@ var PostSearch = class PostSearch {
             "PageType": "Notes"
         };
         $(this.mainDiv).parent().find(".dropdownOfSlide").on("ShowNotes", function () {
+            this.changeSlideCompletely();
             this.cleanUpSearch();
             this.notesWrapper.show();
             $(this.noResultsOption).hide();

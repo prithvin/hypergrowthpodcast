@@ -2,11 +2,16 @@
   width: 100%;
   padding-left: 2.5%;
   padding-right: 2.5%;
+  margin-top: 10px;
 }
 
 .podcast-recommendations {
   margin-top: 12px;
   margin-bottom: 10.3664%;
+}
+
+.lecture-title {
+  font-size: 1.19em;
 }
 
 .rec-preview-img {

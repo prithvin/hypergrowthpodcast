@@ -1,8 +1,14 @@
 var Recommendations = class Recommendations {
-  constructor(mainDiv) {
-    this.getRecommendations((recommendations) => {
+  constructor(mainDiv, podcastid) {
+    this.podcastid = podcastid;
+
+    this.getRecommendations(function (recommendations, lecturedate) {
+      
       this.displayRecomm($(mainDiv).find('.podcast-recommendations'), recommendations);
-    });
+      $(mainDiv).find(".lecture-title").html(new Date(lectureDate).toDateString());
+
+    }.bind(this));
+   
   }
 
   displayRecomm(rec_div, recommendations) {
@@ -34,8 +40,9 @@ var Recommendations = class Recommendations {
   }
 
   getRecommendations(callback) {
-    callAPI('./fake_data/recommendations.json', 'GET', {}, (data) => {
-      callback(data['Recommendations']);
+    callAPI(login_origins.backend + '/getRecommendations', 'GET', {"PodcastId": this.podcastid}, (data) => {
+
+      callback(data['Recommendations'], data['Time']);
     });
   }
 }
