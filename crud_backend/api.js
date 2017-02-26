@@ -67,6 +67,38 @@ var apiFunctions = {
             })
           },
 
+          getKeywordSuggestions: function(request, callback) {
+            CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
+              var keywordSuggestions = [];
+
+              for (var i = 0; i < course.Podcasts.length; i++) {
+                var arr = course.Podcasts[i].OCRKeywords;
+                for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[i]);
+              }
+
+              console.log(keywordSuggestions);
+
+              var frequency = {};
+              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
+
+              keywordSuggestions = keywordSuggestions.filter(
+                (value) => {
+                  return value != undefined && value.length >= request.minKeywordLength && ++frequency[value] == 1;
+                }
+              );
+              console.log(keywordSuggestions);
+
+              keywordSuggestions = keywordSuggestions.sort(
+                (a, b) => {return frequency[b] - frequency[a];}
+              );
+              console.log(keywordSuggestions);
+
+              keywordSuggestions = keywordSuggestions.slice(0, request.count);
+              console.log(keywordSuggestions);
+              callback(keywordSuggestions);
+            });
+          },
+
           searchByKeywords: function(request, callback){
             CourseModel.findById(request.CourseId,
                                 'Podcasts',
@@ -74,26 +106,6 @@ var apiFunctions = {
               var callbackFired = false;
               var results = [];
               var count = 0;
-              var keywordSuggestions = [];
-
-              // Find the 6 most frequent keywords of length >= 5 for this course
-              //////////////////////////////////////////////////////////////////
-              for (var i = 0; i < course.Podcasts.length; i++) {
-                var arr = course.Podcasts[i].OCRKeywords;
-                for (var x = 0; x < 6; x++) keywordSuggestions.push(arr[i]);
-              }
-              var frequency = {};
-              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
-              keywordSuggestions = keywordSuggestions.filter(
-                (value) => {
-                  return value != undefined && value.length >= 5 && ++frequency[value] == 1;
-                }
-              );
-              keywordSuggestions = keywordSuggestions.sort(
-                (a, b) => {return frequency[b] - frequency[a];}
-              );
-              keywordSuggestions = keywordSuggestions.slice(0, 6);
-              //////////////////////////////////////////////////////////////////
 
               for(var i = 0; i < course.Podcasts.length; i++){
                 PodcastModel.findById(course.Podcasts[i].PodcastId,
@@ -110,7 +122,7 @@ var apiFunctions = {
                       });
 
                       if (!callbackFired && results.length >= request.count) {
-                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callback(results);
                         callbackFired = true;
                         return;
                       }
@@ -128,7 +140,7 @@ var apiFunctions = {
                       });
 
                       if (!callbackFired && results.length >= request.count) {
-                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callback(results);
                         callbackFired = true;
                         return;
                       }
@@ -139,7 +151,7 @@ var apiFunctions = {
 
                   // exhausted
                   if (!callbackFired && count == course.Podcasts.length) {
-                    callback({'Keywords': keywordSuggestions, 'Results': results});
+                    callback(results);
                     callbackFired = true;
                   }
                 });
