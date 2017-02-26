@@ -1,9 +1,12 @@
 class CourseVideosClass {
-    constructor (courseId, mainDiv) {
+  
+    constructor (courseId, mainDiv, loadingCallback) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
-      
-        callAPI("fake_data/courseVideos.json", "GET", {}, function(data) {
+        this.loadingCallback = loadingCallback;
+        
+        callAPI(login_origins.backend + '/getVideosForCourse', 'GET', {'CourseId': courseId}, function(data) {
+          console.log(data);
           var masterDiv = document.getElementById('course-videos-div');
           document.getElementById('course-title').innerHTML = data['CourseTitle'];
           var row = document.createElement('div');
@@ -22,21 +25,23 @@ class CourseVideosClass {
               var videoDiv = document.createElement('div');
               videoDiv.className = 'col-4';
               row.appendChild(videoDiv);
-
+            
               var img = document.createElement('img');
               img.className = 'course-videos-preview-images';
-              img.src = curr['PreviewImage'];
+              img.src = 'data:image/png;base64,' + curr['PreviewImage'];
               img.addEventListener('click', function() {
-                window.location.href = '/front_end/#/podcast/' + this['Id']; 
+                window.location.hash = '#/podcast/' + this['Id']; 
               }.bind(curr));
               videoDiv.appendChild(img);
 
               var heading = document.createElement('p');
               heading.align = 'center';
-              heading.innerHTML = curr['Date'];
+              //var date = new Date(curr['Time']);
+              heading.innerHTML = moment(curr['Time']).format("ddd, M/D"); //date.toLocaleDateString();
               heading.className = 'text-title';
               videoDiv.appendChild(heading);
           }
-        });
+          this.loadingCallback();
+        }.bind(this));
     }
 }

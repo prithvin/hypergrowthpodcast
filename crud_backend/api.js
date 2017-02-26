@@ -42,10 +42,12 @@ var apiFunctions = {
           */
           getVideoInfo: function(request, callback) {
             PodcastModel.findById(request.PodcastId,
-                                  'SRTBlob PodcastUrl Time AudioTranscript Slides',
+                                  'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                                   function(err,podcast) {
-              if(err) {
+              if(err || podcast == null) {
                 console.log("error");
+                callback("ERROR");
+                return;
               } else {
                 srt2vtt(podcast.SRTBlob, function(err, vttData) {
                   if (err)
@@ -55,12 +57,46 @@ var apiFunctions = {
                     VideoDate : podcast.Time,
                     SRTFile : vttData.toString('utf8'),
                     ParsedAudioTranscriptForSearch : podcast.AudioTranscript,
-                    Slides : podcast.Slides
+                    Slides : podcast.Slides,
+                    NextVideo: podcast.NextVideo,
+                    PrevVideo: podcast.PrevVideo
                   };
                   callback(response);
                 });
               }
             })
+          },
+
+          getKeywordSuggestions: function(request, callback) {
+            CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
+              var keywordSuggestions = [];
+
+              for (var i = 0; i < course.Podcasts.length; i++) {
+                var arr = course.Podcasts[i].OCRKeywords;
+                for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[i]);
+              }
+
+              console.log(keywordSuggestions);
+
+              var frequency = {};
+              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
+
+              keywordSuggestions = keywordSuggestions.filter(
+                (value) => {
+                  return value != undefined && value.length >= request.minKeywordLength && ++frequency[value] == 1;
+                }
+              );
+              console.log(keywordSuggestions);
+
+              keywordSuggestions = keywordSuggestions.sort(
+                (a, b) => {return frequency[b] - frequency[a];}
+              );
+              console.log(keywordSuggestions);
+
+              keywordSuggestions = keywordSuggestions.slice(0, request.count);
+              console.log(keywordSuggestions);
+              callback(keywordSuggestions);
+            });
           },
 
           searchByKeywords: function(request, callback){
@@ -70,26 +106,6 @@ var apiFunctions = {
               var callbackFired = false;
               var results = [];
               var count = 0;
-              var keywordSuggestions = [];
-
-              // Find the 6 most frequent keywords of length >= 5 for this course
-              //////////////////////////////////////////////////////////////////
-              for (var i = 0; i < course.Podcasts.length; i++) {
-                var arr = course.Podcasts[i].OCRKeywords;
-                for (var x = 0; x < 6; x++) keywordSuggestions.push(arr[i]);
-              }
-              var frequency = {};
-              keywordSuggestions.forEach((value) => {frequency[value] = 0;});
-              keywordSuggestions = keywordSuggestions.filter(
-                (value) => {
-                  return value != undefined && value.length >= 5 && ++frequency[value] == 1;
-                }
-              );
-              keywordSuggestions = keywordSuggestions.sort(
-                (a, b) => {return frequency[b] - frequency[a];}
-              );
-              keywordSuggestions = keywordSuggestions.slice(0, 6);
-              //////////////////////////////////////////////////////////////////
 
               for(var i = 0; i < course.Podcasts.length; i++){
                 PodcastModel.findById(course.Podcasts[i].PodcastId,
@@ -106,7 +122,7 @@ var apiFunctions = {
                       });
 
                       if (!callbackFired && results.length >= request.count) {
-                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callback(results);
                         callbackFired = true;
                         return;
                       }
@@ -124,7 +140,7 @@ var apiFunctions = {
                       });
 
                       if (!callbackFired && results.length >= request.count) {
-                        callback({'Keywords': keywordSuggestions, 'Results': results});
+                        callback(results);
                         callbackFired = true;
                         return;
                       }
@@ -135,7 +151,7 @@ var apiFunctions = {
 
                   // exhausted
                   if (!callbackFired && count == course.Podcasts.length) {
-                    callback({'Keywords': keywordSuggestions, 'Results': results});
+                    callback(results);
                     callbackFired = true;
                   }
                 });
@@ -179,6 +195,20 @@ var apiFunctions = {
                 Content : notes[0].Notes[0].Content
               };
               callback(reponse);
+            });
+          },
+          createNotesForUser : function(request,callback){
+            UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
+              if(user){
+                UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content},function(err){
+                  callback(true);
+                });
+              }
+              else{
+                UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}},function(err){
+                  callback(true);
+                });
+              }
             });
           },
           addUser : function(name,profileId,callback){
@@ -251,7 +281,6 @@ var apiFunctions = {
         postFunctions:{
           getPostsForCourse : function(request, callback){
             PostModel.find({'CourseId': request.CourseId}, {TimeOfPost: -1}, function(err,posts){
-              var response;
               if(posts.length >= request.UpperLimit){
                   posts = posts.slice(0,request.UpperLimit);
               }
@@ -263,13 +292,13 @@ var apiFunctions = {
                 delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
-                console.log(posts[i]);
               }
               callback(posts);
             });
           },
           getPostsForLecture : function(request, callback){
-            PostModel.find({'PodcastId': request.PodcastId} , {TimeOfPost: -1}, function(err,posts){
+            PostModel.find({'PodcastId': request.PodcastId}).sort({TimeOfPost: -1}).exec(function(err,posts){
+              console.log(posts);
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
@@ -277,7 +306,6 @@ var apiFunctions = {
                 delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
-                console.log(posts[i]);
               }
               callback(posts);
             });
@@ -285,8 +313,8 @@ var apiFunctions = {
           getPostsByKeyword : function(request,callback){
             PostModel.find({'CourseId' : request.CourseId,
               $or : [{Content: {$regex : request.Keywords, $options: 'i'}},
-              {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]},
-              {TimeOfPost: -1}, function (err, posts) {
+              {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]}).sort(
+              {TimeOfPost: -1}).exec(function (err, posts) {
                 if (!posts) {
                   callback([]);
                   return;
@@ -304,13 +332,15 @@ var apiFunctions = {
             });
           },
           createPost: function(request,callback) {
-            PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
-            Content : request.Content, CourseId : request.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
-              if(err)
-                callback(false);
-              else {
-                callback(true);
-              }
+            PodcastModel.find({PodcastId : request.PodcastId}, function(err,podcast){
+              PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
+              Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+                if(err)
+                  callback(false);
+                else {
+                  callback(post._id);
+                }
+              });
             });
           },
 

@@ -1,5 +1,7 @@
 var autokeys = [];
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
+
+    // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
         this.course = "";
@@ -21,13 +23,14 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
-        this.setHomeHyperLink(classID);
+        
         this.initAutocomplete();
     }
 
     fetchCourseData(classID,  callback) {
         callAPI(login_origins.backend + '/getCourseInfo', 'GET', {'CourseId': classID}, function(data) {
             callback(data['Course'], data['Quarter']);
+            this.setHomeHyperLink(data['Id']);
         }.bind(this));
     }
 
@@ -70,27 +73,22 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
     
     setHomeHyperLink (classID) {
+        var windowHash = "#/courses/" + classID;
+        if (classID == null) {
+            windowHash = "#/courses";
+        }
         $(this.mainDiv).find("#home_button").on("click", function () {
-            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
-            var baseURL = window.location.origin + window.location.pathname;
-            var targetURL = baseURL + "#/courses/" + classID;
-            window.location.href = targetURL;
-            window.location.hash =  "/courses/" + classID;
-            //$(this.mainDiv).trigger( "goToCourseHome", [] );
+            window.location.hash = windowHash;
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
-            console.log("Reloading " + this.course + " " + this.quarter + " course page...");
-            var baseURL = window.location.origin + window.location.pathname;
-            var targetURL = baseURL + "#/courses/" + classID;
-            window.location.href = targetURL;
-            window.location.hash =  "/courses/" + classID;
+            window.location.hash = windowHash;
         }.bind(this))
     }
     
     
     initAutocomplete() {
         var self = this;
-        var apiURL = "./fake_data/getVideo.json";
+        var apiURL = "./fake_data/getKeyword.json";
         //var apiURL2 = "./fake_data/dictionary.json";
         
         callAPI(apiURL, "GET", {}, function (data) {
