@@ -1,12 +1,5 @@
 var Onboarding = class Onboarding {
   constructor(mainDiv) {
-    $(mainDiv).find('.fb-login-button')[0].onclick = () => {
-      var baseURL = window.location.origin + window.location.pathname;
-      var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
-      var errorCallbackURL = encodeURIComponent(baseURL + "#");
-      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
-    }
-
     var queries;
 		var query_str = window.location.search.substring(1);
     if(!query_str) {
@@ -19,8 +12,18 @@ var Onboarding = class Onboarding {
       queries = this.getQueries(query_str);
     }
 
+    $(mainDiv).find('.fb-login-button')[0].onclick = () => {
+      var baseURL = window.location.origin + window.location.pathname;
+      var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
+      var errorCallbackURL = encodeURIComponent(baseURL + "#");
+      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
+    }
+
     if(queries && queries.hasOwnProperty('redirectURL')) {
-      window.location.href = encodeURI(window.location.origin + '/#/' +  queries['redirectURL']);
+      var baseURL = window.location.origin + window.location.pathname;
+      var errorCallbackURL = encodeURIComponent(baseURL + "#");
+      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + encodeURIComponent(queries['redirectURL']) + '&errorCallbackURL=' + errorCallbackURL;
+      //window.location.href = encodeURI(window.location.origin + '/#/' +  queries['redirectURL']);
     } else {
       callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
         if(data.result === true) {
