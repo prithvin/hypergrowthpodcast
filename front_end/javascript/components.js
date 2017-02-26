@@ -38,7 +38,7 @@ function loadComponentOrLogin (moduleName, divToLoad, callback) {
             loadComponent(moduleName, divToLoad, callback);
         }
         else {
-            window.location.hash = "";
+            window.location.hash = "#/?redirectURL=" + window.location.href;
         }
     });
 }

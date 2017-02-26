@@ -11,7 +11,7 @@ var apiFunctions = {
         //API Functions for podcast schema
         podcastFunctions:{
           getVideosForCourse: function(request, callback){
-            CourseModel.findById(request.CourseId, function(err,course){
+            CourseModel.find("_id" : request.CourseId, function(err,course){
               if(course == null) {
                 callback({});
                 console.log("error finding course");
@@ -212,7 +212,7 @@ var apiFunctions = {
             });
           },
           addUser : function(name,profileId,callback){
-            UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=large'}, function(err,users){
+            UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
             if(err) {
             console.log(err);
             }
