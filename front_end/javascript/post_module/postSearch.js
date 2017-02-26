@@ -131,7 +131,7 @@ var PostSearch = class PostSearch {
         $(this.newPostButton).on("click", function (ev) {
             var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
-                swal("Please ask a question to search for!");   // Alert library
+                swal("Type your question in the \"Search or write a post\" search bar, and then press the post button!");   // Alert library
             else {
                 this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }

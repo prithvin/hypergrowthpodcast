@@ -79,3 +79,7 @@
 .home-button:hover {
     cursor: pointer;
 }
+
+#navbox {
+  margin-bottom: 0.5%;
+}
