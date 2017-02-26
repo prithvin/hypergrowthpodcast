@@ -263,23 +263,36 @@ app.get('/logout',function(req,res){
   res.send("LOGGED OUT");
 });
 
+var realCallbackUrl = 'http://www.google.com';
+
 /***************************************FACEBOOK AUTH****************************************************/
 app.get('/auth/facebook', function(req,res,next){
   if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
     res.send("Error. Invalid params");
     return;
   }
-  auth.callbackURL = req.query.callbackURL;
-  auth.errorCallback = req.query.errorCallbackURL;
-  next();
-},
-  passport.authenticate('facebook',
-  {
+  req.session.callbackURL = req.query.callbackURL;
+  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+  realCallbackUrl = req.protocol + '://' + req.get('host') + auth.facebookAuth.callbackURL;
+  //console.log(realCallbackUrl);
+  req.session.save(function (err) {
+    auth.callbackURL = req.query.callbackURL;
+    auth.errorCallback = req.query.errorCallbackURL;
+    //next();
+    putStuff(req, res, next);
+    //res.redirect('/auth/facebook/newcallback');
+  });
+});
+
+function putStuff (req, res, next) {  
+  var object = {
+      callbackURL: realCallbackUrl,
       display: 'popup',
       scope: [ 'email', 'basic_info'],
       profileFields: ['id', 'displayName', 'photos', 'email', 'birthday']
-  }
-));
+  };
+  passport.authenticate('facebook', object)(req, res, next);
+ }
 
 
 app.get("/auth/facebook/callback",
@@ -295,8 +308,8 @@ app.get("/auth/facebook/callback",
           console.log(err);
       });
     }
-
-    res.redirect(auth.callbackURL);
+    console.log('req.session.callbackURL is ' + req.session.callbackURL);
+    res.redirect(req.session.callbackURL);
   },
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
