@@ -73,7 +73,7 @@ var apiFunctions = {
 
               for (var i = 0; i < course.Podcasts.length; i++) {
                 var arr = course.Podcasts[i].OCRKeywords;
-                for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[i]);
+                for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[x]);
               }
 
               console.log(keywordSuggestions);
