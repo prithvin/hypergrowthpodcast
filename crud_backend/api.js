@@ -335,6 +335,7 @@ var apiFunctions = {
             PodcastModel.find({PodcastId : request.PodcastId}, function(err,podcast){
               PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
               Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+                console.log(post);
                 if(err)
                   callback(false);
                 else {
