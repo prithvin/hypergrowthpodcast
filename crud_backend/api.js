@@ -11,8 +11,8 @@ var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
     getRecommendations : function(request,callback){
-      PodcastModel.findById(request.PodcastId,"Recommendations",function(err,recommendations){
-        callback(recommendations.Recommendations);
+      PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
+        callback(info);
       });
     },
     getVideosForCourse: function(request, callback){
