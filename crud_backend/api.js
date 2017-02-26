@@ -42,10 +42,12 @@ var apiFunctions = {
           */
           getVideoInfo: function(request, callback) {
             PodcastModel.findById(request.PodcastId,
-                                  'SRTBlob PodcastUrl Time AudioTranscript Slides',
+                                  'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                                   function(err,podcast) {
-              if(err) {
+              if(err || podcast == null) {
                 console.log("error");
+                callback("ERROR");
+                return;
               } else {
                 srt2vtt(podcast.SRTBlob, function(err, vttData) {
                   if (err)
@@ -55,7 +57,9 @@ var apiFunctions = {
                     VideoDate : podcast.Time,
                     SRTFile : vttData.toString('utf8'),
                     ParsedAudioTranscriptForSearch : podcast.AudioTranscript,
-                    Slides : podcast.Slides
+                    Slides : podcast.Slides,
+                    NextVideo: podcast.NextVideo,
+                    PrevVideo: podcast.PrevVideo
                   };
                   callback(response);
                 });
