@@ -181,6 +181,16 @@ var apiFunctions = {
               callback(reponse);
             });
           },
+          createNotesForUser : function(request,callback){
+            UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
+              if(user){
+                UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content});
+              }
+              else{
+                UserModel.update({_id : request.UserId},{$addToSet : {"Notes" : {"PodcastId" : request.PodcastId, "Content" : request.Content}}});
+              }
+            });
+          },
           addUser : function(name,profileId,callback){
             UserModel.create({Name:name, FBUserId: profileId, ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=large'}, function(err,users){
             if(err) {

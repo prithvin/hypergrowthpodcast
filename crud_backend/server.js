@@ -186,6 +186,17 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   });
 });
 
+app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id,
+    PodcastId : req.query.PodcastId,
+    Content : req.query.Content
+  };
+  apiFunctions.userFunctions.createNotesForUser(request,function(status){
+    res.send(status);
+  });
+});
+
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     PostId : req.query.PostId,
