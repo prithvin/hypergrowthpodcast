@@ -4,12 +4,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
-        this.course = "";
-        this.quarter = "";
-        
-
-        /* Autocorrect */
-        this.norvig;
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -84,8 +78,21 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     
     initAutocomplete(classID) {
-        callAPI(login_origins.backend + '/getKeywordSuggestions', "GET", {'count': 100, 'minKeywordLength': 4, 'CourseId': classID}, function (data) {
-            console.log(data);
+        // Keep user searches if they are worthwhile
+        document.getElementById("searchBar").addEventListener("change", function() {
+            var text = document.getElementById('searchBar').value.toLowerCase();
+            if ($.inArray(text, autokeys) == -1 && text.length > 2)
+                autokeys.push(text);
+            //console.log(autokeys);
+            localStorage.setItem("autokeys", autokeys);
+        });     
+        
+        if (classID == null) {
+            return;             // we don't want a podcast id here so exit!
+        }
+        
+        // Get Keywords for entire course
+        callAPI(login_origins.backend + '/getKeywordSuggestions', "GET", {'count': 100, 'minKeywordLength': 3, 'CourseId': classID}, function (data) {
             var keys = localStorage.getItem("autokeys");
             if (keys !== null) autokeys = keys.split(",");
             // Merge keywords
@@ -102,14 +109,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                     $('ul.ui-autocomplete').addClass('closed');
                 },
             });
-        });
-        
-        // Keep user searches if they are worthwhile
-        document.getElementById("searchBar").addEventListener("change", function() {
-            var text = document.getElementById('searchBar').value.toLowerCase();
-            if ($.inArray(text, autokeys) == -1 && text.length > 2)
-                autokeys.push(text);
-            localStorage.setItem("autokeys", autokeys);
-        });                   
+        });              
     }
 }
