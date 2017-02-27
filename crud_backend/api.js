@@ -46,6 +46,7 @@ var apiFunctions = {
       }
     */
     getVideoInfo: function(request, callback) {
+
       PodcastModel.findById(request.PodcastId,
                             'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                             function(err,podcast) {
@@ -75,6 +76,11 @@ var apiFunctions = {
     getKeywordSuggestions: function(request, callback) {
       CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
         var keywordSuggestions = [];
+
+        if (err || course == null) {
+          callback([]);
+          return;
+        }
 
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
