@@ -25,7 +25,7 @@ var APost = class APost {
             $(this.commentForm).hide();
         }
 
-        console.log(this.postData);
+        //console.log(this.postData);
         if (this.postData && this.postData.LectureDate) {
             this.generateClickableLecturePost(this.postData.LectureDate);
         }

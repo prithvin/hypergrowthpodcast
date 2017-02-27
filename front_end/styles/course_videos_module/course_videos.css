@@ -16,7 +16,9 @@
   font-family: "Roboto", sans-serif;
   font-weight: normal;
 }
-
+#course-posts .post-container{
+    cursor: pointer;
+}
 .course-videos-Hr {
     width: 100%
     font-size: 1px;
