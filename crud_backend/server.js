@@ -130,7 +130,7 @@ app.get('/getRecommendations', apiFunctions.userFunctions.isLoggedIn, function(r
     res.send(recommendations);
   });
 });
-app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.get('/getVideoInfo',function(req,res){
   var request = {
     PodcastId : req.query.PodcastId
   };
