@@ -4,13 +4,13 @@ var fs = require('fs');
 function getProfiles(filename) {
   var contents = fs.readFileSync(filename, 'utf8');
   var lines = contents.split('\n');
-  var ret = {};
+  var ret = [];
   for (let i = 0; i < lines.length; i++) {
     var pair = lines[i].split(',');
     if (pair.length != 2) {
       continue;
     }
-    ret[pair[0]] = pair[1].replace('\r', '');
+    ret.push([pair[0], pair[1].replace('\r', '')]);
   }
   return ret;
 }
@@ -23,10 +23,8 @@ function generateSentenceCorpus(filename) {
 function createFakePosts(num_posts, names, sentences) {
   var name_len = Object.keys(names).length;
   var sentences_len = sentences.length;
-  var time_tolerance = 1000*60*60*24*365*10;
   var posts = [];
 
-  var postTime = (new Date()).getTime() - Math.random() * time_tolerance;
 
   for(var i = 0; i < num_posts; i++) {
     var com_nums = [0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,10,10];
@@ -34,22 +32,21 @@ function createFakePosts(num_posts, names, sentences) {
     var comments = [];
     for(var j = 0; j < num_comments; j++) {
       var comment = sentences[Math.floor(sentences.length * Math.random())];
-      var posterName = Object.keys(names)[Math.floor(name_len * Math.random())];
+      var nameIndex = Math.floor(name_len * Math.random());
       comments.push({
-        'PosterName': posterName,
-        'Pic': names[posterName],
-        'Time': postTime,
+        'PosterName': names[nameIndex][0],
+        'Pic': names[nameIndex][1],
         'Content': comment + '.'
       });
     }
 
+    var nameIndex = Math.floor(name_len * Math.random());
     var post = {
-      'Name': Object.keys(names)[Math.floor(name_len * Math.random())],
-      'TimeOfPost': postTime,
+      'Name': names[nameIndex][0],
+      'ProfilePic':  names[nameIndex][1],
       'Content': sentences[Math.floor(sentences_len * Math.random())] + '.',
       'Comments': comments
     }
-    post.ProfilePic = names[post['Name']];
 
     posts.push(post);
   }

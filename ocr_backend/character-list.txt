@@ -1,11 +1,11 @@
 Elizabeth Bennet,https://lh3.googleusercontent.com/-NO-eSqsx1Pk/AAAAAAAAAAI/AAAAAAAAAQY/6J7PqNFleQ4/s46-c-k-no/photo.jpg
 Fitzwilliam Darcy,https://68.media.tumblr.com/avatar_3e63ffa18aed_128.png
-Jane Darcy,https://pbs.twimg.com/profile_images/729748173795655680/1DbE8Vjv_normal.jpg
+Jane Bennet,https://pbs.twimg.com/profile_images/729748173795655680/1DbE8Vjv_normal.jpg
 Charles Bingley,https://pbs.twimg.com/profile_images/448295267771506688/bymJJMo7_normal.jpeg
-Mr. Bennet,https://s-media-cache-ak0.pinimg.com/736x/92/5f/1b/925f1bd3d10a4e1362ad3aa7bbece7a2.jpg
-Mrs. Bennet,https://68.media.tumblr.com/avatar_2acd6728afdc_64.png
+Mr Bennet,https://s-media-cache-ak0.pinimg.com/736x/92/5f/1b/925f1bd3d10a4e1362ad3aa7bbece7a2.jpg
+Mrs Bennet,https://68.media.tumblr.com/avatar_2acd6728afdc_64.png
 Mary Bennet,https://pbs.twimg.com/profile_images/1766403112/Mary-Bennet-pride-and-prejudice-1995-8441335-174-174_normal.jpg
-Catherine Bennet,https://pbs.twimg.com/profile_images/673185187459649536/IOrHR7tx_reasonably_small.jpg
+Kitty Bennet,https://pbs.twimg.com/profile_images/673185187459649536/IOrHR7tx_reasonably_small.jpg
 Lydia Bennet,https://68.media.tumblr.com/avatar_189335441b73_128.png
 Caroline Bingley,https://pbs.twimg.com/profile_images/518099250790404096/bvAtbkB5_normal.jpeg
 George Wickham,https://pbs.twimg.com/profile_images/1814313210/wickham_normal.jpg
