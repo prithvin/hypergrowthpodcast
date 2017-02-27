@@ -100,63 +100,27 @@ var apiFunctions = {
     },
 
     searchByKeywords: function(request, callback){
+      console.log(new Date());
       CourseModel.findById(request.CourseId,
                           'Podcasts',
                           function(err, course) {
-        var callbackFired = false;
         var results = [];
-        var count = 0;
+        var keywordsArr = request.Keywords.split(' ');
 
-        for(var i = 0; i < course.Podcasts.length; i++){
-          PodcastModel.findById(course.Podcasts[i].PodcastId,
-                                '_id Slides AudioTranscript',
-                                function(err, podcast) {
-            for (var j = 0; j < podcast.Slides.length; j++) {
-              var slide = podcast.Slides[j];
-
-              if (slide.OCRTranscription.includes(request.Keywords)) {
-                results.push({
-                  'PodcastID': podcast._id,
-                  'Type': 'OCR',
-                  'Data': slide
-                });
-
-                if (!callbackFired && results.length >= request.count) {
-                  callback(results);
-                  callbackFired = true;
-                  return;
-                }
-              }
+        for (let i = 0; i < course.Podcasts.length; i++) {
+          for (let j = 0; j < keywordsArr.length; j++) {
+            if (keywordsArr[j].length < 1) continue;
+            if (course.Podcasts[i].OCRKeywords.indexOf(keywordsArr[j]) != -1) {
+              delete course.Podcasts[i].OCRKeywords;
+              results.push(course.Podcasts[i]);
+              break;
             }
-
-            for (var k = 0; k < podcast.AudioTranscript.length; k++) {
-              var transcript = podcast.AudioTranscript[k];
-
-              if (transcript.Content.includes(request.Keywords)) {
-                results.push({
-                  'PodcastID': podcast._id,
-                  'Type': 'Audio',
-                  'Data': transcript
-                });
-
-                if (!callbackFired && results.length >= request.count) {
-                  callback(results);
-                  callbackFired = true;
-                  return;
-                }
-              }
-            }
-
-            count++;
-
-            // exhausted
-            if (!callbackFired && count == course.Podcasts.length) {
-              callback(results);
-              callbackFired = true;
-            }
-          });
-          if (callbackFired) break;
+          }
+          if (results.length >= request.count) break;
         }
+    
+        console.log(new Date());
+        callback(results);
       });
     }
   },
