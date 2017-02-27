@@ -437,7 +437,6 @@ var PostSearch = class PostSearch {
             };
         }
 
-
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned
             for (var x = 0; x < data.length; x++) {
