@@ -162,8 +162,8 @@ var apiFunctions = {
           if(notes.length == 0)
             return callback({Notes : ""});
 
-          for (var x = 0; x < notes.length; x++) {
-            if (notes[x].PodcastId != req.PodcastId)
+          for (var x = 0; x < notes.Notes.length; x++) {
+            if (notes.Notes[x].PodcastId != req.PodcastId)
               continue;
 
             var response = {
