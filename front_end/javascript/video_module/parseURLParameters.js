@@ -16,7 +16,7 @@ function callAJAX (mytype, url, datastruct, callback) {
         success: callback,
         xhrFields: {withCredentials: true},
         error:function(){
-            console.log("ERROR");
+            console.error("ERROR");
         }
     });
 }

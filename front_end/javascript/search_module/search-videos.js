@@ -11,7 +11,6 @@ class SearchVideosClass {
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
 
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
-          console.log("TEST" + overallDiv);
           overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:66%";
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -60,7 +59,6 @@ class SearchVideosClass {
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
       var recKeywords = $(".recClass")[0];
-      console.log(recKeywords);
       masterDiv.appendChild(recKeywords);
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
@@ -69,7 +67,6 @@ class SearchVideosClass {
         var currentColor = this.fnGetRandomColour(120, 250);
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
         $(recs).on("click", function (ev) {
-          console.log(ev);
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
         });
       }

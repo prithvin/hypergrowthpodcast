@@ -282,7 +282,6 @@ var PostSearch = class PostSearch {
             "Content": text
         };
         callAPI(login_origins.backend + "/createPost", "POST", obj, function (postID) {
-            console.log("Post is created" + postID);
             var newPost = {
                 "Name": this.userData["Name"],
                 "PostId": postID, // get from callback
