@@ -56,8 +56,9 @@
 
         loadComponentOrLogin("PodcastModule", $("#page"), function () {
           require(['podcast'], function () {
-            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide);
-            timeToHideLoader(1000);
+            new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
+              $("#loader-animation").fadeOut();  
+            });
           });
         });
       };

@@ -1,9 +1,10 @@
 var PodcastPage = class PodcastPage {
 
-    constructor (podcastID, mainDiv, startingSlide) {
+    constructor (podcastID, mainDiv, startingSlide, loadingCallback) {
         this.mainDiv = mainDiv;
         this.podcastID = podcastID;
         this.startingSlide = startingSlide;
+        this.loadingCallback = loadingCallback;
         if (!this.startingSlide)
             this.startingSlide = 1;
         this.fetchUserData(this);
@@ -95,7 +96,7 @@ var PodcastPage = class PodcastPage {
                     thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
                 });
             });
-        });
+        })
     }
 
     dynamicWindowResize (thisClass) {
@@ -164,9 +165,9 @@ var PodcastPage = class PodcastPage {
                     thisClass.getSlideClicks();
                     thisClass.videoClass.setTime(thisClass.getTimeForSlide(thisClass.startingSlide));
                     thisClass.updateSlideNumberFromVideo();
+                    thisClass.loadingCallback();
                 });
             });
-
         });                
     }
 
