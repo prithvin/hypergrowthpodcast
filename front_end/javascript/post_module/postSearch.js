@@ -99,6 +99,15 @@ var PostSearch = class PostSearch {
                 this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"], this.podcastid);
                 this.showNotes();
             }.bind(this));
+        }else{
+           $(this.mainDiv).on("click", ".post-container", function (ev) {
+                var target = ev.currentTarget;
+                var slideDiv = $(target).find(".slide-no");
+                var pid = $(slideDiv).attr("data-podcast");
+                var slide = $(slideDiv).attr("data-slide");
+                
+               window.location.hash = '#/podcast/' + pid + '/' + slide;
+            }); 
         }
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
@@ -110,7 +119,7 @@ var PostSearch = class PostSearch {
         this.generateDropdownMenu();
         this.handleAllLectureTrigger();
         this.handleUnresolvedLectureTrigger();
-
+        
     }
 
     getCurrentSlideOfNewPost () {
