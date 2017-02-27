@@ -1,6 +1,5 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
-        this.autokeys = [];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
     }
