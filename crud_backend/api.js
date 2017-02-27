@@ -46,6 +46,7 @@ var apiFunctions = {
       }
     */
     getVideoInfo: function(request, callback) {
+
       PodcastModel.findById(request.PodcastId,
                             'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                             function(err,podcast) {
@@ -253,7 +254,7 @@ var apiFunctions = {
         }
         var podcastids = [];
         for(var i = 0; i < posts.length; i++){
-          podcastids[i].push(posts[i].PodcastId);
+          podcastids.push(posts[i].PodcastId);
         }
         PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
           for(var i = 0; i < posts.length; i++){
@@ -318,7 +319,7 @@ var apiFunctions = {
             }
             var podcastids = [];
             for(var i = 0; i < posts.length; i++){
-              podcastids[i].push(posts[i].PodcastId);
+              podcastids.push(posts[i].PodcastId);
             }
             PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
               for(var i = 0; i < posts.length; i++){
