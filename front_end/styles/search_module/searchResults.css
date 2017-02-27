@@ -95,6 +95,11 @@
     transform: scale(1.1);
 }
 
+.search-videos-img:active {
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+}
+
 .videos-row {
     min-height: 200px;
 }
