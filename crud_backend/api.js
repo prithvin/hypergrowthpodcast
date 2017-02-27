@@ -100,12 +100,12 @@ var apiFunctions = {
     },
 
     searchByKeywords: function(request, callback){
-      console.log(new Date());
       CourseModel.findById(request.CourseId,
                           'Podcasts',
                           function(err, course) {
         var results = [];
         var keywordsArr = request.Keywords.split(' ');
+
 
         for (let i = 0; i < course.Podcasts.length; i++) {
           for (let j = 0; j < keywordsArr.length; j++) {
@@ -114,6 +114,7 @@ var apiFunctions = {
               delete course.Podcasts[i].OCRKeywords;
               results.push(course.Podcasts[i]);
               break;
+
             }
           }
           if (results.length >= request.count) break;
