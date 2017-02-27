@@ -326,7 +326,7 @@ var apiFunctions = {
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
-                copy.LectureDate = copy.TimeOfPost;
+                copy.LectureDate = 3;
                 delete copy._id;
                 delete copy.PodcastId;
                 delete copy.CourseId;
