@@ -27,8 +27,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             if (qtr.indexOf("fa") > -1) qtr = "Fall " + qtr.slice(-2);
             if (qtr.indexOf("wi") > -1) qtr = "Winter " + qtr.slice(-2);
             if (qtr.indexOf("sp") > -1) qtr = "Spring " + qtr.slice(-2);
-            if (qtr.indexOf("s2") > -1) qtr = "SS 2 " + qtr.slice(-2);
-            if (qtr.indexOf("s1") > -1) qtr = "SS 1 " + qtr.slice(-2);
+            if (qtr.indexOf("s2") > -1) qtr = "SS2 " + qtr.slice(-2);
+            if (qtr.indexOf("s1") > -1) qtr = "SS1 " + qtr.slice(-2);
             callback(data['Course'], qtr);
             this.setHomeHyperLink(data['Id']);
             this.initAutocomplete(data['Id']);
