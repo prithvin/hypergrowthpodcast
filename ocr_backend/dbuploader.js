@@ -260,9 +260,17 @@ module.exports = {
           obj.PodcastId = chosenPodcast._id;
           obj.CourseId = chosenPodcast.CourseId;
           obj.SlideOfPost = Math.floor(Math.random() * chosenPodcast.Slides.length) + 1;
-          obj.TimeOfPost = chosenPodcast.Time;
-          for (let j = 0; j < obj.Comments.length; j++)
-            obj.Comments[j].Time = chosenPodcast.Time;
+
+          var diff = new Date().getTime() - chosenPodcast.Time;
+
+          obj.TimeOfPost = chosenPodcast.Time + diff * Math.random();
+          var last = obj.TimeOfPost;
+          diff = new Date().getTime() - last;
+          for (let j = 0; j < obj.Comments.length; j++) {
+            obj.Comments[j].Time = last + diff * Math.random();
+            last = obj.Comments[j].Time;
+            diff = new Date().getTime() - last;
+          }
 
           PostModel.create(obj, function(err, post) {
             if (err) {

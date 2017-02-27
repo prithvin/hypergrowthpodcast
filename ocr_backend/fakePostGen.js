@@ -27,8 +27,8 @@ function createFakePosts(num_posts, names, sentences) {
 
 
   for(var i = 0; i < num_posts; i++) {
-    var com_nums = [0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,10,10];
-    var num_comments = Math.floor(Math.random() * com_nums.length);
+    var com_nums = [0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,5,5];
+    var num_comments = com_nums[Math.floor(Math.random() * com_nums.length)];
     var comments = [];
     for(var j = 0; j < num_comments; j++) {
       var comment = sentences[Math.floor(sentences.length * Math.random())];
