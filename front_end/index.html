@@ -61,7 +61,7 @@
 
       var search = function (courseId, searchTerm) {
         $("#loader-animation").show();
-        console.log("PLEASE WORK");
+
         require(['searchResults'], function () {
           loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
             new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);

@@ -30,10 +30,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     listenToUserSearch () {
-        $(this.mainDiv).find(".main_search_container").on("submit", function () {
-            console.log($(this.mainDiv).find("#searchBar").val());
-            console.log("THE NEW HASH");
-            window.location.hash = "#/search/" + this.classID + "/" + $(this.mainDiv).find("#searchBar").val();
+        $(this.mainDiv).find(".main_search_container").on("submit", function (ev) {
+            ev.preventDefault();
+            if ($(this.mainDiv).find("#searchBar").val().trim().length != 0)
+                window.location.hash = "#/search/" + this.classID + "/" + $(this.mainDiv).find("#searchBar").val();
         }.bind(this));
     }
 
