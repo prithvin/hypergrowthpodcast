@@ -19,7 +19,7 @@ var apiFunctions = {
     },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
-        if(course == null || err) {
+        if(course == null || err || course.Podcasts == null) {
           callback({});
           console.log("error finding course");
         } else {
@@ -299,17 +299,14 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.findById(request.PodcastId,"Time",function(err,podcast){
-          for(var i = 0; i < posts.length; i++){
-            var copy = JSON.parse(JSON.stringify(posts[i]));
-            copy.PostId = copy._id;
-            copy.LectureDate = podcast.Time;
-            delete copy._id;
-            delete copy.CourseId;
-            posts[i] = copy;
-          }
-          callback(posts);
-        });
+        for(var i = 0; i < posts.length; i++){
+          var copy = JSON.parse(JSON.stringify(posts[i]));
+          copy.PostId = copy._id;
+          delete copy._id;
+          delete copy.CourseId;
+          posts[i] = copy;
+        }
+        callback(posts);
       });
     },
     getPostsByKeyword : function(request,callback){
