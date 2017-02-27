@@ -142,7 +142,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         console.log('Logging user out...');
         callAPI(login_origins.backend + '/logout', 'GET', {}, (data) => {
             //Redirect User to Login
-             window.location.hash =  '/';
+             window.location.hash = '/';
         });
     } 
 }
