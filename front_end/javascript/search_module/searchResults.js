@@ -4,10 +4,10 @@ var SearchPage = class SearchPage {
         this.mainDiv = mainDiv;
         this.podcastID = podcastID;
         this.searchTerm = searchTerm;
-        this.loadPosts(this);
         this.loadNavbar(this);
         this.loadVideos(this);
-
+        this.loadPosts(this);
+        this.updateComponentHeights(this);
     }
 
     dynamicWindowResize (thisClass) {
@@ -16,7 +16,7 @@ var SearchPage = class SearchPage {
                 $('#myimage').off('click.mynamespace');
             }
             else {
-                thisClass.updatePostHeights();
+                thisClass.updateComponentHeights();
             }
         });
     }
@@ -51,7 +51,6 @@ var SearchPage = class SearchPage {
                     },
                     divToLoad
                 );
-                thisClass.dynamicWindowResize(thisClass);
             });
         });
     }
@@ -60,14 +59,16 @@ var SearchPage = class SearchPage {
       require(['search-videos'], function() {
         var divToLoad = $(thisClass.mainDiv).find("#search-videos");
         loadComponent("SearchResultsModule", divToLoad, function() {
-            new SearchVideosClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm);
+            new SearchVideosClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm); 
         });
       });
     }
 
-    updatePostHeights() {
+    updateComponentHeights() {
+        console.log('updated');
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
+        $(this.mainDiv).find("#podcast-posts").css("height",newHeight - 35);
+        $(this.mainDiv).find("#search-videos").css("height",newHeight - 35);
     }
 
 };
