@@ -3,13 +3,14 @@ class SearchVideosClass {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
 
-        var masterDiv = $(this.mainDiv).find('search-videos-div')[0];
+        var masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
+
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
 
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
 
-          var overallDiv = $(".videos-div")[0];
+          var overallDiv = $(this.mainDiv).find(".videos-div")[0];
           overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:66%";
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -46,7 +47,7 @@ class SearchVideosClass {
             videoDiv.appendChild(heading);
           }
 
-        });
+        }.bind(this));
     }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
@@ -58,7 +59,6 @@ class SearchVideosClass {
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
       var recKeywords = $(".recClass")[0];
-      console.log(recKeywords);
       masterDiv.appendChild(recKeywords);
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
@@ -67,7 +67,6 @@ class SearchVideosClass {
         var currentColor = this.fnGetRandomColour(120, 250);
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
         $(recs).on("click", function (ev) {
-          console.log(ev);
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
         });
       }

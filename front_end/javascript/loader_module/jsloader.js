@@ -9,7 +9,7 @@ function loadJSDynamicallyHelper (arr, index, callback) {
     }
     $.getScript(arr[index], function(data, textStatus, jqxhr) {
         if (textStatus != "success") {
-            console.log(arr[index] + " failed to load");
+            console.error(arr[index] + " failed to load");
         }
         loadJSDynamicallyHelper(arr, index + 1, callback);
     });

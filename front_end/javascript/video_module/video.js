@@ -26,7 +26,6 @@ class videoClass {
         //when to change video
         this.mainDiv.on('changeVideo', function(e, deet){
             videojs('my-video').ready(function() {
-                console.log("got changeVid event: " + deet);
             });
         });
 

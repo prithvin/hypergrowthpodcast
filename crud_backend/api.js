@@ -48,6 +48,7 @@ var apiFunctions = {
       }
     */
     getVideoInfo: function(request, callback) {
+
       PodcastModel.findById(request.PodcastId,
                             'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                             function(err,podcast) {
@@ -77,6 +78,11 @@ var apiFunctions = {
     getKeywordSuggestions: function(request, callback) {
       CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
         var keywordSuggestions = [];
+
+        if (err || course == null) {
+          callback([]);
+          return;
+        }
 
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
@@ -154,13 +160,20 @@ var apiFunctions = {
     getNotesForUser : function(req,callback){
         console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
-        UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},{"Notes.Content" : 1},function(err,notes){
-        if(notes.length == 0)
-          return callback({Notes : ""});
-        var response = {
-          Notes : notes[0].Notes[0].Content
-        };
-        callback(response);
+        UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes',function(err,notes){
+          if(!notes || err || notes.Notes.length == 0)
+            return callback({Notes : ""});
+
+          for (var x = 0; x < notes.Notes.length; x++) {
+            if (notes.Notes[x].PodcastId != req.PodcastId)
+              continue;
+
+            var response = {
+              "Notes" : notes.Notes[x].Content
+            };
+            break;
+          }
+          callback(response);
       });
     },
     createNotes : function(request,callback){
