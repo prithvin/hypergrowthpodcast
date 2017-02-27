@@ -6,7 +6,6 @@ var OnboardingCourses = class OnboardingCourses {
 
     fetchCourses() {
         var apiURL = login_origins.backend + "/getCourses";
-        console.log("GETTING COURSES");
         callAPI(apiURL, "GET", {}, function (data) {
             this.loadCourses(data);
         }.bind(this));

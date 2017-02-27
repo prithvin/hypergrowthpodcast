@@ -45,7 +45,6 @@ var Recommendations = class Recommendations {
 
   getRecommendations(callback) {
     callAPI(login_origins.backend + '/getRecommendations', 'GET', {"PodcastId": this.podcastid}, (data) => {
-      console.log(data);
       callback(data['Recommendations'], data['Time']);
 
     });

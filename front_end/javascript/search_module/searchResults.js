@@ -13,11 +13,9 @@ var SearchPage = class SearchPage {
     dynamicWindowResize (thisClass) {
         $(window).on("resize", function() {
             if ($(thisClass.mainDiv).length == 0) {
-                console.log("not resizing");
                 $('#myimage').off('click.mynamespace');
             }
             else {
-                console.log("resiizing");
                 thisClass.updatePostHeights();
             }
         });
@@ -70,7 +68,6 @@ var SearchPage = class SearchPage {
     updatePostHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
         $(this.mainDiv).find("#podcast-posts").css("height",newHeight );
-        console.log(newHeight);
     }
 
 };

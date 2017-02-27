@@ -58,7 +58,6 @@ var APost = class APost {
             });
             this.numOfComments++;
             $( this.mainDiv ).trigger( "commentAdded", [] );
-            console.log(inputForm);
             $(inputForm).val("");
         }.bind(this));
     }
