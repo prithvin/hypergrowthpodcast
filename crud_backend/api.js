@@ -256,22 +256,19 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+        PodcastModel.find({"_id" : {$in : podcastids}},"Time",function(err,podcastInfo){
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
             delete copy._id;
-            delete copy.PodcastId;
             delete copy.CourseId;
             posts[i] = copy;
           }
-          console.log(posts);
-          for(var i = 0; i < podcastInfo.length; i++){
+          for(var k = 0; k < podcastInfo.length; k++){
             for(var j = 0; j < posts.length; j++){
-              if(posts[j].PodcastId == podcastInfo[i]._id){
-                var copy = JSON.parse(JSON.stringify(posts[j]));
-                copy.LectureDate = podcastInfo[i].Time;
-                posts[j] = copy;
+              if(posts[j].PodcastId == podcastInfo[k]._id){
+                delete posts[j].PodcastId;
+                posts[j].LectureDate = podcastInfo[k].Time;
               }
             }
           }
@@ -289,24 +286,15 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+        PodcastModel.findById(request.PodcastId,"Time",function(err,podcast){
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
-            delete copy._id;
+            copy.LectureDate = podcast.Time;
             delete copy.PodcastId;
+            delete copy._id;
             delete copy.CourseId;
             posts[i] = copy;
-          }
-          console.log(posts);
-          for(var i = 0; i < podcastInfo.length; i++){
-            for(var j = 0; j < posts.length; j++){
-              if(posts[j].PodcastId == podcastInfo[i]._id){
-                var copy = JSON.parse(JSON.stringify(posts[j]));
-                copy.LectureDate = podcastInfo[i].Time;
-                posts[j] = copy;
-              }
-            }
           }
           callback(posts);
         });
@@ -325,22 +313,19 @@ var apiFunctions = {
             for(var i = 0; i < posts.length; i++){
               podcastids.push(posts[i].PodcastId);
             }
-            PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+            PodcastModel.find({"_id" : {$in : podcastids}},"Time",function(err,podcastInfo){
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
                 delete copy._id;
-                delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
               }
-              console.log(posts);
-              for(var i = 0; i < podcastInfo.length; i++){
+              for(var k = 0; k < podcastInfo.length; k++){
                 for(var j = 0; j < posts.length; j++){
-                  if(posts[j].PodcastId == podcastInfo[i]._id){
-                    var copy = JSON.parse(JSON.stringify(posts[j]));
-                    copy.LectureDate = podcastInfo[i].Time;
-                    posts[j] = copy;
+                  if(posts[j].PodcastId == podcastInfo[k]._id){
+                    delete posts[j].PodcastId;
+                    posts[j].LectureDate = podcastInfo[k].Time;
                   }
                 }
               }
