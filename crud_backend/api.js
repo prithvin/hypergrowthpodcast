@@ -158,8 +158,8 @@ var apiFunctions = {
     getNotesForUser : function(req,callback){
         console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
-        UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes.Content',function(err,notes){
-          if(notes.length == 0)
+        UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes',function(err,notes){
+          if(!notes || err || notes.Notes.length == 0)
             return callback({Notes : ""});
 
           for (var x = 0; x < notes.Notes.length; x++) {
