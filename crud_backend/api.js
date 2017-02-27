@@ -12,12 +12,14 @@ var apiFunctions = {
   podcastFunctions:{
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
-        callback(info);
+        if(err || !info)
+          return callback({Recommendations : [], Time : 0});
+        return callback({Recommendations : info.Recommendations, Time : info.Time});
       });
     },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
-        if(course == null) {
+        if(course == null || err) {
           callback({});
           console.log("error finding course");
         } else {
@@ -279,7 +281,6 @@ var apiFunctions = {
           for(var k = 0; k < podcastInfo.length; k++){
             for(var j = 0; j < posts.length; j++){
               if(posts[j].PodcastId == podcastInfo[k]._id){
-                delete posts[j].PodcastId;
                 posts[j].LectureDate = podcastInfo[k].Time;
               }
             }
@@ -303,7 +304,6 @@ var apiFunctions = {
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
             copy.LectureDate = podcast.Time;
-            delete copy.PodcastId;
             delete copy._id;
             delete copy.CourseId;
             posts[i] = copy;
@@ -336,7 +336,6 @@ var apiFunctions = {
               for(var k = 0; k < podcastInfo.length; k++){
                 for(var j = 0; j < posts.length; j++){
                   if(posts[j].PodcastId == podcastInfo[k]._id){
-                    delete posts[j].PodcastId;
                     posts[j].LectureDate = podcastInfo[k].Time;
                   }
                 }

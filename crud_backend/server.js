@@ -259,7 +259,7 @@ app.get('/setUserFromSession', function(req,res) {
 });
 
 app.get('/logout',function(req,res){
-  req.logout();
+  req.session.destroy();
   res.send("LOGGED OUT");
 });
 

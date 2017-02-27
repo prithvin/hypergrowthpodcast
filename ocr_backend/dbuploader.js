@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var PodcastModel = require('./podcastModel.js').PodcastModel;
 var CourseModel = require('./courseModel.js').CourseModel;
 var base64resize = require('base64resize');
+var PostModel = require('./postModel.js').PostModel;
 
 var isMongoConnected = false;
 
@@ -244,6 +245,35 @@ module.exports = {
             podcasts[i].save((err, updated) => {console.log(i);});
             if (i == podcasts.length - 1) callback();
           }
+        }
+      });
+    });
+  },
+
+  generateFakePosts: function (objects, callback) {
+    connectMongo(function () {
+      PodcastModel.find({}, '_id CourseId Slides', function(err, podcasts) {
+        for (let i = 0; i < objects.length; i++) {
+          var obj = objects[i];
+
+          obj.ProfilePic = 'https://68.media.tumblr.com/avatar_3e63ffa18aed_128.png';
+          for (let i = 0; i < obj.Comments.length; i++)
+            obj.Comments[i].Pic = 'https://68.media.tumblr.com/avatar_3e63ffa18aed_128.png';
+
+          var chosenPodcast = podcasts[Math.floor(Math.random() * podcasts.length)];
+          obj.PodcastId = chosenPodcast._id;
+          obj.CourseId = chosenPodcast.CourseId;
+          obj.SlideOfPost = Math.floor(Math.random() * chosenPodcast.Slides.length);
+
+          PostModel.create(obj, function(err, post) {
+            if (err) {
+              console.error("Issue connecting to database");
+              console.error(err);
+            }
+            else {
+              callback(post._id);
+            }
+          });
         }
       });
     });
