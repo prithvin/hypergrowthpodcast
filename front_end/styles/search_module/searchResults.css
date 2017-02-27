@@ -88,7 +88,7 @@
     transition: all 0.5s;
 }
 
-.course-videos-preview-images:hover {
+.search-videos-img:hover {
     cursor: pointer;
     position:relative;
     -webkit-transform: scale(1.1);
