@@ -11,7 +11,6 @@ class SearchVideosClass {
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
 
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
-          //console.log("TEST" + overallDiv);
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
 
@@ -64,7 +63,6 @@ class SearchVideosClass {
         var currentColor = this.fnGetRandomColour(120, 250);
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
         $(recs).on("click", function (ev) {
-          console.log(ev);
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
         });
       }

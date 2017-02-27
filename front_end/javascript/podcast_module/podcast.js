@@ -90,7 +90,6 @@ var PodcastPage = class PodcastPage {
                 "PodcastID": thisClass.podcastID
             };
             callAPI(login_origins.backend + '/getNotesForUser', "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
-                console.log("Notes: " + notes)
                 thisClass.audioData["Notes"] = notes["Notes"];
                 thisClass.parseSlides(data['Slides']);
                 thisClass.loadPosts(thisClass, function () {

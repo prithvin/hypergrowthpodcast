@@ -13,11 +13,9 @@ var SearchPage = class SearchPage {
     dynamicWindowResize (thisClass) {
         $(window).on("resize", function() {
             if ($(thisClass.mainDiv).length == 0) {
-                console.log("not resizing");
                 $('#myimage').off('click.mynamespace');
             }
             else {
-                console.log("resiizing");
                 thisClass.updateComponentHeights();
             }
         });

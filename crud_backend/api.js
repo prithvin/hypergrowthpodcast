@@ -12,12 +12,14 @@ var apiFunctions = {
   podcastFunctions:{
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
-        callback(info);
+        if(err || !info)
+          return callback({Recommendations : [], Time : 0});
+        return callback({Recommendations : info.Recommendations, Time : info.Time});
       });
     },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
-        if(course == null) {
+        if(course == null || err || course.Podcasts == null) {
           callback({});
           console.log("error finding course");
         } else {
@@ -279,7 +281,6 @@ var apiFunctions = {
           for(var k = 0; k < podcastInfo.length; k++){
             for(var j = 0; j < posts.length; j++){
               if(posts[j].PodcastId == podcastInfo[k]._id){
-                delete posts[j].PodcastId;
                 posts[j].LectureDate = podcastInfo[k].Time;
               }
             }
@@ -298,18 +299,14 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.findById(request.PodcastId,"Time",function(err,podcast){
-          for(var i = 0; i < posts.length; i++){
-            var copy = JSON.parse(JSON.stringify(posts[i]));
-            copy.PostId = copy._id;
-            copy.LectureDate = podcast.Time;
-            delete copy.PodcastId;
-            delete copy._id;
-            delete copy.CourseId;
-            posts[i] = copy;
-          }
-          callback(posts);
-        });
+        for(var i = 0; i < posts.length; i++){
+          var copy = JSON.parse(JSON.stringify(posts[i]));
+          copy.PostId = copy._id;
+          delete copy._id;
+          delete copy.CourseId;
+          posts[i] = copy;
+        }
+        callback(posts);
       });
     },
     getPostsByKeyword : function(request,callback){
@@ -336,7 +333,6 @@ var apiFunctions = {
               for(var k = 0; k < podcastInfo.length; k++){
                 for(var j = 0; j < posts.length; j++){
                   if(posts[j].PodcastId == podcastInfo[k]._id){
-                    delete posts[j].PodcastId;
                     posts[j].LectureDate = podcastInfo[k].Time;
                   }
                 }
