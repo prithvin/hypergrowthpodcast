@@ -433,10 +433,9 @@ var PostSearch = class PostSearch {
             apiURL = login_origins.backend + "/getPostsByKeyword";
             requestData = {
                 "CourseId": postData["UniqueID"],
-                "Keywords": postData["SearchQuery"]
+                "SearchTerm": postData["SearchQuery"]
             };
         }
-
 
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned

@@ -10,6 +10,14 @@ var SearchPage = class SearchPage {
 
     }
 
+    fetchUserData (thisClass) {
+        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
+            thisClass.UserName = data['Name'];
+            thisClass.UserPic = data['Pic'];
+            thisClass.loadPosts(thisClass);
+        });
+    }
+
     dynamicWindowResize (thisClass) {
         $(window).on("resize", function() {
             if ($(thisClass.mainDiv).length == 0) {
@@ -60,9 +68,10 @@ var SearchPage = class SearchPage {
 
     loadVideos(thisClass) {
       require(['search-videos'], function() {
+          console.log("TEST");
         var divToLoad = $(thisClass.mainDiv).find("#search-videos");
         loadComponent("SearchResultsModule", divToLoad, function() {
-            new SearchVideosClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm);
+            new SearchVideosClass(1, $(thisClass.mainDiv));
         });
       });
     }

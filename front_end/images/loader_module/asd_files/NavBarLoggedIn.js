@@ -30,7 +30,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     listenToUserSearch () {
-        $(this.mainDiv).find(".main_search_container").on("submit", function () {
+        $(this.mainDiv).find("#searchBar").on("submit", function () {
             console.log($(this.mainDiv).find("#searchBar").val());
             console.log("THE NEW HASH");
             window.location.hash = "#/search/" + this.classID + "/" + $(this.mainDiv).find("#searchBar").val();

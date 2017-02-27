@@ -100,17 +100,13 @@ var apiFunctions = {
     },
 
     searchByKeywords: function(request, callback){
-      CourseModel.findById(request.CourseId,
-                          'Podcasts',
-                          function(err, course) {
+      CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
         var callbackFired = false;
         var results = [];
         var count = 0;
 
         for(var i = 0; i < course.Podcasts.length; i++){
-          PodcastModel.findById(course.Podcasts[i].PodcastId,
-                                '_id Slides AudioTranscript',
-                                function(err, podcast) {
+          PodcastModel.findById(course.Podcasts[i].PodcastId, '_id Slides', function(err, podcast) {
             for (var j = 0; j < podcast.Slides.length; j++) {
               var slide = podcast.Slides[j];
 
