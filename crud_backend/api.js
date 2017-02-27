@@ -152,13 +152,20 @@ var apiFunctions = {
     getNotesForUser : function(req,callback){
         console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
-        UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},{"Notes.Content" : 1},function(err,notes){
-        if(notes.length == 0)
-          return callback({Notes : ""});
-        var response = {
-          Notes : notes[0].Notes[0].Content
-        };
-        callback(response);
+        UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes.Content',function(err,notes){
+          if(notes.length == 0)
+            return callback({Notes : ""});
+
+          for (var x = 0; x < notes.length; x++) {
+            if (notes[x].PodcastId != req.PodcastId)
+              continue;
+
+            var response = {
+              "Notes" : notes[x].Notes[x].Content
+            };
+            break;
+          }
+          callback(response);
       });
     },
     createNotes : function(request,callback){

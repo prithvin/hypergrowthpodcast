@@ -10,7 +10,8 @@ class SearchVideosClass {
 
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
 
-          var overallDiv = $(".videos-div")[0];
+          var overallDiv = $(this.mainDiv).find(".videos-div")[0];
+          console.log("TEST" + overallDiv);
           overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:66%";
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -47,7 +48,7 @@ class SearchVideosClass {
             videoDiv.appendChild(heading);
           }
 
-        });
+        }.bind(this));
     }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
