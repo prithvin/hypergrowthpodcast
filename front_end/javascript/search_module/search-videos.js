@@ -3,14 +3,11 @@ class SearchVideosClass {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
 
-        var masterDiv = document.getElementById('search-videos-div');
+        var masterDiv = $(this.mainDiv).find('search-videos-div')[0];
+        $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
 
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
-          console.log(data);
-
-          document.getElementById('title').innerHTML = "Search Results for " + data['Query'] + "  in " + data['Title'];
-
 
           var overallDiv = $(".videos-div")[0];
           overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:66%";
@@ -24,29 +21,29 @@ class SearchVideosClass {
 
           var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
-              if (row.childElementCount == 2) {
-                  row = document.createElement('div');
-                  row.className = 'row';
-                  row.style="height:284";
-                  overallDiv.appendChild(row);
-              }
-              var videoDiv = document.createElement('div');
-              videoDiv.className = 'col-md-6';
-              row.appendChild(videoDiv);
+            if (row.childElementCount == 2) {
+                row = document.createElement('div');
+                row.className = 'row';
+                row.style="height:284";
+                overallDiv.appendChild(row);
+            }
+            var videoDiv = document.createElement('div');
+            videoDiv.className = 'col-md-6';
+            row.appendChild(videoDiv);
 
-              var innerDiv = document.createElement('div');
-              videoDiv.appendChild(innerDiv);
+            var innerDiv = document.createElement('div');
+            videoDiv.appendChild(innerDiv);
 
-              var img = document.createElement('img');
-              img.className = 'img-fluid';
-              img.src = videos[i]['PreviewImage'];
-              img.style = "width: 300px; height: 240px; border-radius:6px; border: 1px solid #67809f";
-              innerDiv.appendChild(img);
+            var img = document.createElement('img');
+            img.className = 'img-fluid';
+            img.src = videos[i]['PreviewImage'];
+            img.style = "width: 300px; height: 240px; border-radius:6px; border: 1px solid #67809f";
+            innerDiv.appendChild(img);
 
-              var heading = document.createElement('p');
-              heading.className = 'textUnderVid';
-              heading.innerHTML = "Lecture on " + videos[i]['Date'];
-              videoDiv.appendChild(heading);
+            var heading = document.createElement('p');
+            heading.className = 'textUnderVid';
+            heading.innerHTML = "Lecture on " + videos[i]['Date'];
+            videoDiv.appendChild(heading);
           }
 
         });
