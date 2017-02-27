@@ -17,8 +17,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setClassQuarter(classQuarter);
             self.setPlaceHolder(className, classQuarter);
         });
-        this.setCoursesHyperLink(this);
         this.listenToUserSearch();
+        this.setHomeHyperLink();
     }
 
     fetchCourseData(classID,  callback) {
@@ -30,7 +30,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             if (qtr.indexOf("s2") > -1) qtr = "SS2 " + qtr.slice(-2);
             if (qtr.indexOf("s1") > -1) qtr = "SS1 " + qtr.slice(-2);
             callback(data['Course'], qtr);
-            this.setHomeHyperLink(data['Id']);
+        
+            this.setCoursesHyperLink(data['Id']);
             this.initAutocomplete(data['Id']);
         }.bind(this));
     }
@@ -75,20 +76,18 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         $(this.mainDiv).find("#userProfPic").attr("src", userPicture)
     }
 
-    setCoursesHyperLink (thisClass) {
+    setCoursesHyperLink (classId) {
         $(this.mainDiv).find("#course_button").on("click", function () {
-            var baseURL = window.location.origin + window.location.pathname;
-            var targetURL = baseURL + "#/courses";
-            window.location.href = targetURL;
-            window.location.hash =  "/courses";
-        })
+            var windowHash = "#/courses/" + classId;
+            if (classId == null) {
+                windowHash = "#/courses";
+            }
+            window.location.hash =  windowHash;
+        });
     }
     
-    setHomeHyperLink (classID) {
-        var windowHash = "#/courses/" + classID;
-        if (classID == null) {
-            windowHash = "#/courses";
-        }
+    setHomeHyperLink () {
+        var windowHash = "#/courses";
         $(this.mainDiv).find("#home_button").on("click", function () {
             window.location.hash = windowHash;
         }.bind(this))

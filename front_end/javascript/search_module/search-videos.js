@@ -7,9 +7,7 @@ class SearchVideosClass {
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
 
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
-
-        callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
-
+        callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -18,7 +16,7 @@ class SearchVideosClass {
           row.className = 'row videos-row';
           overallDiv.appendChild(row);
 
-          var videos = data['Videos'];
+          var videos = data;
           for (var i = 0; i < videos.length; i++) {
             var curr = videos[i];
             if (row.childElementCount == 3) {
@@ -32,7 +30,7 @@ class SearchVideosClass {
 
             var img = document.createElement('img');
             img.className = 'search-videos-img';
-            img.src = videos[i]['PreviewImage'];
+            img.src = videos[i]['PodcastImage'];
             img.addEventListener('click', function() {
               window.location.hash = '#/podcast/' + this['Id']; 
             }.bind(curr));
@@ -40,7 +38,7 @@ class SearchVideosClass {
 
             var heading = document.createElement('p');
             heading.className = 'textUnderVid';
-            heading.innerHTML = videos[i]['Date'];
+            heading.innerHTML = videos[i]['Time'];
             videoDiv.appendChild(heading);
           }
 
