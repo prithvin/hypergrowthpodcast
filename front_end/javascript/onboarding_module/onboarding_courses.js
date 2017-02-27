@@ -32,7 +32,11 @@ var OnboardingCourses = class OnboardingCourses {
             });  
             
             var course = document.createTextNode(data[i]['Course']);
-            var quarter = document.createTextNode(data[i]['Quarter']);
+            var qtr = data[i]['Quarter'];
+            if (qtr.indexOf("fa") > -1) qtr = "Fall " + qtr.slice(-2);
+            if (qtr.indexOf("wi") > -1) qtr = "Winter " + qtr.slice(-2);
+            if (qtr.indexOf("sp") > -1) qtr = "Spring " + qtr.slice(-2);
+            var quarter = document.createTextNode(qtr);
             var sym = document.createElement('i');
             var att = document.createAttribute('aria-hidden');
             att.value = 'true';
