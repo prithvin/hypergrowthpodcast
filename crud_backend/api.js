@@ -12,14 +12,14 @@ var apiFunctions = {
   podcastFunctions:{
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
-        if(err || !info)
+        if(err || info == null)
           return callback({Recommendations : [], Time : 0});
         return callback({Recommendations : info.Recommendations, Time : info.Time});
       });
     },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
-        if(course == null || err) {
+        if(course == null || err || course.Podcasts == null) {
           callback({});
           console.log("error finding course");
         } else {
@@ -53,8 +53,7 @@ var apiFunctions = {
                             'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                             function(err,podcast) {
         if(err || podcast == null) {
-          console.log("error");
-          callback("ERROR");
+          callback({});
           return;
         } else {
           srt2vtt(podcast.SRTBlob, function(err, vttData) {
@@ -112,6 +111,10 @@ var apiFunctions = {
       CourseModel.findById(request.CourseId,
                           'Podcasts',
                           function(err, course) {
+        if(err || course == null){
+          callback([]);
+          return;
+        }
         var results = [];
         var keywordsArr = request.Keywords.split(' ');
 
@@ -149,19 +152,24 @@ var apiFunctions = {
     },
     getUser : function(req,callback){
       UserModel.findById(req.UserId, 'Name ProfilePicture', function(err,user){
+        if(err || user == null){
+          callback({Name : "", Pic : ""});
+          return;
+        }
         var response = {
           Name : user.Name,
           Pic : user.ProfilePicture
         }
 
         callback(response);
+        return;
       });
     },
     getNotesForUser : function(req,callback){
         console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
         UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes',function(err,notes){
-          if(!notes || err || notes.Notes.length == 0)
+          if(notes == null || err || notes.Notes.length == 0)
             return callback({Notes : ""});
 
           for (var x = 0; x < notes.Notes.length; x++) {
@@ -178,6 +186,9 @@ var apiFunctions = {
     },
     createNotes : function(request,callback){
       UserModel.findOne({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, function(err,user){
+        if(err)
+          return callback(false);
+
         if(user){
           UserModel.update({_id : request.UserId, "Notes.PodcastId" : request.PodcastId}, {"Notes.$.Content" : request.Content},function(err){
             return callback(true);
@@ -192,25 +203,21 @@ var apiFunctions = {
     },
     addUser : function(name,profileId,callback){
       UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
-      if(err) {
-      console.log(err);
+      if(err || users == null) {
+        callback(err,users);
       }
       else{
-          console.log("HERE ARE THE USERS" + users);
-          callback(err,users);
+        callback(null,users);
       }
       });
-    },
-    //adds courses for the user
-    addCoursesForUser : function(request,callback){
-      var FBAuthID = request.FBAuthID;
-      var ClassNameCourseKey = request.ClassNameCourseKey;
-
     },
   },
   courseFunctions :{
     getCourses : function(callback){
       CourseModel.find({}, "_id Name Quarter", function(err,courses){
+        if(err || courses == null){
+          return callback([]);
+        }
         for(var i = 0; i < courses.length; i++){
           var object = {
             Id : courses[i]._id,
@@ -259,7 +266,7 @@ var apiFunctions = {
   postFunctions:{
     getPostsForCourse : function(request, callback){
       PostModel.find({'CourseId': request.CourseId}).sort({TimeOfPost: -1}).exec(function(err,posts){
-        if (!posts) {
+        if (err || posts == null) {
           callback([]);
           return;
         }
@@ -291,7 +298,7 @@ var apiFunctions = {
     },
     getPostsForLecture : function(request, callback){
       PostModel.find({'PodcastId': request.PodcastId}).sort({TimeOfPost: -1}).exec(function(err,posts){
-        if (!posts) {
+        if (err || posts == null) {
           callback([]);
           return;
         }
@@ -299,17 +306,14 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.findById(request.PodcastId,"Time",function(err,podcast){
-          for(var i = 0; i < posts.length; i++){
-            var copy = JSON.parse(JSON.stringify(posts[i]));
-            copy.PostId = copy._id;
-            copy.LectureDate = podcast.Time;
-            delete copy._id;
-            delete copy.CourseId;
-            posts[i] = copy;
-          }
-          callback(posts);
-        });
+        for(var i = 0; i < posts.length; i++){
+          var copy = JSON.parse(JSON.stringify(posts[i]));
+          copy.PostId = copy._id;
+          delete copy._id;
+          delete copy.CourseId;
+          posts[i] = copy;
+        }
+        callback(posts);
       });
     },
     getPostsByKeyword : function(request,callback){
@@ -317,7 +321,7 @@ var apiFunctions = {
         $or : [{Content: {$regex : request.Keywords, $options: 'i'}},
         {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]}).sort(
         {TimeOfPost: -1}).exec(function (err, posts) {
-            if (!posts) {
+            if (err || posts == null) {
               callback([]);
               return;
             }
@@ -348,7 +352,7 @@ var apiFunctions = {
       PodcastModel.findById(request.PodcastId,"CourseId", function(err,podcast){
         PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
         Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
-          if(err)
+          if(err || post == null)
             return callback(false);
           else {
             return callback(post._id);

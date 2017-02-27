@@ -27,8 +27,7 @@ passport.use(new FacebookStrategy({
         }else{
           apiFunctions.userFunctions.addUser(profile.displayName, profile.id, function(err,newUser){
             if (err)
-              throw err;
-            console.log("USER ADDED NEWLY");
+              return done(err, newUser);
             return done(null, newUser);
           });
         }

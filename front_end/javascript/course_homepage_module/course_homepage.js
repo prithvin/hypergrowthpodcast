@@ -6,6 +6,7 @@ class CourseHomepageClass {
         this.loadNavbar(this);
         this.loadCourseVideos(this);
         this.loadPostSearch(this);
+        
     }
     
     loadNavbar (thisClass) {
@@ -42,6 +43,7 @@ class CourseHomepageClass {
     
     
     loadPostSearch(thisClass) {
+        
         require(['postSearch'], function () {
             var divToLoad = $(thisClass.mainDiv).find("#course-posts");
             loadComponent("PostSearchModule", divToLoad, function () {
@@ -59,6 +61,8 @@ class CourseHomepageClass {
                 thisClass.dynamicWindowResize(thisClass);
             });
         });
+        
+
     }
   
     loadCourseVideos(thisClass) {
