@@ -1,22 +1,13 @@
 var SearchPage = class SearchPage {
 
-    constructor (podcastID, mainDiv) {
-        console.log(mainDiv);
-        console.log("hiii");
+    constructor (podcastID, mainDiv, searchTerm) {
         this.mainDiv = mainDiv;
         this.podcastID = podcastID;
+        this.searchTerm = searchTerm;
         this.loadPosts(this);
         this.loadNavbar(this);
         this.loadVideos(this);
 
-    }
-
-    fetchUserData (thisClass) {
-        callAPI("./fake_data/getUser.json", "GET", {}, function (data) {
-            thisClass.UserName = data['Name'];
-            thisClass.UserPic = data['Pic'];
-            thisClass.loadPosts(thisClass);
-        });
     }
 
     dynamicWindowResize (thisClass) {
@@ -36,11 +27,11 @@ var SearchPage = class SearchPage {
         require(['navbar'], function () {
             var divToLoad = $(thisClass.mainDiv).find("#navbox");
             loadComponent("MenuModule", divToLoad, function () {
-              console.log("navbar");
-                new NavBarLoggedInCourse(
+                var navbar = new NavBarLoggedInCourse(
                     divToLoad,
                     thisClass.podcastID
                 );
+                navbar.setValueOfSearchBar(thisClass.searchTerm);
             });
         });
 
@@ -50,13 +41,11 @@ var SearchPage = class SearchPage {
         require(['postSearch'], function () {
             var divToLoad = $(thisClass.mainDiv).find("#posts");
             loadComponent("PostSearchModule", divToLoad, function () {
-              console.log(thisClass.mainDiv);
-              console.log("postSearch");
                 new PostSearch(
                     {
                         "UniqueID": thisClass.podcastID,
                         "TypeOfFetch": "CourseSearch",
-                        "SearchQuery" : "Supply"
+                        "SearchQuery" : thisClass.searchTerm
                     },
                     {
                         "Name": thisClass.UserName,
@@ -71,10 +60,9 @@ var SearchPage = class SearchPage {
 
     loadVideos(thisClass) {
       require(['search-videos'], function() {
-          console.log("TEST");
         var divToLoad = $(thisClass.mainDiv).find("#search-videos");
         loadComponent("SearchResultsModule", divToLoad, function() {
-            new SearchVideosClass(1, $(thisClass.mainDiv));
+            new SearchVideosClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm);
         });
       });
     }

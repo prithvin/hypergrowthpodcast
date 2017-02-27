@@ -4,6 +4,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
     constructor (mainDiv, classID) {
         this.mainDiv = mainDiv;
+        this.classID = classID;
 
         var self = this;
         this.fetchUserData(function (userName, userPic) {
@@ -17,6 +18,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setPlaceHolder(className, classQuarter);
         });
         this.setCoursesHyperLink(this);
+        this.listenToUserSearch();
     }
 
     fetchCourseData(classID,  callback) {
@@ -24,6 +26,14 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             callback(data['Course'], data['Quarter']);
             this.setHomeHyperLink(data['Id']);
             this.initAutocomplete(data['Id']);
+        }.bind(this));
+    }
+
+    listenToUserSearch () {
+        $(this.mainDiv).find(".main_search_container").on("submit", function () {
+            console.log($(this.mainDiv).find("#searchBar").val());
+            console.log("THE NEW HASH");
+            window.location.hash = "#/search/" + this.classID + "/" + $(this.mainDiv).find("#searchBar").val();
         }.bind(this));
     }
 
@@ -44,6 +54,11 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     setPlaceHolder(className, classQuarter) {
         $(this.mainDiv).find("#searchBar").attr("placeholder", "Search in " + className + " " + classQuarter);
+    }
+
+    setValueOfSearchBar(newValue) {
+        console.log(newValue);
+        $(this.mainDiv).find("#searchBar").val(newValue);
     }
 
     setUserName(userFirstName) {

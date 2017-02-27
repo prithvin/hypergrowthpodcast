@@ -4,7 +4,7 @@
     </head>
 
     <body>
-        <div id="page" style="width:100%;height:100%;position:fixed;top:0;left:0;font-family: Roboto, sans-serif !important;-webkit-font-smoothing: subpixel-antialiased !important;"></div>
+        <div id="page" style="overflow-x:scroll;overflow-y:hidden;width:100%;height:100%;position:fixed;top:0;left:0;font-family: Roboto, sans-serif !important;-webkit-font-smoothing: subpixel-antialiased !important;"></div>
         <div id="loader-animation"  style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:100"></div>
     </body>
 
@@ -59,14 +59,12 @@
         });
       };
 
-      var search = function (courseId) {
+      var search = function (courseId, searchTerm) {
         $("#loader-animation").show();
+        console.log("PLEASE WORK");
         require(['searchResults'], function () {
-          // loadComponent("CourseSearchModule", $("#page"), function () {
-          //   new SearchPage(123, $("#page").find(".search-results-div"));
-          //   $("#loader-animation").hide();
           loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
-            new SearchPage(courseId, $("#page").find(".search-results-div"));
+            new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);
             timeToHideLoader(1000);
           });
         });
@@ -86,7 +84,7 @@
       var routes = {
         '/podcast/:podcastId': podcast,
         '/podcast/:podcastId/:slide': podcast,
-        '/search/:courseId': search,
+        '/search/:courseId/:searchTerm': search,
         '/': loginPage,
         '': loginPage,
         '/courses/:courseId': courseHomepage,

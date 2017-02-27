@@ -268,7 +268,9 @@ var apiFunctions = {
           for(var i = 0; i < podcastInfo.length; i++){
             for(var j = 0; j < posts.length; j++){
               if(posts[j].PodcastId == podcastInfo[i]._id){
-                posts[j].LectureDate = podcastInfo[i].Time;
+                var copy = JSON.parse(JSON.stringify(posts[j]));
+                copy.LectureDate = podcastInfo[i].Time;
+                posts[j] = copy;
               }
             }
           }
@@ -299,7 +301,9 @@ var apiFunctions = {
           for(var i = 0; i < podcastInfo.length; i++){
             for(var j = 0; j < posts.length; j++){
               if(posts[j].PodcastId == podcastInfo[i]._id){
-                posts[j].LectureDate = podcastInfo[i].Time;
+                var copy = JSON.parse(JSON.stringify(posts[j]));
+                copy.LectureDate = podcastInfo[i].Time;
+                posts[j] = copy;
               }
             }
           }
@@ -333,7 +337,9 @@ var apiFunctions = {
               for(var i = 0; i < podcastInfo.length; i++){
                 for(var j = 0; j < posts.length; j++){
                   if(posts[j].PodcastId == podcastInfo[i]._id){
-                    posts[j].LectureDate = podcastInfo[i].Time;
+                    var copy = JSON.parse(JSON.stringify(posts[j]));
+                    copy.LectureDate = podcastInfo[i].Time;
+                    posts[j] = copy;
                   }
                 }
               }

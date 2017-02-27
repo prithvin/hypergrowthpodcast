@@ -113,7 +113,7 @@ class videoClass {
             videojs('my-video', {
                 controls:true,
                 class: 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
-                playbackRates: [1,1.25,1.5,1.75,2], 
+                playbackRates: [1,1.25,1.5,1.75,2,2.25,2.5,2.75,3], 
                 autoplay: true,
                   tracks: [
                     { src:duri, kind:'captions', srclang:'en', label:'English' }
