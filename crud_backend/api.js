@@ -77,6 +77,11 @@ var apiFunctions = {
       CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
         var keywordSuggestions = [];
 
+        if (err || course == null) {
+          callback([]);
+          return;
+        }
+
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
           for (var x = 0; x < arr.length; x++) keywordSuggestions.push(arr[x]);
