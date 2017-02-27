@@ -6,9 +6,7 @@ class CourseVideosClass {
         this.loadingCallback = loadingCallback;
         
         callAPI(login_origins.backend + '/getVideosForCourse', 'GET', {'CourseId': courseId}, function(data) {
-          console.log(data);
           var masterDiv = document.getElementById('course-videos-div');
-          //document.getElementById('course-title').innerHTML = data['CourseTitle'];
           var row = document.createElement('div');
           row.className = 'row videos-row';
           masterDiv.appendChild(row);

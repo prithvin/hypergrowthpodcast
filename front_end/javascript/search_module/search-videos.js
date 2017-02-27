@@ -11,40 +11,37 @@ class SearchVideosClass {
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
 
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
-          console.log("TEST" + overallDiv);
-          overallDiv.style="overflow-y:scroll; overflow-x:hidden; height:66%";
+          //console.log("TEST" + overallDiv);
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
 
           var row = document.createElement('div');
-          row.className = 'row';
-          row.style="height:284px";
+          row.className = 'row videos-row';
           overallDiv.appendChild(row);
 
           var videos = data['Videos'];
           for (var i = 0; i < videos.length; i++) {
-            if (row.childElementCount == 2) {
+            var curr = videos[i];
+            if (row.childElementCount == 3) {
                 row = document.createElement('div');
-                row.className = 'row';
-                row.style="height:284";
+                row.className = 'row videos-row';
                 overallDiv.appendChild(row);
             }
             var videoDiv = document.createElement('div');
-            videoDiv.className = 'col-md-6';
+            videoDiv.className = 'col-4';
             row.appendChild(videoDiv);
 
-            var innerDiv = document.createElement('div');
-            videoDiv.appendChild(innerDiv);
-
             var img = document.createElement('img');
-            img.className = 'img-fluid';
+            img.className = 'search-videos-img';
             img.src = videos[i]['PreviewImage'];
-            img.style = "width: 300px; height: 240px; border-radius:6px; border: 1px solid #67809f";
-            innerDiv.appendChild(img);
+            img.addEventListener('click', function() {
+              window.location.hash = '#/podcast/' + this['Id']; 
+            }.bind(curr));
+            videoDiv.appendChild(img);
 
             var heading = document.createElement('p');
             heading.className = 'textUnderVid';
-            heading.innerHTML = "Lecture on " + videos[i]['Date'];
+            heading.innerHTML = videos[i]['Date'];
             videoDiv.appendChild(heading);
           }
 
@@ -60,8 +57,6 @@ class SearchVideosClass {
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
       var recKeywords = $(".recClass")[0];
-      console.log(recKeywords);
-      masterDiv.appendChild(recKeywords);
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
         recs.innerHTML = results[i];
