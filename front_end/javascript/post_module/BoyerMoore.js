@@ -6,7 +6,6 @@ class BoyMor{
     }
     bmIndexOf(haystack) {
         var needle = this.needle;
-        console.log(needle);
         if (needle.length == 0) {
             return 0;
         }

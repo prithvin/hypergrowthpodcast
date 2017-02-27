@@ -63,7 +63,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     setValueOfSearchBar(newValue) {
-        console.log(newValue);
         $(this.mainDiv).find("#searchBar").val(newValue);
     }
 
@@ -160,7 +159,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
     
     logout() {
-        console.log('Logging user out...');
         callAPI(login_origins.backend + '/logout', 'GET', {}, (data) => {
             //Redirect User to Login
              window.location.hash = '/';

@@ -12,12 +12,14 @@ var apiFunctions = {
   podcastFunctions:{
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
-        callback(info);
+        if(err || !info)
+          return callback({Recommendations : [], Time : 0});
+        return callback({Recommendations : info.Recommendations, Time : info.Time});
       });
     },
     getVideosForCourse: function(request, callback){
       CourseModel.findById( request.CourseId, function(err,course){
-        if(course == null) {
+        if(course == null || err) {
           callback({});
           console.log("error finding course");
         } else {
@@ -46,6 +48,7 @@ var apiFunctions = {
       }
     */
     getVideoInfo: function(request, callback) {
+
       PodcastModel.findById(request.PodcastId,
                             'SRTBlob PodcastUrl Time AudioTranscript NextVideo PrevVideo Slides',
                             function(err,podcast) {
@@ -75,6 +78,11 @@ var apiFunctions = {
     getKeywordSuggestions: function(request, callback) {
       CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
         var keywordSuggestions = [];
+
+        if (err || course == null) {
+          callback([]);
+          return;
+        }
 
         for (var i = 0; i < course.Podcasts.length; i++) {
           var arr = course.Podcasts[i].OCRKeywords;
@@ -152,13 +160,20 @@ var apiFunctions = {
     getNotesForUser : function(req,callback){
         console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
-        UserModel.find({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},{"Notes.Content" : 1},function(err,notes){
-        if(notes.length == 0)
-          return callback({Notes : ""});
-        var response = {
-          Notes : notes[0].Notes[0].Content
-        };
-        callback(response);
+        UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes',function(err,notes){
+          if(!notes || err || notes.Notes.length == 0)
+            return callback({Notes : ""});
+
+          for (var x = 0; x < notes.Notes.length; x++) {
+            if (notes.Notes[x].PodcastId != req.PodcastId)
+              continue;
+
+            var response = {
+              "Notes" : notes.Notes[x].Content
+            };
+            break;
+          }
+          callback(response);
       });
     },
     createNotes : function(request,callback){
@@ -255,22 +270,18 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+        PodcastModel.find({"_id" : {$in : podcastids}},"Time",function(err,podcastInfo){
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
             delete copy._id;
-            delete copy.PodcastId;
             delete copy.CourseId;
             posts[i] = copy;
           }
-          console.log(posts);
-          for(var i = 0; i < podcastInfo.length; i++){
+          for(var k = 0; k < podcastInfo.length; k++){
             for(var j = 0; j < posts.length; j++){
-              if(posts[j].PodcastId == podcastInfo[i]._id){
-                var copy = JSON.parse(JSON.stringify(posts[j]));
-                copy.LectureDate = podcastInfo[i].Time;
-                posts[j] = copy;
+              if(posts[j].PodcastId == podcastInfo[k]._id){
+                posts[j].LectureDate = podcastInfo[k].Time;
               }
             }
           }
@@ -288,24 +299,14 @@ var apiFunctions = {
         for(var i = 0; i < posts.length; i++){
           podcastids.push(posts[i].PodcastId);
         }
-        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+        PodcastModel.findById(request.PodcastId,"Time",function(err,podcast){
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
+            copy.LectureDate = podcast.Time;
             delete copy._id;
-            delete copy.PodcastId;
             delete copy.CourseId;
             posts[i] = copy;
-          }
-          console.log(posts);
-          for(var i = 0; i < podcastInfo.length; i++){
-            for(var j = 0; j < posts.length; j++){
-              if(posts[j].PodcastId == podcastInfo[i]._id){
-                var copy = JSON.parse(JSON.stringify(posts[j]));
-                copy.LectureDate = podcastInfo[i].Time;
-                posts[j] = copy;
-              }
-            }
           }
           callback(posts);
         });
@@ -324,22 +325,18 @@ var apiFunctions = {
             for(var i = 0; i < posts.length; i++){
               podcastids.push(posts[i].PodcastId);
             }
-            PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+            PodcastModel.find({"_id" : {$in : podcastids}},"Time",function(err,podcastInfo){
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
                 delete copy._id;
-                delete copy.PodcastId;
                 delete copy.CourseId;
                 posts[i] = copy;
               }
-              console.log(posts);
-              for(var i = 0; i < podcastInfo.length; i++){
+              for(var k = 0; k < podcastInfo.length; k++){
                 for(var j = 0; j < posts.length; j++){
-                  if(posts[j].PodcastId == podcastInfo[i]._id){
-                    var copy = JSON.parse(JSON.stringify(posts[j]));
-                    copy.LectureDate = podcastInfo[i].Time;
-                    posts[j] = copy;
+                  if(posts[j].PodcastId == podcastInfo[k]._id){
+                    posts[j].LectureDate = podcastInfo[k].Time;
                   }
                 }
               }

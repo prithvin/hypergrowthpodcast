@@ -7,6 +7,8 @@ class Notes{
 
         this.getTime();
         this.initListeners();
+        if (!text)
+            text = "";
         if(text.length > 0){
             this.mainDiv.find('.notes-content').text(text);
         }

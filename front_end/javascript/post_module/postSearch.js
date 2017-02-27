@@ -282,7 +282,6 @@ var PostSearch = class PostSearch {
             "Content": text
         };
         callAPI(login_origins.backend + "/createPost", "POST", obj, function (postID) {
-            console.log("Post is created" + postID);
             var newPost = {
                 "Name": this.userData["Name"],
                 "PostId": postID, // get from callback
@@ -436,7 +435,6 @@ var PostSearch = class PostSearch {
                 "Keywords": postData["SearchQuery"]
             };
         }
-
 
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned
