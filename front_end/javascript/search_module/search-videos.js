@@ -3,8 +3,9 @@ class SearchVideosClass {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
 
-        var masterDiv = $(this.mainDiv).find('search-videos-div')[0];
+        var masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
+
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
 
         callAPI("fake_data/searchResults.json", "GET", {}, function(data) {
