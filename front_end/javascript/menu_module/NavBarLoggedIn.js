@@ -40,7 +40,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     fetchUserData (callback) {
         callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             callback(data['Name'], data['Pic']);
-        });
+            this.initLogout(data['Name']);
+        }.bind(this));
     }
 
     setClassName(className) {
@@ -129,4 +130,34 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             };    
         });
     }
+    
+    initLogout(name) {
+        var self = this;
+        $('.logout-container').hover(
+            function () {
+              $('#name-logout').fadeOut('fast', function() {
+                $('#name-logout').text('Logout?').fadeIn('fast');
+              });
+              $("#name-logout").css({"cursor":"pointer"});
+            }, 
+            function () {
+              $('#name-logout').fadeOut('fast', function() {
+                $('#name-logout').text("Hey " + name.substring(0, name.indexOf(' ')) + "!").fadeIn('fast');
+              });
+            }
+        ); 
+        $('#name-logout').click(
+            function() {
+                self.logout();
+            }
+        );
+    }
+    
+    logout() {
+        console.log('Logging user out...');
+        callAPI(login_origins.backend + '/logout', 'GET', {}, (data) => {
+            //Redirect User to Login
+             window.location.hash = '/';
+        });
+    } 
 }

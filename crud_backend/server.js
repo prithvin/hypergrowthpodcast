@@ -207,11 +207,11 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   });
 });
 
-app.get('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     UserId : req.user._id,
-    PodcastId : req.query.PodcastId,
-    Content : req.query.Content
+    PodcastId : req.body.PodcastId,
+    Content : req.body.Content
   };
   apiFunctions.userFunctions.createNotes(request,function(status){
     res.send(status);
@@ -284,7 +284,7 @@ app.get('/auth/facebook', function(req,res,next){
   });
 });
 
-function putStuff (req, res, next) {  
+function putStuff (req, res, next) {
   var object = {
       callbackURL: realCallbackUrl,
       display: 'popup',

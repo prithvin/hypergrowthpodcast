@@ -100,59 +100,28 @@ var apiFunctions = {
     },
 
     searchByKeywords: function(request, callback){
-      CourseModel.findById(request.CourseId, 'Podcasts', function(err, course) {
-        var callbackFired = false;
+      CourseModel.findById(request.CourseId,
+                          'Podcasts',
+                          function(err, course) {
         var results = [];
-        var count = 0;
+        var keywordsArr = request.Keywords.split(' ');
 
-        for(var i = 0; i < course.Podcasts.length; i++){
-          PodcastModel.findById(course.Podcasts[i].PodcastId, '_id Slides', function(err, podcast) {
-            for (var j = 0; j < podcast.Slides.length; j++) {
-              var slide = podcast.Slides[j];
 
-              if (slide.OCRTranscription.includes(request.Keywords)) {
-                results.push({
-                  'PodcastID': podcast._id,
-                  'Type': 'OCR',
-                  'Data': slide
-                });
+        for (let i = 0; i < course.Podcasts.length; i++) {
+          for (let j = 0; j < keywordsArr.length; j++) {
+            if (keywordsArr[j].length < 1) continue;
+            if (course.Podcasts[i].OCRKeywords.indexOf(keywordsArr[j]) != -1) {
+              delete course.Podcasts[i].OCRKeywords;
+              results.push(course.Podcasts[i]);
+              break;
 
-                if (!callbackFired && results.length >= request.count) {
-                  callback(results);
-                  callbackFired = true;
-                  return;
-                }
-              }
             }
-
-            for (var k = 0; k < podcast.AudioTranscript.length; k++) {
-              var transcript = podcast.AudioTranscript[k];
-
-              if (transcript.Content.includes(request.Keywords)) {
-                results.push({
-                  'PodcastID': podcast._id,
-                  'Type': 'Audio',
-                  'Data': transcript
-                });
-
-                if (!callbackFired && results.length >= request.count) {
-                  callback(results);
-                  callbackFired = true;
-                  return;
-                }
-              }
-            }
-
-            count++;
-
-            // exhausted
-            if (!callbackFired && count == course.Podcasts.length) {
-              callback(results);
-              callbackFired = true;
-            }
-          });
-          if (callbackFired) break;
+          }
+          if (results.length >= request.count) break;
         }
+
+        console.log(new Date());
+        callback(results);
       });
     }
   },
@@ -276,33 +245,69 @@ var apiFunctions = {
   postFunctions:{
     getPostsForCourse : function(request, callback){
       PostModel.find({'CourseId': request.CourseId}).sort({TimeOfPost: -1}).exec(function(err,posts){
+        if (!posts) {
+          callback([]);
+          return;
+        }
         if(posts.length >= request.UpperLimit){
             posts = posts.slice(0,request.UpperLimit);
         }
-
+        var podcastids = [];
         for(var i = 0; i < posts.length; i++){
-          var copy = JSON.parse(JSON.stringify(posts[i]));
-          copy.PostId = copy._id;
-          delete copy._id;
-          delete copy.PodcastId;
-          delete copy.CourseId;
-          posts[i] = copy;
+          podcastids.push(posts[i].PodcastId);
         }
-        callback(posts);
+        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+          for(var i = 0; i < posts.length; i++){
+            var copy = JSON.parse(JSON.stringify(posts[i]));
+            copy.PostId = copy._id;
+            copy.LectureDate = copy.TimeOfPost;
+            delete copy._id;
+            delete copy.PodcastId;
+            delete copy.CourseId;
+            posts[i] = copy;
+          }
+          console.log(posts);
+          for(var i = 0; i < podcastInfo.length; i++){
+            for(var j = 0; j < posts.length; j++){
+              if(posts[j].PodcastId == podcastInfo[i]._id){
+                posts[j].LectureDate = podcastInfo[i].Time;
+              }
+            }
+          }
+          callback(posts);
+        });
       });
     },
     getPostsForLecture : function(request, callback){
       PostModel.find({'PodcastId': request.PodcastId}).sort({TimeOfPost: -1}).exec(function(err,posts){
-        console.log(posts);
-        for(var i = 0; i < posts.length; i++){
-          var copy = JSON.parse(JSON.stringify(posts[i]));
-          copy.PostId = copy._id;
-          delete copy._id;
-          delete copy.PodcastId;
-          delete copy.CourseId;
-          posts[i] = copy;
+        if (!posts) {
+          callback([]);
+          return;
         }
-        callback(posts);
+        var podcastids = [];
+        for(var i = 0; i < posts.length; i++){
+          podcastids.push(posts[i].PodcastId);
+        }
+        PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+          for(var i = 0; i < posts.length; i++){
+            var copy = JSON.parse(JSON.stringify(posts[i]));
+            copy.PostId = copy._id;
+            copy.LectureDate = copy.TimeOfPost;
+            delete copy._id;
+            delete copy.PodcastId;
+            delete copy.CourseId;
+            posts[i] = copy;
+          }
+          console.log(posts);
+          for(var i = 0; i < podcastInfo.length; i++){
+            for(var j = 0; j < posts.length; j++){
+              if(posts[j].PodcastId == podcastInfo[i]._id){
+                posts[j].LectureDate = podcastInfo[i].Time;
+              }
+            }
+          }
+          callback(posts);
+        });
       });
     },
     getPostsByKeyword : function(request,callback){
@@ -310,20 +315,34 @@ var apiFunctions = {
         $or : [{Content: {$regex : request.Keywords, $options: 'i'}},
         {Comments : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]}).sort(
         {TimeOfPost: -1}).exec(function (err, posts) {
-          if (!posts) {
-            callback([]);
-            return;
-          }
-          for(var i = 0; i < posts.length; i++){
-            var copy = JSON.parse(JSON.stringify(posts[i]));
-            copy.PostId = copy._id;
-            delete copy._id;
-            delete copy.PodcastId;
-            delete copy.CourseId;
-            posts[i] = copy;
-            console.log(posts[i]);
-          }
-          callback(posts);
+            if (!posts) {
+              callback([]);
+              return;
+            }
+            var podcastids = [];
+            for(var i = 0; i < posts.length; i++){
+              podcastids.push(posts[i].PodcastId);
+            }
+            PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
+              for(var i = 0; i < posts.length; i++){
+                var copy = JSON.parse(JSON.stringify(posts[i]));
+                copy.PostId = copy._id;
+                copy.LectureDate = copy.TimeOfPost;
+                delete copy._id;
+                delete copy.PodcastId;
+                delete copy.CourseId;
+                posts[i] = copy;
+              }
+              console.log(posts);
+              for(var i = 0; i < podcastInfo.length; i++){
+                for(var j = 0; j < posts.length; j++){
+                  if(posts[j].PodcastId == podcastInfo[i]._id){
+                    posts[j].LectureDate = podcastInfo[i].Time;
+                  }
+                }
+              }
+              callback(posts);
+            });
       });
     },
     createPost: function(request,callback) {
