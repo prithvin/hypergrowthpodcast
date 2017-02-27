@@ -259,6 +259,7 @@ var apiFunctions = {
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
+            copy.LectureDate = copy.TimeOfPost;
             delete copy._id;
             delete copy.PodcastId;
             delete copy.CourseId;
@@ -290,6 +291,7 @@ var apiFunctions = {
           for(var i = 0; i < posts.length; i++){
             var copy = JSON.parse(JSON.stringify(posts[i]));
             copy.PostId = copy._id;
+            copy.LectureDate = copy.TimeOfPost;
             delete copy._id;
             delete copy.PodcastId;
             delete copy.CourseId;
@@ -324,6 +326,7 @@ var apiFunctions = {
               for(var i = 0; i < posts.length; i++){
                 var copy = JSON.parse(JSON.stringify(posts[i]));
                 copy.PostId = copy._id;
+                copy.LectureDate = copy.TimeOfPost;
                 delete copy._id;
                 delete copy.PodcastId;
                 delete copy.CourseId;
