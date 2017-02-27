@@ -23,14 +23,6 @@ class videoClass {
     initListeners(){
         var self = this;
 
-        $('#prevButton').click(function(){
-            var event = new CustomEvent('changeVideo', {'detail': "previous"});
-            self.mainDiv.trigger('changeVideo', ["prev"]);
-        });
-        $('#nextButton').click(function(){
-            self.mainDiv.trigger('changeVideo', ["next"]);
-        });
-            
         //when to change video
         this.mainDiv.on('changeVideo', function(e, deet){
             videojs('my-video').ready(function() {
@@ -49,9 +41,10 @@ class videoClass {
     initHotKeys(){
       
         videojs('my-video').hotkeys({
-            volumeStep: 0.1,
+          //  volumeStep: 0.1,
             seekStep: 5,
-            enableModifiersForNumbers: false
+            enableModifiersForNumbers: false,
+            enableVolumeScroll: false
         });
     }
     
@@ -120,7 +113,7 @@ class videoClass {
             videojs('my-video', {
                 controls:true,
                 class: 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
-                playbackRates: [1,1.25,1.5,1.75,2], 
+                playbackRates: [1,1.25,1.5,1.75,2,2.25,2.5,2.75,3], 
                 autoplay: true,
                   tracks: [
                     { src:duri, kind:'captions', srclang:'en', label:'English' }

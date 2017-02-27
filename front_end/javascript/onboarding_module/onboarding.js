@@ -1,12 +1,5 @@
 var Onboarding = class Onboarding {
   constructor(mainDiv) {
-    $(mainDiv).find('.fb-login-button')[0].onclick = () => {
-      var baseURL = window.location.origin + window.location.pathname;
-      var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
-      var errorCallbackURL = encodeURIComponent(baseURL + "#");
-      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
-    }
-
     var queries;
 		var query_str = window.location.search.substring(1);
     if(!query_str) {
@@ -19,8 +12,24 @@ var Onboarding = class Onboarding {
       queries = this.getQueries(query_str);
     }
 
+    $(mainDiv).find('.fb-login-button')[0].onclick = () => {
+      var baseURL = window.location.origin + window.location.pathname;
+      var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
+      var errorCallbackURL = encodeURIComponent(baseURL + "#");
+      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
+    }
+
     if(queries && queries.hasOwnProperty('redirectURL')) {
-      window.location.href = encodeURI(window.location.origin + '/#/' +  queries['redirectURL']);
+      callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
+        if(!data.result) {
+          var baseURL = window.location.origin + window.location.pathname;
+          var targetCallbackURL = encodeURIComponent(baseURL + '#/?redirectURL=' + queries['redirectURL']);
+          var errorCallbackURL = encodeURIComponent(baseURL + "#");
+          window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
+        } else {
+          window.location.href = decodeURIComponent(queries['redirectURL']);
+        }
+      });
     } else {
       callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
         if(data.result === true) {

@@ -4,6 +4,8 @@
     box-shadow: none !IMPORTANT;
     border-radius: 3px !IMPORTANT;
     border-color: #446CB3 !IMPORTANT;
+    padding-right: 32px !IMPORTANT;
+    font-family: 'Roboto', sans-serif !IMPORTANT;
 }
 
 .main_search_container {

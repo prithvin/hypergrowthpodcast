@@ -2,11 +2,20 @@
   width: 100%;
   padding-left: 2.5%;
   padding-right: 2.5%;
+  margin-top: 10px;
 }
 
 .podcast-recommendations {
   margin-top: 12px;
   margin-bottom: 10.3664%;
+}
+
+.lecture-title {
+  font-size: 1.19em;
+}
+
+#recommendations-container {
+  padding-bottom: 50px;
 }
 
 .rec-preview-img {
@@ -19,6 +28,7 @@
 
 .rec-container {
   padding-right: 2.375%;
+  text-align:center;
 }
 
 .rec-title {
@@ -26,6 +36,11 @@
   text-align: center;
   color: #3a5c9b;
   font-size: 90%;
+}
+
+.lecture-title {
+  padding-bottom: 10px;
+  padding-top: 7px;
 }
 
 .rec-preview-img:hover {
@@ -37,4 +52,5 @@
 
 .recommendations-header {
   color: #405a74;
+  font-size: 0.8em;
 }

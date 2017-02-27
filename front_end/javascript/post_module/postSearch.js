@@ -96,7 +96,7 @@ var PostSearch = class PostSearch {
             loadHTMLComponent("NotesModule", function (data) {
                 var notesDiv = $(this.mainDiv).find(".notes-module").html(data);
                 this.notesModule = $(notesDiv).find(".notes-wrapper");
-                this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"]);
+                this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"], this.podcastid);
                 this.showNotes();
             }.bind(this));
         }
@@ -131,7 +131,7 @@ var PostSearch = class PostSearch {
         $(this.newPostButton).on("click", function (ev) {
             var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
-                swal("Please ask a question to search for!");   // Alert library
+                swal("Type your question in the \"Search or write a post\" search bar, and then press the post button!");   // Alert library
             else {
                 this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }
@@ -281,8 +281,8 @@ var PostSearch = class PostSearch {
             "TimeOfPost": timeOfPost,
             "Content": text
         };
-        console.log(obj);
         callAPI(login_origins.backend + "/createPost", "POST", obj, function (postID) {
+            console.log("Post is created" + postID);
             var newPost = {
                 "Name": this.userData["Name"],
                 "PostId": postID, // get from callback
@@ -305,6 +305,7 @@ var PostSearch = class PostSearch {
             "PageType": "Notes"
         };
         $(this.mainDiv).parent().find(".dropdownOfSlide").on("ShowNotes", function () {
+            this.changeSlideCompletely();
             this.cleanUpSearch();
             this.notesWrapper.show();
             $(this.noResultsOption).hide();
@@ -432,13 +433,13 @@ var PostSearch = class PostSearch {
             apiURL = login_origins.backend + "/getPostsByKeyword";
             requestData = {
                 "CourseId": postData["UniqueID"],
-                "SearchTerm": postData["SearchQuery"]
+                "Keywords": postData["SearchQuery"]
             };
         }
 
+
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned
-            console.log(data);
             for (var x = 0; x < data.length; x++) {
                 thisClass.loadPost(thisClass, data[x]);
             }

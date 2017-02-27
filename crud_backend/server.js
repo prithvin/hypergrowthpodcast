@@ -39,7 +39,9 @@ mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaru
 app.use(cors({
     allowedOrigins: [
         'localhost:7888',
-        'localhost:8000'
+        'localhost:8000',
+        '104.131.147.159',
+        '104.131.147.159:80'
     ]
 }))
 
@@ -120,7 +122,15 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
   });
 });
 
-app.get('/getVideoInfo',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+app.get('/getRecommendations', apiFunctions.userFunctions.isLoggedIn, function(req,res){
+  var request = {
+    PodcastId : req.query.PodcastId
+  };
+  apiFunctions.podcastFunctions.getRecommendations(request,function(recommendations){
+    res.send(recommendations);
+  });
+});
+app.get('/getVideoInfo',function(req,res){
   var request = {
     PodcastId : req.query.PodcastId
   };
@@ -183,11 +193,11 @@ app.get('/getCourseInfo',apiFunctions.userFunctions.isLoggedIn, function(req,res
 
 app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PodcastId : req.query.PodcastId,
-    SlideOfPost : req.query.SlideOfPost,
-    TimeOfPost : req.query.TimeOfPost,
-    Content : req.query.Content,
-    CourseId : req.query.CourseId,
+    PodcastId : req.body.PodcastId,
+    SlideOfPost : req.body.SlideOfPost,
+    TimeOfPost : req.body.TimeOfPost,
+    Content : req.body.Content,
+    CourseId : req.body.CourseId,
     ProfilePic : req.user.ProfilePicture,
     Name : req.user.Name
   };
@@ -200,19 +210,19 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
     UserId : req.user._id,
-    PodcastId : req.query.PodcastId,
-    Content : req.query.Content
+    PodcastId : req.body.PodcastId,
+    Content : req.body.Content
   };
-  apiFunctions.userFunctions.createNotesForUser(request,function(status){
+  apiFunctions.userFunctions.createNotes(request,function(status){
     res.send(status);
   });
 });
 
 app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    PostId : req.query.PostId,
-    Time : req.query.Time,
-    Content : req.query.Content,
+    PostId : req.body.PostId,
+    Time : req.body.Time,
+    Content : req.body.Content,
     Pic : req.user.ProfilePicture,
     PosterName : req.user.Name
   };
@@ -253,23 +263,36 @@ app.get('/logout',function(req,res){
   res.send("LOGGED OUT");
 });
 
+var realCallbackUrl = 'http://www.google.com';
+
 /***************************************FACEBOOK AUTH****************************************************/
 app.get('/auth/facebook', function(req,res,next){
   if (req.query.callbackURL == null || req.query.errorCallbackURL == null)  {
     res.send("Error. Invalid params");
     return;
   }
-  auth.callbackURL = req.query.callbackURL;
-  auth.errorCallback = req.query.errorCallbackURL;
-  next();
-},
-  passport.authenticate('facebook',
-  {
+  req.session.callbackURL = req.query.callbackURL;
+  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+  realCallbackUrl = req.protocol + '://' + req.get('host') + auth.facebookAuth.callbackURL;
+  //console.log(realCallbackUrl);
+  req.session.save(function (err) {
+    auth.callbackURL = req.query.callbackURL;
+    auth.errorCallback = req.query.errorCallbackURL;
+    //next();
+    putStuff(req, res, next);
+    //res.redirect('/auth/facebook/newcallback');
+  });
+});
+
+function putStuff (req, res, next) {
+  var object = {
+      callbackURL: realCallbackUrl,
       display: 'popup',
       scope: [ 'email', 'basic_info'],
       profileFields: ['id', 'displayName', 'photos', 'email', 'birthday']
-  }
-));
+  };
+  passport.authenticate('facebook', object)(req, res, next);
+ }
 
 
 app.get("/auth/facebook/callback",
@@ -285,8 +308,8 @@ app.get("/auth/facebook/callback",
           console.log(err);
       });
     }
-
-    res.redirect(auth.callbackURL);
+    console.log('req.session.callbackURL is ' + req.session.callbackURL);
+    res.redirect(req.session.callbackURL);
   },
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {

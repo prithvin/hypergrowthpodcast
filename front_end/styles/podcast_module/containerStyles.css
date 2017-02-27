@@ -10,6 +10,13 @@
     background-color:#F4F6F8;
 }
 
+.prev-button {
+  display:none;
+}
+
+.next-button {
+  display:none;
+}
 
 #podcast-posts {
     height: 80%;
@@ -21,6 +28,9 @@
   height: 100%;
 }
 
-#recommendations-container {
-  padding-bottom: 50px;
+#video-title {
+  margin-top: 1.5%;
+  margin-bottom: 2.5%;
+  margin-left: 1.25%;
+  font-size: 135%;
 }

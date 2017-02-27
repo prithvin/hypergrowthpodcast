@@ -14,6 +14,7 @@ var dbuploader = require('./dbuploader.js');
 var recommender = require('./recommender.js');
 var srt = require('./srtProcessor.js');
 var mongoose = require('mongoose');
+var base64resize = require('base64resize');
 
 module.exports = {
   parseVideo: function(videoFiles) {
@@ -151,12 +152,18 @@ function parseVideoForEach (videoFiles, videosFromCourse, index) {
               var partsOfFileName = parseFileNameForCourseData(fileData["FileNameWithoutExtension"]); // parses file name for course data
               var image = base64encode(fileData["DirName"] + '/1.jpg');
 
-              addPodcast(transcriptionStuff, partsOfFileName, image, fileData, slidesArray, function (podcastId, courseId) {
-                videosFromCourse.push({"_id" : podcastId});
-                deleteRandomPodcastData(fileData, function () {
-                  var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
-                  recommender.getRecommendationsForCourseID(!hasMoreVideosInSeries, courseId, function () {
-                    parseVideoForEach(videoFiles, videosFromCourse, index + 1);
+              base64resize({
+                'src': 'data:image/jpeg;base64,' + image,
+                'width': 160,
+                'height': 100
+              }, (error, shrunk) => {
+                addPodcast(transcriptionStuff, partsOfFileName, shrunk, fileData, slidesArray, function (podcastId, courseId) {
+                  videosFromCourse.push({"_id" : podcastId});
+                  deleteRandomPodcastData(fileData, function () {
+                    var hasMoreVideosInSeries = isMorePodcastInLecture(videoFiles, index, videosFromCourse, partsOfFileName);
+                    recommender.getRecommendationsForCourseID(!hasMoreVideosInSeries, courseId, function () {
+                      parseVideoForEach(videoFiles, videosFromCourse, index + 1);
+                    });
                   });
                 });
               });

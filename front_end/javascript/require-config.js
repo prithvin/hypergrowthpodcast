@@ -54,7 +54,7 @@ var require = {
         "angular": {},
         "post-dropdown": {},
         "navbar": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'auto-correct']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap', 'moment']
@@ -111,7 +111,6 @@ var require = {
         "ocr_module": "post_module/ocr_audio_parse",
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "post-dropdown": "post_module/PodcastDropdownMenu",
-        "auto-correct": "menu_module/Norvig",
         "search-results": "search_module/search-results",
         "recommendations": "recommendations_module/recommendations"
     }

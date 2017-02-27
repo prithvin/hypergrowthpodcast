@@ -21,6 +21,13 @@ var loadHTMLModules = {
     "NotesModule": "notes_module.html"
 };
 
+preloadComponents();
+function preloadComponents () {
+    for (key in loadHTMLModules) {
+        loadHTMLComponent(key, function () { });
+    }
+}
+
 function loadComponent (moduleName, divToLoad, callback) {
     if (loadHTMLModules[moduleName] == null) {
         console.log("Invalid module");
@@ -38,7 +45,7 @@ function loadComponentOrLogin (moduleName, divToLoad, callback) {
             loadComponent(moduleName, divToLoad, callback);
         }
         else {
-            window.location.hash = "";
+          window.location.href = window.location.origin + window.location.pathname + '/#/?redirectURL=' + encodeURIComponent(window.location.href);
         }
     });
 }
