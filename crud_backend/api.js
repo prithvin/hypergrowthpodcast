@@ -118,7 +118,7 @@ var apiFunctions = {
           }
           if (results.length >= request.count) break;
         }
-    
+
         console.log(new Date());
         callback(results);
       });
@@ -253,7 +253,7 @@ var apiFunctions = {
         }
         var podcastids = [];
         for(var i = 0; i < posts.length; i++){
-          podcastids[i].push(posts[i].PodcastId);
+          podcastids.push(posts[i].PodcastId);
         }
         PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
           for(var i = 0; i < posts.length; i++){
@@ -284,7 +284,7 @@ var apiFunctions = {
         }
         var podcastids = [];
         for(var i = 0; i < posts.length; i++){
-          podcastids[i].push(posts[i].PodcastId);
+          podcastids.push(posts[i].PodcastId);
         }
         PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
           for(var i = 0; i < posts.length; i++){
@@ -318,7 +318,7 @@ var apiFunctions = {
             }
             var podcastids = [];
             for(var i = 0; i < posts.length; i++){
-              podcastids[i].push(posts[i].PodcastId);
+              podcastids.push(posts[i].PodcastId);
             }
             PodcastModel.find({_id : {$in : podcastids}},"Time",function(err,podcastInfo){
               for(var i = 0; i < posts.length; i++){
