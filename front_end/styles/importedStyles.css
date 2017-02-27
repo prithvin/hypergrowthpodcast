@@ -30,6 +30,7 @@
 
 /* search module */
 @import url("./search_module/searchResults.css");
+@import url("./search_module/search-keywords.css");
 
 /* post module */
 @import url("./post_module/alertBox.css");
