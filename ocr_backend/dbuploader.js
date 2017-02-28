@@ -307,4 +307,10 @@ module.exports = {
       ]}).remove(callback);
     });
   },
+
+  getNoRecommendations: function(callback) {
+    connectMongo(function () {
+      PodcastModel.find({"Recommendations": []}, 'CourseId', callback);
+    });
+  }
 }
