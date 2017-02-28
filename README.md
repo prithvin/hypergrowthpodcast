@@ -31,7 +31,7 @@ This code is run intermittently to populate the database (a 500MB MongoDB sandbo
 
 To run: After installing the dependencies, copy this directory to a different location so that git pulls don't affect processing:
 
-    cp -r ocr_backend ../ocr_backend_production && cd ../ocr_backend_production
+    cp -r ocr_backend ~/ocr_backend_production && cd ~/ocr_backend_production
 
 Place a list of MP4 URLs in the file `ocr_backend/scraped`. They can be obtained using the following method:
 
