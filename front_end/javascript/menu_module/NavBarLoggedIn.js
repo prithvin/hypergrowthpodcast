@@ -17,7 +17,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setClassQuarter(classQuarter);
             self.setPlaceHolder(className, classQuarter);
         });
-        this.listenToUserSearch();
         this.setHomeHyperLink();
     }
 
@@ -30,8 +29,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             if (qtr.indexOf("s2") > -1) qtr = "SS2 " + qtr.slice(-2);
             if (qtr.indexOf("s1") > -1) qtr = "SS1 " + qtr.slice(-2);
             callback(data['Course'], qtr);
-        
+
+            this.classID = data['Id'];
             this.setCoursesHyperLink(data['Id']);
+            this.listenToUserSearch();
             this.initAutocomplete(data['Id']);
         }.bind(this));
     }
