@@ -2,7 +2,7 @@
 Full-fledged webapp that allows for searching of UCSD podcasts by keyword with respect to the content on each podcast, as well as social comment feeds for each podcast that is connected through Facebook.
 
 ## Operations
-Our current production environment is a low-end DigitalOcean droplet (1 core, 512MB RAM + 1GB swap, 20GB SSD) running Ubuntu Xenial.
+Our current production environment is a low-end DigitalOcean droplet (1 core, 512MB RAM + 8GB swap, 20GB SSD) running Ubuntu Xenial.
 
 The IP address of this droplet is: `104.131.147.159`
 
