@@ -14,6 +14,18 @@ module.exports = {
       });
     });
 
+  },
+
+  fixRecommendations: function(callback) {
+    dbuploader.getNoRecommendations(function(err, podcasts) {
+      var arr = [];
+      for (let i = 0; i < podcasts.length; i++) {
+        if (arr.indexOf(podcasts[i].CourseId) < 0) {
+          module.exports.getRecommendationsForCourseID(true, podcasts[i].CourseId, callback);
+          arr.push(podcasts[i].CourseId);
+        }
+      }
+    });
   }
 };
 

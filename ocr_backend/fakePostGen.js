@@ -56,4 +56,4 @@ function createFakePosts(num_posts, names, sentences) {
 
 var profile_names = getProfiles('character-list.txt');
 var sentences = generateSentenceCorpus('pride-and-prejudice.txt');
-createFakePosts(500, profile_names, sentences);
+createFakePosts(1000, profile_names, sentences);
