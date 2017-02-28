@@ -72,7 +72,7 @@ function parseFileNameForCourseData (fileName) {
 
   var formattedCourse = course.split('_')[0].toUpperCase();
   var pre = formattedCourse.split(/[0-9]/)[0];
-  formattedCourse = pre + ' ' + formattedCourse.match(/\d+/)[0];
+  formattedCourse = pre + ' ' + formattedCourse.slice(pre.length);
 
   return {
     "Date": dateinMillis,

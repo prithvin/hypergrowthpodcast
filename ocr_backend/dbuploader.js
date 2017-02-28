@@ -252,18 +252,25 @@ module.exports = {
 
   generateFakePosts: function (objects, callback) {
     connectMongo(function () {
-      PodcastModel.find({}, '_id CourseId Slides', function(err, podcasts) {
+      PodcastModel.find({}, '_id CourseId Time Slides', function(err, podcasts) {
         for (let i = 0; i < objects.length; i++) {
           var obj = objects[i];
-
-          obj.ProfilePic = 'https://68.media.tumblr.com/avatar_3e63ffa18aed_128.png';
-          for (let i = 0; i < obj.Comments.length; i++)
-            obj.Comments[i].Pic = 'https://68.media.tumblr.com/avatar_3e63ffa18aed_128.png';
 
           var chosenPodcast = podcasts[Math.floor(Math.random() * podcasts.length)];
           obj.PodcastId = chosenPodcast._id;
           obj.CourseId = chosenPodcast.CourseId;
-          obj.SlideOfPost = Math.floor(Math.random() * chosenPodcast.Slides.length);
+          obj.SlideOfPost = Math.floor(Math.random() * chosenPodcast.Slides.length) + 1;
+
+          var diff = new Date().getTime() - chosenPodcast.Time;
+
+          obj.TimeOfPost = chosenPodcast.Time + diff * Math.random();
+          var last = obj.TimeOfPost;
+          diff = new Date().getTime() - last;
+          for (let j = 0; j < obj.Comments.length; j++) {
+            obj.Comments[j].Time = last + diff * Math.random();
+            last = obj.Comments[j].Time;
+            diff = new Date().getTime() - last;
+          }
 
           PostModel.create(obj, function(err, post) {
             if (err) {
@@ -271,11 +278,33 @@ module.exports = {
               console.error(err);
             }
             else {
-              callback(post._id);
+              callback(post.PodcastId);
             }
           });
         }
       });
     });
-  }
+  },
+
+  removeFakePosts: function (callback) {
+    connectMongo(function () {
+      PostModel.find({ $or: [
+        {'Name': 'Elizabeth Bennet'},
+        {'Name': 'Fitzwilliam Darcy'},
+        {'Name': 'Jane Bennet'},
+        {'Name': 'Charles Bingley'},
+        {'Name': 'Mr Bennet'},
+        {'Name': 'Mrs Bennet'},
+        {'Name': 'Mary Bennet'},
+        {'Name': 'Kitty Bennet'},
+        {'Name': 'Lydia Bennet'},
+        {'Name': 'Caroline Bingley'},
+        {'Name': 'George Wickham'},
+        {'Name': 'William Collins'},
+        {'Name': 'Lady Catherine de Bourgh'},
+        {'Name': 'Georgiana Darcy'},
+        {'Name': 'Charlotte Lucas'},
+      ]}).remove(callback);
+    });
+  },
 }

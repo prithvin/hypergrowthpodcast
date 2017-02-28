@@ -6,7 +6,7 @@
   width:100%; 
   display:flex; 
   justify-content:space-between;
-  text-align: center
+  text-align: center;
 }
 
 .recClass button {
@@ -18,5 +18,18 @@
   margin-top:8;
   display: inline-block;
   text-align:center;
-  color:white
+  color:white;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.recClass button:active {
+  -webkit-transform: scale(.7);
+  transform: scale(.7);
+  width: 70%;
+  font-size: 0; 
+}
+
+button:focus {
+  outline:0;
 }

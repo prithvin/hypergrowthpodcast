@@ -39,9 +39,7 @@ var OnboardingCourses = class OnboardingCourses {
             if (qtr.indexOf("s1") > -1) qtr = "SS1 " + qtr.slice(-2);
             var quarter = document.createTextNode(qtr);
             var sym = document.createElement('i');
-            var att = document.createAttribute('aria-hidden');
-            att.value = 'true';
-            sym.setAttributeNode(att);
+            sym.setAttribute('aria-hidden', 'true');
             sym.className = 'fa fa-graduation-cap sym'; //fa-graduation-cap
             cell.appendChild(course);
             cell2.appendChild(sym);
