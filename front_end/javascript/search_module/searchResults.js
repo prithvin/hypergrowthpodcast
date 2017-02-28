@@ -7,18 +7,6 @@ var SearchPage = class SearchPage {
         this.loadNavbar(this);
         this.loadVideos(this);
         this.loadPosts(this);
-        this.updateComponentHeights(this);
-    }
-
-    dynamicWindowResize (thisClass) {
-        $(window).on("resize", function() {
-            if ($(thisClass.mainDiv).length == 0) {
-                $('#myimage').off('click.mynamespace');
-            }
-            else {
-                thisClass.updateComponentHeights();
-            }
-        });
     }
 
     loadNavbar (thisClass) {
@@ -51,6 +39,7 @@ var SearchPage = class SearchPage {
                     },
                     divToLoad
                 );
+                thisClass.dynamicWindowResize(thisClass);
             });
         });
     }
@@ -63,11 +52,25 @@ var SearchPage = class SearchPage {
         });
       });
     }
+    
+    dynamicWindowResize (thisClass) {
+        $(window).on("resize", function() {
+            if ($(thisClass.mainDiv).length == 0) {
+                $('#myimage').off('click.mynamespace');
+            }
+            else {
+                thisClass.updateComponentHeights();
+            }
+        })
+        $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
+            thisClass.updateComponentHeights();
+        });
+    }
 
     updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
-        $(this.mainDiv).find("#podcast-posts").css("height",newHeight - 35);
-        $(this.mainDiv).find("#search-videos").css("height",newHeight - 35);
+        $(this.mainDiv).find("#posts").css("height", newHeight - 35);
+        $(this.mainDiv).find("#search-videos").css("height", newHeight - 35);
     }
 
 };
