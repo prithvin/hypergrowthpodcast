@@ -41,7 +41,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         $(this.mainDiv).find(".main_search_container").on("submit", function (ev) {
             ev.preventDefault();
             if ($(this.mainDiv).find("#searchBar").val().trim().length != 0)
-                window.location.hash = "#/search/" + this.classID + "/" + $(this.mainDiv).find("#searchBar").val();
+                window.location.hash = "#/search/" + this.classID + "/" + encodeURIComponent($(this.mainDiv).find("#searchBar").val());
         }.bind(this));
     }
 
