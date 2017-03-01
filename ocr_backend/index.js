@@ -7,6 +7,8 @@ var srtProcessor = require('./srtProcessor.js');
 var existing = new Set([]);
 var counter = 0;
 
+var useNew = process.argv.length > 2 && process.argv[2] == '--new'
+
 uploader.getPodcastList(function(podcasts) {
   podcasts.push("");
   podcasts.forEach(function(e) {
@@ -14,8 +16,8 @@ uploader.getPodcastList(function(podcasts) {
     counter++;
 
     if (counter == podcasts.length) {
-      scraper.scrapePodcasts(existing, function(working) {
-        console.log("Finished scraping");
+      scraper.scrapePodcasts(existing, useNew, function(working) {
+        console.log('Finished scraping - videos to process:\n' + working.join('\n'));
 
         exec("rm -rf tmp* contents slides unique && rm -f *.mp4", function(error, stdout, stderr) {
           videoParsing.parseVideo(working, [], 0);

@@ -6,7 +6,6 @@ from sys import argv
 
 URL = 'http://podcast.ucsd.edu/'
 
-# suppress InsecureRequestWarning
 if len(argv) > 1 and argv[1] == '--new':
     urllib3.disable_warnings()
     http = urllib3.PoolManager()
@@ -35,7 +34,8 @@ if len(argv) > 1 and argv[1] == '--new':
                 pass
 
         for video in videos:
-            print(URL + 'Podcasts//' + video)
+            if len(argv) > 2 and 'wi17' in video and any(key == video.split('/')[-2] for key in argv[2:]):
+                print(URL + 'Podcasts//' + video)
 
 else:
     with open ('./scraped', 'r') as f:
