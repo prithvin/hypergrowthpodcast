@@ -70,7 +70,13 @@ function parseFileNameForCourseData (fileName) {
   var dateString = unsortedDay.slice(4) + "-" + unsortedDay.slice(0,2) + "-" + unsortedDay.slice(2, 4);
   var dateinMillis = new Date(new Date(dateString).getTime() +  8 * 60 * 60 * 1000 ).getTime()
 
-  var formattedCourse = course.split('_')[0].toUpperCase();
+  var formattedCourse = '';
+
+  for (let i = 0; i < course.length - 4; i++) {
+    if (course.charAt(i) == '_') break;
+    formattedCourse += course.charAt(i);
+  }
+
   var pre = formattedCourse.split(/[0-9]/)[0];
   formattedCourse = pre + ' ' + formattedCourse.slice(pre.length);
 
