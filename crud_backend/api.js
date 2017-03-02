@@ -159,7 +159,7 @@ var apiFunctions = {
       }
       else {
           console.log("HERE'S THE REDIRECT URL" + req.url);
-          res.redirect('/login?callbackURL=' + req.url);
+          res.send(false);
       }
 
     },

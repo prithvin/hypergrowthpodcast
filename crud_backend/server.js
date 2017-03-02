@@ -63,7 +63,7 @@ app.get('/login', function(req,res){
     res.redirect("/");
   }
   else {
-    res.sendFile('./index.html', {root: __dirname });
+    res.send("error");
   }
 });
 
