@@ -101,7 +101,7 @@ var require = {
         "components": "components",
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
-        "videojs": "http://vjs.zencdn.net/5.16.0/video",
+        "videojs": "https://vjs.zencdn.net/5.16.0/video",
         "video_hotkeys":"https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min",
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
