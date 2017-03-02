@@ -215,7 +215,8 @@ var apiFunctions = {
       });
     },
     addUser : function(name,profileId,callback){
-      UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+      UserModel.create({Name:name, FBUserId: profileId, Notes :
+      [],ProfilePicture : 'https://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
       if(err || users == null) {
         callback(err,users);
       }
