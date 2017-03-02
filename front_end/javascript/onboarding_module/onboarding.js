@@ -16,6 +16,7 @@ var Onboarding = class Onboarding {
       var baseURL = window.location.origin + window.location.pathname;
       var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
       var errorCallbackURL = encodeURIComponent(baseURL + "#");
+      console.log(login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL);
       window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
     }
 
