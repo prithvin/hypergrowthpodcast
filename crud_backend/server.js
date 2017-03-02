@@ -10,6 +10,7 @@ var passport = require('passport');
 var cors = require('express-cors')
 var session = require('express-session');
 var auth = require('./config/auth.js');
+var UserModel = require("./models/userModel.js");
 var path = require('path');
 var fs = require('fs');
 
@@ -113,7 +114,7 @@ app.get('/getBase64Image',apiFunctions.userFunctions.isLoggedIn,function(req,res
 
 app.get('/getAllUsers',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id
+    UserId : req.session.user
   }
 
   apiFunctions.userFunctions.getUsers(request,function(users){
@@ -126,7 +127,7 @@ app.get('/getAllUsers',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id
+    UserId : req.session.user
   }
 
   apiFunctions.userFunctions.getUser(request,function(user){
@@ -137,10 +138,10 @@ app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id,
+    UserId : req.session.user,
     PodcastId : req.query.PodcastId
   };
-  console.log("The user is outside is" + req.user._id);
+  console.log("The user is outside is" + req.session.user);
   apiFunctions.userFunctions.getNotesForUser(request,function(notes){
     res.send(notes);
   });
@@ -222,8 +223,8 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
     TimeOfPost : req.body.TimeOfPost,
     Content : req.body.Content,
     CourseId : req.body.CourseId,
-    ProfilePic : req.user.ProfilePicture,
-    Name : req.user.Name
+    ProfilePic : req.session.pic,
+    Name : req.session.name
   };
 
   apiFunctions.postFunctions.createPost(request,function(postId){
@@ -233,7 +234,7 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id,
+    UserId : req.session.user,
     PodcastId : req.body.PodcastId,
     Content : req.body.Content
   };
@@ -247,8 +248,8 @@ app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res
     PostId : req.body.PostId,
     Time : req.body.Time,
     Content : req.body.Content,
-    Pic : req.user.ProfilePicture,
-    PosterName : req.user.Name
+    Pic : req.session.pic,
+    PosterName : req.session.name
   };
 
   apiFunctions.postFunctions.createComment(request, function(status){
@@ -266,12 +267,10 @@ app.post('/login',function(req,res){
 });
 
 app.get('/isUserLoggedIn', function(req,res){
-  if(req.isAuthenticated()){
-    res.send(200, {"result": true});
-  }
-  else{
-    res.send(200,{"result" : false});
-  }
+  if (req.session.user != null)
+    res.send(true);
+  else
+    res.send(false);
 });
 
 app.get('/getUserSession', function(req,res) {
@@ -286,6 +285,49 @@ app.get('/logout',function(req,res){
   req.session.destroy();
   res.send("LOGGED OUT");
 });
+
+app.get('/loginorcreate', function (req, res) {
+  var profileID = req.query.id;
+  var userName = req.query.name;
+  UserModel.findOne({ FBUserId : profileID}, "_id Name", function(err, user) {
+    if (err){
+      res.send(false);
+      return;
+    }
+    if (user) {
+      console.log(user);
+      console.log("USER FOUND: " + user.Name + " @ " + new Date());
+      req.session.user = user._id;
+      req.session.profId = profileID;
+      req.session.name = userName;
+      req.session.pic = user.ProfilePicture;  
+      req.session.save(function () {
+        res.send(true);
+      });
+    }
+    else{
+      apiFunctions.userFunctions.addUser(userName, profileID, function(err,newUser){
+        if (err) {
+          res.send(false);
+          return;
+        }
+        req.session.user = newUser._id;
+        req.session.profId = profileID;
+        req.session.name = userName;
+        req.session.pic = newUser.ProfilePicture;  
+        req.session.save(function () {
+          res.send(true);
+        });
+      });
+    }
+  });
+
+});
+
+
+
+
+
 
 var realCallbackUrl = 'http://www.google.com';
 

@@ -153,7 +153,7 @@ var apiFunctions = {
     },
     //middleware do not remove
     isLoggedIn : function(req,res,next){
-      if (req.isAuthenticated()){
+      if (req.session.user){
           return next();
           console.log(res);
       }

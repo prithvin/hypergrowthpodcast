@@ -54,7 +54,7 @@ var require = {
         "angular": {},
         "post-dropdown": {},
         "navbar": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'facebook']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap', 'moment']
@@ -78,10 +78,10 @@ var require = {
             "deps": ['jquery']
         },
         'facebook' : {
-          exports: 'FB'
+            "exports": 'FB'
         },
         'onboarding': {
-            "deps": ['facebook', 'jquery']
+            "deps": ['facebook', 'jquery', 'alertbox']
         }
     },
     // Note: Don't include the .js in the path

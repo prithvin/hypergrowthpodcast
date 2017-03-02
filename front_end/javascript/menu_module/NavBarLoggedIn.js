@@ -160,8 +160,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     logout() {
         callAPI(login_origins.backend + '/logout', 'GET', {}, (data) => {
-            //Redirect User to Login
-             window.location.hash = '/';
+          //Redirect User to Login
+          window.location.hash = '/';
         });
     } 
 }
