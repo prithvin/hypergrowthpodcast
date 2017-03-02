@@ -41,9 +41,7 @@ app.use(cors({
         'localhost:7888',
         'localhost:8000',
         '104.131.147.159',
-        '104.131.147.159:80',
-        'www.podcastucsd.ml',
-        'podcastucsd.ml'
+        '104.131.147.159:80'
     ]
 }))
 
