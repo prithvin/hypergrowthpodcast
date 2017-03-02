@@ -262,7 +262,7 @@ app.get('/markWatchedLater',apiFunctions.userFunctions.isLoggedIn,function(req,r
 
 
 app.post('/login',function(req,res){
-  res.redirect("/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
+  res.redirect("/api/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
 });
 
 app.get('/isUserLoggedIn', function(req,res){
