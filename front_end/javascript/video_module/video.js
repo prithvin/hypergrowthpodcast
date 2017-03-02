@@ -60,7 +60,7 @@ class videoClass {
                     $(this.mainDiv).trigger( "slideChange", [ newSlide ] );
                     currentSlide = newSlide;
                 }
-            }.bind(this))
+            }.bind(this));
         }.bind(this));
     }
     getSlideForTime (timeValueInSeconds) {
@@ -94,7 +94,7 @@ class videoClass {
                 var video = videojs('my-video');
                 var time = video.currentTime();
                 var minutes = Math.floor(time/60);   
-                var seconds = Math.floor(time - minutes * 60)
+                var seconds = Math.floor(time - minutes * 60);
                 var x = minutes < 10 ? "0" + minutes : minutes;
                 var y = seconds < 10 ? "0" + seconds : seconds;
             }.bind(this));
