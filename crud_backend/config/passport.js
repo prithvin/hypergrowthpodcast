@@ -22,7 +22,7 @@ passport.use(new FacebookStrategy({
           return done(err);
         }
         if (user) {
-          console.log("USER FOUND");
+          console.log("USER FOUND: " + user.Name);
           return done(null, user);
         }else{
           apiFunctions.userFunctions.addUser(profile.displayName, profile.id, function(err,newUser){

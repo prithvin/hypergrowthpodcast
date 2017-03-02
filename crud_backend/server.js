@@ -98,6 +98,28 @@ app.get('/getPostsByKeyword',apiFunctions.userFunctions.isLoggedIn,function(req,
   });
 });
 
+app.get('/getBase64Image',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    imageURL : req.query.imageURL
+  }
+
+  apiFunctions.userFunctions.getImage(request,function(image){
+    res.send(image);
+  });
+
+});
+
+app.get('/getAllUsers',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.user._id
+  }
+
+  apiFunctions.userFunctions.getUsers(request,function(users){
+    res.send(users);
+  });
+
+});
+
 /*returns entire user object*/
 
 app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
