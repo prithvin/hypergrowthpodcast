@@ -77,6 +77,12 @@ var require = {
         "ocr_txt_mod": {
             "deps": ['jquery']
         },
+        'facebook' : {
+          exports: 'FB'
+        },
+        'onboarding': {
+            "deps": ['facebook', 'jquery']
+        }
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -112,6 +118,7 @@ var require = {
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "post-dropdown": "post_module/PodcastDropdownMenu",
         "search-results": "search_module/search-results",
-        "recommendations": "recommendations_module/recommendations"
+        "recommendations": "recommendations_module/recommendations",
+        'facebook': '//connect.facebook.net/en_US/sdk'
     }
 };
