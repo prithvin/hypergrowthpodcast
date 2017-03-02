@@ -153,13 +153,13 @@ var apiFunctions = {
     },
     //middleware do not remove
     isLoggedIn : function(req,res,next){
-      if (req.isAuthenticated()){
+      if (req.session.user){
           return next();
           console.log(res);
       }
       else {
           console.log("HERE'S THE REDIRECT URL" + req.url);
-          res.redirect('/login?callbackURL=' + req.url);
+          res.send(false);
       }
 
     },
@@ -215,7 +215,8 @@ var apiFunctions = {
       });
     },
     addUser : function(name,profileId,callback){
-      UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+      UserModel.create({Name:name, FBUserId: profileId, Notes :
+      [],ProfilePicture : 'https://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
       if(err || users == null) {
         callback(err,users);
       }

@@ -41,7 +41,7 @@ function loadComponent (moduleName, divToLoad, callback) {
 
 function loadComponentOrLogin (moduleName, divToLoad, callback) {   
     callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (loginStatus) {
-        if(loginStatus.result === true) {
+        if(loginStatus === true) {
             loadComponent(moduleName, divToLoad, callback);
         }
         else {

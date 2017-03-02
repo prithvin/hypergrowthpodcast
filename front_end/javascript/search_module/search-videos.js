@@ -8,7 +8,6 @@ class SearchVideosClass {
 
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
         callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
-          console.log(data);
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -32,9 +31,10 @@ class SearchVideosClass {
             var img = document.createElement('img');
             img.className = 'search-videos-img';
             img.src = videos[i]['PodcastImage'];
-            img.addEventListener('click', function() {
-              window.location.hash = '#/podcast/' + curr['PodcastId']
-            }.bind(curr));
+            $(img).attr("data-podcastid", curr['PodcastId']);
+            $(img).on("click", function (ev) {
+              window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
+            });
             videoDiv.appendChild(img);
 
             var heading = document.createElement('p');

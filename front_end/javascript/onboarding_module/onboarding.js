@@ -12,39 +12,41 @@ var Onboarding = class Onboarding {
       queries = this.getQueries(query_str);
     }
 
-    $(mainDiv).find('.fb-login-button')[0].onclick = () => {
-      var baseURL = window.location.origin + window.location.pathname;
-      var targetCallbackURL = encodeURIComponent(baseURL + "#/courses");
-      var errorCallbackURL = encodeURIComponent(baseURL + "#");
-      window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
-    }
+    FB.init({
+      appId: '1606385449650440',
+      version: 'v2.4'
+    });
 
-    if(queries && queries.hasOwnProperty('redirectURL')) {
-      callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
-        if(!data.result) {
-          var baseURL = window.location.origin + window.location.pathname;
-          var targetCallbackURL = encodeURIComponent(baseURL + '#/?redirectURL=' + queries['redirectURL']);
-          var errorCallbackURL = encodeURIComponent(baseURL + "#");
-          window.location.href = login_origins.backend + '/auth/facebook?callbackURL=' + targetCallbackURL + '&errorCallbackURL=' + errorCallbackURL;
-        } else {
-          window.location.href = decodeURIComponent(queries['redirectURL']);
-        }
-      });
-    } else {
-      callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
-        if(data.result === true) {
-          window.location.hash =  '/courses';
-        } else {
-          callAPI(login_origins.backend + '/getUserSession', 'GET', {}, (data) => {
-            if(data['user']) {
-              callAPI(login_origins.backend + '/setUserFromSession', 'GET', {}, (data) => {
-                window.location.hash =  '/courses';
-              });
+  $(mainDiv).find('.fb-login-button').on("click", function ()  {
+      FB.login(function(response) {
+        if (response.status === 'connected') {
+          FB.api('/me', function(response) {
+            console.log(response);    // TODO over here, then call server and
+                                      // store user data and redirect
+            var callbackURL = window.location.origin + window.location.pathname
+                                                     + "#/courses";
+            if(queries && queries.hasOwnProperty('redirectURL')) {
+              callbackURL = decodeURIComponent(queries['redirectURL']);
             }
+
+            callAPI(login_origins.backend + '/loginorcreate', 'GET', response, function (data) {
+              if (data == true)
+                window.location.href = callbackURL;
+              else
+                swal("Oops!", "Looks like you did not log into Facebook correctly. Try again!");
+            });
           });
+        } else {
+          swal("Oops!", "Looks like you did not log into Facebook correctly. Try again!")
         }
-      });
-    }
+      }, {scope: 'public_profile,email'});
+    });
+
+    callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, (data) => {
+      if(data === true) {
+          window.location.hash =  '/courses';
+      }
+    });
   }
 
   getQueries(query_str) {
