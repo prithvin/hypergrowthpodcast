@@ -339,6 +339,6 @@ app.get("/auth/facebook/callback",
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
         if(err) {
-            res.redirect('/auth/facebook?callbackURL=' + auth.callbackURL);
+            res.redirect('api/auth/facebook?callbackURL=' + auth.callbackURL);
         }
   });
