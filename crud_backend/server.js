@@ -297,7 +297,7 @@ app.get('/auth/facebook', function(req,res,next){
   }
   req.session.callbackURL = req.query.callbackURL;
   console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
-  realCallbackUrl = req.protocol + '://' + encodeURI("https://www.podcastml.com/api") + auth.facebookAuth.callbackURL;
+  realCallbackUrl = req.protocol + '://' + ("https://www.podcastucsd.ml/api") + auth.facebookAuth.callbackURL;
   //console.log(realCallbackUrl);
   req.session.save(function (err) {
     auth.callbackURL = req.query.callbackURL;
