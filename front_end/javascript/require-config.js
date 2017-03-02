@@ -120,10 +120,7 @@ var require = {
         "post-dropdown": "post_module/PodcastDropdownMenu",
         "search-results": "search_module/search-results",
         "recommendations": "recommendations_module/recommendations",
-<<<<<<< HEAD
         "aos": "../bower_components/aos/dist/aos"
-=======
         'facebook': '//connect.facebook.net/en_US/sdk'
->>>>>>> a42625b8b9de95d914cb846154160b3049ae6fd2
     }
 };
