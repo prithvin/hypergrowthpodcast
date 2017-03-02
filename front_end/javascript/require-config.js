@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', "notes", 'post-dropdown']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', "notes", 'post-dropdown', 'aos']
         },
         "notes":{
             "deps":["jquery"]
@@ -77,6 +77,7 @@ var require = {
         "ocr_txt_mod": {
             "deps": ['jquery']
         },
+        "aos": {},
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -112,6 +113,7 @@ var require = {
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "post-dropdown": "post_module/PodcastDropdownMenu",
         "search-results": "search_module/search-results",
-        "recommendations": "recommendations_module/recommendations"
+        "recommendations": "recommendations_module/recommendations",
+        "aos": "../bower_components/aos/dist/aos"
     }
 };
