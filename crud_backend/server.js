@@ -262,7 +262,7 @@ app.get('/markWatchedLater',apiFunctions.userFunctions.isLoggedIn,function(req,r
 
 
 app.post('/login',function(req,res){
-  res.redirect("/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
+  res.redirect("/api/auth/facebook?callbackURL=" + req.query.callbackURL + "&errorCallbackURL=/login");
 });
 
 app.get('/isUserLoggedIn', function(req,res){
@@ -296,8 +296,9 @@ app.get('/auth/facebook', function(req,res,next){
     return;
   }
   req.session.callbackURL = req.query.callbackURL;
-  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
-  realCallbackUrl = req.protocol + '://' + req.get('host') + auth.facebookAuth.callbackURL;
+ // console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+  //req.protocol + '://' + 
+  realCallbackUrl = ("https://www.podcastucsd.ml/api/") + auth.facebookAuth.callbackURL;
   //console.log(realCallbackUrl);
   req.session.save(function (err) {
     auth.callbackURL = req.query.callbackURL;
@@ -338,6 +339,6 @@ app.get("/auth/facebook/callback",
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
         if(err) {
-            res.redirect('/auth/facebook?callbackURL=' + auth.callbackURL);
+            res.redirect('api/auth/facebook?callbackURL=' + auth.callbackURL);
         }
   });
