@@ -296,10 +296,10 @@ app.get('/auth/facebook', function(req,res,next){
     return;
   }
   req.session.callbackURL = req.query.callbackURL;
- // console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+ console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
   //req.protocol + '://' + 
-  realCallbackUrl = ("https://www.podcastucsd.ml/api/") + auth.facebookAuth.callbackURL;
-  //console.log(realCallbackUrl);
+  realCallbackUrl = ("https://www.podcastucsd.ml/api/auth/facebook/callback") //+ auth.facebookAuth.callbackURL;
+  console.log("auth stage\n\n");
   req.session.save(function (err) {
     auth.callbackURL = req.query.callbackURL;
     auth.errorCallback = req.query.errorCallbackURL;
@@ -339,6 +339,10 @@ app.get("/auth/facebook/callback",
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
         if(err) {
-            res.redirect('api/auth/facebook?callbackURL=' + auth.callbackURL);
+          console.log("Bypassing auth");
+          ////console.log(req);
+         // res.redirect('/api/auth/facebook?callbackURL=' +
+          //encodeURIComponent(auth.callbackURL) + "&errorCallbackURL=" +
+          ////auth.errorCallback);
         }
   });
