@@ -1,4 +1,5 @@
 var PodcastModel = require('./models/podcastModel.js');
+var NewPodcastModel = require('./models/newPodcastModel.js');
 var UserModel = require('./models/userModel.js');
 var PostModel = require('./models/postModel.js');
 var CourseModel = require('./models/courseModel.js');
@@ -109,7 +110,6 @@ var apiFunctions = {
     },
 
     searchByKeywords: function(request, callback){
-      console.log(new Date());
       CourseModel.findById(request.CourseId,
                           'Podcasts',
                           function(err, course) {
@@ -134,6 +134,59 @@ var apiFunctions = {
 
         console.log(new Date());
         callback(results);
+      });
+    },
+
+    deepSearchByKeywords: function(request, callback) {
+      var start = (new Date()).getTime();
+      var keywords = request.Keywords.toLowerCase();
+      var results = [];
+
+      /* This block attempts to save time by filtering stuff in the db layer, but is 3x slower in tests
+          NewPodcastModel.find({'CourseId' : request.CourseId,
+              $or : [{Slides : {$elemMatch : {OCRTranscription : {$regex : request.Keywords, $options: 'i'}}}},
+              {AudioTranscript : {$elemMatch : {Content : {$regex : request.Keywords, $options: 'i'}}}}]},
+              '_id Slides AudioTranscript Time',
+              function (err, podcasts) {
+      */
+
+      NewPodcastModel.find({CourseId: request.CourseId},
+                        '_id Slides AudioTranscript Time',
+                        function(err, podcasts) {
+        for (let i = 0; i < podcasts.length; i++) {
+          var podcast = podcasts[i];
+          var matches = [];
+
+          for (let j = 0; j < podcast.Slides.length; j++) {
+            var slide = podcast.Slides[j];
+
+            if (slide.OCRTranscription.toLowerCase().indexOf(keywords) != -1) {
+              matches.push({
+                  'Type': 'OCR',
+                  'Text': slide.OCRTranscription.replace(/\n/g, ''),
+                  'SlideNo': slide.SlideNum
+                });
+              }
+            }
+
+          for (let k = 0; k < podcast.AudioTranscript.length; k++) {
+            var transcript = podcast.AudioTranscript[k];
+            
+            if (transcript.Content.toLowerCase().indexOf(keywords) != -1) {
+              matches.push({
+                'Type': 'AUDIO',
+                'Text': transcript.Content.replace(/\n/g, ''),
+                'Time': transcript.StartTime
+              });
+            }
+          }
+
+          if (matches.length > 0)
+            results.push({'LectureTime': podcast.Time, 'Matches': matches});
+
+          if (i == podcasts.length - 1)
+            callback(results);
+        }
       });
     }
   },
@@ -244,9 +297,13 @@ var apiFunctions = {
       });
 
     },
-    getCourseInfo : function(request,callback, neverBefore){
+    getCourseInfo : function(request,callback, neverBefore) {
+      if (!request.CourseId) {
+        res.send({});
+        return;
+      }
       CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
-          if (course == null) {
+          if (err || course == null) {
             this.getPodcastInfo(request, callback, neverBefore);
             return;
           }
@@ -266,9 +323,7 @@ var apiFunctions = {
       }
 
       PodcastModel.findById(request.CourseId, '_id CourseId', function(err,course){
-        console.log(err);
-        console.log(course);
-        if (course == null) {
+        if (err || course == null) {
           callback({});
           return;
         }
