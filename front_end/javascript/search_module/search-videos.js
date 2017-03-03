@@ -3,8 +3,6 @@ class SearchVideosClass {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
         this.searchTerm = searchTerm;
-        
-        this.cards =[];
 
         this.masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
@@ -22,13 +20,16 @@ class SearchVideosClass {
           this.overallDiv.appendChild(row);
 
           var videos = data;
+        
           for (var i = 0; i < videos.length; i++) {
             var curr = videos[i];
-            this.loadCard(this, curr);
-            /*if (row.childElementCount == 3) {
+            this.loadCard(curr, row);
+
+            /*
+            if (row.childElementCount == 3) {
                 row = document.createElement('div');
                 row.className = 'row videos-row';
-                overallDiv.appendChild(row);
+                this.overallDiv.appendChild(row);
             }
             var videoDiv = document.createElement('div');
             videoDiv.className = 'col-4';
@@ -58,14 +59,11 @@ class SearchVideosClass {
         });
     }
     
-   loadCard(thisClass, curr_video_data, divToLoad) {
-       thisClass.loadCardData(function (cardTemplate) {
+   loadCard(curr_video_data, divToAppend) {
+       this.loadCardData(function (cardTemplate) {
             var newDiv = $(cardTemplate);
             var newCardObj = new SearchCardClass(this.courseId, newDiv, this.searchTerm, curr_video_data);
-
-            thisClass.cards.push(newCardObj);
-            $(thisClass.mainDiv).find('#single-row').prepend(newDiv);
-
+            $(divToAppend).prepend(newDiv);
         }.bind(this));
     }
 

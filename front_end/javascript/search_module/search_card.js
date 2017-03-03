@@ -2,10 +2,9 @@ class SearchCardClass {
     constructor (courseId, mainDiv, searchTerm, data) {
         this.courseId = courseId;
         
-        this.mainDiv = $(mainDiv);
-        this.card = document.getElementById("video-card");//$(this.mainDiv).find(".video-card");
-        this.title = document.getElementById("video-card-title");//$(this.mainDiv).find(".video-card-title");
-        this.img = document.getElementById("video-card-img");//$(this.mainDiv).find(".video-card-img");
+        this.card = $(mainDiv);
+        this.title = $(mainDiv).find(".video-card-title");
+        this.img = $(mainDiv).find(".video-card-img");
         
         $(this.title).html(moment(data['Time']).format("ddd, MMM Do"));
         
@@ -15,10 +14,8 @@ class SearchCardClass {
         $(this.card).on("click", function (ev) {
             window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
         });
-        //this.appendOCRandAudio(this.card, data);
         
         this.appendOCRandAudio(this.card, data);
-        console.log(this.card);
     }
     
     appendOCRandAudio(cardDiv, data) {    
