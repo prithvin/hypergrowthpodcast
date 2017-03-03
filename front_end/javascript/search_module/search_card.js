@@ -17,24 +17,19 @@ class SearchCardClass {
         });
         //this.appendOCRandAudio(this.card, data);
         
-        this.loadOCRContent(this, data);
+        this.appendOCRandAudio(this.card, data);
         console.log(this.card);
     }
     
     appendOCRandAudio(cardDiv, data) {    
-            for (var i = 0; i < 8; i ++) {
-                var key = document.createElement('span');
-                key.className = 'col-12 type-of-ocr';
-                key.innerHTML = data['OCRKeywords'][i];
-                var hr = document.createElement('hr');  
-                hr.className = 'ocr-module-hr';
-                cardDiv.append(key);
-                cardDiv.append(hr);
-            }
-    }
-    
-/*    loadOCRContent (thisClass, ocr) {
-          
-    }*/
-
+        for (var i = 0; i < 8; i ++) {
+            var key = document.createElement('span');
+            key.className = 'col-12 type-of-ocr';
+            key.innerHTML = data['OCRKeywords'][i];
+            var hr = document.createElement('hr');  
+            hr.className = 'ocr-module-hr';
+            $(cardDiv).append(key);
+            $(cardDiv).append(hr);
+        }
+    }   
 }

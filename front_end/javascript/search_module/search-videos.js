@@ -57,19 +57,17 @@ class SearchVideosClass {
             callback(data);
         });
     }
-
-
-    loadCard (thisClass, cardData) {
-        var OCRobj = new OCRAudioIndPost()
-    }
     
-   /* loadCard(thisClass, curr_video_data, divToLoad) {
-      require(['search-card'], function() {
-        loadComponent("SearchCardModule", divToLoad, function() {
-            new SearchCardClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm, curr_video_data); 
-        });
-      });
-    }*/
+   loadCard(thisClass, curr_video_data, divToLoad) {
+       thisClass.loadCardData(function (cardTemplate) {
+            var newDiv = $(cardTemplate);
+            var newCardObj = new SearchCardClass(this.courseId, newDiv, this.searchTerm, curr_video_data);
+
+            thisClass.cards.push(newCardObj);
+            $(thisClass.mainDiv).find('#single-row').prepend(newDiv);
+
+        }.bind(this));
+    }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
       callAPI(login_origins.backend + "/getKeywordSuggestions", "GET", {'count': 50, 'minKeywordLength': 3, 'CourseId': courseId}, function(results) {

@@ -60,7 +60,7 @@ var require = {
             "deps": ['jquery', 'bootstrap', 'moment']
         },
         "search-videos": {
-            "deps": ['jquery', 'bootstrap']
+            "deps": ['jquery', 'bootstrap', 'search-card']
         },
         "course-homepage": {
             "deps": ['course-videos', 'components']
@@ -84,9 +84,6 @@ var require = {
             "deps": ['facebook', 'jquery', 'alertbox']
         },
         'scrollreveal': {},
-        'search-card': {
-            "deps": ['jquery', 'ocr_txt_mod']   
-        }
     },
     // Note: Don't include the .js in the path
     paths: {
