@@ -70,7 +70,7 @@ var SearchPage = class SearchPage {
     updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
         $(this.mainDiv).find("#posts").css("height", newHeight - 35);
-        $(this.mainDiv).find("#search-videos").css("height", newHeight - 35);
+        $(this.mainDiv).find("#search-videos").css("height", newHeight - 100);
     }
 
 };
