@@ -475,7 +475,10 @@ var PostSearch = class PostSearch {
                 thisClass.remarkText();
             });
         });
-
+        sr.reveal('.post-container', {
+          container: '.search-module',
+          reset: true
+        });
     }
     
 

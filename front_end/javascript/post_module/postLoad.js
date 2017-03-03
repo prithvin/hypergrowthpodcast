@@ -134,7 +134,6 @@ var APost = class APost {
         $(newComment).find(".comment-poster-name").html(commentData["PosterName"]);
         $(newComment).find(".comment-post-content").html(commentData["Content"]);
         $(newComment).find(".comment-time").html(moment(new Date(commentData["Time"]) , "YYYYMMDD").fromNow());
-        $(newComment).attr("data-aos", "fade-up");
         $(this.commentDiv).append(newComment);
     }
 }

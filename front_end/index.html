@@ -22,12 +22,7 @@
         setTimeout(function () {
            $("#loader-animation").fadeOut();
         }, time);
-      }
-    
-    /* aos */
-    require(['aos'], function(AOS) {
-      AOS.init();
-    })
+      };
 
 
 
@@ -108,6 +103,12 @@
           router.init('/');
         }, 20);
       });
+    });
+      
+            
+    require(['scrollreveal'], function(ScrollReveal) {
+      window.sr = ScrollReveal();
+      sr.reveal('.post-container');
     });
     </script>
 </html>

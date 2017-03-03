@@ -52,6 +52,3 @@
 
 /* recommendations module */
 @import url("./recommendations_module/recommendations.css");
-
-/* aos animations */
-@import url("../bower_components/aos/dist/aos.css");
