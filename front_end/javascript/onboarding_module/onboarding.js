@@ -13,7 +13,7 @@ var Onboarding = class Onboarding {
     }
 
     FB.init({
-      appId: '1606385449650440',
+      appId: '457479924597605',//'1606385449650440',
       version: 'v2.4'
     });
 
