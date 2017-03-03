@@ -201,6 +201,17 @@ app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req
   });
 });
 
+app.get('/deepSearchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
+  var request = {
+    CourseId: req.query.CourseId,
+    Keywords: req.query.Keywords
+  };
+
+  apiFunctions.podcastFunctions.deepSearchByKeywords(request, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/getCourses',apiFunctions.userFunctions.isLoggedIn, function(req,res){
   apiFunctions.courseFunctions.getCourses(function(courses){
     res.send(courses);
@@ -295,7 +306,6 @@ app.get('/loginorcreate', function (req, res) {
       return;
     }
     if (user) {
-      console.log(user);
       console.log("USER FOUND: " + user.Name + " @ " + new Date());
       req.session.user = user._id;
       req.session.profId = profileID;
