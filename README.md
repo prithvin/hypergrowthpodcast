@@ -18,7 +18,8 @@ This code is served by Node.js on port 3000 (must be opened). We are using nodem
     nodemon server
 
 ### ocr_backend
-This code is run intermittently to populate the database (a 500MB MongoDB sandbox on mlab.com). It has the following dependencies:
+This code is run intermittently to populate the database (hosted locally...). It has the 
+following dependencies:
 - Python 2
 - OpenCV
 - Tesseract + English language pack
