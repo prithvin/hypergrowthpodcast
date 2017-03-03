@@ -289,7 +289,7 @@ app.get('/logout',function(req,res){
 app.get('/loginorcreate', function (req, res) {
   var profileID = req.query.id;
   var userName = req.query.name;
-  UserModel.findOne({ FBUserId : profileID}, "_id Name", function(err, user) {
+  UserModel.findOne({ FBUserId : profileID}, "_id Name ProfilePicture", function(err, user) {
     if (err){
       res.send(false);
       return;

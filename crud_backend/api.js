@@ -147,7 +147,7 @@ var apiFunctions = {
     },
 
     getUsers : function(req, callback) {
-      UserModel.find({}, 'Name', function(err, users) {
+      UserModel.find({}, 'Name FBUserId', function(err, users) {
         callback(users);
       });
     },
