@@ -12,10 +12,11 @@ class SearchCardClass {
         $(this.card).attr("data-podcastid", data['PodcastId']);
         
         $(this.card).on("click", function (ev) {
-            window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
+            window.location.hash = '#/podcast/' + this.getAttribute("data-podcastid");
         });
         
         this.appendOCRandAudio(this.card, data);
+        console.log(this.card);
     }
     
     appendOCRandAudio(cardDiv, data) {    
