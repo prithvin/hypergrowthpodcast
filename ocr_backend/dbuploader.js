@@ -11,7 +11,8 @@ function connectMongo (callback) {
     callback(); return;
   }
 
-  mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', function(error){
+  //mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', function(error){
+  mongoose.connect('mongodb://localhost:27017/testdbnaruto', function(error) {
     if(error){
       console.log("Error Connecting" + error);
       console.log("Trying again...");
