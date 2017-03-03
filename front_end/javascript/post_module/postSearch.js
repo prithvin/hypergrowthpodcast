@@ -1,4 +1,3 @@
-
 /*
     new PostSearch(
         {"UniqueID": "1", "TypeOfFetch": "PodcastSearch"},
@@ -486,12 +485,14 @@ var PostSearch = class PostSearch {
                 thisClass.remarkText();
             });
         });
-
+        sr.reveal('.post-container', {
+          container: '.search-module',
+          reset: true
+        });
     }
     
 
 }
-
 
 
 
