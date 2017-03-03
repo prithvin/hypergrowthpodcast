@@ -200,7 +200,7 @@ var apiFunctions = {
     },
 
     getUsers : function(req, callback) {
-      UserModel.find({}, 'Name', function(err, users) {
+      UserModel.find({}, 'Name FBUserId', function(err, users) {
         callback(users);
       });
     },
@@ -297,9 +297,13 @@ var apiFunctions = {
       });
 
     },
-    getCourseInfo : function(request,callback, neverBefore){
+    getCourseInfo : function(request,callback, neverBefore) {
+      if (!request.CourseId) {
+        res.send({});
+        return;
+      }
       CourseModel.findById(request.CourseId, '_id Name Quarter', function(err,course){
-          if (course == null) {
+          if (err || course == null) {
             this.getPodcastInfo(request, callback, neverBefore);
             return;
           }
@@ -319,9 +323,7 @@ var apiFunctions = {
       }
 
       PodcastModel.findById(request.CourseId, '_id CourseId', function(err,course){
-        console.log(err);
-        console.log(course);
-        if (course == null) {
+        if (err || course == null) {
           callback({});
           return;
         }
