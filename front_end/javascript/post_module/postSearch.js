@@ -77,7 +77,7 @@ var PostSearch = class PostSearch {
         this.searchInputField = $(this.searchInputForm).find("#secondary-search-bar");
         this.viewAllPostsButton =  $(this.mainDiv).find(".all-posts-view");
         this.newPostButton = $(this.mainDiv).prev().find(".new-post-img");
-        this.otherNewPostButton = $(this.mainDiv).prev().find(".new-post-img-other");
+        this.otherNewPostButton = $(this.mainDiv).find(".new-post-img-other");
         this.loadingModule = $(this.mainDiv).parent().find("#slide-transition-data");
         this.notesWrapper = $(this.mainDiv).find(".notes-module");
         this.loadingModule.hide();
@@ -147,7 +147,6 @@ var PostSearch = class PostSearch {
             }
         }.bind(this));
         $(this.otherNewPostButton).on("click", function (ev) {
-            console.log("ok " + $(this.searchInputField).val());
             var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
                 swal("Type your question in the \"Search or write a post\" search bar, and then press the post button!");   // Alert library
