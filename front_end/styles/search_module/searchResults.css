@@ -95,11 +95,11 @@
 }
 
 .search-videos-img {
-    width: 220px;
+    width: 250px;
     height: 150px;
     max-width: 240px;
     display: inline;
-    margin-top: 5px;
+    margin: 10px;
     border-color: rgba(66, 100, 155, .7);
     border-style: solid;
     border-radius: 5px;
