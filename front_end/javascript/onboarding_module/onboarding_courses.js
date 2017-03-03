@@ -36,7 +36,7 @@ var OnboardingCourses = class OnboardingCourses {
             
             if (qtr.indexOf("fa") > -1) {
                 qtr = "Fall " + qtr.slice(-2);
-                $(row).css({'background-color': colors[1});
+                $(row).css({'background-color': colors[1]});
             }
             if (qtr.indexOf("wi") > -1) {
                 qtr = "Winter " + qtr.slice(-2);
