@@ -5,7 +5,7 @@ var Recommendations = class Recommendations {
     this.getRecommendations(function (recommendations, lecturedate) {
       
       this.displayRecomm($(mainDiv).find('.podcast-recommendations'), recommendations);
-      $(mainDiv).find(".lecture-date").html(new Date(lecturedate).toDateString());
+      $(mainDiv).find(".lecture-date").html(moment(lecturedate).format("dddd MM/DD"));
 
     }.bind(this));
    

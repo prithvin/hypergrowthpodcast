@@ -39,7 +39,7 @@ class SearchVideosClass {
 
             var heading = document.createElement('p');
             heading.className = 'textUnderVid';
-            heading.innerHTML = moment(videos[i]['Time']).format("ddd, MMM Do");
+            heading.innerHTML = moment(videos[i]['Time']).format("dddd, MM/DD");
             videoDiv.appendChild(heading);
           }
 
