@@ -10,6 +10,8 @@ class videoClass {
         //this.getInfo()
     
         this.initWithCaptions(srtData, function(){
+            var player = videojs('my-video');
+
             self.setSource(url);
             self.setTime(timestamp);
             self.getTime();
@@ -41,7 +43,7 @@ class videoClass {
       
         videojs('my-video').hotkeys({
           //  volumeStep: 0.1,
-            seekStep: 5,
+            seekStep: 10,
             enableModifiersForNumbers: false,
             enableVolumeScroll: false
         });
@@ -112,12 +114,13 @@ class videoClass {
             videojs('my-video', {
                 controls:true,
                 class: 'video-js vjs-default-skin vjs-big-play-centered vjs-16-9',
-                playbackRates: [1,1.25,1.5,1.75,2,2.25,2.5,2.75,3], 
-                autoplay: true,
+                playbackRates: [1,1.25,1.5,1.75,2,2.25,2.5], 
+                autoplay: false,
                   tracks: [
                     { src:duri, kind:'captions', srclang:'en', label:'English' }
                   ]
-                }, callback);
+            }, callback);
+                    
 
     }
 
