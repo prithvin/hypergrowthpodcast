@@ -11,9 +11,13 @@ var Onboarding = class Onboarding {
     } else {
       queries = this.getQueries(query_str);
     }
-
+    var fbAppId = "1606385449650440";
+    if (window.location.hostname == "localhost") {
+      fbAppId = "1604407836236361";
+    }
+  
     FB.init({
-      appId: '457479924597605',//'1606385449650440',
+      appId: fbAppId,
       version: 'v2.4'
     });
 
