@@ -47,8 +47,8 @@ var SearchPage = class SearchPage {
     loadVideos(thisClass) {
       require(['search-videos'], function() {
         var divToLoad = $(thisClass.mainDiv).find("#search-videos");
-        loadComponent("SearchResultsModule", divToLoad, function() {
-            new SearchVideosClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm); 
+        loadComponent("SearchCardModule", divToLoad, function() {
+            new SearchCardClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm); 
         });
       });
     }

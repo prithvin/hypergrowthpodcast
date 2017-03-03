@@ -1,4 +1,3 @@
-
 /*
     new PostSearch(
         {"UniqueID": "1", "TypeOfFetch": "PodcastSearch"},
@@ -88,7 +87,10 @@ var PostSearch = class PostSearch {
 
         // DOM Interactions in constructor
         $(this.noResultsOption).hide();
+
+        this.isPodcastPage = false;
         if (ocrAudioData) {
+            this.isPodcastPage = true;
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
             }.bind(this));
@@ -100,7 +102,9 @@ var PostSearch = class PostSearch {
                 this.notes = new Notes($(this.notesModule), ocrAudioData["Notes"], this.podcastid);
                 this.showNotes();
             }.bind(this));
-        }else{
+        
+        }
+        else{
            $(this.mainDiv).on("click", ".post-container", function (ev) {
                 var target = ev.currentTarget;
                 var slideDiv = $(target).find(".slide-no");
@@ -108,8 +112,9 @@ var PostSearch = class PostSearch {
                 var slide = $(slideDiv).attr("data-slide");
                 
                window.location.hash = '#/podcast/' + pid + '/' + slide;
-            }); 
+            });
         }
+
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
         this.loadPostsFromServer(this);
@@ -487,11 +492,17 @@ var PostSearch = class PostSearch {
             });
         });
 
+        if (!thisClass.isPodcastPage) {
+            sr.reveal('.post-container', {
+                container: '.search-module',
+                reset: true
+            });
+        }
+
     }
     
 
 }
-
 
 
 

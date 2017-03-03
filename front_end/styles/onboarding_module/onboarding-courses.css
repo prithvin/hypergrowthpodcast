@@ -215,6 +215,7 @@
   opacity: .95 !important;
 }
 
+/*
 .table-row:nth-child(4n + 1) {
   background: rgba(56, 90, 154, 1);
 }
@@ -229,7 +230,7 @@
 
 .table-row:nth-child(4n + 4) {
   background: rgba(104, 129, 158, 1);
-}
+}*/
 
 /* Search Bar */
 .search-container-table {

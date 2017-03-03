@@ -30,7 +30,7 @@ var require = {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
         },
         "postSearch": {
-            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', "notes", 'post-dropdown']
+            "deps": ['postLoad',  'ocr_module', 'BoyerMoore', 'jquery', 'jquery-ui', 'navbar', "notes", 'post-dropdown', 'scrollreveal']
         },
         "notes":{
             "deps":["jquery"]
@@ -69,7 +69,7 @@ var require = {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
-            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card']
         },
         "ocr_module": {
             "deps": ['jquery', 'ocr_txt_mod']
@@ -82,6 +82,10 @@ var require = {
         },
         'onboarding': {
             "deps": ['facebook', 'jquery', 'alertbox']
+        },
+        'scrollreveal': {},
+        'search-card': {
+            "deps": ['jquery', 'ocr_txt_mod']   
         }
     },
     // Note: Don't include the .js in the path
@@ -119,6 +123,8 @@ var require = {
         "post-dropdown": "post_module/PodcastDropdownMenu",
         "search-results": "search_module/search-results",
         "recommendations": "recommendations_module/recommendations",
-        'facebook': '//connect.facebook.net/en_US/sdk'
+        'facebook': '//connect.facebook.net/en_US/sdk',
+        'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
+        'search-card': "search_module/search_card",
     }
 };
