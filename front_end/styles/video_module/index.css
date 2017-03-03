@@ -7,7 +7,7 @@
     
 }
 .vjs-default-skin .vjs-big-play-button {
-  font-size: 0em;
+  
 }
 .directional-button {
   width: 100px;
@@ -29,7 +29,6 @@
   border-radius: 5px;
 }
 .video-js .vjs-control-bar,
-.video-js .vjs-big-play-button,
 .video-js .vjs-menu-button .vjs-menu-content {
   background-color: rgba( 0, 0, 0, 0.7);
   width: 72%;
