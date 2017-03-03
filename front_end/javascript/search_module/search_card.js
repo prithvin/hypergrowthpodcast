@@ -9,7 +9,7 @@ class SearchCardClass {
         $(this.title).html(moment(data['Time']).format("ddd, MMM Do"));
         
         $(this.img).attr('src', data['PodcastImage']);
-        $(this.img).attr("data-podcastid", data['PodcastId']);
+        $(this.card).attr("data-podcastid", data['PodcastId']);
         
         $(this.card).on("click", function (ev) {
             window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
