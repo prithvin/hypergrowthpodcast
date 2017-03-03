@@ -3,25 +3,28 @@ class SearchVideosClass {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
         this.searchTerm = searchTerm;
+        
+        this.cards =[];
 
-        var masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
+        this.masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
-
-        this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
+        this.overallDiv = $(this.mainDiv).find(".videos-div")[0];
+        
+        this.keywordLoadFromCrud(searchTerm, courseId, this.masterDiv);
         callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
-          var overallDiv = $(this.mainDiv).find(".videos-div")[0];
-          masterDiv.appendChild(overallDiv);
-          overallDiv.class = 'scroll';
+          
+          this.masterDiv.appendChild(this.overallDiv);
+          this.overallDiv.class = 'scroll';
 
           var row = document.createElement('div');
           row.className = 'row videos-row';
           row.id = 'single-row';
-          overallDiv.appendChild(row);
+          this.overallDiv.appendChild(row);
 
           var videos = data;
           for (var i = 0; i < videos.length; i++) {
             var curr = videos[i];
-            this.loadCard(this, curr, row);
+            this.loadCard(this, curr);
             /*if (row.childElementCount == 3) {
                 row = document.createElement('div');
                 row.className = 'row videos-row';
@@ -49,13 +52,24 @@ class SearchVideosClass {
         }.bind(this));
     }
     
-    loadCard(thisClass, curr_video_data, divToLoad) {
+    loadCardData (callback) {
+        loadHTMLComponent("SearchCardModule", function (data) {
+            callback(data);
+        });
+    }
+
+
+    loadCard (thisClass, cardData) {
+        var OCRobj = new OCRAudioIndPost()
+    }
+    
+   /* loadCard(thisClass, curr_video_data, divToLoad) {
       require(['search-card'], function() {
         loadComponent("SearchCardModule", divToLoad, function() {
             new SearchCardClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm, curr_video_data); 
         });
       });
-    }
+    }*/
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
       callAPI(login_origins.backend + "/getKeywordSuggestions", "GET", {'count': 50, 'minKeywordLength': 3, 'CourseId': courseId}, function(results) {
