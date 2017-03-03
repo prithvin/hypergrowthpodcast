@@ -27,7 +27,8 @@ var myPassport = require('./config/passport.js');
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', options, function(error){
+//mongoose.connect('mongodb://testUser:testUser@ds139899.mlab.com:39899/testdbnaruto', options, function(error){
+mongoose.connect('mongodb://localhost:27017/testdbnaruto', options, function(error) {
   if(error){
     console.log("Error Connecting" + error);
   }

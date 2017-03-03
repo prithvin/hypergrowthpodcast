@@ -35,7 +35,7 @@ class CourseVideosClass {
               var heading = document.createElement('p');
               heading.align = 'center';
               //var date = new Date(curr['Time']);
-              heading.innerHTML = moment(curr['Time']).format("ddd, M/D"); //date.toLocaleDateString();
+              heading.innerHTML = moment(curr['Time']).format("dddd, MM/DD"); //date.toLocaleDateString();
               heading.className = 'text-title';
               videoDiv.appendChild(heading);
           }
