@@ -6,7 +6,7 @@ class SearchCardClass {
         this.title = $(mainDiv).find(".video-card-title");
         this.img = $(mainDiv).find(".video-card-img");
         
-        $(this.title).html(moment(data['Time']).format("ddd, MMM Do"));
+        $(this.title).html(moment(data['Time']).format("dddd, MM/DD"));
         
         $(this.img).attr('src', data['PodcastImage']);
         $(this.card).attr("data-podcastid", data['PodcastId']);
