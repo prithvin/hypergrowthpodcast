@@ -4,7 +4,7 @@ import urllib3
 from bs4 import BeautifulSoup
 from sys import argv
 
-URL = 'http://podcast.ucsd.edu/'
+URL = 'https://podcast.ucsd.edu/'
 
 if len(argv) > 1 and argv[1] == '--new':
     urllib3.disable_warnings()

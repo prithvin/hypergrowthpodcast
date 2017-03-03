@@ -312,5 +312,22 @@ module.exports = {
     connectMongo(function () {
       PodcastModel.find({"Recommendations": []}, 'CourseId', callback);
     });
+  },
+
+  makeHTTPS: function(callback) {
+    connectMongo(function() {
+      PodcastModel.find({}, '_id PodcastUrl', function(err, podcasts) {
+        for (let i = 0; i < podcasts.length; i++) {
+          var podcast = podcasts[i];
+          if (podcast.PodcastUrl.indexOf('https') == -1 && podcast.PodcastUrl.indexOf('aws') == -1) {
+            PodcastModel.update(
+              {_id: podcast._id},
+              {$set: {'PodcastUrl': 'https' + podcast.PodcastUrl.slice(4)}},
+              function(a, b) {callback(podcast._id);}
+            );
+          }
+        }
+      });
+    });
   }
 }

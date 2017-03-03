@@ -83,7 +83,7 @@ function parseFileNameForCourseData (fileName) {
   return {
     "Date": dateinMillis,
     "Quarter": course.slice(-4),
-    "Course": formattedCourse,
+    "Course": formattedCourse.toUpperCase(),
     "ClassNameCourseKey": course
   };
 }

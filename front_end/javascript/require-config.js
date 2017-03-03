@@ -54,7 +54,7 @@ var require = {
         "angular": {},
         "post-dropdown": {},
         "navbar": {
-            "deps": ['bootstrap', 'jquery', 'jquery-ui']
+            "deps": ['bootstrap', 'jquery', 'jquery-ui', 'facebook']
         },
         "course-videos": {
             "deps": ['jquery', 'bootstrap', 'moment']
@@ -77,6 +77,12 @@ var require = {
         "ocr_txt_mod": {
             "deps": ['jquery']
         },
+        'facebook' : {
+            "exports": 'FB'
+        },
+        'onboarding': {
+            "deps": ['facebook', 'jquery', 'alertbox']
+        }
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -95,7 +101,7 @@ var require = {
         "components": "components",
         "director": "https://rawgit.com/flatiron/director/master/build/director.min",
         "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min",
-        "videojs": "http://vjs.zencdn.net/5.16.0/video",
+        "videojs": "https://vjs.zencdn.net/5.16.0/video",
         "video_hotkeys":"https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min",
         "podcast": "podcast_module/podcast",
         "video-wrapper": "video_module/video",
@@ -112,6 +118,7 @@ var require = {
         "ocr_txt_mod": "post_module/text_ocr_audio_parse",
         "post-dropdown": "post_module/PodcastDropdownMenu",
         "search-results": "search_module/search-results",
-        "recommendations": "recommendations_module/recommendations"
+        "recommendations": "recommendations_module/recommendations",
+        'facebook': '//connect.facebook.net/en_US/sdk'
     }
 };

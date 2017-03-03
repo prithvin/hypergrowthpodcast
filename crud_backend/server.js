@@ -10,6 +10,7 @@ var passport = require('passport');
 var cors = require('express-cors')
 var session = require('express-session');
 var auth = require('./config/auth.js');
+var UserModel = require("./models/userModel.js");
 var path = require('path');
 var fs = require('fs');
 
@@ -41,7 +42,9 @@ app.use(cors({
         'localhost:7888',
         'localhost:8000',
         '104.131.147.159',
-        '104.131.147.159:80'
+        '104.131.147.159:80',
+        'www.podcastucsd.ml',
+        'podcastucsd.ml'
     ]
 }))
 
@@ -61,7 +64,7 @@ app.get('/login', function(req,res){
     res.redirect("/");
   }
   else {
-    res.sendFile('./index.html', {root: __dirname });
+    res.send("error");
   }
 });
 
@@ -98,11 +101,33 @@ app.get('/getPostsByKeyword',apiFunctions.userFunctions.isLoggedIn,function(req,
   });
 });
 
+app.get('/getBase64Image',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    imageURL : req.query.imageURL
+  }
+
+  apiFunctions.userFunctions.getImage(request,function(image){
+    res.send(image);
+  });
+
+});
+
+app.get('/getAllUsers',apiFunctions.userFunctions.isLoggedIn,function(req,res){
+  var request = {
+    UserId : req.session.user
+  }
+
+  apiFunctions.userFunctions.getUsers(request,function(users){
+    res.send(users);
+  });
+
+});
+
 /*returns entire user object*/
 
 app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id
+    UserId : req.session.user
   }
 
   apiFunctions.userFunctions.getUser(request,function(user){
@@ -113,10 +138,10 @@ app.get('/getUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id,
+    UserId : req.session.user,
     PodcastId : req.query.PodcastId
   };
-  console.log("The user is outside is" + req.user._id);
+  console.log("The user is outside is" + req.session.user);
   apiFunctions.userFunctions.getNotesForUser(request,function(notes){
     res.send(notes);
   });
@@ -198,8 +223,8 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
     TimeOfPost : req.body.TimeOfPost,
     Content : req.body.Content,
     CourseId : req.body.CourseId,
-    ProfilePic : req.user.ProfilePicture,
-    Name : req.user.Name
+    ProfilePic : req.session.pic,
+    Name : req.session.name
   };
 
   apiFunctions.postFunctions.createPost(request,function(postId){
@@ -209,7 +234,7 @@ app.post('/createPost',apiFunctions.userFunctions.isLoggedIn,function(req,res){
 
 app.post('/createNotes',apiFunctions.userFunctions.isLoggedIn,function(req,res){
   var request = {
-    UserId : req.user._id,
+    UserId : req.session.user,
     PodcastId : req.body.PodcastId,
     Content : req.body.Content
   };
@@ -223,8 +248,8 @@ app.post('/createComment',apiFunctions.userFunctions.isLoggedIn,function(req,res
     PostId : req.body.PostId,
     Time : req.body.Time,
     Content : req.body.Content,
-    Pic : req.user.ProfilePicture,
-    PosterName : req.user.Name
+    Pic : req.session.pic,
+    PosterName : req.session.name
   };
 
   apiFunctions.postFunctions.createComment(request, function(status){
@@ -242,12 +267,10 @@ app.post('/login',function(req,res){
 });
 
 app.get('/isUserLoggedIn', function(req,res){
-  if(req.isAuthenticated()){
-    res.send(200, {"result": true});
-  }
-  else{
-    res.send(200,{"result" : false});
-  }
+  if (req.session.user != null)
+    res.send(true);
+  else
+    res.send(false);
 });
 
 app.get('/getUserSession', function(req,res) {
@@ -263,6 +286,49 @@ app.get('/logout',function(req,res){
   res.send("LOGGED OUT");
 });
 
+app.get('/loginorcreate', function (req, res) {
+  var profileID = req.query.id;
+  var userName = req.query.name;
+  UserModel.findOne({ FBUserId : profileID}, "_id Name", function(err, user) {
+    if (err){
+      res.send(false);
+      return;
+    }
+    if (user) {
+      console.log(user);
+      console.log("USER FOUND: " + user.Name + " @ " + new Date());
+      req.session.user = user._id;
+      req.session.profId = profileID;
+      req.session.name = userName;
+      req.session.pic = user.ProfilePicture;  
+      req.session.save(function () {
+        res.send(true);
+      });
+    }
+    else{
+      apiFunctions.userFunctions.addUser(userName, profileID, function(err,newUser){
+        if (err) {
+          res.send(false);
+          return;
+        }
+        req.session.user = newUser._id;
+        req.session.profId = profileID;
+        req.session.name = userName;
+        req.session.pic = newUser.ProfilePicture;  
+        req.session.save(function () {
+          res.send(true);
+        });
+      });
+    }
+  });
+
+});
+
+
+
+
+
+
 var realCallbackUrl = 'http://www.google.com';
 
 /***************************************FACEBOOK AUTH****************************************************/
@@ -272,9 +338,10 @@ app.get('/auth/facebook', function(req,res,next){
     return;
   }
   req.session.callbackURL = req.query.callbackURL;
-  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
-  realCallbackUrl = req.protocol + '://' + req.get('host') + auth.facebookAuth.callbackURL;
-  //console.log(realCallbackUrl);
+ console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
+  //req.protocol + '://' + 
+  realCallbackUrl = ("https://www.podcastucsd.ml/api/auth/facebook/callback") //+ auth.facebookAuth.callbackURL;
+  console.log("auth stage\n\n");
   req.session.save(function (err) {
     auth.callbackURL = req.query.callbackURL;
     auth.errorCallback = req.query.errorCallbackURL;
@@ -314,6 +381,10 @@ app.get("/auth/facebook/callback",
   /*NEED TO BYPASS AUTHORIZATION TOKEN HAS BEEN USED ISSUE*/
   function(err,req,res,next) {
         if(err) {
-            res.redirect('/auth/facebook?callbackURL=' + auth.callbackURL);
+          console.log("Bypassing auth");
+          ////console.log(req);
+         // res.redirect('/api/auth/facebook?callbackURL=' +
+          //encodeURIComponent(auth.callbackURL) + "&errorCallbackURL=" +
+          ////auth.errorCallback);
         }
   });

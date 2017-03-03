@@ -5,11 +5,13 @@ var CourseModel = require('./models/courseModel.js');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var srt2vtt = require('srt2vtt');
+var base64 = require('node-base64-image');
 
 //API Functions
 var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
+  
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
         if(err || info == null)
@@ -138,15 +140,26 @@ var apiFunctions = {
 
   //functions to retrieve and create user information
   userFunctions:{
+    getImage : function(req, callback) {
+      base64.encode(req.imageURL, {string: true}, function(error, image) {
+        callback('data:image/jpeg;base64,' + image);
+      });
+    },
+
+    getUsers : function(req, callback) {
+      UserModel.find({}, 'Name', function(err, users) {
+        callback(users);
+      });
+    },
     //middleware do not remove
     isLoggedIn : function(req,res,next){
-      if (req.isAuthenticated()){
+      if (req.session.user){
           return next();
           console.log(res);
       }
       else {
           console.log("HERE'S THE REDIRECT URL" + req.url);
-          res.redirect('/login?callbackURL=' + req.url);
+          res.send(false);
       }
 
     },
@@ -202,7 +215,8 @@ var apiFunctions = {
       });
     },
     addUser : function(name,profileId,callback){
-      UserModel.create({Name:name, FBUserId: profileId, Notes : [],ProfilePicture : 'http://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
+      UserModel.create({Name:name, FBUserId: profileId, Notes :
+      [],ProfilePicture : 'https://graph.facebook.com/'+ profileId +'/picture?type=square'}, function(err,users){
       if(err || users == null) {
         callback(err,users);
       }

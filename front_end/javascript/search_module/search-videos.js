@@ -8,7 +8,6 @@ class SearchVideosClass {
 
         this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
         callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
-          console.log(data);
           var overallDiv = $(this.mainDiv).find(".videos-div")[0];
           masterDiv.appendChild(overallDiv);
           overallDiv.class = 'scroll';
@@ -32,9 +31,10 @@ class SearchVideosClass {
             var img = document.createElement('img');
             img.className = 'search-videos-img';
             img.src = videos[i]['PodcastImage'];
-            img.addEventListener('click', function() {
-              window.location.hash = '#/podcast/' + curr['PodcastId']
-            }.bind(curr));
+            $(img).attr("data-podcastid", curr['PodcastId']);
+            $(img).on("click", function (ev) {
+              window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
+            });
             videoDiv.appendChild(img);
 
             var heading = document.createElement('p');
@@ -55,11 +55,12 @@ class SearchVideosClass {
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
       var recKeywords = $(".recClass")[0];
+      var colors = ['009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
         recs.innerHTML = results[i];
         recKeywords.appendChild(recs);
-        var currentColor = this.fnGetRandomColour(120, 250);
+        var currentColor = colors[i];
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
         $(recs).on("click", function (ev) {
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();

@@ -29,7 +29,7 @@ class Notes{
             this.ap = "PM";
             this.hour -= 12;
         }
-        if(this.hour == 0){
+        if(this.hour === 0){
             this.hour = 12;
         }
         this.month = this.checkTime(this.month);
@@ -41,7 +41,7 @@ class Notes{
             i = "0" + i;
         }
         return i;
-    };
+    }
 
 
 

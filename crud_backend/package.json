@@ -15,6 +15,7 @@
     "express-cors": "0.0.3",
     "express-session": "1.15.1",
     "mongoose": "^4.5.8",
+    "node-base64-image": "1.0.3",
     "passport": "0.3.2",
     "passport-facebook": "2.1.1",
     "passport-local": "1.0.0",
