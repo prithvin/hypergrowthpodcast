@@ -1,4 +1,5 @@
 .video-card {
+    position: relative;
     background-color:white;
     width: 30%;
     border-radius: 6px;
@@ -97,11 +98,11 @@
 }
 
 .search-videos-img {
-    padding: 10px;
+    position: relative;
+    width: 375%;
     height: 150px;
-    max-width: 240px;
-    display: inline;
     margin: 10px;
+    left: 0%;
     border-color: rgba(66, 100, 155, .7);
     border-style: solid;
     border-radius: 5px;
