@@ -18,7 +18,8 @@ var loadHTMLModules = {
     "AudioOCRMod": "audio_ocr_search_module.html",
     "SlideTransitionModule": "slide_transition_module.html",
     "RecommendationsModule": "recommendations_module.html",
-    "NotesModule": "notes_module.html"
+    "NotesModule": "notes_module.html",
+    "SearchCardModule": "search_card_module.html"
 };
 
 preloadComponents();

@@ -2,27 +2,34 @@ class SearchVideosClass {
     constructor (courseId, mainDiv, searchTerm) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+        this.searchTerm = searchTerm;
 
-        var masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
+        this.masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
-
-        this.keywordLoadFromCrud(searchTerm, courseId, masterDiv);
+        this.overallDiv = $(this.mainDiv).find(".videos-div")[0];
+        
+        this.keywordLoadFromCrud(searchTerm, courseId, this.masterDiv);
         callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
-          var overallDiv = $(this.mainDiv).find(".videos-div")[0];
-          masterDiv.appendChild(overallDiv);
-          overallDiv.class = 'scroll';
+          
+          this.masterDiv.appendChild(this.overallDiv);
+          this.overallDiv.class = 'scroll';
 
           var row = document.createElement('div');
           row.className = 'row videos-row';
-          overallDiv.appendChild(row);
+          row.id = 'single-row';
+          this.overallDiv.appendChild(row);
 
           var videos = data;
+        
           for (var i = 0; i < videos.length; i++) {
             var curr = videos[i];
+            this.loadCard(curr, row);
+
+            /*
             if (row.childElementCount == 3) {
                 row = document.createElement('div');
                 row.className = 'row videos-row';
-                overallDiv.appendChild(row);
+                this.overallDiv.appendChild(row);
             }
             var videoDiv = document.createElement('div');
             videoDiv.className = 'col-4';
@@ -40,9 +47,23 @@ class SearchVideosClass {
             var heading = document.createElement('p');
             heading.className = 'textUnderVid';
             heading.innerHTML = moment(videos[i]['Time']).format("ddd, MMM Do");
-            videoDiv.appendChild(heading);
+            videoDiv.appendChild(heading);*/
           }
 
+        }.bind(this));
+    }
+    
+    loadCardData (callback) {
+        loadHTMLComponent("SearchCardModule", function (data) {
+            callback(data);
+        });
+    }
+    
+   loadCard(curr_video_data, divToAppend) {
+       this.loadCardData(function (cardTemplate) {
+            var newDiv = $(cardTemplate);
+            var newCardObj = new SearchCardClass(this.courseId, newDiv, this.searchTerm, curr_video_data);
+            $(divToAppend).prepend(newDiv);
         }.bind(this));
     }
 

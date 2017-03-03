@@ -60,7 +60,7 @@ var require = {
             "deps": ['jquery', 'bootstrap', 'moment']
         },
         "search-videos": {
-            "deps": ['jquery', 'bootstrap']
+            "deps": ['jquery', 'bootstrap', 'search-card']
         },
         "course-homepage": {
             "deps": ['course-videos', 'components']
@@ -69,7 +69,7 @@ var require = {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
-            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos']
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card']
         },
         "ocr_module": {
             "deps": ['jquery', 'ocr_txt_mod']
@@ -83,7 +83,7 @@ var require = {
         'onboarding': {
             "deps": ['facebook', 'jquery', 'alertbox']
         },
-        'scrollreveal': {}
+        'scrollreveal': {},
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -121,6 +121,7 @@ var require = {
         "search-results": "search_module/search-results",
         "recommendations": "recommendations_module/recommendations",
         'facebook': '//connect.facebook.net/en_US/sdk',
-        'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min'
+        'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
+        'search-card': "search_module/search_card",
     }
 };
