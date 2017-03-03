@@ -15,11 +15,11 @@ var OnboardingCourses = class OnboardingCourses {
         var toSort = true;
         if(toSort){
           var quarterPriority = {
-            "fa" : 1,
-            "wi" : 2,
-            "sp" : 3,
-            "s1" : 4,
-            "s2" : 5
+            "wi" : 1,
+            "sp" : 2,
+            "s1" : 3,
+            "s2" : 4,
+            "fa" : 5
           };
 
           data.sort(
@@ -28,10 +28,10 @@ var OnboardingCourses = class OnboardingCourses {
                 return 0;
               }
               if(x.Quarter.substring(2,4) - y.Quarter.substring(2,4) != 0){
-                return (x.Quarter.substring(2,4) - y.Quarter.substring(2,4));
+                return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
               }
               else{
-                return quarterPriority[x.Quarter.substring(0,2)] - quarterPriority[y.Quarter.substring(0,2)];
+                return quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
               }
             }
           );
