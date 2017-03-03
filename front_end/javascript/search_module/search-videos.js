@@ -2,6 +2,7 @@ class SearchVideosClass {
     constructor (courseId, mainDiv, searchTerm) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
+        this.searchTerm = searchTerm;
 
         var masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
@@ -14,16 +15,18 @@ class SearchVideosClass {
 
           var row = document.createElement('div');
           row.className = 'row videos-row';
+          row.id = 'single-row';
           overallDiv.appendChild(row);
 
           var videos = data;
           for (var i = 0; i < videos.length; i++) {
             var curr = videos[i];
-            /*if (row.childElementCount > 4) {
+            this.loadCard(this, curr, row);
+            /*if (row.childElementCount == 3) {
                 row = document.createElement('div');
                 row.className = 'row videos-row';
                 overallDiv.appendChild(row);
-            }*/
+            }
             var videoDiv = document.createElement('div');
             videoDiv.className = 'col-4';
             row.appendChild(videoDiv);
@@ -40,10 +43,18 @@ class SearchVideosClass {
             var heading = document.createElement('p');
             heading.className = 'textUnderVid';
             heading.innerHTML = moment(videos[i]['Time']).format("ddd, MMM Do");
-            videoDiv.appendChild(heading);
+            videoDiv.appendChild(heading);*/
           }
 
         }.bind(this));
+    }
+    
+    loadCard(thisClass, curr_video_data, divToLoad) {
+      require(['search-card'], function() {
+        loadComponent("SearchCardModule", divToLoad, function() {
+            new SearchCardClass(thisClass.podcastID, $(thisClass.mainDiv), thisClass.searchTerm, curr_video_data); 
+        });
+      });
     }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
