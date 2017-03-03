@@ -55,11 +55,12 @@ class SearchVideosClass {
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
       var recKeywords = $(".recClass")[0];
+      var colors = ['009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
         recs.innerHTML = results[i];
         recKeywords.appendChild(recs);
-        var currentColor = this.fnGetRandomColour(120, 250);
+        var currentColor = colors[i];
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
         $(recs).on("click", function (ev) {
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
