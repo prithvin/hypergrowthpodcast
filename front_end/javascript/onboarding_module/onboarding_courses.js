@@ -1,5 +1,6 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
+        this.colors = ['rgba(56, 90, 154, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)', 'rgba(104, 129, 158, 1)','009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
     }
@@ -10,8 +11,32 @@ var OnboardingCourses = class OnboardingCourses {
             this.loadCourses(data);
         }.bind(this));
     }
-    
+
     loadCourses(data) {
+        var toSort = true;
+        if(toSort){
+          var quarterPriority = {
+            "wi" : 1,
+            "sp" : 2,
+            "s1" : 3,
+            "s2" : 4,
+            "fa" : 5
+          };
+
+          data.sort(
+            function(x,y){
+              if(!x || !y || x.Quarter == null || y.Quarter == null || x.Quarter.length < 4 || y.Quarter.length < 4){
+                return 0;
+              }
+              if(x.Quarter.substring(2,4) - y.Quarter.substring(2,4) != 0){
+                return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
+              }
+              else{
+                return quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+              }
+            }
+          );
+        }
         for(var i = 0; i < data.length; i++) {
             var row = document.createElement('tr');//this.tableRef.insertRow(this.tableRef.rows.length);
             var cell = row.insertCell(0);
@@ -22,37 +47,36 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.className = 'cell cell-end';
             row.className = 'table-row';
             row.id = data[i]['Id'];
-            
+
             row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
                 var targetURL = baseURL + "#/courses/" + this.id;
                 window.location.href = targetURL;
                 window.location.hash =  "/courses/" + this.id;
-            });  
-            
+            });
+
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
-            var colors = ['rgba(56, 90, 154, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)', 'rgba(104, 129, 158, 1)','009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
-            
+
             if (qtr.indexOf("fa") > -1) {
                 qtr = "Fall " + qtr.slice(-2);
-                $(row).css({'background-color': colors[1]});
+                $(row).css({'background-color': this.colors[1]});
             }
             if (qtr.indexOf("wi") > -1) {
                 qtr = "Winter " + qtr.slice(-2);
-                $(row).css({'background-color': colors[0]});
+                $(row).css({'background-color': this.colors[0]});
             }
             if (qtr.indexOf("sp") > -1) {
                 qtr = "Spring " + qtr.slice(-2);
-                $(row).css({'background-color': colors[2]});
+                $(row).css({'background-color': this.colors[2]});
             }
             if (qtr.indexOf("s2") > -1) {
                 qtr = "SS2 " + qtr.slice(-2);
-                $(row).css({'background-color': colors[3]});
+                $(row).css({'background-color': this.colors[3]});
             }
             if (qtr.indexOf("s1") > -1) {
                 qtr = "SS1 " + qtr.slice(-2);
-                $(row).css({'background-color': colors[4]});
+                $(row).css({'background-color': this.colors[4]});
             }
             var quarter = document.createTextNode(qtr);
             var sym = document.createElement('i');
@@ -62,7 +86,7 @@ var OnboardingCourses = class OnboardingCourses {
             cell2.appendChild(sym);
             cell3.appendChild(quarter);
             this.tableRef.appendChild(row);
-        } 
+        }
     }
 }
 
@@ -87,7 +111,7 @@ function myFunction() {
         tr[i].style.display = "none";
         count++;
       }
-    }    
+    }
   }
   if (count == tr.length - 1) {
       // No results
@@ -103,7 +127,7 @@ function sortTable(n) {
   table = document.getElementById("myTable");
   switching = true;
   //Set the sorting direction to ascending:
-  dir = "asc"; 
+  dir = "asc";
   /*Make a loop that will continue until
   no switching has been done:*/
   while (switching) {
@@ -141,7 +165,7 @@ function sortTable(n) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       //Each time a switch is done, increase this count by 1:
-      switchcount ++;      
+      switchcount ++;
     } else {
       /*If no switching has been done AND the direction is "asc",
       set the direction to "desc" and run the while loop again.*/

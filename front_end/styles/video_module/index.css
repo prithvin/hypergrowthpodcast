@@ -36,7 +36,9 @@
   right: 0;
   bottom: 2%;
 }
-
+.video-js .vjs-play-progress:before{
+    top:-0.3em;
+}
 .video-js .vjs-volume-menu-button .vjs-menu{
     width: 72%;
 }
@@ -86,6 +88,7 @@
 .prev-button:hover {
     opacity: 1;
 }
+
 .next-button {
   background-image:url(../../images/video_module/next.png);
   background-repeat:no-repeat;

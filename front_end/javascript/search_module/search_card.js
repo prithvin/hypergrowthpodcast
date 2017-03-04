@@ -6,16 +6,17 @@ class SearchCardClass {
         this.title = $(mainDiv).find(".video-card-title");
         this.img = $(mainDiv).find(".video-card-img");
         
-        $(this.title).html(moment(data['Time']).format("ddd, MMM Do"));
+        $(this.title).html(moment(data['Time']).format("dddd, MM/DD"));
         
         $(this.img).attr('src', data['PodcastImage']);
-        $(this.img).attr("data-podcastid", data['PodcastId']);
+        $(this.card).attr("data-podcastid", data['PodcastId']);
         
         $(this.card).on("click", function (ev) {
-            window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
+            window.location.hash = '#/podcast/' + this.getAttribute("data-podcastid");
         });
         
         this.appendOCRandAudio(this.card, data);
+        console.log(this.card);
     }
     
     appendOCRandAudio(cardDiv, data) {    
