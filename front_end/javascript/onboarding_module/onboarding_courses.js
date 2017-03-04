@@ -1,6 +1,8 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
-        this.colors = ['rgba(56, 90, 154, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)', 'rgba(104, 129, 158, 1)','009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
+        this.colors = ['rgba(229, 77, 66, 1)', 'rgba(56, 90, 154, 1)', 'rgba(41, 187, 156, 1)', '009788', 'rgba(104, 129, 158, 1)', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
+        this.quarters_short = ['fa', 'wi', 'sp', 's1', 's2'];
+        this.quarters_long = ['Fall ', 'Winter ', 'Spring ', 'SS1 ', 'SS2 '];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
     }
@@ -13,6 +15,7 @@ var OnboardingCourses = class OnboardingCourses {
     }
 
     loadCourses(data) {
+        /* Initial Sort */
         var toSort = true;
         if(toSort){
           var quarterPriority = {
@@ -37,8 +40,10 @@ var OnboardingCourses = class OnboardingCourses {
             }
           );
         }
+        
         for(var i = 0; i < data.length; i++) {
-            var row = document.createElement('tr');//this.tableRef.insertRow(this.tableRef.rows.length);
+            /* Row Creation */
+            var row = document.createElement('tr');
             var cell = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
@@ -48,6 +53,7 @@ var OnboardingCourses = class OnboardingCourses {
             row.className = 'table-row';
             row.id = data[i]['Id'];
 
+            /* Redirect to CourseHomepage onclick*/
             row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
                 var targetURL = baseURL + "#/courses/" + this.id;
@@ -57,27 +63,14 @@ var OnboardingCourses = class OnboardingCourses {
 
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
-
-            if (qtr.indexOf("fa") > -1) {
-                qtr = "Fall " + qtr.slice(-2);
-                $(row).css({'background-color': this.colors[1]});
-            }
-            if (qtr.indexOf("wi") > -1) {
-                qtr = "Winter " + qtr.slice(-2);
-                $(row).css({'background-color': this.colors[0]});
-            }
-            if (qtr.indexOf("sp") > -1) {
-                qtr = "Spring " + qtr.slice(-2);
-                $(row).css({'background-color': this.colors[2]});
-            }
-            if (qtr.indexOf("s2") > -1) {
-                qtr = "SS2 " + qtr.slice(-2);
-                $(row).css({'background-color': this.colors[3]});
-            }
-            if (qtr.indexOf("s1") > -1) {
-                qtr = "SS1 " + qtr.slice(-2);
-                $(row).css({'background-color': this.colors[4]});
-            }
+            
+            /* Quarter Conversion */
+            var index = 0;
+            while (qtr.indexOf(this.quarters_short[index]) <= -1 && index < this.quarters_short.length) {index++}
+            qtr = this.quarters_long[index] + qtr.slice(-2);
+            $(row).css({'background-color': this.colors[index]});
+            
+            /* Appending Items to Cells and Cells to Row*/
             var quarter = document.createTextNode(qtr);
             var sym = document.createElement('i');
             sym.setAttribute('aria-hidden', 'true');

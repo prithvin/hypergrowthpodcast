@@ -9,6 +9,7 @@
     padding-left: 100px;
     padding-right: 100px;
     font-family: "Roboto", sans-serif;
+    font-weight: 200;
     font-size: 42px;
     -webkit-transition: visibility 0s, opacity 2s;
     transition: visibility 0s, opacity 2s;

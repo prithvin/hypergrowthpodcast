@@ -1,5 +1,5 @@
 .a-post {
-    background-color: #F3F5F7;
+    background-color: rgb(246, 247, 249);
     position:absolute;
     top:0;
 }
@@ -17,7 +17,7 @@ mark {
 
 .post-container {
     background-color:white;
-    border-radius: 6px;
+    border-radius: 5px;
     border: 1px solid #BAC5D3;
     font-family: 'Roboto', sans-serif;
     padding-left:0px;
@@ -106,7 +106,8 @@ mark {
 .one-comment {
     padding-bottom: 13px;
     background-color: #F7F7F7;
-    margin-bottom:3px;
+    margin-top:2px;
+    border-radius: 4px;
     word-wrap: break-word;
 
 }
@@ -150,7 +151,20 @@ mark {
 .comment-form {
     padding:0;
     margin:0;
-    margin-bottom: 2px;
+    margin-top: -3px;
+    background: #BAC5D3;
+    border-radius: 3px;
+}
+
+.comment-form input {
+    width: 100%;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    background: white;
+}
+
+.comment-form input:focus {
 }
 
 .push-up-comment {
