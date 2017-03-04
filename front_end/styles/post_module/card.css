@@ -17,7 +17,7 @@ mark {
 
 .post-container {
     background-color:white;
-    border-radius: 5px;
+    border-radius: 6px;
     border: 1px solid #BAC5D3;
     font-family: 'Roboto', sans-serif;
     padding-left:0px;
@@ -107,7 +107,7 @@ mark {
     padding-bottom: 13px;
     background-color: #F7F7F7;
     margin-top:2px;
-    border-radius: 4px;
+    border-radius: 5px;
     word-wrap: break-word;
 
 }
@@ -155,7 +155,7 @@ mark {
     margin-left: -1px;
     margin-top: -4px;
     margin-bottom: -1px;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid #BAC5D3;
 }
 
