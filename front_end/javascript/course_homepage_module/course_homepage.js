@@ -38,7 +38,7 @@ class CourseHomepageClass {
     updateComponentHeights() {
         var newHeight =$(window).height() - $(this.mainDiv).find("#navbox").height();
         $(this.mainDiv).find("#course-posts").css("height", newHeight - 35);
-        $(this.mainDiv).find("#course-videos").css("height", newHeight - 35);
+        $(this.mainDiv).find("#course-videos").css("height", newHeight - 40);
     }
     
     

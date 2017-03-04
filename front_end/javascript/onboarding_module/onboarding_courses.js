@@ -1,6 +1,6 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
-        this.colors = ['rgba(229, 77, 66, 1)', 'rgba(56, 90, 154, 1)', 'rgba(41, 187, 156, 1)', '009788', 'rgba(104, 129, 158, 1)', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
+        this.colors = ['rgba(244, 162, 45, 1)', 'rgba(68, 108, 179, 1)', 'rgba(141, 193, 83, 1)', 'rgba(229, 77, 66, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)'];
         this.quarters_short = ['fa', 'wi', 'sp', 's1', 's2'];
         this.quarters_long = ['Fall ', 'Winter ', 'Spring ', 'SS1 ', 'SS2 '];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
