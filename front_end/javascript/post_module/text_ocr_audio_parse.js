@@ -59,6 +59,17 @@ var OCRAudioIndPost = class OCRAudioIndPost {
         }
     }
 
+    showForSlide(slideNum) {
+        if (slideNum == this.slideNum) {
+            this.showThisPost(this);
+            return true;
+        }
+        else {
+            this.hideThisPost(this);
+            return false;
+        }
+    }
+
     determineSlideData(preSlideEle, slideNoEle) {
         $(slideNoEle).attr("data-slide", this.slideNum).html("Slide " + this.slideNum);
         if (this.startTime) {

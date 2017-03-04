@@ -341,6 +341,8 @@ var PostSearch = class PostSearch {
         for (var x = 0; x < this.posts.length; x++) {
             anyPostsShown = this.posts[x].fetchBySlide(slideNo) || anyPostsShown;
         }
+        var slideDataShown = this.displayOCRAndAudioForSlide(slideNo);
+        anyPostsShown = anyPostsShown || slideDataShown;
         if (!anyPostsShown) {
             if (!$(this.noResultsOption).is(":visible"))
                 $(this.noResultsOption).fadeIn();
@@ -414,6 +416,17 @@ var PostSearch = class PostSearch {
             this.loadingModule.hide(); 
         }.bind(this), 500);
         
+    }
+
+    displayOCRAndAudioForSlide(slideNum) {
+        this.mark.unmark();
+        this.notesWrapper.hide();
+        
+        var anyPostsShown = false;
+        var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
+        var ocrResults = this.ocrModule.fetchOCRForSlide(slideNum);
+        anyPostsShown = audioResults || ocrResults;
+        return anyPostsShown;
     }
 
     remarkText () {

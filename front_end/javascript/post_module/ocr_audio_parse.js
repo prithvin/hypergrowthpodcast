@@ -44,6 +44,29 @@ var OCRAudioPosts = class OCRAudioPosts {
         }
     }
 
+    fetchAudioForSlide(slideNum) {
+        if (slideNum == 0) {
+            this.hideTable(this.audioPost);
+            return true;
+        }
+          console.log(slideNum);
+
+        var foundAnything = false;
+        for (var x = 0; x < this.audioPosts.length; x++) {
+            var nextQuery = this.audioPosts[x].showForSlide(slideNum);
+            foundAnything = foundAnything || nextQuery;
+            console.log(foundAnything);
+        }
+        if (!foundAnything)  {
+            this.hideTable(this.audioPost);
+            return false;
+        }
+        else  {
+            this.showTable(this.audioPost);
+            return true;
+        }
+    }
+
     doSearchInOCR (query) {
         if (query.trim().length == 0) {
             this.hideTable(this.ocrPost);
@@ -53,6 +76,27 @@ var OCRAudioPosts = class OCRAudioPosts {
         var foundAnything = false;
         for (var x = 0; x < this.ocrPosts.length; x++) {
             var nextQuery = this.ocrPosts[x].checkForContent(query);
+            foundAnything = foundAnything || nextQuery;
+        }
+        if (!foundAnything) {
+            this.hideTable(this.ocrPost);
+            return false;
+        }
+        else  {
+            this.showTable(this.ocrPost);
+            return true;
+        }
+    }
+
+    fetchOCRForSlide(slideNum) {
+        if (slideNum == 0) {
+            this.hideTable(this.ocrPost);
+            return true;
+        }
+
+        var foundAnything = false;
+        for (var x = 0; x < this.ocrPosts.length; x++) {
+            var nextQuery = this.ocrPosts[x].showForSlide(slideNum);
             foundAnything = foundAnything || nextQuery;
         }
         if (!foundAnything) {

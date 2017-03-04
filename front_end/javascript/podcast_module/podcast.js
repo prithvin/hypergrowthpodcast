@@ -24,7 +24,7 @@ var PodcastPage = class PodcastPage {
         // Note that the slides themselves are indexed starting at 1
         var slideTimes = [];
         for (var x = 0; x < slides.length; x++) {
-            slideTimes.push(slides[x]["StartTime"]/1000);
+          slideTimes.push(slides[x]["StartTime"]/1000);
         }
         this.slideTimes = slideTimes;
     }
