@@ -24,6 +24,9 @@
   outline: none;
 }
 
+.notes-content:focus {
+  outline: none;
+}
 /*html, body {
   width: 100%;
   height: 100%;
@@ -41,7 +44,7 @@
   height: auto;
   background-color: #fff;
   border-radius: 6px;
-border: 1px solid #BAC5D3;
+  border: 1px solid #BAC5D3;
 
   box-shadow: none !IMPORTANT;
   position: relative;

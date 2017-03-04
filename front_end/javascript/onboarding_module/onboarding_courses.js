@@ -1,5 +1,6 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
+        this.colors = ['rgba(56, 90, 154, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)', 'rgba(104, 129, 158, 1)','009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         this.fetchCourses();
     }
@@ -56,27 +57,26 @@ var OnboardingCourses = class OnboardingCourses {
 
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
-            var colors = ['rgba(56, 90, 154, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)', 'rgba(104, 129, 158, 1)','009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
 
             if (qtr.indexOf("fa") > -1) {
                 qtr = "Fall " + qtr.slice(-2);
-                $(row).css({'background-color': colors[1]});
+                $(row).css({'background-color': this.colors[1]});
             }
             if (qtr.indexOf("wi") > -1) {
                 qtr = "Winter " + qtr.slice(-2);
-                $(row).css({'background-color': colors[0]});
+                $(row).css({'background-color': this.colors[0]});
             }
             if (qtr.indexOf("sp") > -1) {
                 qtr = "Spring " + qtr.slice(-2);
-                $(row).css({'background-color': colors[2]});
+                $(row).css({'background-color': this.colors[2]});
             }
             if (qtr.indexOf("s2") > -1) {
                 qtr = "SS2 " + qtr.slice(-2);
-                $(row).css({'background-color': colors[3]});
+                $(row).css({'background-color': this.colors[3]});
             }
             if (qtr.indexOf("s1") > -1) {
                 qtr = "SS1 " + qtr.slice(-2);
-                $(row).css({'background-color': colors[4]});
+                $(row).css({'background-color': this.colors[4]});
             }
             var quarter = document.createTextNode(qtr);
             var sym = document.createElement('i');
