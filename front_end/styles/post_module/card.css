@@ -149,17 +149,20 @@ mark {
 }
 
 .comment-form {
+    width: calc(100% + 2px);
     padding:0;
     margin:0;
-    margin-top: -3px;
-    background: #BAC5D3;
-    border-radius: 3px;
+    margin-left: -1px;
+    margin-top: -4px;
+    margin-bottom: -1px;
+    border-radius: 4px;
+    border: 1px solid #BAC5D3;
 }
 
 .comment-form input {
     width: 100%;
     margin-top: 1px;
-    margin-bottom: 0px;
+    margin-bottom: 1px;
     background: white;
 }
 
