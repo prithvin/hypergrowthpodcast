@@ -11,14 +11,7 @@
     -webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
 }
-.video-card:hover {
-    z-index: 1;
-    cursor: pointer;
-    position:relative;
-    display: block;
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
+
 .video-card:active {
 
 }

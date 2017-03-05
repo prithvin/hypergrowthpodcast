@@ -4,7 +4,6 @@ class SearchCardClass {
         
         this.card = $(mainDiv);
         this.title = $(mainDiv).find(".video-card-title");
-        this.img = $(mainDiv).find(".video-card-img");
         
         $(this.title).html(moment(data['Time']).format("dddd, MM/DD"));
         
@@ -16,14 +15,14 @@ class SearchCardClass {
         });
         
         this.appendOCRandAudio(this.card, data);
-        console.log(this.card);
     }
     
     appendOCRandAudio(cardDiv, data) {    
-        for (var i = 0; i < 8; i ++) {
+        console.log(data);
+        for (var i = 0; i < Math.random() * 8; i ++) {
             var key = document.createElement('span');
             key.className = 'col-12 type-of-ocr';
-            key.innerHTML = data['OCRKeywords'][i];
+            key.innerHTML = "B;ob"
             var hr = document.createElement('hr');  
             hr.className = 'ocr-module-hr';
             $(cardDiv).append(key);
