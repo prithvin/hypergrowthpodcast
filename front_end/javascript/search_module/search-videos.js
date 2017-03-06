@@ -1,4 +1,4 @@
-class SearchVideosClass {
+var SearchVideosClass =  class SearchVideosClass {
     constructor (courseId, mainDiv, searchTerm) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
@@ -21,9 +21,11 @@ class SearchVideosClass {
 
     loadCard (resultData) {
       loadHTMLComponent("SearchCardModule", function (data) {
-        var mainDiv = $(data);
-        new SearchCardClass(1123123123, $(mainDiv), this.searchTerm, resultData);
-        $(this.mainDiv).find("#search-vid").append(mainDiv);
+        for (var x = 0; x < resultData.length; x++) {
+          var mainDiv = $(data);
+          new SearchCardClass($(mainDiv), this.searchTerm, resultData[x]);
+          $(this.mainDiv).find("#search-vid").append(mainDiv);
+        }
       }.bind(this));
       
     }
