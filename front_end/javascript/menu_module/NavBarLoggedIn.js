@@ -149,7 +149,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                         }, 4000);
                     },
                     function() {
-                        $(self.mainDiv).find("#userProfPic").attr("src", pic).fadeIn('slow');  
+                        $(self.mainDiv).find("#userProfPic").attr("src", pic).fadeIn('fast');  
                     }
                 );
               });
