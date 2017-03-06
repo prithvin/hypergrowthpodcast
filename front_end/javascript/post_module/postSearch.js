@@ -146,7 +146,7 @@ var PostSearch = class PostSearch {
         $(this.newPostButton).on("click", function (ev) {
             var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
-                swal("Type your question in the \"Search or write a post\" search bar, and then press the post button!");   // Alert library
+                swal("Have a question or comment? Write it in the search bar and post it with the post button!");   // Alert library
             else {
                 this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }
@@ -154,7 +154,7 @@ var PostSearch = class PostSearch {
         $(this.otherNewPostButton).on("click", function (ev) {
             var newPostVal = $(this.searchInputField).val();
             if (newPostVal.trim().length == 0)
-                swal("Type your question in the \"Search or write a post\" search bar, and then press the post button!");   // Alert library
+                swal("Have a question or comment? Write it in the search bar and post it with the post button!");   // Alert library
             else {
                 this.generateNewPost(newPostVal, new Date().getTime(), this.getCurrentSlideOfNewPost()); 
             }

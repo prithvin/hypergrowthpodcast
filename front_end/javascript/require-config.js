@@ -84,6 +84,12 @@ var require = {
             "deps": ['facebook', 'jquery', 'alertbox']
         },
         'scrollreveal': {},
+        'search-card': {
+            "deps": ['word-cloud']
+        },
+        'word-cloud': {
+            "deps": ['jquery']
+        }
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -123,5 +129,6 @@ var require = {
         'facebook': '//connect.facebook.net/en_US/sdk',
         'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
         'search-card': "search_module/search_card",
+        'word-cloud': "search_module/jqcloud.min"
     }
 };

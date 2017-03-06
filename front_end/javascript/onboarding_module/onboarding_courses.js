@@ -68,7 +68,7 @@ var OnboardingCourses = class OnboardingCourses {
             var index = 0;
             while (qtr.indexOf(this.quarters_short[index]) <= -1 && index < this.quarters_short.length) {index++}
             qtr = this.quarters_long[index] + qtr.slice(-2);
-            $(row).css({'background-color': this.colors[index]});
+            $(row).css({'background-color': this.colors[1]});
             
             /* Appending Items to Cells and Cells to Row*/
             var quarter = document.createTextNode(qtr);
