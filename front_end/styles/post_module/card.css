@@ -165,7 +165,7 @@ mark {
     margin-bottom: -1px;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    border-top: 1px solid rgba(186,197,211,1);
+    border-top: 1px solid rgba(186, 197, 211, 0.21)
     border-bottom: 1px solid rgba(186,197,211,.3);
 }
 

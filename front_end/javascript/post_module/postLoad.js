@@ -38,12 +38,14 @@ var APost = class APost {
     addCommentListener (thisClass) {
         $(this.commentForm).on("submit", function (ev) {
             ev.preventDefault();
-            thisClass.addComment(
-                $(thisClass.mainDiv).find(".comment-answer"), 
-                thisClass.userData["Pic"], 
-                thisClass.userData["Name"], 
-                new Date().getTime()
-            );
+            if ($(thisClass.mainDiv).find(".comment-answer").val().trim().length > 0) {
+                thisClass.addComment(
+                    $(thisClass.mainDiv).find(".comment-answer"), 
+                    thisClass.userData["Pic"], 
+                    thisClass.userData["Name"], 
+                    new Date().getTime()
+                );
+            }
         })
     }
 
@@ -83,7 +85,7 @@ var APost = class APost {
     }
 
     fetchBySlide (slideNo) {
-        var isGoodSlide = $($(this.mainDiv).find(".slide-no")).is(':contains("Slide ' + slideNo + '")');
+        var isGoodSlide = ($($(this.mainDiv).find(".slide-no")).attr("data-slide") == slideNo);
         if (isGoodSlide) {
             this.showThisPost();
             return true;

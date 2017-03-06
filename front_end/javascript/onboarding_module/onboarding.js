@@ -25,8 +25,6 @@ var Onboarding = class Onboarding {
       FB.login(function(response) {
         if (response.status === 'connected') {
           FB.api('/me', function(response) {
-            console.log(response);    // TODO over here, then call server and
-                                      // store user data and redirect
             var callbackURL = window.location.origin + window.location.pathname
                                                      + "#/courses";
             if(queries && queries.hasOwnProperty('redirectURL')) {
