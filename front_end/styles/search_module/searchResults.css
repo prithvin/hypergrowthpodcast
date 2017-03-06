@@ -11,6 +11,7 @@
     transition: all 0.5s;
     margin-bottom: 20px;
     min-width: 225px;
+    width: 96%;
 }
 
 .video-card:active {
