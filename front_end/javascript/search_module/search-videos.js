@@ -1,4 +1,4 @@
-class SearchVideosClass {
+var SearchVideosClass =  class SearchVideosClass {
     constructor (courseId, mainDiv, searchTerm) {
         this.courseId = courseId;
         this.mainDiv = mainDiv;
@@ -9,62 +9,30 @@ class SearchVideosClass {
         this.overallDiv = $(this.mainDiv).find(".videos-div")[0];
         
         this.keywordLoadFromCrud(searchTerm, courseId, this.masterDiv);
-        callAPI(login_origins.backend + "/searchByKeywords", "GET", {"count": 6, "CourseId": this.courseId, "Keywords": searchTerm}, function(data) {
-          
-          this.masterDiv.appendChild(this.overallDiv);
-          this.overallDiv.class = 'scroll';
+        this.loadCourseCards(searchTerm);
 
-          var row = document.createElement('div');
-          row.className = 'row videos-row';
-          row.id = 'single-row';
-          this.overallDiv.appendChild(row);
-
-          var videos = data;
-        
-          for (var i = 0; i < videos.length; i++) {
-            var curr = videos[i];
-            this.loadCard(curr, row);
-
-            /*
-            if (row.childElementCount == 3) {
-                row = document.createElement('div');
-                row.className = 'row videos-row';
-                this.overallDiv.appendChild(row);
-            }
-            var videoDiv = document.createElement('div');
-            videoDiv.className = 'col-4';
-            row.appendChild(videoDiv);
-
-            var img = document.createElement('img');
-            img.className = 'search-videos-img';
-            img.src = videos[i]['PodcastImage'];
-            $(img).attr("data-podcastid", curr['PodcastId']);
-            $(img).on("click", function (ev) {
-              window.location.hash = '#/podcast/' + $(ev.target).attr("data-podcastid");
-            });
-            videoDiv.appendChild(img);
-
-            var heading = document.createElement('p');
-            heading.className = 'textUnderVid';
-            heading.innerHTML = moment(videos[i]['Time']).format("ddd, MMM Do");
-            videoDiv.appendChild(heading);*/
-          }
-
-        }.bind(this));
     }
-    
-    loadCardData (callback) {
-        loadHTMLComponent("SearchCardModule", function (data) {
-            callback(data);
+
+    loadCourseCards (searchTerm) {
+      callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
+        this.loadCard(resultData)
+        var waterfall = new Waterfall({
+          containerSelector: '#search-vid',
+          boxSelector: '.video-card',
+          minBoxWidth: 250
         });
+      }.bind(this));
     }
-    
-   loadCard(curr_video_data, divToAppend) {
-       this.loadCardData(function (cardTemplate) {
-            var newDiv = $(cardTemplate);
-            var newCardObj = new SearchCardClass(this.courseId, newDiv, this.searchTerm, curr_video_data);
-            $(divToAppend).prepend(newDiv);
-        }.bind(this));
+
+    loadCard (resultData) {
+      loadHTMLComponent("SearchCardModule", function (data) {
+        for (var x = 0; x < resultData.length; x++) {
+          var mainDiv = $(data);
+          new SearchCardClass($(mainDiv), this.searchTerm, resultData[x]);
+          $(this.mainDiv).find("#search-vid").append(mainDiv);
+        }
+      }.bind(this));
+      
     }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 

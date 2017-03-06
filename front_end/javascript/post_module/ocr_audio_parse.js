@@ -49,13 +49,11 @@ var OCRAudioPosts = class OCRAudioPosts {
             this.hideTable(this.audioPost);
             return true;
         }
-          console.log(slideNum);
 
         var foundAnything = false;
         for (var x = 0; x < this.audioPosts.length; x++) {
             var nextQuery = this.audioPosts[x].showForSlide(slideNum);
             foundAnything = foundAnything || nextQuery;
-            console.log(foundAnything);
         }
         if (!foundAnything)  {
             this.hideTable(this.audioPost);

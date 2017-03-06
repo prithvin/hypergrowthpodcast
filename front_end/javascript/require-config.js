@@ -69,7 +69,7 @@ var require = {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
-            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card']
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card', 'boardz']
         },
         "ocr_module": {
             "deps": ['jquery', 'ocr_txt_mod']
@@ -84,6 +84,8 @@ var require = {
             "deps": ['facebook', 'jquery', 'alertbox']
         },
         'scrollreveal': {},
+        'search-card': {
+        }
     },
     // Note: Don't include the .js in the path
     paths: {
@@ -123,5 +125,6 @@ var require = {
         'facebook': '//connect.facebook.net/en_US/sdk',
         'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
         'search-card': "search_module/search_card",
+        'boardz': 'search_module/boardz'
     }
 };

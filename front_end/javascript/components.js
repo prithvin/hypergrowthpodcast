@@ -19,7 +19,8 @@ var loadHTMLModules = {
     "SlideTransitionModule": "slide_transition_module.html",
     "RecommendationsModule": "recommendations_module.html",
     "NotesModule": "notes_module.html",
-    "SearchCardModule": "search_card_module.html"
+    "SearchCardModule": "search_card_module.html",
+    "SearchCardIndvModule": "search_card_indv_mod.html"
 };
 
 preloadComponents();
