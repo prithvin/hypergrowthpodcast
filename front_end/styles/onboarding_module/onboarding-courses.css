@@ -169,7 +169,6 @@
 }
 
 .table-row:hover .sym {
-    color:  rgba(229,193,0,1);
     opacity: 1;
 }
 
