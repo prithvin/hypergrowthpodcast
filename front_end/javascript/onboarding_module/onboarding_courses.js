@@ -52,7 +52,7 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.className = 'cell cell-end';
             row.className = 'table-row';
             row.id = data[i]['Id'];
-
+        
             /* Redirect to CourseHomepage onclick*/
             row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
