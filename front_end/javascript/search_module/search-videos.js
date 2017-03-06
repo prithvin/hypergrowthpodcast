@@ -19,7 +19,7 @@ var SearchVideosClass =  class SearchVideosClass {
         var waterfall = new Waterfall({
           containerSelector: '#search-vid',
           boxSelector: '.video-card',
-          minBoxWidth: 240
+          minBoxWidth: 250
         });
       }.bind(this));
     }

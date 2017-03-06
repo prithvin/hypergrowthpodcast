@@ -11,6 +11,7 @@
     transition: all 0.5s;
     margin-bottom: 20px;
     min-width: 225px;
+    width: 90%;
 }
 
 .video-card:active {
@@ -117,7 +118,7 @@
     background-color: #F4F6F8;
     height: auto;
     max-height: 100%;
-    width: 100%;
+    width: 104%;
     bottom: 0%;
     padding-top: 25px;
     flex-direction: column;

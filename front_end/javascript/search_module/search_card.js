@@ -17,6 +17,7 @@ var SearchCardClass = class SearchCardClass {
         // Listeners and stuff
         $(this.title).html(moment(data['LectureTime']).format("dddd, MM/DD"));
         this.clickedImage();
+        this.slideClicks();
 
         
         loadHTMLComponent("SearchCardIndvModule", function (htmlComponent) {
@@ -35,6 +36,12 @@ var SearchCardClass = class SearchCardClass {
     clickedImage () {
         $(this.mainDiv).find(".lecture-image-search").on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'];
+        }.bind(this));
+    }
+
+    slideClicks () {
+        $(this.mainDiv).on("click", ".slide-no", function (ev) {
+            window.location.hash = '#/podcast/' + this.data['PodcastId'] + "/" + $(ev.target).attr("data-slide");
         }.bind(this));
     }
     
@@ -64,11 +71,11 @@ var SearchCardClass = class SearchCardClass {
     }
 
     getFiveDiffs (left, term, right) {
-        var newLeft = left.split(' ').slice(0, 5).join(' ');
+        var newLeft = left.split(' ').slice(0, 2).join(' ');
         var term = " " + term + " ";
 
         var splitRight = right.split(' ');
-        var newRight = splitRight.slice(splitRight.length - 5).join(' ');
+        var newRight = splitRight.slice(splitRight.length - 2).join(' ');
 
         return "..." + newLeft + term  + newRight + "...\n";
         
