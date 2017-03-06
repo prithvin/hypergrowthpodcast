@@ -12,7 +12,7 @@ var base64 = require('node-base64-image');
 var apiFunctions = {
   //API Functions for podcast schema
   podcastFunctions:{
-  
+
     getRecommendations : function(request,callback){
       PodcastModel.findById(request.PodcastId,"Recommendations Time",function(err,info){
         if(err || info == null)
@@ -162,27 +162,35 @@ var apiFunctions = {
           for (let i = 0; i < podcasts.length; i++) {
             var podcast = podcasts[i];
             var matches = [];
+            var times = [];
 
             for (let j = 0; j < podcast.Slides.length; j++) {
               var slide = podcast.Slides[j];
+              times.push(slide.StartTime);
 
               if (slide.OCRTranscription.toLowerCase().indexOf(keywords) != -1) {
                 matches.push({
                     'Type': 'OCR',
                     'Text': slide.OCRTranscription.replace(/\n/g, ''),
                     'SlideNo': slide.SlideNum
-                  });
-                }
+                });
               }
+            }
 
             for (let k = 0; k < podcast.AudioTranscript.length; k++) {
               var transcript = podcast.AudioTranscript[k];
-              
+
               if (transcript.Content.toLowerCase().indexOf(keywords) != -1) {
+                var audioMs = transcript.StartTime * 1000;
+                var z;
+                for (z = 0; z < times.length; z++) {
+                  if (audioMs < times[z]) break;
+                  if (z == times.length - 1) z++;
+                }
                 matches.push({
                   'Type': 'AUDIO',
                   'Text': transcript.Content.replace(/\n/g, ''),
-                  'Time': transcript.StartTime
+                  'SlideNo': z
                 });
               }
             }
