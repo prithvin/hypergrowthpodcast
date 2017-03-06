@@ -103,7 +103,7 @@ var PostSearch = class PostSearch {
                 this.showNotes();
             }.bind(this));
         
-        }
+        }/*
         else{
            $(this.mainDiv).on("click", ".post-container", function (ev) {
                 var target = ev.currentTarget;
@@ -113,7 +113,7 @@ var PostSearch = class PostSearch {
                 
                window.location.hash = '#/podcast/' + pid + '/' + slide;
             });
-        }
+        }*/
 
 
         this.detectTypeOfPostsToShow(); // this.shouldAllowNewComments is set here
@@ -494,6 +494,13 @@ var PostSearch = class PostSearch {
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
 
+            if(thisClass.postFetchData.TypeOfFetch === "CourseGlobal"){
+                var link_anchor = $(newDiv).find(".linker");
+                link_anchor.attr('href', '#/podcast/' + postData['PodcastId'] + '/' + postData['SlideOfPost']);
+                link_anchor.attr('style', 'text-decoration: none');
+                //$(link_anchor).append(newDiv);
+                //newDiv = link_anchor;
+            }
             thisClass.posts.push(newPostObj);
             if (shouldPrepend)
                 $(thisClass.mainDiv).prepend(newDiv);

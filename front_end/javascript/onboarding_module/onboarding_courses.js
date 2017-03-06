@@ -54,13 +54,15 @@ var OnboardingCourses = class OnboardingCourses {
             row.id = data[i]['Id'];
 
             /* Redirect to CourseHomepage onclick*/
-            row.addEventListener("click", function() {
+            /*row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
                 var targetURL = baseURL + "#/courses/" + this.id;
                 window.location.href = targetURL;
                 window.location.hash =  "/courses/" + this.id;
-            });
-
+            });*/
+            var link_anchor = document.createElement('a');
+            link_anchor.href = "#/courses/" + row.id;
+            link_anchor.style = "text-decoration: none";
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
             
@@ -78,7 +80,9 @@ var OnboardingCourses = class OnboardingCourses {
             cell.appendChild(course);
             cell2.appendChild(sym);
             cell3.appendChild(quarter);
-            this.tableRef.appendChild(row);
+                       
+            link_anchor.appendChild(row);
+            this.tableRef.appendChild(link_anchor);
         }
     }
 }
