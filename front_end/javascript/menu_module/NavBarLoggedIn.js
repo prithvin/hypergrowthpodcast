@@ -78,23 +78,28 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     setCoursesHyperLink (classId) {
+        $(this.mainDiv).find(".classlink1").attr('href', "#/courses/" + classId);
+        $(this.mainDiv).find(".classlink2").attr('href', "#/courses/" + classId);
+/*  
         $(this.mainDiv).find("#course_button").on("click", function () {
             var windowHash = "#/courses/" + classId;
             if (classId == null) {
                 windowHash = "#/courses";
             }
             window.location.hash =  windowHash;
-        });
+        });*/
     }
     
     setHomeHyperLink () {
         var windowHash = "#/courses";
+        $(this.mainDiv).find(".homelink").attr('href', windowHash);
+        /*
         $(this.mainDiv).find("#home_button").on("click", function () {
             window.location.hash = windowHash;
         }.bind(this))
         $(this.mainDiv).find("#home_button2").on("click", function () {
             window.location.hash = windowHash;
-        }.bind(this))
+        }.bind(this))*/
     }
     
     
