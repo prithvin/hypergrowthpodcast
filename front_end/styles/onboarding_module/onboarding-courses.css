@@ -163,12 +163,13 @@
 
 .sym {
     padding-top: 10px;
-    opacity: .2;
+    opacity: .1;
     -webkit-transition: opacity 1s, padding-top .1s;
     transition: opacity 1s, padding-top .1s;
 }
 
 .table-row:hover .sym {
+    color:  rgba(229,193,0,1);
     opacity: 1;
 }
 
