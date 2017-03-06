@@ -338,6 +338,7 @@ var PostSearch = class PostSearch {
     searchForSlide (slideNo) {
         var anyPostsShown = false;
         $(this.noResultsOption).hide();
+        console.log(slideNo);
         for (var x = 0; x < this.posts.length; x++) {
             anyPostsShown = this.posts[x].fetchBySlide(slideNo) || anyPostsShown;
         }
