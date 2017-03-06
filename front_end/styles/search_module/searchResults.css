@@ -9,11 +9,30 @@
     padding: 0px !IMPORTANT;
     -webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
-    margin-left: 20px;
+    margin-left: 7px;
 }
 
 .video-card:active {
 
+}
+
+
+.lecture-image-search {
+  width: 100%;
+  filter: brightness(0.5);
+  border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+}
+
+.title-video-data {
+  position:absolute;
+  z-index: 5;
+  top: 40px;
+  width: 100%;
+}
+
+.title-video-data span {
+    color: white;
 }
 
 .video-card-title {
