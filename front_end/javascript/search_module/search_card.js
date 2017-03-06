@@ -71,11 +71,11 @@ var SearchCardClass = class SearchCardClass {
     }
 
     getFiveDiffs (left, term, right) {
-        var newLeft = left.split(' ').slice(0, 5).join(' ');
+        var newLeft = left.split(' ').slice(0, 2).join(' ');
         var term = " " + term + " ";
 
         var splitRight = right.split(' ');
-        var newRight = splitRight.slice(splitRight.length - 5).join(' ');
+        var newRight = splitRight.slice(splitRight.length - 2).join(' ');
 
         return "..." + newLeft + term  + newRight + "...\n";
         
