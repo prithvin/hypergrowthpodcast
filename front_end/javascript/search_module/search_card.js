@@ -6,27 +6,28 @@ class SearchCardClass {
         this.title = $(mainDiv).find(".video-card-title");
         
         $(this.title).html(moment(data['Time']).format("dddd, MM/DD"));
-        
-        $(this.img).attr('src', data['PodcastImage']);
+
         $(this.card).attr("data-podcastid", data['PodcastId']);
         
         $(this.card).on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.getAttribute("data-podcastid");
         });
+
+        loadHTMLComponent("SearchCardIndvModule", function (htmlComponent) {
+            this.cardModule = htmlComponent;
+            this.appendOCRandAudio(this.card, data);
+        }.bind(this));
         
-        this.appendOCRandAudio(this.card, data);
+        
     }
     
     appendOCRandAudio(cardDiv, data) {    
         console.log(data);
         for (var i = 0; i < Math.random() * 8; i ++) {
-            var key = document.createElement('span');
-            key.className = 'col-12 type-of-ocr';
-            key.innerHTML = "B;ob"
-            var hr = document.createElement('hr');  
-            hr.className = 'ocr-module-hr';
-            $(cardDiv).append(key);
-            $(cardDiv).append(hr);
+            var ocrText = $(this.cardModule);
+            ocrText.find(".content-span").html("This is a post " + i);
+            console.log(ocrText);
+            $(cardDiv).append(ocrText);
         }
     }   
 }

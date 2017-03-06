@@ -149,44 +149,59 @@ var apiFunctions = {
               '_id Slides AudioTranscript Time',
               function (err, podcasts) {
       */
+      CourseModel.findById(request.CourseId, function (err, course) {
+        var images = {};
+        for (let a = 0; a < course.Podcasts.length; a++) {
+          var working = course.Podcasts[a];
+          images[working.PodcastId] = working.PodcastImage;
+        }
 
-      NewPodcastModel.find({CourseId: request.CourseId},
-                        '_id Slides AudioTranscript Time',
-                        function(err, podcasts) {
-        for (let i = 0; i < podcasts.length; i++) {
-          var podcast = podcasts[i];
-          var matches = [];
+        NewPodcastModel.find({CourseId: request.CourseId},
+                          '_id Slides AudioTranscript Time',
+                          function(err, podcasts) {
+          for (let i = 0; i < podcasts.length; i++) {
+            var podcast = podcasts[i];
+            var matches = [];
 
-          for (let j = 0; j < podcast.Slides.length; j++) {
-            var slide = podcast.Slides[j];
+            for (let j = 0; j < podcast.Slides.length; j++) {
+              var slide = podcast.Slides[j];
 
-            if (slide.OCRTranscription.toLowerCase().indexOf(keywords) != -1) {
-              matches.push({
-                  'Type': 'OCR',
-                  'Text': slide.OCRTranscription.replace(/\n/g, ''),
-                  'SlideNo': slide.SlideNum
+              if (slide.OCRTranscription.toLowerCase().indexOf(keywords) != -1) {
+                matches.push({
+                    'Type': 'OCR',
+                    'Text': slide.OCRTranscription.replace(/\n/g, ''),
+                    'SlideNo': slide.SlideNum
+                  });
+                }
+              }
+
+            for (let k = 0; k < podcast.AudioTranscript.length; k++) {
+              var transcript = podcast.AudioTranscript[k];
+              
+              if (transcript.Content.toLowerCase().indexOf(keywords) != -1) {
+                matches.push({
+                  'Type': 'AUDIO',
+                  'Text': transcript.Content.replace(/\n/g, ''),
+                  'Time': transcript.StartTime
                 });
               }
             }
 
-          for (let k = 0; k < podcast.AudioTranscript.length; k++) {
-            var transcript = podcast.AudioTranscript[k];
-            
-            if (transcript.Content.toLowerCase().indexOf(keywords) != -1) {
-              matches.push({
-                'Type': 'AUDIO',
-                'Text': transcript.Content.replace(/\n/g, ''),
-                'Time': transcript.StartTime
+            if (matches.length > 0)
+              results.push({
+                'PodcastId': podcast._id,
+                'LectureTime': podcast.Time,
+                'Matches': matches,
+                'PodcastImage': images[podcast._id]
               });
+
+            if (i == podcasts.length - 1) {
+              console.log('elapsed: ' + (new Date().getTime() - start) + 'ms');
+              return callback(results);
             }
           }
+        });
 
-          if (matches.length > 0)
-            results.push({'LectureTime': podcast.Time, 'Matches': matches});
-
-          if (i == podcasts.length - 1)
-            callback(results);
-        }
       });
     }
   },
