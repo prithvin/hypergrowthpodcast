@@ -125,5 +125,6 @@ var require = {
         'facebook': '//connect.facebook.net/en_US/sdk',
         'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
         'search-card': "search_module/search_card",
+        'boardz': 'search_module/boardz'
     }
 };

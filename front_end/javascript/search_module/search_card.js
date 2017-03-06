@@ -56,8 +56,6 @@ var SearchCardClass = class SearchCardClass {
         var searchTerm = this.searchTerm;
         var splittedString = text.split(searchTerm);
         var newString = "";
-        console.log(searchTerm );
-        console.log(text);
         for (var x = 1; x < splittedString.length; x++) 
             newString += this.getFiveDiffs(splittedString[x - 1], searchTerm, splittedString[x]);
         return newString;
