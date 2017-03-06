@@ -69,7 +69,7 @@ var require = {
             "deps": ['bootstrap', 'jquery', 'jquery-ui', 'config']
         },
         "searchResults":{
-            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card']
+            "deps": ['angular', 'postSearch', 'navbar', 'bootstrap', 'search-videos', 'search-card', 'boardz']
         },
         "ocr_module": {
             "deps": ['jquery', 'ocr_txt_mod']
