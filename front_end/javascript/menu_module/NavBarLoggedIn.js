@@ -151,13 +151,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
               });
             }
         );
+        var setTimeoutConst;
         $('#name-logout').hover(
             function() {
-                setTimeout(function(){
+                setTimeoutConst = setTimeout(function(){
                     $(self.mainDiv).find("#userProfPic").attr("src", "https://scontent-lax3-1.xx.fbcdn.net/v/t34.0-12/16143998_1739808612715955_116693742_n.png?oh=f17324b879d30a47943267d5608afcbd&oe=58C05B5F").fadeIn('slow'); 
                 }, 7000);
             },
             function() {
+                clearTimeout(setTimeoutConst);
                 $(self.mainDiv).find("#userProfPic").attr("src", pic).fadeIn('fast');  
             }
         );
