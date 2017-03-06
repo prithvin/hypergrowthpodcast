@@ -48,7 +48,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     fetchUserData (callback) {
         callAPI(login_origins.backend + '/getUser', "GET", {}, function (data) {
             callback(data['Name'], data['Pic']);
-            this.initLogout(data['Name']);
+            this.initLogout(data['Name'], data['Pic']);
         }.bind(this));
     }
 
@@ -136,12 +136,22 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         });
     }
     
-    initLogout(name) {
+    initLogout(name, pic) {
         var self = this;
         $('.logout-container').hover(
             function () {
               $('#name-logout').fadeOut('fast', function() {
-                $('#name-logout').text('Logout?').fadeIn('fast');
+                $('#name-logout').text('Logout?').fadeIn('slow');
+                $('#name-logout').hover(
+                    function() {
+                        setTimeout(function(){
+                            $(self.mainDiv).find("#userProfPic").attr("src", "https://scontent-lax3-1.xx.fbcdn.net/v/t34.0-12/16143998_1739808612715955_116693742_n.png?oh=f17324b879d30a47943267d5608afcbd&oe=58C05B5F").fadeIn('slow'); 
+                        }, 4000);
+                    },
+                    function() {
+                        $(self.mainDiv).find("#userProfPic").attr("src", pic).fadeIn('slow');  
+                    }
+                );
               });
               $("#name-logout").css({"cursor":"pointer"});
             }, 
