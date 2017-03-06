@@ -15,8 +15,12 @@ var SearchVideosClass =  class SearchVideosClass {
 
     loadCourseCards (searchTerm) {
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
-        console.log(resultData);
         this.loadCard(resultData)
+        var waterfall = new Waterfall({
+          containerSelector: '#search-vid',
+          boxSelector: '.video-card',
+          minBoxWidth: 240
+        });
       }.bind(this));
     }
 

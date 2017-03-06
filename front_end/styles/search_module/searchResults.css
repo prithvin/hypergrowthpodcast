@@ -119,9 +119,7 @@
     max-height: 100%;
     width: 100%;
     bottom: 0%;
-    padding: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 25px;
     flex-direction: column;
     overflow: auto;
 }
