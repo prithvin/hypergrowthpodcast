@@ -15,6 +15,7 @@ var SearchVideosClass =  class SearchVideosClass {
 
     loadCourseCards (searchTerm) {
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
+        console.log(resultData);
         this.loadCard(resultData)
       }.bind(this));
     }

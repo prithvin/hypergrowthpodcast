@@ -9,7 +9,8 @@
     padding: 0px !IMPORTANT;
     -webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
-    margin-left: 7px;
+    margin-bottom: 20px;
+    min-width: 225px;
 }
 
 .video-card:active {

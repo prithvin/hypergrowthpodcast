@@ -44,7 +44,7 @@ var SearchCardClass = class SearchCardClass {
             var ocrText = $(this.cardModule);
             ocrText.find(".content-span").html(this.generateMatch(matches[i].Text));
             if (matches[i].Type == "AUDIO")
-                ocrText.find(".pre-slide-data").html("Transcription match during");
+                ocrText.find(".pre-slide-data").html("Audio match on");
             else
                 ocrText.find(".pre-slide-data").html("Slide match on");
             ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo);
@@ -54,7 +54,9 @@ var SearchCardClass = class SearchCardClass {
 
     generateMatch(text) {
         var searchTerm = this.searchTerm;
-        var splittedString = text.split(searchTerm);
+        var pattern = new RegExp(searchTerm, 'gi');
+
+        var splittedString = text.split(pattern);
         var newString = "";
         for (var x = 1; x < splittedString.length; x++) 
             newString += this.getFiveDiffs(splittedString[x - 1], searchTerm, splittedString[x]);
