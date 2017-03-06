@@ -3,7 +3,7 @@
 .video-js {
     width: 100% !important;
     padding: 23% !important;
-    height: auto!important;
+    height: auto;
     
 }
 .vjs-default-skin .vjs-big-play-button {
