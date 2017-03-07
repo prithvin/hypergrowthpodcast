@@ -107,10 +107,12 @@ function myFunction() {
     td2 = tr[i].getElementsByTagName("td")[2];
     if (td && td1 && td2) {
       var course = td.innerHTML + " " + td2.innerHTML;
+      var nospace = course.replace(/\s/g,'');
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1 ||
           td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
           td2.innerHTML.toUpperCase().indexOf(filter) > -1 || 
-          course.toUpperCase().indexOf(filter) > -1){
+          course.toUpperCase().indexOf(filter) > -1 ||
+          nospace.toUpperCase().indexOf(filter) > -1) {
           tr[i].className = 'table-row';
           tr[i].style.display = "";
       } else {
