@@ -422,11 +422,9 @@ var PostSearch = class PostSearch {
         this.mark.unmark();
         this.notesWrapper.hide();
         
-        var anyPostsShown = false;
-        var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
+        //var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
         var ocrResults = this.ocrModule.fetchOCRForSlide(slideNum);
-        anyPostsShown = audioResults || ocrResults;
-        return anyPostsShown;
+        return true;
     }
 
     remarkText () {
@@ -496,7 +494,7 @@ var PostSearch = class PostSearch {
             if(thisClass.postFetchData.TypeOfFetch === "CourseGlobal"){
                 var link_anchor = $(newDiv).find(".linker");
                 link_anchor.attr('href', '#/podcast/' + postData['PodcastId'] + '/' + postData['SlideOfPost']);
-                link_anchor.attr('style', 'text-decoration: none');
+                link_anchor.attr('style', 'text-decoration: none; color: inherit');
                 //$(link_anchor).append(newDiv);
                 //newDiv = link_anchor;
             }

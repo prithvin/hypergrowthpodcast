@@ -132,6 +132,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
+                select: function(event, ui) { 
+                    $("input#searchBar").val(ui.item.value);
+                    $("#searchForm").submit();
+                },
                 open: function () { 
                     $('ul.ui-autocomplete').addClass('opened');  
                 },
