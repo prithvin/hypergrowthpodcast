@@ -109,7 +109,8 @@ var PodcastPage = class PodcastPage {
             }
         });
         $(thisClass.mainDiv).bind("DOMSubtreeModified", function() {
-            thisClass.updatePostHeights();
+            if ($(thisClass.mainDiv))
+                thisClass.updatePostHeights();
         });
     }
 

@@ -1,4 +1,4 @@
-require(['director', 'components', 'loader', 'config'], function () {
+require(['director', 'components', 'loader', 'config', 'garbageBin'], function () {
 
   function timeToHideLoader (time) {
     if (!time)
@@ -47,6 +47,9 @@ require(['director', 'components', 'loader', 'config'], function () {
     // calls the latest function called, and sets the callbackToCall to null so that in the timeout
     // the funciton is not recurisvely called again!
     
+    //if ($("#page").find("div")[0])
+      //discardElement($("#page").find("div")[0]);
+
     callbackToCall();
     callbackToCall = null;
   }
