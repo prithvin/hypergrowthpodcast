@@ -10,6 +10,7 @@ require(['director', 'components', 'loader', 'config'], function () {
 
   function startPageLoad () {
     $("#loader-animation").show();
+    callback();
   }
 
 
