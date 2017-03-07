@@ -118,8 +118,6 @@
 .pic-filter {
     width: 0px;
     height: 0px;
-    //width: 30px;
-    //height: 20px;
     opacity: .09;
     padding: 2px;
     margin-bottom: 5px;
@@ -242,7 +240,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
