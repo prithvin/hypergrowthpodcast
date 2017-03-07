@@ -29,6 +29,7 @@ var SearchVideosClass =  class SearchVideosClass {
         for (var x = 0; x < resultData.length; x++) {
           var mainDiv = $(data);
           new SearchCardClass($(mainDiv), this.searchTerm, resultData[x]);
+            
           $(this.mainDiv).find("#search-vid").append(mainDiv);
         }
       }.bind(this));
@@ -58,13 +59,26 @@ var SearchVideosClass =  class SearchVideosClass {
       var colors = ['009788', '00bcd6', '323e94', '6734ba', '9d1cb2', 'c81352'];
       for (var i = 0; i < 6; i++){
         var recs = document.createElement('button');
+          
+        var link_anchor = document.createElement('a');
+        
+        
+          
         recs.innerHTML = results[i];
-        recKeywords.appendChild(recs);
+        link_anchor.href = "#/search/" + courseId + "/" + results[i];
+        link_anchor.style = 'text-decoration: none; color: inherit';
+        link_anchor.class = "recClass";
+        link_anchor.appendChild(recs);
+
+          //recs.appendChild(link_anchor);
+        recKeywords.appendChild(link_anchor);
+        //recKeywords.appendChild(recs);
+
         var currentColor = colors[i];
         $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor, "font-family": "Open Sans, sans-serif"});
-        $(recs).on("click", function (ev) {
+        /*$(recs).on("click", function (ev) {
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
-        });
+        });*/
       }
     }
 

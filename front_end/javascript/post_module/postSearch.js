@@ -491,7 +491,8 @@ var PostSearch = class PostSearch {
             var newDiv = $(postTemplate);
             var newPostObj = new APost(postData, thisClass.userData, newDiv, thisClass.shouldAllowNewComments);
 
-            if(thisClass.postFetchData.TypeOfFetch === "CourseGlobal"){
+            if(thisClass.postFetchData.TypeOfFetch === "CourseGlobal" || 
+              thisClass.postFetchData.TypeOfFetch === "CourseSearch"){
                 var link_anchor = $(newDiv).find(".linker");
                 link_anchor.attr('href', '#/podcast/' + postData['PodcastId'] + '/' + postData['SlideOfPost']);
                 link_anchor.attr('style', 'text-decoration: none; color: inherit');

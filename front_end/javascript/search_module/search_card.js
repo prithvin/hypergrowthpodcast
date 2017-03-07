@@ -34,15 +34,17 @@ var SearchCardClass = class SearchCardClass {
     }
 
     clickedImage () {
-        $(this.mainDiv).find(".title-video-data").on("click", function (ev) {
+        $(this.mainDiv).find(".title-video-data").attr('href', '#/podcast/' + this.data['PodcastId']);
+        $(this.mainDiv).find(".title-video-data").attr('style', 'text-decoration: none');
+        /*$(this.mainDiv).find(".title-video-data").on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'];
-        }.bind(this));
+        }.bind(this));*/
     }
 
     slideClicks () {
-        $(this.mainDiv).on("click", ".slide-no", function (ev) {
+        /*$(this.mainDiv).on("click", ".slide-no", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'] + "/" + $(ev.target).attr("data-slide");
-        }.bind(this));
+        }.bind(this));*/
     }
     
     appendOCRandAudio(cardDiv, data) {    
@@ -57,7 +59,17 @@ var SearchCardClass = class SearchCardClass {
             else
                 ocrText.find(".pre-slide-data").html("Slide match on");
             ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo);
+            //console.log(data);
+            var link_anchor = ocrText.find(".linker");
+                link_anchor.attr('href', '#/podcast/' + data['PodcastId'] + '/' + matches[i].SlideNo);
+                link_anchor.attr('style', 'text-decoration: none; color: inherit');
+            
+            
+            //link_anchor.append(ocrText);
+
             $(cardDiv).append(ocrText);
+            //$(cardDiv).append(link_anchor);
+
             if (i != 0)
                 $(ocrText).hide();
         }
