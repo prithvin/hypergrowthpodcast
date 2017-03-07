@@ -62,7 +62,7 @@ var OnboardingCourses = class OnboardingCourses {
             });*/
             var link_anchor = document.createElement('a');
             link_anchor.href = "#/courses/" + row.id;
-            link_anchor.style = "text-decoration: none";
+            $(link_anchor).css({"text-decoration": "none"});
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
             
