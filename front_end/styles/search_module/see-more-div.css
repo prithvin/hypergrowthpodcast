@@ -3,6 +3,9 @@
     width: 100%;
     font-weight: 500;
     color: #6734ba;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size:0.8em;
 }
 
 .see-more-div span {
