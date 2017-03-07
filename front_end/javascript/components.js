@@ -1,5 +1,6 @@
 window.appModules = {};
 
+var baseModuleURL = "./views/"
 var loadHTMLModules = {
     "CommentModule": "comment_module.html",
     "CourseHomepageModule": "course_homepage_module.html",
@@ -60,7 +61,7 @@ function loadHTMLComponent (moduleName, callback) {
         return;
     }
 
-    var filePath = loadHTMLModules[moduleName];
+    var filePath = baseModuleURL + loadHTMLModules[moduleName];
 
     $.ajax({
         url: filePath,

@@ -14,6 +14,7 @@ var SearchVideosClass =  class SearchVideosClass {
     }
 
     loadCourseCards (searchTerm) {
+      $(this.mainDiv).find(".loading-animation-for-searching-podcast").show();
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
         $(this.mainDiv).find(".loading-animation-for-searching-podcast").hide();
         if (resultData.length == 0) {
