@@ -8,7 +8,7 @@
     width: 100%;
     padding-left: 100px;
     padding-right: 100px;
-    font-family: "Roboto", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 200;
     font-size: 42px;
     -webkit-transition: visibility 0s, opacity 2s;
@@ -42,7 +42,7 @@
   height: 100%;
   width: 100%;
   min-width: 1200px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -68,7 +68,7 @@
 .caption {
   padding-top: 5%;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 42px;
   /*font-size: 2.5vw;*/
@@ -76,7 +76,7 @@
 }
 
 .emphasis {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -114,19 +114,23 @@
   border-collapse: collapse;
 }
 
+
 .pic-filter {
-    width: 30px;
-    height: 20px;
+    width: 0px;
+    height: 0px;
+    //width: 30px;
+    //height: 20px;
     opacity: .09;
     padding: 2px;
     margin-bottom: 5px;
 }
 
+/*
 .pic-filter:hover {
   cursor: pointer;
   padding: 0px;
   opacity: 1;
-}
+}*/
 
 .cell-head { 
     width: 1%;
@@ -151,7 +155,7 @@
 .cell {
   padding: 20px;
   line-height: 35px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 18px;
   color: white;
@@ -196,6 +200,7 @@
   height: 60vh;
   overflow-y: scroll;
   display: block;
+  -webkit-animation-delay: 1s;
 }
 
 .table-row {
@@ -237,7 +242,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
@@ -250,7 +255,7 @@
 
 
 .input-style {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 15px;
 }

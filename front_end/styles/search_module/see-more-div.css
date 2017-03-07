@@ -1,0 +1,19 @@
+.see-more-div {
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+    color: #6734ba;
+}
+
+.see-more-div span {
+    padding: 0;
+    margin: 0;
+}
+
+
+.see-more-div i {
+    font-size: 1.5em;
+    position: relative;
+    width: 100%;
+    top: -3px;
+}

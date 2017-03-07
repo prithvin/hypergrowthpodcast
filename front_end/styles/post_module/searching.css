@@ -76,6 +76,5 @@
 .new-post-img img {
     filter: invert(100%);
     height: 100%;
-    top: -3px;
     position:relative;
 }

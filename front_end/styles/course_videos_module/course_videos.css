@@ -13,13 +13,14 @@
 
 #course-title {
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }
 #course-posts .post-container,
 #posts .post-container{
     cursor: pointer;
 }
+
 .course-videos-Hr {
     width: 100%
     font-size: 1px;
@@ -69,12 +70,16 @@
     min-height: 200px;
 }
 
+.videos-row:last-child {
+    margin-bottom: 30px;
+}
+
 .videos-row .col-4 {
     text-align: center;
 }
 .text-title {
   margin-top: 5px;
   color: rgba(66, 100, 155, 1);
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }

@@ -78,6 +78,13 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     }
 
     setCoursesHyperLink (classId) {
+        /*$(this.mainDiv).find(".classlink1").attr('href', "#/courses/" + classId);
+        $(this.mainDiv).find(".classlink1").attr('style', 'text-decoration: none');
+
+        $(this.mainDiv).find(".classlink2").attr('href', "#/courses/" + classId);
+        $(this.mainDiv).find(".classlink2").attr('style', 'text-decoration: none');*/
+
+
         $(this.mainDiv).find("#course_button").on("click", function () {
             var windowHash = "#/courses/" + classId;
             if (classId == null) {
@@ -89,6 +96,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     
     setHomeHyperLink () {
         var windowHash = "#/courses";
+        /*$(this.mainDiv).find(".homelink").attr('href', windowHash);
+        $(this.mainDiv).find(".homelink").attr('style', 'text-decoration: none');*/
+
+        
         $(this.mainDiv).find("#home_button").on("click", function () {
             window.location.hash = windowHash;
         }.bind(this))
@@ -121,6 +132,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $("#searchBar").autocomplete({
                 source: autokeys,
                 minLength: 2,
+                select: function(event, ui) { 
+                    $("input#searchBar").val(ui.item.value);
+                    $("#searchForm").submit();
+                },
                 open: function () { 
                     $('ul.ui-autocomplete').addClass('opened');  
                 },
