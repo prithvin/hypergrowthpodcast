@@ -9,11 +9,32 @@
     padding: 0px !IMPORTANT;
     -webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
-    margin-left: 20px;
+    margin-bottom: 20px;
+    min-width: 225px;
+    width: 90%;
 }
 
 .video-card:active {
 
+}
+
+
+.lecture-image-search {
+  width: 100%;
+  filter: brightness(0.5);
+  border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+}
+
+.title-video-data {
+  position:absolute;
+  z-index: 5;
+  top: 40px;
+  width: 100%;
+}
+
+.title-video-data span {
+    color: white;
 }
 
 .video-card-title {
@@ -97,11 +118,9 @@
     background-color: #F4F6F8;
     height: auto;
     max-height: 100%;
-    width: 100%;
+    width: 104%;
     bottom: 0%;
-    padding: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 25px;
     flex-direction: column;
     overflow: auto;
 }

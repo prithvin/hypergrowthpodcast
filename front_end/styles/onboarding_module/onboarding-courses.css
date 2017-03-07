@@ -169,7 +169,6 @@
 }
 
 .table-row:hover .sym {
-    color:  rgba(229,193,0,1);
     opacity: 1;
 }
 
@@ -197,6 +196,7 @@
   height: 60vh;
   overflow-y: scroll;
   display: block;
+  -webkit-animation-delay: 1s;
 }
 
 .table-row {

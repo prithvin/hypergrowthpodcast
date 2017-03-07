@@ -52,7 +52,7 @@ var OnboardingCourses = class OnboardingCourses {
             cell3.className = 'cell cell-end';
             row.className = 'table-row';
             row.id = data[i]['Id'];
-
+        
             /* Redirect to CourseHomepage onclick*/
             /*row.addEventListener("click", function() {
                 var baseURL = window.location.origin + window.location.pathname;
@@ -70,7 +70,7 @@ var OnboardingCourses = class OnboardingCourses {
             var index = 0;
             while (qtr.indexOf(this.quarters_short[index]) <= -1 && index < this.quarters_short.length) {index++}
             qtr = this.quarters_long[index] + qtr.slice(-2);
-            $(row).css({'background-color': this.colors[1]});
+            $(row).css({'background-color': this.colors[index]});
             
             /* Appending Items to Cells and Cells to Row*/
             var quarter = document.createTextNode(qtr);
