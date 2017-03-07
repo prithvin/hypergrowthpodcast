@@ -8,7 +8,7 @@ require(['director', 'components', 'loader', 'config'], function () {
     }, time);
   };
 
-  function startPageLoad () {
+  function startPageLoad (callback) {
     $("#loader-animation").show();
     callback();
   }
