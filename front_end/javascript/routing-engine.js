@@ -8,10 +8,13 @@ require(['director', 'components', 'loader', 'config'], function () {
     }, time);
   };
 
+  function startPageLoad () {
+    $("#loader-animation").show();
+  }
 
 
   var loginPage = function () {
-    $("#loader-animation").show();
+    startPageLoad();
     require(['onboarding'], function () {
       loadComponent("OnboardingFrontPage", $("#page"), function () {
         new Onboarding($('#page').find('.onboarding-page'));
@@ -21,7 +24,7 @@ require(['director', 'components', 'loader', 'config'], function () {
   };
 
   var onboardingCoursesPage = function(courses) {
-    $("#loader-animation").show();
+    startPageLoad();
     loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
       require(['course-selection'], function () {
         new OnboardingCourses($("#page").find(".onboarding-courses-page"));
@@ -32,10 +35,10 @@ require(['director', 'components', 'loader', 'config'], function () {
 
 
   var podcast = function (podcastId, slide) {
-    $("#loader-animation").show();
+    startPageLoad();
+
     if (!slide)
       slide = 0;
-
     loadComponentOrLogin("PodcastModule", $("#page"), function () {
       require(['podcast'], function () {
         new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
@@ -46,9 +49,8 @@ require(['director', 'components', 'loader', 'config'], function () {
   };
 
   var search = function (courseId, searchTerm) {
+    startPageLoad();
     searchTerm = decodeURIComponent(searchTerm);
-    $("#loader-animation").show();
-
     require(['searchResults'], function () {
       loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
         new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);
@@ -58,7 +60,7 @@ require(['director', 'components', 'loader', 'config'], function () {
   };
 
   var courseHomepage = function(courseId) {
-    $("#loader-animation").show();
+    startPageLoad();
     loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
       require(['course-homepage'], function() {
         new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
@@ -68,6 +70,10 @@ require(['director', 'components', 'loader', 'config'], function () {
     });
   }
 
+  var otherPages = function() {
+    alert("This page is not found");
+  }
+
   var routes = {
     '/podcast/:podcastId': podcast,
     '/podcast/:podcastId/:slide': podcast,
@@ -75,7 +81,8 @@ require(['director', 'components', 'loader', 'config'], function () {
     '/': loginPage,
     '': loginPage,
     '/courses/:courseId': courseHomepage,
-    '/courses': onboardingCoursesPage
+    '/courses': onboardingCoursesPage,
+    '/?((\w|.)*)': otherPages
   };
 
   var router = Router(routes);
