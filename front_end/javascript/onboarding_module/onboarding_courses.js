@@ -83,6 +83,8 @@ var OnboardingCourses = class OnboardingCourses {
                        
             link_anchor.appendChild(row);
             this.tableRef.appendChild(link_anchor);
+            //this.tableRef.appendChild(row);
+
         }
     }
 }
