@@ -89,8 +89,4 @@ require(['director', 'components', 'loader', 'config'], function () {
   });
 });
   
-        
-require(['scrollreveal'], function(ScrollReveal) {
-  window.sr = ScrollReveal();
-  sr.reveal('.post-container');
-});
+     
