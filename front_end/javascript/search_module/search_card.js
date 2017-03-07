@@ -61,13 +61,16 @@ var SearchCardClass = class SearchCardClass {
             if (i != 0)
                 $(ocrText).hide();
         }
-        loadHTMLComponent("SeeMoreTinySearchCardModule", function (data) {
-            var seeMoreButton = $(data);
-            $(cardDiv).append(seeMoreButton);
-            this.seeMoreButton = seeMoreButton;
-            this.arrOfThings = arr;
-            this.seeMoreListener();
-        }.bind(this));
+
+        if (arr.length != 0) {
+            loadHTMLComponent("SeeMoreTinySearchCardModule", function (data) {
+                var seeMoreButton = $(data);
+                $(cardDiv).append(seeMoreButton);
+                this.seeMoreButton = seeMoreButton;
+                this.arrOfThings = arr;
+                this.seeMoreListener();
+            }.bind(this));
+        }
     }   
 
 
@@ -82,9 +85,8 @@ var SearchCardClass = class SearchCardClass {
     seeMoreRecursive (index) {
         if (index == this.arrOfThings.length) 
             return;
-        $(this.arrOfThings[index]).slideDown(100, function () {
-            this.seeMoreRecursive(index + 1);
-        }.bind(this));
+        $(this.arrOfThings[index]).slideDown(100);
+        this.seeMoreRecursive(index + 1);
     }
 
     generateMatch(text) {
