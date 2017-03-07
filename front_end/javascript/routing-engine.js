@@ -11,17 +11,27 @@ require(['director', 'components', 'loader', 'config'], function () {
   var globalTime = 0;
   
   var callbackToCall = null;
+
   // Preventing random race conditions hopefully???!?!?
   function startPageLoad (callback) {
     var currentTime = new Date().getTime();
+
     if (currentTime - globalTime < 1000) {  // then queue up this function call and wait for a bit??
-      callbackToCall = callback;
+      if (callback != null)
+        callbackToCall = callback;
+      setTimeout(function () {
+        if (callbackToCall)
+          startPageLoad();
+      }, 50)
       return;
     }
+    if (callback)
+      callbackToCall = callback;
+
     globalTime = currentTime;
-    console.log("Callback");
     $("#loader-animation").show();
-    callback();
+    callbackToCall();
+    callbackToCall = null;
   }
 
 
