@@ -3,7 +3,7 @@
     background-color:white;
     border-radius: 6px;
     border: 1px solid #BAC5D3;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding-left:0px;
     padding-right:0px;
     padding: 0px !IMPORTANT;
@@ -14,8 +14,8 @@
     width: 90%;
 }
 
-.video-card:active {
-
+.title-video-data:hover {
+    cursor: pointer;
 }
 
 
@@ -57,7 +57,7 @@
 }*/
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*.recClass{padding-bottom:15;padding-left: 10; padding-right: 10;overflow:hidden; height: 40; width:100%; display:flex; justify-content:space-between;text-align: center}*/
@@ -72,7 +72,7 @@
 }*/
 
 .imageOverVid{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #67809f;
   font-size: 14px;
   max-height: 10px;
@@ -82,7 +82,7 @@
 }
 
 .textUnderVid{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color:#124d87;
   font-size: 14px;
   max-height: 10px;

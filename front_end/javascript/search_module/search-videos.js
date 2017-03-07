@@ -37,9 +37,20 @@ var SearchVideosClass =  class SearchVideosClass {
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
       callAPI(login_origins.backend + "/getKeywordSuggestions", "GET", {'count': 50, 'minKeywordLength': 3, 'CourseId': courseId}, function(results) {
-        results.sort( function() { return 0.5 - Math.random() } );
-        this.keywordGeneration(searchTerm, courseId, masterDiv, results);
+        var topSixResults = []; // random, using hash
+        var hashTerm = Math.abs(this.hash(searchTerm)) % results.length;
+        var firstHashed = hashTerm;
+        for (var x = 0; x < 6; x++) {
+          topSixResults.push(results[firstHashed]);
+          firstHashed += hashTerm;
+          firstHashed = firstHashed % results.length;
+        }
+        this.keywordGeneration(searchTerm, courseId, masterDiv, topSixResults);
       }.bind(this));
+    }
+
+    hash(s){
+      return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
     }
 
     keywordGeneration (searchTerm, courseId, masterDiv, results) {
@@ -50,7 +61,7 @@ var SearchVideosClass =  class SearchVideosClass {
         recs.innerHTML = results[i];
         recKeywords.appendChild(recs);
         var currentColor = colors[i];
-        $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
+        $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor, "font-family": "Open Sans, sans-serif"});
         $(recs).on("click", function (ev) {
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
         });

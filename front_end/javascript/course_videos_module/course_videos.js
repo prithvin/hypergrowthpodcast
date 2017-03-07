@@ -23,15 +23,18 @@ class CourseVideosClass {
               var videoDiv = document.createElement('div');
               videoDiv.className = 'col-4';
               row.appendChild(videoDiv);
-            
+              var link_anchor = document.createElement('a');
+              link_anchor.href = '#/podcast/' + curr['Id'];
+              
               var img = document.createElement('img');
               img.className = 'course-videos-preview-images';
               img.src = curr['PreviewImage'];
-              img.addEventListener('click', function() {
+              /*img.addEventListener('click', function() {
                 window.location.hash = '#/podcast/' + this['Id']; 
-              }.bind(curr));
-              videoDiv.appendChild(img);
-
+              }.bind(curr));*/
+              link_anchor.appendChild(img);
+              //videoDiv.appendChild(img);
+              videoDiv.appendChild(link_anchor);
               var heading = document.createElement('p');
               heading.align = 'center';
               //var date = new Date(curr['Time']);

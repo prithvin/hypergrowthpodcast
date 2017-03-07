@@ -8,7 +8,7 @@
     width: 100%;
     padding-left: 100px;
     padding-right: 100px;
-    font-family: "Roboto", sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 200;
     font-size: 42px;
     -webkit-transition: visibility 0s, opacity 2s;
@@ -42,7 +42,7 @@
   height: 100%;
   width: 100%;
   min-width: 1200px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -68,7 +68,7 @@
 .caption {
   padding-top: 5%;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 42px;
   /*font-size: 2.5vw;*/
@@ -76,7 +76,7 @@
 }
 
 .emphasis {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -151,7 +151,7 @@
 .cell {
   padding: 20px;
   line-height: 35px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 18px;
   color: white;
@@ -251,7 +251,7 @@
 
 
 .input-style {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 15px;
 }
