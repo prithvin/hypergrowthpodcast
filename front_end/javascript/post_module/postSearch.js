@@ -505,12 +505,12 @@ var PostSearch = class PostSearch {
             });
         });
 
-        if (!thisClass.isPodcastPage) {
+        /*if (!thisClass.isPodcastPage) {
             sr.reveal('.post-container', {
                 container: '.search-module',
                 reset: true
             });
-        }
+        }*/
 
     }
     
