@@ -20,6 +20,7 @@
 #posts .post-container{
     cursor: pointer;
 }
+
 .course-videos-Hr {
     width: 100%
     font-size: 1px;
@@ -67,6 +68,10 @@
 
 .videos-row {
     min-height: 200px;
+}
+
+.videos-row:last-child {
+    margin-bottom: 30px;
 }
 
 .videos-row .col-4 {
