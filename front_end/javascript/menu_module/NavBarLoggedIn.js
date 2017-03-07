@@ -17,6 +17,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setClassQuarter(classQuarter);
             self.setPlaceHolder(className, classQuarter);
         });
+        
     }
 
     fetchCourseData(classID,  callback) {

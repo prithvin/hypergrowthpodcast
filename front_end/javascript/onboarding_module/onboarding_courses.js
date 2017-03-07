@@ -25,7 +25,7 @@ var OnboardingCourses = class OnboardingCourses {
             "s2" : 4,
             "fa" : 5
           };
-
+          
           data.sort(
             function(x,y){
               if(!x || !y || x.Quarter == null || y.Quarter == null || x.Quarter.length < 4 || y.Quarter.length < 4){
@@ -35,10 +35,13 @@ var OnboardingCourses = class OnboardingCourses {
                 return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
               }
               else{
-                return quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+                var result = quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+                if (result === 0) result = x.Course.localeCompare(y.Course, undefined, {numeric: true, sensitivity: 'base'});
+                return result;
               }
             }
           );
+        
         }
         
         for(var i = 0; i < data.length; i++) {
@@ -50,7 +53,8 @@ var OnboardingCourses = class OnboardingCourses {
             cell.className = 'cell cell-end';
             cell2.className = 'cell cell-mid';
             cell3.className = 'cell cell-end';
-            row.className = 'table-row';
+            row.className = 'table-row animated fadeInUpBig';
+            if ( i < 15) $(row).css({"-webkit-animation-delay": i*13/data.length + "s"});
             row.id = data[i]['Id'];
         
             /* Redirect to CourseHomepage onclick*/
@@ -62,7 +66,7 @@ var OnboardingCourses = class OnboardingCourses {
             });*/
             var link_anchor = document.createElement('a');
             link_anchor.href = "#/courses/" + row.id;
-            link_anchor.style = "text-decoration: none";
+            $(link_anchor).css({"text-decoration": "none"});
             var course = document.createTextNode(data[i]['Course']);
             var qtr = data[i]['Quarter'];
             
@@ -103,10 +107,13 @@ function myFunction() {
     td2 = tr[i].getElementsByTagName("td")[2];
     if (td && td1 && td2) {
       var course = td.innerHTML + " " + td2.innerHTML;
+      var nospace = course.replace(/\s/g,'');
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1 ||
           td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
           td2.innerHTML.toUpperCase().indexOf(filter) > -1 || 
-          course.toUpperCase().indexOf(filter) > -1){
+          course.toUpperCase().indexOf(filter) > -1 ||
+          nospace.toUpperCase().indexOf(filter) > -1) {
+          tr[i].className = 'table-row';
           tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
