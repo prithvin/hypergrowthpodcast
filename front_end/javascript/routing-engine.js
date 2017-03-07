@@ -8,8 +8,10 @@ require(['director', 'components', 'loader', 'config'], function () {
     }, time);
   };
 
+  // keeps track of time for race condition
   var globalTime = 0;
   
+  // acts as a "queue" that only holds the latest call
   var callbackToCall = null;
 
   // Preventing random race conditions hopefully???!?!?
@@ -17,19 +19,34 @@ require(['director', 'components', 'loader', 'config'], function () {
     var currentTime = new Date().getTime();
 
     if (currentTime - globalTime < 1000) {  // then queue up this function call and wait for a bit??
+
+      // if the callback is null, then we don't want to change the latest callback
       if (callback != null)
         callbackToCall = callback;
+
       setTimeout(function () {
+        // calls this function recursively with a delay to check to see if the user stopped randomly
+        // redirecting from page to page. does not pass in url, making callback null
         if (callbackToCall)
           startPageLoad();
+        // if callbackToCall is null, that means the callbackToCall was executed, so no need
+        // to recursively call
       }, 50)
       return;
     }
+
+    // if the callback is not null, then set it to callback to call, which is next function being
+    // executed
     if (callback)
       callbackToCall = callback;
 
+    // update time right before function execution
     globalTime = currentTime;
     $("#loader-animation").show();
+
+    // calls the latest function called, and sets the callbackToCall to null so that in the timeout
+    // the funciton is not recurisvely called again!
+    
     callbackToCall();
     callbackToCall = null;
   }
