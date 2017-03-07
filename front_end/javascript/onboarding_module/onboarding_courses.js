@@ -25,7 +25,7 @@ var OnboardingCourses = class OnboardingCourses {
             "s2" : 4,
             "fa" : 5
           };
-
+          
           data.sort(
             function(x,y){
               if(!x || !y || x.Quarter == null || y.Quarter == null || x.Quarter.length < 4 || y.Quarter.length < 4){
@@ -35,10 +35,13 @@ var OnboardingCourses = class OnboardingCourses {
                 return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
               }
               else{
-                return quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+                var result = quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+                if (result === 0) result = x.Course.localeCompare(y.Course, undefined, {numeric: true, sensitivity: 'base'});
+                return result;
               }
             }
           );
+        
         }
         
         for(var i = 0; i < data.length; i++) {
