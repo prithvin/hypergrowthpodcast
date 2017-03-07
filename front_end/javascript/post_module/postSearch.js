@@ -422,11 +422,9 @@ var PostSearch = class PostSearch {
         this.mark.unmark();
         this.notesWrapper.hide();
         
-        var anyPostsShown = false;
-        var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
+        //var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
         var ocrResults = this.ocrModule.fetchOCRForSlide(slideNum);
-        anyPostsShown = audioResults || ocrResults;
-        return anyPostsShown;
+        return true;
     }
 
     remarkText () {
