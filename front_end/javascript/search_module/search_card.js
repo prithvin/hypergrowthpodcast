@@ -65,14 +65,25 @@ var SearchCardClass = class SearchCardClass {
             var seeMoreButton = $(data);
             $(cardDiv).append(seeMoreButton);
             this.seeMoreButton = seeMoreButton;
+            this.arrOfThings = arr;
             this.seeMoreListener();
         }.bind(this));
     }   
 
 
     seeMoreListener () {
-        $(this.seeMoreListener).on("click", function () {
-            $(this.seeMoreListener).hide();
+
+        $(this.seeMoreButton).on("click", function () {
+            $(this.seeMoreButton).hide();
+            this.seeMoreRecursive(0);
+        }.bind(this));
+    }
+
+    seeMoreRecursive (index) {
+        if (index == this.arrOfThings.length) 
+            return;
+        $(this.arrOfThings[index]).slideDown(100, function () {
+            this.seeMoreRecursive(index + 1);
         }.bind(this));
     }
 
