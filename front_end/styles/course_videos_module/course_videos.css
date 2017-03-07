@@ -80,6 +80,7 @@
 }
 
 .enlarge:hover {
+    cursor: pointer;
     background: rgba(0,0,0,.1);
     border-radius: 5px;
     -webkit-transform: scale(1.01);
