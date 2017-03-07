@@ -14,8 +14,8 @@
     width: 90%;
 }
 
-.video-card:active {
-
+.title-video-data:hover {
+    cursor: pointer;
 }
 
 
