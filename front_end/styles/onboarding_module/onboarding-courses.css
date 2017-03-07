@@ -118,13 +118,10 @@
 .pic-filter {
     width: 0px;
     height: 0px;
-    //width: 30px;
-    //height: 20px;
     opacity: .09;
     padding: 2px;
     margin-bottom: 5px;
 }
-
 /*
 .pic-filter:hover {
   cursor: pointer;
@@ -159,10 +156,6 @@
   font-weight: 200;
   font-size: 18px;
   color: white;
-  //width: 100%;
-  /*-webkit-transition: font-size .3s;
-  transition: font-size .3s;*/
-  /*white-space:nowrap;*/
 }
 
 .sym {
@@ -200,7 +193,6 @@
   height: 60vh;
   overflow-y: scroll;
   display: block;
-  -webkit-animation-delay: 1s;
 }
 
 .table-row {
@@ -242,7 +234,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
