@@ -61,7 +61,7 @@ var SearchVideosClass =  class SearchVideosClass {
         recs.innerHTML = results[i];
         recKeywords.appendChild(recs);
         var currentColor = colors[i];
-        $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor});
+        $(recs).css({"border":"2pxsolid " + currentColor, "background-color" : currentColor, "font-family": "Open Sans, sans-serif"});
         $(recs).on("click", function (ev) {
           window.location.hash =  "#/search/" + courseId + "/" + $(ev.target).html();
         });

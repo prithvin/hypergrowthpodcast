@@ -37,6 +37,9 @@ var SearchCardClass = class SearchCardClass {
         $(this.mainDiv).find(".lecture-image-search").on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'];
         }.bind(this));
+        $(this.mainDiv).find(".title-video-data").on("click", function (ev) {
+            window.location.hash = '#/podcast/' + this.data['PodcastId'];
+        }.bind(this));
     }
 
     slideClicks () {
