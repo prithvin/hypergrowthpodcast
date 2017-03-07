@@ -13,7 +13,7 @@
 
 #course-title {
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }
 #course-posts .post-container,
@@ -75,6 +75,6 @@
 .text-title {
   margin-top: 5px;
   color: rgba(66, 100, 155, 1);
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }

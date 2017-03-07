@@ -3,17 +3,38 @@
     background-color:white;
     border-radius: 6px;
     border: 1px solid #BAC5D3;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding-left:0px;
     padding-right:0px;
     padding: 0px !IMPORTANT;
     -webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
-    margin-left: 20px;
+    margin-bottom: 20px;
+    min-width: 225px;
+    width: 90%;
 }
 
-.video-card:active {
+.title-video-data:hover {
+    cursor: pointer;
+}
 
+
+.lecture-image-search {
+  width: 100%;
+  filter: brightness(0.5);
+  border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
+}
+
+.title-video-data {
+  position:absolute;
+  z-index: 5;
+  top: 40px;
+  width: 100%;
+}
+
+.title-video-data span {
+    color: white;
 }
 
 .video-card-title {
@@ -36,7 +57,7 @@
 }*/
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*.recClass{padding-bottom:15;padding-left: 10; padding-right: 10;overflow:hidden; height: 40; width:100%; display:flex; justify-content:space-between;text-align: center}*/
@@ -51,7 +72,7 @@
 }*/
 
 .imageOverVid{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #67809f;
   font-size: 14px;
   max-height: 10px;
@@ -61,7 +82,7 @@
 }
 
 .textUnderVid{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color:#124d87;
   font-size: 14px;
   max-height: 10px;
@@ -97,11 +118,9 @@
     background-color: #F4F6F8;
     height: auto;
     max-height: 100%;
-    width: 100%;
+    width: 104%;
     bottom: 0%;
-    padding: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 25px;
     flex-direction: column;
     overflow: auto;
 }
