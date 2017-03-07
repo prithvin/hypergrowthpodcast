@@ -39,7 +39,7 @@ require(['director', 'components', 'loader', 'config'], function () {
     loadComponentOrLogin("PodcastModule", $("#page"), function () {
       require(['podcast'], function () {
         new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
-          $("#loader-animation").fadeOut();  
+          timeToHideLoader(10);
         });
       });
     });
