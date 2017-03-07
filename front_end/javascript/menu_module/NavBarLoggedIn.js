@@ -17,7 +17,6 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setClassQuarter(classQuarter);
             self.setPlaceHolder(className, classQuarter);
         });
-        this.setHomeHyperLink();
     }
 
     fetchCourseData(classID,  callback) {
@@ -31,7 +30,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             callback(data['Course'], qtr);
 
             this.classID = data['Id'];
-            this.setCoursesHyperLink(data['Id']);
+            this.setCoursesHyperLink();
+            this.setHomeHyperLink(data['Id']);
             this.listenToUserSearch();
             this.initAutocomplete(data['Id']);
         }.bind(this));
@@ -77,29 +77,29 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         $(this.mainDiv).find("#userProfPic").attr("src", userPicture)
     }
 
-    setCoursesHyperLink (classId) {
+    setCoursesHyperLink () {
         /*$(this.mainDiv).find(".classlink1").attr('href', "#/courses/" + classId);
         $(this.mainDiv).find(".classlink1").attr('style', 'text-decoration: none');
 
         $(this.mainDiv).find(".classlink2").attr('href', "#/courses/" + classId);
         $(this.mainDiv).find(".classlink2").attr('style', 'text-decoration: none');*/
 
-
+        var windowHash = "#/courses";
         $(this.mainDiv).find("#course_button").on("click", function () {
-            var windowHash = "#/courses/" + classId;
-            if (classId == null) {
-                windowHash = "#/courses";
-            }
             window.location.hash =  windowHash;
         });
     }
     
-    setHomeHyperLink () {
-        var windowHash = "#/courses";
+    setHomeHyperLink (classId) {
+        
         /*$(this.mainDiv).find(".homelink").attr('href', windowHash);
         $(this.mainDiv).find(".homelink").attr('style', 'text-decoration: none');*/
 
-        
+        var windowHash = "#/courses/" + classId;
+        if (classId == null) {
+            windowHash = "#/courses";
+        }
+
         $(this.mainDiv).find("#home_button").on("click", function () {
             window.location.hash = windowHash;
         }.bind(this))

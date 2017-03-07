@@ -36,3 +36,22 @@
 a:focus {
   outline:0;
 }
+
+.sad-fox {
+  margin-left:5px;
+  color:#2d4761;
+  text-align: center;
+  display: none;
+}
+
+
+.loading-animation-for-searching-podcast  {
+  text-align:center;
+  font-size: 1.5em;
+  font-weight: 100;
+  display: none;
+}
+
+.loading-animation-for-searching-podcast  img {
+  width: 150px;
+}

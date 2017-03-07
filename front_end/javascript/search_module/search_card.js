@@ -74,7 +74,7 @@ var SearchCardClass = class SearchCardClass {
                 $(ocrText).hide();
         }
 
-        if (arr.length != 0) {
+        if (arr.length > 1) {
             loadHTMLComponent("SeeMoreTinySearchCardModule", function (data) {
                 var seeMoreButton = $(data);
                 $(cardDiv).append(seeMoreButton);

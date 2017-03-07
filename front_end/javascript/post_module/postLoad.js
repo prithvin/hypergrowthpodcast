@@ -54,8 +54,9 @@ var APost = class APost {
     }
 
     addComment (inputForm, userPic, userName, timeOfComment) {
+        var text = $(inputForm).val();
         var obj = {
-            "Content": $(inputForm).val(),
+            "Content": text,
             "Time": timeOfComment,
             "PostId": this.postID
         };
@@ -63,7 +64,7 @@ var APost = class APost {
             this.loadIndividualComment({
                 "Pic": userPic,
                 "PosterName": userName,
-                "Content": $(inputForm).val(),
+                "Content": text,
                 "Time": timeOfComment
             });
             this.numOfComments++;

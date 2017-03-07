@@ -15,6 +15,10 @@ var SearchVideosClass =  class SearchVideosClass {
 
     loadCourseCards (searchTerm) {
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
+        $(this.mainDiv).find(".loading-animation-for-searching-podcast").hide();
+        if (resultData.length == 0) {
+          $(this.mainDiv).find(".sad-fox").show();
+        }
         this.loadCard(resultData)
         var waterfall = new Waterfall({
           containerSelector: '#search-vid',
@@ -39,10 +43,20 @@ var SearchVideosClass =  class SearchVideosClass {
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 
       callAPI(login_origins.backend + "/getKeywordSuggestions", "GET", {'count': 50, 'minKeywordLength': 3, 'CourseId': courseId}, function(results) {
         var topSixResults = []; // random, using hash
-        var hashTerm = Math.abs(this.hash(searchTerm)) % results.length;
+        var hashTerm = (Math.abs(this.hash(searchTerm)) + 1) % results.length + 1;
         var firstHashed = hashTerm;
+        var searchTerms = searchTerm.split(' ');
         for (var x = 0; x < 6; x++) {
-          topSixResults.push(results[firstHashed]);
+          if (searchTerms.indexOf(results[firstHashed]) != -1 ) 
+            x--;
+          else if (topSixResults.indexOf(results[firstHashed]) != -1) {
+            x--;
+            hashTerm = 1;
+          }
+          else 
+            topSixResults.push(results[firstHashed]);
+          
+          
           firstHashed += hashTerm;
           firstHashed = firstHashed % results.length;
         }
