@@ -20,7 +20,7 @@
   width: 100%;
   min-width: 1200px;
   min-height: 300px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   background-color: white;
 }
@@ -44,14 +44,14 @@
 .caption {
   padding-top: 5%;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 200;
   font-size: 42px;
   color: white;
 }
 
 .emphasis {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
 
