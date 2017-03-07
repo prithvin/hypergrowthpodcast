@@ -56,8 +56,8 @@
 
 .enlarge:hover > .course-videos-preview-images {
     cursor: pointer;
-    -webkit-transform: scale(.97);
-    transform: scale(.97);
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
 }
 
 .enlarge:hover > .text-tile {
@@ -75,13 +75,13 @@
 
 .enlarge {
     padding: 10px;
-    -webkit-transition: all .7s; /* Safari */
-    transition: all .7s;
+    -webkit-transition: all .3s; /* Safari */
+    transition: all .3s;
 }
 
 .enlarge:hover {
     cursor: pointer;
-    background: rgba(0,0,0,.1);
+    background: rgba(0,0,0,.05);
     border-radius: 5px;
     -webkit-transform: scale(1.01);
     transform: scale(1.01);
