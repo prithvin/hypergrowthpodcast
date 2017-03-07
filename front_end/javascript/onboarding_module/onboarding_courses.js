@@ -53,7 +53,8 @@ var OnboardingCourses = class OnboardingCourses {
             cell.className = 'cell cell-end';
             cell2.className = 'cell cell-mid';
             cell3.className = 'cell cell-end';
-            row.className = 'table-row';
+            row.className = 'table-row animated fadeInUpBig';
+            if ( i < 15) $(row).css({"-webkit-animation-delay": i*13/data.length + "s"});
             row.id = data[i]['Id'];
         
             /* Redirect to CourseHomepage onclick*/
@@ -110,6 +111,7 @@ function myFunction() {
           td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
           td2.innerHTML.toUpperCase().indexOf(filter) > -1 || 
           course.toUpperCase().indexOf(filter) > -1){
+          tr[i].className = 'table-row';
           tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
