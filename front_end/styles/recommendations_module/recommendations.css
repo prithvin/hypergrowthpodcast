@@ -46,8 +46,8 @@
 .rec-preview-img:hover {
     cursor: pointer;
     position: relative;
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(.97);
+    transform: scale(.97);
 }
 
 .recommendations-header {

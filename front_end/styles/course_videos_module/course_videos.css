@@ -54,11 +54,14 @@
     transition: all 0.5s;
 }
 
-.course-videos-preview-images:hover {
+.enlarge:hover > .course-videos-preview-images {
     cursor: pointer;
-    position:relative;
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(.97);
+    transform: scale(.97);
+}
+
+.enlarge:hover > .text-tile {
+    padding-top: -20px;
 }
 
 .course-videos-preview-images:active {
@@ -70,6 +73,20 @@
     min-height: 200px;
 }
 
+.enlarge {
+    padding: 10px;
+    -webkit-transition: all .7s; /* Safari */
+    transition: all .7s;
+}
+
+.enlarge:hover {
+    background: rgba(0,0,0,.1);
+    border-radius: 5px;
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
+    padding-bottom: 15px;
+}
+
 .videos-row:last-child {
     margin-bottom: 30px;
 }
@@ -77,6 +94,7 @@
 .videos-row .col-4 {
     text-align: center;
 }
+
 .text-title {
   margin-top: 5px;
   color: rgba(66, 100, 155, 1);

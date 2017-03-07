@@ -26,6 +26,9 @@ var Recommendations = class Recommendations {
 
       var rec_container = document.createElement('div');
       $(rec_container).addClass('rec-container pure-u-6-24');
+        
+      var highlight = document.createElement('div');
+      highlight.className = "enlarge";
 
       var preview_img = document.createElement('img');
       preview_img.src = preview_src;
@@ -35,8 +38,9 @@ var Recommendations = class Recommendations {
       rec_title.textContent = new Date(title).toDateString();
       $(rec_title).addClass('rec-title');
 
-      $(rec_container).append(preview_img);
-      $(rec_container).append(rec_title);
+      highlight.appendChild(preview_img);
+      highlight.appendChild(rec_title);
+      rec_container.appendChild(highlight);
 
       $(link_anchor).append(rec_container);
       $(rec_div).append(link_anchor);

@@ -20,10 +20,12 @@ class CourseVideosClass {
                   row.className = 'row videos-row';
                   masterDiv.appendChild(row);
               }
+              
               var videoDiv = document.createElement('div');
               videoDiv.className = 'col-4';
               row.appendChild(videoDiv);
               var link_anchor = document.createElement('a');
+              $(link_anchor).css({"text-decoration": "none"});
               link_anchor.href = '#/podcast/' + curr['Id'];
               
               var img = document.createElement('img');
@@ -32,15 +34,20 @@ class CourseVideosClass {
               /*img.addEventListener('click', function() {
                 window.location.hash = '#/podcast/' + this['Id']; 
               }.bind(curr));*/
-              link_anchor.appendChild(img);
-              //videoDiv.appendChild(img);
-              videoDiv.appendChild(link_anchor);
+              var highlight = document.createElement('div');
+              highlight.className = "enlarge";
+              highlight.appendChild(img);
+              
               var heading = document.createElement('p');
               heading.align = 'center';
               //var date = new Date(curr['Time']);
               heading.innerHTML = moment(curr['Time']).format("dddd, MM/DD"); //date.toLocaleDateString();
               heading.className = 'text-title';
-              videoDiv.appendChild(heading);
+              highlight.appendChild(heading);
+              
+              link_anchor.appendChild(highlight);
+              //videoDiv.appendChild(img);
+              videoDiv.appendChild(link_anchor);
           }
           this.loadingCallback();
         }.bind(this));
