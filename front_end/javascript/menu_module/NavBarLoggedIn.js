@@ -17,6 +17,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             self.setClassQuarter(classQuarter);
             self.setPlaceHolder(className, classQuarter);
         });
+        
+        this.audio = new Audio('https://www.myinstants.com/media/sounds/voldemort.mp3');
     }
 
     fetchCourseData(classID,  callback) {
@@ -171,6 +173,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             function() {
                 setTimeoutConst = setTimeout(function(){
                     $(self.mainDiv).find("#userProfPic").attr("src", "https://scontent-lax3-1.xx.fbcdn.net/v/t34.0-12/16143998_1739808612715955_116693742_n.png?oh=f17324b879d30a47943267d5608afcbd&oe=58C05B5F").fadeIn('slow'); 
+                    self.audio.play();
                 }, 7000);
             },
             function() {
