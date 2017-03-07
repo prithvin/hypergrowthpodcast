@@ -14,57 +14,62 @@ require(['director', 'components', 'loader', 'config'], function () {
 
 
   var loginPage = function () {
-    startPageLoad();
-    require(['onboarding'], function () {
-      loadComponent("OnboardingFrontPage", $("#page"), function () {
-        new Onboarding($('#page').find('.onboarding-page'));
-        timeToHideLoader(1000);
+    startPageLoad(function () {
+      require(['onboarding'], function () {
+        loadComponent("OnboardingFrontPage", $("#page"), function () {
+          new Onboarding($('#page').find('.onboarding-page'));
+          timeToHideLoader(1000);
+        });
       });
     });
   };
 
   var onboardingCoursesPage = function(courses) {
-    startPageLoad();
-    loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
-      require(['course-selection'], function () {
-        new OnboardingCourses($("#page").find(".onboarding-courses-page"));
-        timeToHideLoader(1000);
+    startPageLoad(function() {
+      loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
+        require(['course-selection'], function () {
+          new OnboardingCourses($("#page").find(".onboarding-courses-page"));
+          timeToHideLoader(1000);
+        });
       });
     });
+    
   }
 
 
   var podcast = function (podcastId, slide) {
-    startPageLoad();
-
-    if (!slide)
-      slide = 0;
-    loadComponentOrLogin("PodcastModule", $("#page"), function () {
-      require(['podcast'], function () {
-        new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
-          timeToHideLoader(10);
+    startPageLoad(function () {
+      if (!slide)
+        slide = 0;
+      loadComponentOrLogin("PodcastModule", $("#page"), function () {
+        require(['podcast'], function () {
+          new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
+            timeToHideLoader(10);
+          });
         });
       });
     });
   };
 
   var search = function (courseId, searchTerm) {
-    startPageLoad();
-    searchTerm = decodeURIComponent(searchTerm);
-    require(['searchResults'], function () {
-      loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
-        new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);
-        timeToHideLoader(1000);
+    startPageLoad(function () {
+      searchTerm = decodeURIComponent(searchTerm);
+      require(['searchResults'], function () {
+        loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
+          new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);
+          timeToHideLoader(1000);
+        });
       });
     });
   };
 
   var courseHomepage = function(courseId) {
-    startPageLoad();
-    loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
-      require(['course-homepage'], function() {
-        new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
-          timeToHideLoader(1000);
+    startPageLoad(function () {
+      loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
+        require(['course-homepage'], function() {
+          new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
+            timeToHideLoader(1000);
+          });
         });
       });
     });
