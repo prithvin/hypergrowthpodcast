@@ -9,6 +9,11 @@
   text-align: center;
 }
 
+.content-span {
+  width: 100%;
+  word-wrap: break-word;
+}
+
 .recClass a {
     height: 80%; 
   width: 80%; 
