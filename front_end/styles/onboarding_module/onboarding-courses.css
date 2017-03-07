@@ -238,7 +238,7 @@
   margin-left: 15%;
   opacity: .6;
   width: 70%;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   -webkit-transition: width .5s, margin-left .5s;
   transition: width .5s, margin-left .5s;
 }
