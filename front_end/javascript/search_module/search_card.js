@@ -29,7 +29,7 @@ var SearchCardClass = class SearchCardClass {
             "caseSensitive" : false, 
             "separateWordSearch" : false,
             "exclude": [".pre-slide-data", ".slide-no"]
-        })
+        });
         
     }
 
@@ -47,8 +47,10 @@ var SearchCardClass = class SearchCardClass {
     
     appendOCRandAudio(cardDiv, data) {    
         var matches = data.Matches;
+        var arr = [];
         for (var i = 0; i < matches.length; i ++) {
             var ocrText = $(this.cardModule);
+            arr.push(ocrText);
             ocrText.find(".content-span").html(this.generateMatch(matches[i].Text));
             if (matches[i].Type == "AUDIO")
                 ocrText.find(".pre-slide-data").html("Audio match on");
@@ -56,8 +58,23 @@ var SearchCardClass = class SearchCardClass {
                 ocrText.find(".pre-slide-data").html("Slide match on");
             ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo);
             $(cardDiv).append(ocrText);
+            if (i != 0)
+                $(ocrText).hide();
         }
+        loadHTMLComponent("SeeMoreTinySearchCardModule", function (data) {
+            var seeMoreButton = $(data);
+            $(cardDiv).append(seeMoreButton);
+            this.seeMoreButton = seeMoreButton;
+            this.seeMoreListener();
+        }.bind(this));
     }   
+
+
+    seeMoreListener () {
+        $(this.seeMoreListener).on("click", function () {
+            $(this.seeMoreListener).hide();
+        }.bind(this));
+    }
 
     generateMatch(text) {
         var searchTerm = this.searchTerm;
@@ -71,17 +88,14 @@ var SearchCardClass = class SearchCardClass {
     }
 
     getFiveDiffs (left, term, right) {
-        var newLeft = left.split(' ').slice(0, 2).join(' ');
+        var newLeft = left.split(' ').slice(0, 5).join(' ');
         var term = " " + term + " ";
 
         var splitRight = right.split(' ');
-        var newRight = splitRight.slice(splitRight.length - 2).join(' ');
+        var newRight = splitRight.slice(splitRight.length - 5).join(' ');
 
         return "..." + newLeft + term  + newRight + "...\n";
         
     }
 
-    getFirstFiveString (text) {
-        return ;
-    }
 }
