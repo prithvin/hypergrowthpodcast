@@ -80,7 +80,7 @@ var SearchVideosClass =  class SearchVideosClass {
           
         recs.innerHTML = results[i];
         link_anchor.href = "#/search/" + courseId + "/" + results[i];
-        link_anchor.style = 'text-decoration: none; color: inherit';
+        $(link_anchor).css({"text-decoration": "none", "color": "inherit"});
         link_anchor.class = "recClass";
         link_anchor.appendChild(recs);
 
