@@ -123,7 +123,7 @@ var SearchVideosClass =  class SearchVideosClass {
     }
     
     hideKeyWordsOnScroll() {
-        if ($($(this.mainDiv).find("#search-vid")).scrollTop() > 30) {
+        if ($($(this.mainDiv).find("#search-vid")).scrollTop() > 40) {
             $(this.mainDiv).find(".recClass").css({"opacity": "0", "width": "0"});
         } else {
             $(this.mainDiv).find(".recClass").css({"opacity": "1", "width": "100%"});
