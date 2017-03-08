@@ -8,6 +8,10 @@ var SearchVideosClass =  class SearchVideosClass {
         $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
         this.overallDiv = $(this.mainDiv).find(".videos-div")[0];
         
+        $(this.mainDiv).find("#search-vid").on('scroll', function() {
+            this.hideKeyWordsOnScroll();
+        }.bind(this));
+        
         this.keywordLoadFromCrud(searchTerm, courseId, this.masterDiv);
         this.loadCourseCards(searchTerm);
 
@@ -116,5 +120,13 @@ var SearchVideosClass =  class SearchVideosClass {
         if (iLuma > iDarkLuma && iLuma < iLightLuma) return sColour;
       }
       return sColour;
-    } 
+    }
+    
+    hideKeyWordsOnScroll() {
+        if ($($(this.mainDiv).find("#search-vid")).scrollTop() > 40) {
+            $(this.mainDiv).find(".recClass").css({"opacity": "0", "width": "0"});
+        } else {
+            $(this.mainDiv).find(".recClass").css({"opacity": "1", "width": "100%"});
+        }
+    }
 }

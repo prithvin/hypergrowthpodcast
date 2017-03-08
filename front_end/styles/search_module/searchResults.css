@@ -18,7 +18,6 @@
     cursor: pointer;
 }
 
-
 .lecture-image-search {
   width: 100%;
   filter: brightness(0.5);
@@ -28,7 +27,7 @@
 
 .title-video-data {
   position:absolute;
-  z-index: 5;
+  z-index: 1;
   top: 40px;
   width: 100%;
 }
@@ -118,9 +117,11 @@
     background-color: #F4F6F8;
     height: auto;
     max-height: 100%;
-    width: 104%;
+    width: 102%;
+    padding-left: 1%;
     bottom: 0%;
-    padding-top: 25px;
+    margin-top: -59px;
+    padding-top: 60px;
     flex-direction: column;
     overflow: auto;
 }

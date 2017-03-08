@@ -1,12 +1,22 @@
 .recClass {
   margin-top:-20px;
-  margin-bottom:15;
+  margin-bottom:15px;
   overflow:hidden;
-  height: 40; 
+  height: 40px; 
   width:100%; 
   display:flex; 
   justify-content:space-between;
   text-align: center;
+  background-color: transparent;
+  z-index: 2;
+  position: relative;
+  -webkit-transition: all 0.3s; /* Safari */
+  transition: all 0.3s;
+}
+
+.content-span {
+  width: 100%;
+  word-wrap: break-word;
 }
 
 .content-span {
@@ -18,8 +28,9 @@
     height: 80%; 
   width: 80%; 
   border-radius:8px; 
-  margin-left: 8; 
-  margin-top:8;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
   display: inline-block;
   text-align:center;
 }
@@ -35,7 +46,8 @@
   color:white !IMPORTANT;
   -webkit-transition: all .3s !IMPORTANT;
   transition: all .3s !IMPORTANT;
-
+  z-index: 1;
+  position: relative;
 }
 
 a:focus {

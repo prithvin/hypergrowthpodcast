@@ -8,7 +8,6 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
-    border-collapse: collapse;
 }
 
 #course-title {
@@ -46,7 +45,7 @@
     max-width: 240px;
     display: inline;
     margin-top: 5px;
-    border-color: rgba(66, 100, 155, .7);
+    border-color: #3a5c9b;
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
@@ -70,6 +69,8 @@
 }
 
 .videos-row {
+    margin-top: -20px;
+    margin-bottom: 20px;
     min-height: 200px;
 }
 
@@ -89,7 +90,7 @@
 }
 
 .videos-row:last-child {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .videos-row .col-4 {
@@ -98,7 +99,7 @@
 
 .text-title {
   margin-top: 5px;
-  color: rgba(66, 100, 155, 1);
+  color:#2d4761;
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
 }

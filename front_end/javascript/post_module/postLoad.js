@@ -32,7 +32,7 @@ var APost = class APost {
 
     generateClickableLecturePost(lectureDate) {
         var slideDiv = $(this.mainDiv).find(".slide-no");
-        $(slideDiv).html($(slideDiv).html() + " - " + moment(lectureDate).format("MMM Do")).attr("data-podcast", this.postData.PodcastId);
+        $(slideDiv).html($(slideDiv).html() + " • " + moment(lectureDate).format("MMM Do")).attr("data-podcast", this.postData.PodcastId);
     }
     
     addCommentListener (thisClass) {
@@ -116,7 +116,7 @@ var APost = class APost {
 
         this.slideNo = slideOfPost;
 
-        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost).attr("data-slide", slideOfPost);
+        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost).attr("data-slide", slideOfPost).css({"text-decoration": "none"});;
         
         $(this.mainDiv).find(".post-main-content").find("span").html(content);
     }
