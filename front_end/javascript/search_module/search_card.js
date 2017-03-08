@@ -36,9 +36,9 @@ var SearchCardClass = class SearchCardClass {
     clickedImage () {
         $(this.mainDiv).find(".title-video-data").attr('href', '#/podcast/' + this.data['PodcastId']);
         $(this.mainDiv).find(".title-video-data").attr('style', 'text-decoration: none');
-        /*$(this.mainDiv).find(".title-video-data").on("click", function (ev) {
+        $(this.mainDiv).find(".lecture-image-search").on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'];
-        }.bind(this));*/
+        }.bind(this));
     }
 
     slideClicks () {
