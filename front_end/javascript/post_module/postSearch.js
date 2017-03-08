@@ -241,7 +241,7 @@ var PostSearch = class PostSearch {
 
     showNotifcationToUserForSlideTransition (slideNo) {
         this.slideTransitionDiv.show();
-        this.slideTransitionDiv.find(".rectangle-notif-slide-data").html("Slide " + slideNo).attr("data-slide", slideNo);
+        this.slideTransitionDiv.find(".rectangle-notif-slide-data").html("Slide " + slideNo).attr("data-slide", slideNo).css({"text-decoration": "none"});
     }
     startFormListeners (thisClass) {
         if (!this.OCRAudioLoaded) {

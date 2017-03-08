@@ -58,7 +58,7 @@ var SearchCardClass = class SearchCardClass {
                 ocrText.find(".pre-slide-data").html("Audio match on");
             else
                 ocrText.find(".pre-slide-data").html("Slide match on");
-            ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo);
+            ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo).css({"text-decoration": "none"});
             //console.log(data);
             var link_anchor = ocrText.find(".linker");
                 link_anchor.attr('href', '#/podcast/' + data['PodcastId'] + '/' + matches[i].SlideNo);
