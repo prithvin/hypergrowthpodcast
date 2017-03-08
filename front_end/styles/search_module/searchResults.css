@@ -14,10 +14,6 @@
     width: 90%;
 }
 
-.search-videos-div {
-    height: 100% !important;
-    position: relative;
-}
 .title-video-data:hover {
     cursor: pointer;
 }
