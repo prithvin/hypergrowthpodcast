@@ -240,7 +240,7 @@ module.exports = {
           console.error(err);
         }
         else {
-          var prefix = 'http://podcast-media.ucsd.edu.s3-website-us-west-2.amazonaws.com/Podcasts/';
+          var prefix = 'https://s3-us-west-2.amazonaws.com/podcast-media.ucsd.edu/Podcasts/';
           for (let i = 0; i < podcasts.length; i++) {
             podcasts[i].PodcastUrl = prefix + podcasts[i].PodcastUrl.slice(34);
             podcasts[i].save((err, updated) => {console.log(i);});
@@ -325,6 +325,24 @@ module.exports = {
               {_id: podcast._id},
               {$set: {'PodcastUrl': 'https' + podcast.PodcastUrl.slice(4)}},
               function(a, b) {callback(podcast._id);}
+            );
+          }
+        }
+      });
+    });
+  },
+
+  makeS3HTTPS: function(callback) {
+    connectMongo(function() {
+      PodcastModel.find({}, '_id PodcastUrl', function(err, podcasts) {
+        var prefix = 'https://s3-us-west-2.amazonaws.com/podcast-media.ucsd.edu/';
+        for (let i = 0; i < podcasts.length; i++) {
+          var podcast = podcasts[i];
+          if (podcast.PodcastUrl.indexOf('https') == -1 && podcast.PodcastUrl.indexOf('aws') != -1) {
+            PodcastModel.update(
+              {_id: podcast._id},
+              {$set: {'PodcastUrl': prefix + podcast.PodcastUrl.slice(65)}},
+              function(a, b) {callback(podcast.PodcastUrl);}
             );
           }
         }

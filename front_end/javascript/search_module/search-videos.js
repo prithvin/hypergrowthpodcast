@@ -54,8 +54,11 @@ var SearchVideosClass =  class SearchVideosClass {
             x--;
             hashTerm = 1;
           }
-          else 
+          else {
+            if (firstHashed == results.length)
+              firstHashed--;
             topSixResults.push(results[firstHashed]);
+          }
           
           
           firstHashed += hashTerm;

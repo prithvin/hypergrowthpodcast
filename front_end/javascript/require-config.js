@@ -24,7 +24,7 @@ var require = {
             "deps": ['jquery']
         },
         "components": {
-            "deps": ['jquery', 'config']
+            "deps": ['jquery', 'config', 'garbageBin']
         },
         "postLoad": {
             "deps": ['alertbox', 'markjs', 'local_tether', 'moment', 'components']
@@ -125,6 +125,7 @@ var require = {
         'facebook': '//connect.facebook.net/en_US/sdk',
         'scrollreveal': 'https://unpkg.com/scrollreveal/dist/scrollreveal.min',
         'search-card': "search_module/search_card",
-        'boardz': 'search_module/boardz'
+        'boardz': 'search_module/boardz',
+        'garbageBin': 'garbage-collector'
     }
 };

@@ -54,7 +54,7 @@ var OnboardingCourses = class OnboardingCourses {
             cell2.className = 'cell cell-mid';
             cell3.className = 'cell cell-end';
             row.className = 'table-row animated fadeInUpBig';
-            if ( i < 15) $(row).css({"-webkit-animation-delay": i*13/data.length + "s"});
+            if ( i < 10) $(row).css({"-webkit-animation-delay": i*10/data.length + "s"});
             row.id = data[i]['Id'];
         
             /* Redirect to CourseHomepage onclick*/

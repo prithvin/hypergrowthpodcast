@@ -5,6 +5,8 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
+/* index module */
+@import url("./index_module/index.css");
 
 /* Video module */
 @import url("https://vjs.zencdn.net/5.16.0/video-js.css");
