@@ -13,9 +13,13 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
   
   // acts as a "queue" that only holds the latest call
   var callbackToCall = null;
+  var currentMainDiv = null;
 
   // Preventing random race conditions hopefully???!?!?
   function startPageLoad (callback) {
+    $(currentMainDiv).remove()
+    delete $currentMainDiv;
+
     var currentTime = new Date().getTime();
 
     if (currentTime - globalTime < 1000) {  // then queue up this function call and wait for a bit??
@@ -53,13 +57,14 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     callbackToCall();
     callbackToCall = null;
   }
-
+  var currentClass = null;
 
   var loginPage = function () {
     startPageLoad(function () {
       require(['onboarding'], function () {
         loadComponent("OnboardingFrontPage", $("#page"), function () {
-          new Onboarding($('#page').find('.onboarding-page'));
+          currentMainDiv = $('#page').find('.onboarding-page');
+          currentClass = new Onboarding(currentMainDiv);
           timeToHideLoader(1000);
         });
       });
@@ -70,7 +75,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     startPageLoad(function() {
       loadComponentOrLogin("OnboardingCoursesModule", $("#page"), function () {
         require(['course-selection'], function () {
-          new OnboardingCourses($("#page").find(".onboarding-courses-page"));
+          currentMainDiv = $('#page').find('.onboarding-page');
+          currentClass = new OnboardingCourses(currentMainDiv);
           timeToHideLoader(1000);
         });
       });
@@ -85,7 +91,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
         slide = 0;
       loadComponentOrLogin("PodcastModule", $("#page"), function () {
         require(['podcast'], function () {
-          new PodcastPage(podcastId, $("#page").find(".podcast-page-div"), slide, function() {
+          currentMainDiv = $("#page").find(".podcast-page-div");
+          currentClass = new PodcastPage(podcastId, currentMainDiv, slide, function() {
             timeToHideLoader(10);
           });
         });
@@ -98,7 +105,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
       searchTerm = decodeURIComponent(searchTerm);
       require(['searchResults'], function () {
         loadComponentOrLogin("CourseSearchModule", $("#page"), function () {
-          new SearchPage(courseId, $("#page").find(".search-results-div"), searchTerm);
+          currentMainDiv = $("#page").find(".search-results-div");
+          currentClass = new SearchPage(courseId, currentMainDiv, searchTerm);
           timeToHideLoader(1000);
         });
       });
@@ -109,7 +117,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     startPageLoad(function () {
       loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
         require(['course-homepage'], function() {
-          new CourseHomepageClass(courseId, $("#page").find(".course-homepage-div"), function() {
+          currentMainDiv = $("#page").find(".course-homepage-div");
+          currentClass = new CourseHomepageClass(courseId, currentMainDiv , function() {
             timeToHideLoader(1000);
           });
         });
