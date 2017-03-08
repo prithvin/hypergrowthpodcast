@@ -71,7 +71,8 @@ var OCRAudioIndPost = class OCRAudioIndPost {
     }
 
     determineSlideData(preSlideEle, slideNoEle) {
-        $(slideNoEle).attr("data-slide", this.slideNum).html("Slide " + this.slideNum);
+        $(slideNoEle).attr("data-slide", this.slideNum).html("Slide " + this.slideNum).css({"text-decoration": "none"});;
+        
         if (this.startTime) {
             $(preSlideEle).html("At " + this.getMinutesSecondsString());
             $(slideNoEle).attr("data-time", this.startTime);

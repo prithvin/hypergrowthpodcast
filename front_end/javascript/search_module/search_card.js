@@ -36,9 +36,9 @@ var SearchCardClass = class SearchCardClass {
     clickedImage () {
         $(this.mainDiv).find(".title-video-data").attr('href', '#/podcast/' + this.data['PodcastId']);
         $(this.mainDiv).find(".title-video-data").attr('style', 'text-decoration: none');
-        /*$(this.mainDiv).find(".title-video-data").on("click", function (ev) {
+        $(this.mainDiv).find(".lecture-image-search").on("click", function (ev) {
             window.location.hash = '#/podcast/' + this.data['PodcastId'];
-        }.bind(this));*/
+        }.bind(this));
     }
 
     slideClicks () {
@@ -58,7 +58,7 @@ var SearchCardClass = class SearchCardClass {
                 ocrText.find(".pre-slide-data").html("Audio match on");
             else
                 ocrText.find(".pre-slide-data").html("Slide match on");
-            ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo);
+            ocrText.find(".slide-no").attr("data-slide", matches[i].SlideNo).html("Slide " + matches[i].SlideNo).css({"text-decoration": "none"});
             //console.log(data);
             var link_anchor = ocrText.find(".linker");
                 link_anchor.attr('href', '#/podcast/' + data['PodcastId'] + '/' + matches[i].SlideNo);

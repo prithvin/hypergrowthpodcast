@@ -54,16 +54,9 @@ var OnboardingCourses = class OnboardingCourses {
             cell2.className = 'cell cell-mid';
             cell3.className = 'cell cell-end';
             row.className = 'table-row animated fadeInUpBig';
-            if ( i < 15) $(row).css({"-webkit-animation-delay": i*13/data.length + "s"});
+            if ( i < 10) $(row).css({"-webkit-animation-delay": i*10/data.length + "s"});
             row.id = data[i]['Id'];
-        
-            /* Redirect to CourseHomepage onclick*/
-            /*row.addEventListener("click", function() {
-                var baseURL = window.location.origin + window.location.pathname;
-                var targetURL = baseURL + "#/courses/" + this.id;
-                window.location.href = targetURL;
-                window.location.hash =  "/courses/" + this.id;
-            });*/
+     
             var link_anchor = document.createElement('a');
             link_anchor.href = "#/courses/" + row.id;
             $(link_anchor).css({"text-decoration": "none"});
@@ -87,14 +80,12 @@ var OnboardingCourses = class OnboardingCourses {
                        
             link_anchor.appendChild(row);
             this.tableRef.appendChild(link_anchor);
-            //this.tableRef.appendChild(row);
-
         }
     }
 }
 
 /* Search Function */
-function myFunction() {
+function onboardingSearch() {
   var input, filter, table, tr, td, td1, td2, i;
   input = document.getElementById("searchBar1");
   filter = input.value.toUpperCase();
@@ -121,66 +112,10 @@ function myFunction() {
       }
     }
   }
-  if (count == tr.length - 1) {
-      // No results
+  // No Results Logic
+  if (count == tr.length) {
       $('.no-results-courses').addClass('no-results-show');
   } else {
       $('.no-results-courses').removeClass('no-results-show');
-  }
-}
-
-/* Sort Function */
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc";
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("tr");
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("td")[n];
-      y = rows[i + 1].getElementsByTagName("td")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++;
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
   }
 }
