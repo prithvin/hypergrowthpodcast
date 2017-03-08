@@ -21,7 +21,10 @@
 .rec-preview-img {
   max-width: 100%;
   max-height: 100%;
+  border-color: #3a5c9b;
+  border-style: solid;
   border-radius: 5px;
+  border-width: 2px;
   -webkit-transition: all 0.5s; /* Safari */
   transition: all 0.5s;
 }
@@ -34,7 +37,7 @@
 .rec-title {
   margin-top: 1.45%;
   text-align: center;
-  color: #3a5c9b;
+  color: #2d4761;
   font-size: 90%;
 }
 
@@ -51,6 +54,6 @@
 }
 
 .recommendations-header {
-  color: #405a74;
+  color:#2d4761;
   font-size: 0.8em;
 }
