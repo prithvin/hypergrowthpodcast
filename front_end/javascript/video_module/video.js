@@ -10,7 +10,7 @@ class videoClass {
         //this.getInfo()
     
         this.initWithCaptions(srtData, function(){
-            var player = videojs('my-video');
+            self.player = videojs('my-video');
 
             self.setSource(url);
             self.setTime(timestamp);
@@ -27,21 +27,21 @@ class videoClass {
 
         //when to change video
         this.mainDiv.on('changeVideo', function(e, deet){
-            videojs('my-video').ready(function() {
+            self.player.ready(function() {
             });
         });
 
-        this.timeUpdateListener(videojs('my-video'));
+        this.timeUpdateListener(this.player);
     }
    
     setSource(source){
-        videojs('my-video').src({type: 'video/mp4', src: source});
+        this.player.src({type: 'video/mp4', src: source});
         this.source = source;
     }
     
     initHotKeys(){
       
-        videojs('my-video').hotkeys({
+        this.player.hotkeys({
           //  volumeStep: 0.1,
             seekStep: 10,
             enableModifiersForNumbers: false,
@@ -50,7 +50,7 @@ class videoClass {
     }
     
     setTime(time){
-        videojs('my-video').currentTime(time);   
+        this.player.currentTime(time);   
     }
 
     timeUpdateListener (video) {  
@@ -92,7 +92,7 @@ class videoClass {
 
     getTime() {
        this.mainDiv.on('getTime', function(e){
-            videojs('my-video').ready(function() {
+            this.player.ready(function() {
                 var video = videojs('my-video');
                 var time = video.currentTime();
                 var minutes = Math.floor(time/60);   

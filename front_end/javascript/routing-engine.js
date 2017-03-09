@@ -21,7 +21,7 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
 
     var currentTime = new Date().getTime();
 
-    if (currentTime - globalTime < 1000) {  // then queue up this function call and wait for a bit??
+    if (currentTime - globalTime < 2000) {  // then queue up this function call and wait for a bit??
 
       // if the callback is null, then we don't want to change the latest callback
       if (callback != null)
@@ -52,8 +52,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     
     //if ($("#page").find("div")[0])
       //discardElement($("#page").find("div")[0]);
-    $(currentMainDiv).remove();
-    delete $currentMainDiv;
+    //$(currentMainDiv).remove();
+   // delete $currentMainDiv;
     callbackToCall();
     callbackToCall = null;
   }

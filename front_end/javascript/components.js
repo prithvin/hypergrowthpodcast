@@ -90,8 +90,7 @@ function callAPI (targetURL, type, callData, callback) {
             callback(data);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            console.error("Something went wrong when loading " + targetURL);
-            console.error("Status: " + textStatus + " Error: " + errorThrown);
+            console.warn("API call to  " + targetURL + " failed");;
         } 
     });
 }
