@@ -34,7 +34,7 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
           startPageLoad();
         // if callbackToCall is null, that means the callbackToCall was executed, so no need
         // to recursively call
-      }, 50)
+      }, 100)
       return;
     }
 
@@ -52,8 +52,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     
     //if ($("#page").find("div")[0])
       //discardElement($("#page").find("div")[0]);
-    //$(currentMainDiv).remove();
-   // delete $currentMainDiv;
+    $(currentMainDiv).remove();
+
     callbackToCall();
     callbackToCall = null;
   }
