@@ -17,8 +17,7 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
 
   // Preventing random race conditions hopefully???!?!?
   function startPageLoad (callback) {
-    $(currentMainDiv).remove()
-    delete $currentMainDiv;
+
 
     var currentTime = new Date().getTime();
 
@@ -53,7 +52,8 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     
     //if ($("#page").find("div")[0])
       //discardElement($("#page").find("div")[0]);
-
+    $(currentMainDiv).remove();
+    delete $currentMainDiv;
     callbackToCall();
     callbackToCall = null;
   }
