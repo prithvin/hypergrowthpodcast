@@ -261,8 +261,10 @@ var PostSearch = class PostSearch {
                 this.loadingModule.show();
                 this.searchByText($(this.searchInputField).val());
             }
-            else if ($(this.searchInputField).val().trim().length == 0)
-                swal("Type in something to search for!")
+            else if ($(this.searchInputField).val().trim().length == 0) {
+                this.showAllPostsOfLecture ();
+            }
+
         }.bind(this))
         $(this.searchInputField).on("input", function (ev) {
             var inputVal = $(this.searchInputField).val();
@@ -279,7 +281,7 @@ var PostSearch = class PostSearch {
                 }.bind(this, inputVal), 200);
             }
             else if (inputVal.trim().length == 0) 
-                swal("Type in something to search for!")
+               this.showAllPostsOfLecture ();
         }.bind(this));
     }
 
