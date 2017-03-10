@@ -124,9 +124,11 @@ var SearchVideosClass =  class SearchVideosClass {
     
     hideKeyWordsOnScroll() {
         if ($($(this.mainDiv).find("#search-vid")).scrollTop() > 40) {
-            $(this.mainDiv).find(".recClass").css({"opacity": "0", "width": "0"});
+            //$(this.mainDiv).find(".recClass").css({"opacity": "0", "width": "0"});
+            $(this.mainDiv).find(".recClass").addClass("recClassAdd");
         } else {
-            $(this.mainDiv).find(".recClass").css({"opacity": "1", "width": "100%"});
+           $(this.mainDiv).find(".recClass").removeClass("recClassAdd");
+           // $(this.mainDiv).find(".recClass").css({"opacity": "1", "width": "100%"});
         }
     }
 }
