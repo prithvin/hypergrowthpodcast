@@ -17,13 +17,10 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
 
   // Preventing random race conditions hopefully???!?!?
   function startPageLoad (callback) {
-
-
     var currentTime = new Date().getTime();
-
-    if (currentTime - globalTime < 2000) {  // then queue up this function call and wait for a bit??
-
+    if (currentTime - globalTime < 2000) {  // then queue up this function call and wait for a bit??zzzZ
       // if the callback is null, then we don't want to change the latest callback
+
       if (callback != null)
         callbackToCall = callback;
 
@@ -53,7 +50,6 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     //if ($("#page").find("div")[0])
       //discardElement($("#page").find("div")[0]);
     $(currentMainDiv).remove();
-
     callbackToCall();
     callbackToCall = null;
   }
@@ -64,8 +60,9 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
       require(['onboarding'], function () {
         loadComponent("OnboardingFrontPage", $("#page"), function () {
           currentMainDiv = $('#page').find('.onboarding-page');
-          currentClass = new Onboarding(currentMainDiv);
-          timeToHideLoader(1000);
+          currentClass = new Onboarding(currentMainDiv, function () {
+            timeToHideLoader(0);
+          });
         });
       });
     });
@@ -134,7 +131,6 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
     '/podcast/:podcastId': podcast,
     '/podcast/:podcastId/:slide': podcast,
     '/search/:courseId/:searchTerm': search,
-    '/': loginPage,
     '': loginPage,
     '/courses/:courseId': courseHomepage,
     '/courses': onboardingCoursesPage,

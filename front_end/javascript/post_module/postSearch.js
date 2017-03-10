@@ -261,8 +261,8 @@ var PostSearch = class PostSearch {
                 this.loadingModule.show();
                 this.searchByText($(this.searchInputField).val());
             }
-            else if ($(this.searchInputField).val().trim().length == 0)
-                this.searchByText("");
+            /*else if ($(this.searchInputField).val().trim().length == 0)
+                this.searchByText("");*/
         }.bind(this))
         $(this.searchInputField).on("input", function (ev) {
             var inputVal = $(this.searchInputField).val();
@@ -278,8 +278,8 @@ var PostSearch = class PostSearch {
                     
                 }.bind(this, inputVal), 200);
             }
-            else if (inputVal.trim().length == 0) 
-                this.searchByText("");
+            /*else if (inputVal.trim().length == 0) 
+                swal()*/
         }.bind(this));
     }
 
@@ -421,7 +421,9 @@ var PostSearch = class PostSearch {
     displayOCRAndAudioForSlide(slideNum) {
         this.mark.unmark();
         this.notesWrapper.hide();
-     
+        
+        //var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
+       // var ocrResults = this.ocrModule.fetchOCRForSlide(slideNum);
         return true;
     }
 
