@@ -29,6 +29,8 @@
   position:absolute;
   z-index: 1;
   top: 40px;
+  padding-top: 20px !IMPORTANT;
+  font-weight: 100;
   width: 100%;
 }
 
@@ -37,16 +39,9 @@
 }
 
 .video-card-title {
-  font-weight: 400;
+  font-weight: 100s;
   text-align: center;
   padding-bottom: 5px;
-}
-
-.top-video {
-  font-weight: 200;
-  text-align: center;
-  font-size: 0.8em;
-  width: 100%;
 }
 
 /*.results-body{
