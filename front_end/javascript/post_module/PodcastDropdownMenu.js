@@ -54,6 +54,9 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         }.bind(this))
     }
 
+    initializeSearch (text) {
+        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Search Results for \"" + text + "\" ");
+    }
     switchToSlide (slideNo) {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(this.slideDropdownItems[slideNo]).html());
     }

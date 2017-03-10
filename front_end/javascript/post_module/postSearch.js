@@ -218,6 +218,12 @@ var PostSearch = class PostSearch {
         this.mark.unmark();
     }
 
+    initializeSearch (text) {
+        if (this.dropdownMenu) {
+            this.dropdownMenu.initializeSearch(text);
+        }
+    }
+
 
     // Optional param
     updateCurrentVideoSlide  (slideNo) {
@@ -257,9 +263,11 @@ var PostSearch = class PostSearch {
 
         $(this.searchInputForm).on("submit", function (ev) {
             ev.preventDefault();
-            if ($(this.searchInputField).val().length > 1) {
+            var text = $(this.searchInputField).val().trim();
+            if (text.length > 1) {
                 this.loadingModule.show();
-                this.searchByText($(this.searchInputField).val());
+                this.searchByText(text);
+                this.initializeSearch(text);
             }
             else if ($(this.searchInputField).val().trim().length == 0) {
                 this.showAllPostsOfLecture ();
@@ -267,7 +275,7 @@ var PostSearch = class PostSearch {
 
         }.bind(this))
         $(this.searchInputField).on("input", function (ev) {
-            var inputVal = $(this.searchInputField).val();
+            var inputVal = $(this.searchInputField).val().trim();
             
             ev.preventDefault();
             if (inputVal.length > 1) {
@@ -276,11 +284,12 @@ var PostSearch = class PostSearch {
                     this.loadingModule.show();
                     if(input == this.currWord){
                         this.searchByText(input);
+                        this.initializeSearch(input);
                     }
                     
                 }.bind(this, inputVal), 200);
             }
-            else if (inputVal.trim().length == 0) 
+            else if (inputVal.length == 0) 
                this.showAllPostsOfLecture ();
         }.bind(this));
     }
