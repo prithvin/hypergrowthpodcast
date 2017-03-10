@@ -116,7 +116,7 @@ var APost = class APost {
 
         this.slideNo = slideOfPost;
 
-        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost).attr("data-slide", slideOfPost).css({"text-decoration": "none"});;
+        $(this.mainDiv).find(".slide-no").html("Slide " + slideOfPost).attr("data-should-auto-transition", false).attr("data-slide", slideOfPost).css({"text-decoration": "none"});;
         
         $(this.mainDiv).find(".post-main-content").find("span").html(content);
     }
