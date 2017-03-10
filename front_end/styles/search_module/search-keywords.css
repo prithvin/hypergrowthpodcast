@@ -10,9 +10,8 @@
   background-color: transparent;
   z-index: 2;
   position: relative;
-  -webkit-transition: all 0.3s; /* Safari */
-  transition: all 0.3s;
 }
+
 .recClassAdd {
   top: -4px;
   background-color: rgba(244, 246, 248, 0.7);
