@@ -1,6 +1,6 @@
 var OnboardingCourses = class OnboardingCourses {
     constructor (mainDiv) {
-        this.colors = ['rgba(244, 162, 45, 1)', 'rgba(68, 108, 179, 1)', 'rgba(141, 193, 83, 1)', 'rgba(229, 77, 66, 1)', 'rgba(229, 77, 66, 1)', 'rgba(41, 187, 156, 1)'];
+        this.colors = ['rgba(68, 108, 179, 1)', 'rgba(107, 185, 240, 1)'];
         this.quarters_short = ['fa', 'wi', 'sp', 's1', 's2'];
         this.quarters_long = ['Fall ', 'Winter ', 'Spring ', 'SS1 ', 'SS2 '];
         this.tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
@@ -67,7 +67,7 @@ var OnboardingCourses = class OnboardingCourses {
             var index = 0;
             while (qtr.indexOf(this.quarters_short[index]) <= -1 && index < this.quarters_short.length) {index++}
             qtr = this.quarters_long[index] + qtr.slice(-2);
-            $(row).css({'background-color': this.colors[index]});
+            $(row).css({'background-color': this.colors[i % 2]});
             
             /* Appending Items to Cells and Cells to Row*/
             var quarter = document.createTextNode(qtr);
