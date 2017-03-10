@@ -421,9 +421,7 @@ var PostSearch = class PostSearch {
     displayOCRAndAudioForSlide(slideNum) {
         this.mark.unmark();
         this.notesWrapper.hide();
-        
-        //var audioResults = this.ocrModule.fetchAudioForSlide(slideNum);
-        var ocrResults = this.ocrModule.fetchOCRForSlide(slideNum);
+     
         return true;
     }
 
