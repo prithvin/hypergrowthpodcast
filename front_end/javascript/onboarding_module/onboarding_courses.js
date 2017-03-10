@@ -10,39 +10,35 @@ var OnboardingCourses = class OnboardingCourses {
     fetchCourses() {
         var apiURL = login_origins.backend + "/getCourses";
         callAPI(apiURL, "GET", {}, function (data) {
-            this.loadCourses(data);
+            this.loadCourses(data, true);
+            this.data = data;
         }.bind(this));
     }
-
-    loadCourses(data) {
-        /* Initial Sort */
-        var toSort = true;
-        if(toSort){
-          var quarterPriority = {
+    
+    sortData(data) {
+        var quarterPriority = {
             "wi" : 1,
             "sp" : 2,
             "s1" : 3,
             "s2" : 4,
             "fa" : 5
-          };
-          
-          data.sort(
+        };
+        data.sort(
             function(x,y){
-              if(!x || !y || x.Quarter == null || y.Quarter == null || x.Quarter.length < 4 || y.Quarter.length < 4){
-                return 0;
-              }
-              if(x.Quarter.substring(2,4) - y.Quarter.substring(2,4) != 0){
-                return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
-              }
-              else{
-                var result = quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
-                if (result === 0) result = x.Course.localeCompare(y.Course, undefined, {numeric: true, sensitivity: 'base'});
-                return result;
-              }
+                if(!x || !y || x.Quarter == null || y.Quarter == null || x.Quarter.length < 4 || y.Quarter.length < 4) return 0;
+                if(x.Quarter.substring(2,4) - y.Quarter.substring(2,4) != 0) return (y.Quarter.substring(2,4) - x.Quarter.substring(2,4));
+                else {
+                    var result = quarterPriority[y.Quarter.substring(0,2)] - quarterPriority[x.Quarter.substring(0,2)];
+                    if (result === 0) result = x.Course.localeCompare(y.Course, undefined, {numeric: true, sensitivity: 'base'});
+                    return result;
+                }
             }
-          );
-        
-        }
+        );
+    }
+
+    loadCourses(data, toSort) {
+        /* Sort */
+        if(toSort) this.sortData(data);
         
         for(var i = 0; i < data.length; i++) {
             /* Row Creation */
@@ -113,9 +109,6 @@ function onboardingSearch() {
     }
   }
   // No Results Logic
-  if (count == tr.length) {
-      $('.no-results-courses').addClass('no-results-show');
-  } else {
-      $('.no-results-courses').removeClass('no-results-show');
-  }
+  if (count == tr.length) $('.no-results-courses').addClass('no-results-show');
+  else $('.no-results-courses').removeClass('no-results-show');
 }
