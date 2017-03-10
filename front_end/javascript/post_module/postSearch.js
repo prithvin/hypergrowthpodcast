@@ -219,9 +219,14 @@ var PostSearch = class PostSearch {
     }
 
     initializeSearch (text) {
-        if (this.dropdownMenu) {
-            this.dropdownMenu.initializeSearch(text);
-        }
+        if (!this.dropdownMenu) 
+            return;
+
+        this.dropdownMenu.initializeSearch(text);
+        this.currentViewData = {
+            "PageType": "Unanswered"
+        };
+        this.updateCurrentVideoSlide();
     }
 
 
