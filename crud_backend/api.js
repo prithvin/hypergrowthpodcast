@@ -207,7 +207,7 @@ var apiFunctions = {
                 'PodcastImage': images[podcast._id]
               });
 
-            if (i == podcasts.length - 1) {
+            if (i == podcasts.length - 1 || results.length == 10) {
               console.log('elapsed: ' + (new Date().getTime() - start) + 'ms');
               return callback(results);
             }
