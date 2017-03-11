@@ -208,9 +208,6 @@ function onboardingSearch() {
     }
   }
   // No Results Logic
-  if (count == tr.length) {
-      $('.no-results-courses').addClass('no-results-show');
-  } else {
-      $('.no-results-courses').removeClass('no-results-show');
-  }
+  if (count == tr.length) $('.no-results-courses').addClass('no-results-show');
+  else $('.no-results-courses').removeClass('no-results-show');
 }
