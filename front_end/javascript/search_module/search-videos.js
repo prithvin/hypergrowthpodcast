@@ -5,7 +5,7 @@ var SearchVideosClass =  class SearchVideosClass {
         this.searchTerm = searchTerm;
 
         this.masterDiv = $(this.mainDiv).find('#search-videos-div')[0];
-        $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"");
+        $(this.mainDiv).find("#title").html("Here are some videos we found about \"" + searchTerm + "\"").addClass("search-term-wrap");
         this.overallDiv = $(this.mainDiv).find(".videos-div")[0];
         
         $(this.mainDiv).find("#search-vid").on('scroll', function() {

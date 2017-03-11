@@ -12,6 +12,10 @@
   position: relative;
 }
 
+.search-term-wrap {
+  word-wrap: break-word;
+}
+
 .recClassAdd {
   top: -4px;
   background-color: rgba(244, 246, 248, 0.7);
