@@ -60,8 +60,13 @@ mark {
     padding-right: 15px;
     font-size: 0.77em;
     font-weight: 200;
-
 }
+
+.post-main-content span {
+    word-wrap: break-word;
+    width: 100%;
+}
+
 
 .time-signature-main {
     padding-right: 15px;
