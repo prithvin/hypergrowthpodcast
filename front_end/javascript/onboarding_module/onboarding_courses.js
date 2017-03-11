@@ -82,6 +82,7 @@ var OnboardingCourses = class OnboardingCourses {
 
 /* Search Function */
 function onboardingSearch() {
+  var colors = ['rgba(68, 108, 179, 1)', 'rgba(107, 185, 240, 1)'];
   var input, filter, table, tr, td, td1, td2, i;
   input = document.getElementById("searchBar1");
   filter = input.value.toUpperCase();
@@ -102,8 +103,11 @@ function onboardingSearch() {
           nospace.toUpperCase().indexOf(filter) > -1) {
           tr[i].className = 'table-row';
           tr[i].style.display = "";
+          $(tr[i]).show();
+          $(tr[i]).css({'background-color': colors[(i - count) % 2]});
       } else {
         tr[i].style.display = "none";
+        $(tr[i]).hide();
         count++;
       }
     }
