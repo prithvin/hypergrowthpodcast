@@ -20,9 +20,9 @@ var SearchVideosClass =  class SearchVideosClass {
     loadCourseCards (searchTerm) {
       $(this.mainDiv).find(".loading-animation-for-searching-podcast").show();
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
-        $(this.mainDiv).find(".loading-animation-for-searching-podcast").hide();
+        $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
         if (resultData.length == 0) {
-          $(this.mainDiv).find(".sad-fox").show();
+          $(this.mainDiv).find(".sad-fox").fadeIn();
         }
         this.loadCard(resultData)
         var waterfall = new Waterfall({
