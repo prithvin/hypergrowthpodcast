@@ -41,8 +41,10 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
     listenToUserSearch () {
         $(this.mainDiv).find(".main_search_container").on("submit", function (ev) {
             ev.preventDefault();
-            if ($(this.mainDiv).find("#searchBar").val().trim().length != 0)
+            if ($(this.mainDiv).find("#searchBar").val().trim().length > 1)
                 window.location.hash = "#/search/" + this.classID + "/" + encodeURIComponent($(this.mainDiv).find("#searchBar").val());
+            else
+                swal("No!", "Search for a longer word (2 or more letters) :D")
         }.bind(this));
     }
 
