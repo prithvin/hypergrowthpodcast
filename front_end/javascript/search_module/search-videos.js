@@ -20,8 +20,8 @@ var SearchVideosClass =  class SearchVideosClass {
     loadCourseCards (searchTerm) {
       $(this.mainDiv).find(".loading-animation-for-searching-podcast").show();
       callAPI(login_origins.backend + "/deepSearchByKeywords", "GET", {"CourseId": this.courseId, "Keywords": searchTerm}, function (resultData) {
-        $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
         if (resultData.length == 0) {
+          $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
           $(this.mainDiv).find(".sad-fox").fadeIn();
         }
         this.loadCard(resultData)
@@ -35,18 +35,18 @@ var SearchVideosClass =  class SearchVideosClass {
     }
 
     searchVidListener() {
-        $(window).on("resize", function() {
-          if ($(this.mainDiv).length == 0) {
-            $('#myimage').off('click.mynamespace');
-          }
-          else {
-            this.updateSearchHeights();
-          }
-        }.bind(this));
-        $(this.mainDiv).find("#search-vid").bind("DOMSubtreeModified", function() {
-          if ($(this.mainDiv))
-            this.updateSearchHeights();
-        }.bind(this));
+      $(window).on("resize", function() {
+        if ($(this.mainDiv).length == 0) {
+          $('#myimage').off('click.mynamespace');
+        }
+        else {
+          this.updateSearchHeights();
+        }
+      }.bind(this));
+      $(this.mainDiv).find("#search-vid").bind("DOMSubtreeModified", function() {
+        if ($(this.mainDiv))
+          this.updateSearchHeights();
+      }.bind(this));
     }
 
     loadCard (resultData) {
@@ -60,6 +60,8 @@ var SearchVideosClass =  class SearchVideosClass {
             minBoxWidth: 250
           });
           this.searchVidListener();
+          $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
+          
         }.bind(this));
       }.bind(this));
       
