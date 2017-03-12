@@ -165,8 +165,8 @@ var apiFunctions = {
             var times = [];
 
             for (let j = 0; j < podcast.Slides.length; j++) {
-              if (matches.length == 7)
-                break;
+              /*if (matches.length == 7)
+                break;*/
 
               var slide = podcast.Slides[j];
               times.push(slide.StartTime);
@@ -182,8 +182,8 @@ var apiFunctions = {
 
             for (let k = 0; k < podcast.AudioTranscript.length; k++) {
               var transcript = podcast.AudioTranscript[k];
-              if (matches.length == 20)
-                break;
+             /* if (matches.length == 20)
+                break;*/
               if (transcript.Content.toLowerCase().indexOf(keywords) != -1) {
                 var audioMs = transcript.StartTime * 1000;
                 var z;
