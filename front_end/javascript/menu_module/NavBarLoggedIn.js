@@ -133,9 +133,11 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             // Merge keywords
             $.extend(autokeys, data);
             $("#searchBar").autocomplete({
-                source: autokeys,
+                source: function(request, response) {
+                    var results = $.ui.autocomplete.filter(autokeys, request.term);
+                    response(results.slice(0, 5));
+                },
                 minLength: 1,
-                max: 5,
                 select: function(event, ui) { 
                     $("input#searchBar").val(ui.item.value);
                     $("#searchForm").submit();
@@ -151,7 +153,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                         .data("item.autocomplete", item)
                         .append("<span class='key'>" + item.label + "</span>")
                         .appendTo(ul);;
-            };    
+            }; 
+            
         });
     }
     
