@@ -134,7 +134,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             $.extend(autokeys, data);
             $("#searchBar").autocomplete({
                 source: autokeys,
-                minLength: 2,
+                minLength: 1,
+                max: 5,
                 select: function(event, ui) { 
                     $("input#searchBar").val(ui.item.value);
                     $("#searchForm").submit();
