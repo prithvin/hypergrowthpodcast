@@ -137,7 +137,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
                     var results = $.ui.autocomplete.filter(autokeys, request.term);
                     response(results.slice(0, 5));
                 },
-                minLength: 0,
+                minLength: 1,
                 select: function(event, ui) { 
                     $("input#searchBar").val(ui.item.value);
                     $("#searchForm").submit();
