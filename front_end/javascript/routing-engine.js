@@ -1,4 +1,4 @@
-require(['director', 'components', 'loader', 'config', 'garbageBin'], function () {
+require(['director', 'components', 'loader', 'config', 'garbageBin', 'alertbox'], function () {
 
   function timeToHideLoader (time) {
     if (!time)
@@ -111,6 +111,7 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
   };
 
   var courseHomepage = function(courseId) {
+    console.log(courseId);
     startPageLoad(function () {
       loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
         require(['course-homepage'], function() {
@@ -124,7 +125,18 @@ require(['director', 'components', 'loader', 'config', 'garbageBin'], function (
   }
 
   var otherPages = function() {
-    alert("This page is not found");
+    swal({
+      title: "Error 404",
+      text: "This page does not exist. ",
+      type: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Ok",
+      closeOnConfirm: false
+    }, function () {
+      swal("Cool!", "Check out some of the courses here!", "success");
+      window.location.hash = "#/courses"
+    });
   }
 
   var routes = {
