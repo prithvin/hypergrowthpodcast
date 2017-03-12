@@ -25,24 +25,38 @@ var SearchVideosClass =  class SearchVideosClass {
           $(this.mainDiv).find(".sad-fox").fadeIn();
         }
         this.loadCard(resultData)
-        var waterfall = new Waterfall({
-          containerSelector: '#search-vid',
-          boxSelector: '.video-card',
-          minBoxWidth: 250
-        });
+        
       }.bind(this));
     }
 
     loadCard (resultData) {
-      loadHTMLComponent("SearchCardModule", function (data) {
-        for (var x = 0; x < resultData.length; x++) {
-          var mainDiv = $(data);
-          new SearchCardClass($(mainDiv), this.searchTerm, resultData[x]);
-            
-          $(this.mainDiv).find("#search-vid").append(mainDiv);
-        }
+      loadHTMLComponent("SearchCardModule", function (htmlComponent) {
+        this.loadCardAsync(resultData, htmlComponent, 0, function () {
+
+          // Waterfall is how the pinterest layout is genrated
+          var waterfall = new Waterfall({
+            containerSelector: '#search-vid',
+            boxSelector: '.video-card',
+            minBoxWidth: 250
+          });
+        });
       }.bind(this));
       
+    }
+
+    loadCardAsync (resultData, htmlComponent, index, callback) {
+      if (index == resultData.length) {
+        callback();
+        return;
+      }
+
+      setTimeout(function () {
+        var mainDiv = $(htmlComponent);
+        new SearchCardClass($(mainDiv), this.searchTerm, resultData[index]);
+        $(this.mainDiv).find("#search-vid").append(mainDiv);
+        this.loadCardAsync(resultData, htmlComponent, index  + 1, callback);
+      }.bind(this), 0)
+
     }
 
     keywordLoadFromCrud (searchTerm, courseId, masterDiv) { 

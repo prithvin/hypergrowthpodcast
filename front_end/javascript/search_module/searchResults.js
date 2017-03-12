@@ -26,7 +26,7 @@ var SearchPage = class SearchPage {
     loadPosts (thisClass) {
         require(['postSearch'], function () {
             var divToLoad = $(thisClass.mainDiv).find("#posts");
-            loadComponent("PostSearchModule", divToLoad, function () {
+            /*loadComponent("PostSearchModule", divToLoad, function () {
                 new PostSearch(
                     {
                         "UniqueID": thisClass.podcastID,
@@ -40,7 +40,7 @@ var SearchPage = class SearchPage {
                     divToLoad
                 );
                 thisClass.dynamicWindowResize(thisClass);
-            });
+            });*/
         });
     }
 
