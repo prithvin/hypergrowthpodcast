@@ -489,7 +489,12 @@ var PostSearch = class PostSearch {
 
         callAPI(apiURL, "GET", requestData, function (data) {
             // An array of posts are returned
-            for (var x = 0; x < data.length; x++) {
+            
+            var length = data.length;
+            if(postData["TypeOfFetch"] == "CourseSearch"){
+                length = 10;
+            }
+            for (var x = 0; x < length; x++) {
                 this.loadPost(thisClass, data[x]);
             }
             if (postData["TypeOfFetch"] == "CourseSearch") {
