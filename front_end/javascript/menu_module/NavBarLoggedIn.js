@@ -1,4 +1,4 @@
-var autokeys = [];
+//var autokeys = [];
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
@@ -119,7 +119,7 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
             if ($.inArray(text, autokeys) == -1 && text.length > 2)
                 autokeys.push(text);
             //console.log(autokeys);
-            localStorage.setItem("autokeys", autokeys);
+            //localStorage.setItem("autokeys", autokeys);
         });     
         
         if (classID == null) {
@@ -128,8 +128,8 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         
         // Get Keywords for entire course
         callAPI(login_origins.backend + '/getKeywordSuggestions', "GET", {'count': 100, 'minKeywordLength': 3, 'CourseId': classID}, function (data) {
-            var keys = localStorage.getItem("autokeys");
-            if (keys !== null) autokeys = keys.split(",");
+            //var keys = localStorage.getItem("autokeys");
+            //if (keys !== null) autokeys = keys.split(",");
             // Merge keywords
             $.extend(autokeys, data);
             $("#searchBar").autocomplete({
