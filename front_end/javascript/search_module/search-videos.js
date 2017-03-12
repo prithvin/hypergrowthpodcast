@@ -60,8 +60,9 @@ var SearchVideosClass =  class SearchVideosClass {
             minBoxWidth: 250
           });
           this.searchVidListener();
-          $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
-          
+          setTimeout(function () {
+            $(this.mainDiv).find(".loading-animation-for-searching-podcast").fadeOut();
+          }, 200);
         }.bind(this));
       }.bind(this));
       
