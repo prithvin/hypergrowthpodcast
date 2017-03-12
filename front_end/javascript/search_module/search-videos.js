@@ -29,6 +29,26 @@ var SearchVideosClass =  class SearchVideosClass {
       }.bind(this));
     }
 
+    updateSearchHeights() {
+      var newHeight =$(window).height() - 173;
+      $(this.mainDiv).find("#search-vid").css("height", newHeight);
+    }
+
+    searchVidListener() {
+        $(window).on("resize", function() {
+          if ($(this.mainDiv).length == 0) {
+            $('#myimage').off('click.mynamespace');
+          }
+          else {
+            this.updateSearchHeights();
+          }
+        }.bind(this));
+        $(this.mainDiv).find("#search-vid").bind("DOMSubtreeModified", function() {
+          if ($(this.mainDiv))
+            this.updateSearchHeights();
+        }.bind(this));
+    }
+
     loadCard (resultData) {
       loadHTMLComponent("SearchCardModule", function (htmlComponent) {
         this.loadCardAsync(resultData, htmlComponent, 0, function () {
@@ -39,7 +59,8 @@ var SearchVideosClass =  class SearchVideosClass {
             boxSelector: '.video-card',
             minBoxWidth: 250
           });
-        });
+          this.searchVidListener();
+        }.bind(this));
       }.bind(this));
       
     }
