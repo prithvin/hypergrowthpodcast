@@ -1,4 +1,4 @@
-//var autokeys = [];
+var autokeys = [];
 var NavBarLoggedInCourse = class NavBarLoggedInCourse {
 
     // ClassID COULD EITHER BE A PODCAST OR A CLASSID IT CAN BE SOMETHINg. 
