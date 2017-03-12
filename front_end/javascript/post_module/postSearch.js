@@ -492,7 +492,8 @@ var PostSearch = class PostSearch {
             
             var length = data.length;
             if(postData["TypeOfFetch"] == "CourseSearch"){
-                length = 10;
+                
+                length = Math.min(data.length, 10);
             }
             for (var x = 0; x < length; x++) {
                 this.loadPost(thisClass, data[x]);
