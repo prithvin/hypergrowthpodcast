@@ -13,7 +13,7 @@
   content: attr(data-placeholder);
   display: block; /* For Firefox */
 }
-*, *:before, *:after, h2, p {
+/**, *:before, *:after, h2, p {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -23,7 +23,7 @@
 *:focus, *:before:focus, *:after:focus, h2:focus, p:focus {
   outline: none;
 }
-
+*/
 .notes-content:focus {
   outline: none;
 }
