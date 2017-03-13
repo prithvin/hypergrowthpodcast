@@ -111,7 +111,6 @@ require(['director', 'components', 'loader', 'config', 'garbageBin', 'alertbox']
   };
 
   var courseHomepage = function(courseId) {
-    console.log(courseId);
     startPageLoad(function () {
       loadComponentOrLogin("CourseHomepageModule", $("#page"), function() {
         require(['course-homepage'], function() {
