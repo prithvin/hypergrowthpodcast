@@ -32,13 +32,15 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
                     return;
 
                 this.divOfHoverImage.append(this.slideImages[slideNo - 1]);
-                this.divOfHoverImage.show();
-            
+                this.divOfHoverImage.fadeIn();
             }.bind(this),
-            mouseleave: function () {
-                this.divOfHoverImage.html("");
-                this.divOfHoverImage.hide();
-            }
+            mouseleave: function (ev) {
+                this.divOfHoverImage.fadeOut();
+                var slideNo = $(ev.target).attr("data-slide");
+                if (slideNo)
+                    this.divOfHoverImage.find("canvas").remove();
+
+            }.bind(this)
         });
     }
 
