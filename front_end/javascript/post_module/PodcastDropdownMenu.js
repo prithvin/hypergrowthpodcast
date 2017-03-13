@@ -47,20 +47,22 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     videoSeekerThumb () { 
         var index = 0;
         var video = document.createElement("video");
-
+        this.listenToHoversNow();
         video.addEventListener('loadeddata', function() {
             if (this.slideTimes.length > 0) 
                 video.currentTime = this.slideTimes[0];
         }.bind(this), false);
+        for (var x = 0; x < this.slideTimes.length; x++) {
+            this.slideImages[index] = this.getLoadCanvas();
+        }
 
         video.addEventListener('seeked', function() {
-            this.slideImages.push(this.generateThumbnail(video));
+            this.slideImages[index] = (this.generateThumbnail(video));
             $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
                 video.currentTime = this.slideTimes[index];
-            else 
-                this.listenToHoversNow();
+
         }.bind(this), false);
 
         video.preload = "auto";
