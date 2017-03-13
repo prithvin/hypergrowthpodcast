@@ -26,10 +26,13 @@
     color: white;
     font-weight: 200;
 }
-.hover-img{
+.hover-img {
     width:100%;
+    position:absolute;
+    bottom:0;
+    z-index: 100;
 }
-.not-hover-img{
+.hover-img img{
     width:100%;
 }
 .show-fa {
