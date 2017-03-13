@@ -294,8 +294,9 @@ app.get('/setUserFromSession', function(req,res) {
 });
 
 app.get('/logout',function(req,res){
-  req.session.destroy();
-  res.send("LOGGED OUT");
+  req.session.destroy(function(err) {
+    res.send("LOGGED OUT");
+  });
 });
 
 app.get('/loginorcreate', function (req, res) {
@@ -311,7 +312,7 @@ app.get('/loginorcreate', function (req, res) {
       req.session.user = user._id;
       req.session.profId = profileID;
       req.session.name = userName;
-      req.session.pic = user.ProfilePicture;  
+      req.session.pic = user.ProfilePicture;
       req.session.save(function () {
         res.send(true);
       });
@@ -325,7 +326,7 @@ app.get('/loginorcreate', function (req, res) {
         req.session.user = newUser._id;
         req.session.profId = profileID;
         req.session.name = userName;
-        req.session.pic = newUser.ProfilePicture;  
+        req.session.pic = newUser.ProfilePicture;
         req.session.save(function () {
           res.send(true);
         });
@@ -350,7 +351,7 @@ app.get('/auth/facebook', function(req,res,next){
   }
   req.session.callbackURL = req.query.callbackURL;
  console.log('auth.callbackURL is ' + auth.facebookAuth.callbackURL);
-  //req.protocol + '://' + 
+  //req.protocol + '://' +
   realCallbackUrl = ("https://www.podcastucsd.ml/api/auth/facebook/callback") //+ auth.facebookAuth.callbackURL;
   console.log("auth stage\n\n");
   req.session.save(function (err) {
