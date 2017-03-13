@@ -55,13 +55,18 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
     videoSeekerThumb () { 
         var index = 0;
-        var video = document.createElement("video");
+        var video = $("<video /> ",  {
+            src : this.videoURL
+        })
+        $(this.mainDiv).append(video);
+        $(video).hide();
         
-        video.addEventListener('loadeddata', function() {
+        video[0].addEventListener('loadeddata', function() {
             if (this.slideTimes.length > 0) {
-                video.currentTime = this.slideTimes[0];
+                video[0].currentTime = this.slideTimes[0];
             }
         }.bind(this), false);
+
         this.listenToHoversNow();
         for (var x = 0; x < this.slideTimes.length; x++) {
             this.slideImages[x] = this.getLoadCanvas();
@@ -69,19 +74,15 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         }
        
 
-        video.addEventListener('seeked', function() {
-            this.slideImages[index] = (this.generateThumbnail(video));
-            console.log("Index " + index + " Loaded");
+        video[0].addEventListener('seeked', function() {
+            this.slideImages[index] = (this.generateThumbnail(video[0]));
             $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
-                video.currentTime = this.slideTimes[index];
+                video[0].currentTime = this.slideTimes[index];
 
 
         }.bind(this), false);
-
-        video.preload = "auto";
-        video.src = this.videoURL;
     }
 
     generateThumbnail(video) {
