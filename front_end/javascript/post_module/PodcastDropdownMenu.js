@@ -27,8 +27,6 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     getLoadCanvas(){
         var image = new Image();
         image.src = './images/liquidbooks.gif';
-        image.height = 640;
-        image.width = 360;
         return image;
     }
     listenToHoversNow() {
@@ -73,7 +71,6 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
         video.addEventListener('seeked', function() {
             this.slideImages[index] = (this.generateThumbnail(video));
-            console.log("Index " + index + " Loaded");
             $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
