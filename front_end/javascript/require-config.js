@@ -112,7 +112,7 @@ var require = {
         "navbar": "menu_module/NavBarLoggedIn",
         "course-videos": "course_videos_module/course_videos",
         "course-homepage": "course_homepage_module/course_homepage",
-        "course-selection": "onboarding_module/onboarding_courses_fav",
+        "course-selection": "onboarding_module/onboarding_courses",
         "onboarding": "onboarding_module/onboarding",
         "config": "config",
         "searchResults": "search_module/searchResults",
