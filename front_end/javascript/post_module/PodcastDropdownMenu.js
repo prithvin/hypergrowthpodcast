@@ -70,9 +70,9 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     generateThumbnail(video) {
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
-        c.width = 320;
-        c.height = 180;
-        ctx.drawImage(video, 0, 0, 320, 180);
+        c.width = 640;
+        c.height = 360;
+        ctx.drawImage(video, 0, 0, 640, 360);
         return c;
     }
 
