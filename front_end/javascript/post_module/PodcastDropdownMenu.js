@@ -76,6 +76,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
         video[0].addEventListener('seeked', function() {
             this.slideImages[index] = (this.generateThumbnail(video[0]));
+
             $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
