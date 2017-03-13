@@ -27,11 +27,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     getLoadCanvas(){
         var image = new Image();
         image.src = './images/liquidbooks.gif';
-        var canvas = document.createElement("canvas");
-        canvas.width = image.width;
-        canvas.height = image.height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
-        return canvas;
+        return image;
     }
     listenToHoversNow() {
         $(this.mainDiv).find(".dropdown-item").on({
