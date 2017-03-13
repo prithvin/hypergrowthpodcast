@@ -27,13 +27,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     getLoadCanvas(){
         var image = new Image();
         image.src = './images/liquidbooks.gif';
-        var canvas = document.createElement("canvas");
-        image.onload = function () {
-            canvas.getContext("2d").drawImage(image, 0, 0, 640, 360);
-        };
-        canvas.width = 640;
-        canvas.height = 360;
-        return canvas;
+        return image;
     }
     listenToHoversNow() {
         $(this.mainDiv).find(".dropdown-item").on({
@@ -48,8 +42,12 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
             mouseleave: function (ev) {
                 this.divOfHoverImage.hide();
                 var slideNo = $(ev.target).attr("data-slide");
-                if (slideNo)
-                    this.divOfHoverImage.find("canvas").remove();
+                if (slideNo) {
+                    if (this.divOfHoverImage.find("img").length != 0)
+                        this.divOfHoverImage.find("img").remove();
+                    else
+                        this.divOfHoverImage.find("canvas").remove();
+                }
 
             }.bind(this)
         });
