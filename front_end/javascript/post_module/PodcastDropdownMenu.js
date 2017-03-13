@@ -18,7 +18,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         this.generateNonSlideOptions();
         this.generateDropdownForSlides();
         this.updateSlideTextListener();
-
+        this.videoSeekerThumb();
         // Default value
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
     }
@@ -30,10 +30,11 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         video.addEventListener('loadeddata', function() {
             if (this.slideTimes.length > 0) 
                 video.currentTime = this.slideTimes[0];
-        }, false);
+        }.bind(this), false);
 
         video.addEventListener('seeked', function() {
             this.slideImages.push(this.generateThumbnail(video));
+            $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
                 video.currentTime = this.slideTimes[index];
@@ -85,11 +86,31 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
             $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(ev.target).html());
         }.bind(this))
 
-        $(this.mainDiv).find(".dropdown-item").hover(function (ev) {
-            
-        });
-    }
+        $(this.mainDiv).find(".dropdown-item").hover(
+            function (ev) {
+                this.resetslides();
 
+                if($(ev.target).attr("data-slide")){
+                    var slidenum = $(ev.target).attr("data-slide");
+                    //var image = document.createElement("img");
+                    //image.src = this.slideImages[slidenum];
+                    $(ev.target).html("");
+                    $(ev.target).append(this.slideImages[slidenum]);
+                }
+            }.bind(this), 
+            function(ev){
+                if($(ev.target).attr("data-slide"))
+                    $(ev.target).html("Slide " + $(ev.target).attr("data-slide") + " Feed");
+            }.bind(this)
+        );
+       
+    }
+    resetslides(){
+        for(var i = 1; i <= this.numSlides; i++){
+            this.slideDropdownItems[i].html("Slide " + i + " Feed");
+
+        }
+    }
     initializeSearch (text) {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Search Results for \"" + text + "\" ");
     }

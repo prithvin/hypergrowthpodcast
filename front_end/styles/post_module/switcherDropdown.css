@@ -26,6 +26,9 @@
     color: white;
     font-weight: 200;
 }
+.hover-img{
+    width:100%;
+}
 .show-fa {
     font: normal normal normal 14px/1 FontAwesome !IMPORTANT;
     float:right;
