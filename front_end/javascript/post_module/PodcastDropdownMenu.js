@@ -86,23 +86,8 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
             $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(ev.target).html());
         }.bind(this))
 
-        $(this.mainDiv).find(".dropdown-item").hover(
-            function (ev) {
-                this.resetslides();
+        
 
-                if($(ev.target).attr("data-slide")){
-                    var slidenum = $(ev.target).attr("data-slide");
-                    //var image = document.createElement("img");
-                    //image.src = this.slideImages[slidenum];
-                    $(ev.target).html("");
-                    $(ev.target).append(this.slideImages[slidenum]);
-                }
-            }.bind(this), 
-            function(ev){
-                if($(ev.target).attr("data-slide"))
-                    $(ev.target).html("Slide " + $(ev.target).attr("data-slide") + " Feed");
-            }.bind(this)
-        );
        
     }
     resetslides(){
