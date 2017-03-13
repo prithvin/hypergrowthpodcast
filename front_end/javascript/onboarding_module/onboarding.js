@@ -1,8 +1,6 @@
 var Onboarding = class Onboarding {
   constructor(mainDiv, callback) {
-    this.checkUserLogStatus(function () {
-      callback();
-    })
+
     
 
     var fbAppId = "1606385449650440";
@@ -14,7 +12,9 @@ var Onboarding = class Onboarding {
       appId: fbAppId,
       version: 'v2.4'
     });
-
+    this.checkUserLogStatus(function () {
+      callback();
+    })
     var self = this;
     var errorString = "Looks like you did not log into Facebook correctly. Try again!";
     $(mainDiv).find('.fb-login-button').on("click", function ()  {
@@ -47,23 +47,25 @@ var Onboarding = class Onboarding {
   }
 
   checkUserLogStatus (callback) {
-    var errorString = "Looks like you did not log into Facebook correctly. Try again!";
-    FB.login(function(response) {
-      if (response.status === 'connected') {
-        callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (data) {
-          if(data === true) {
+    callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (data) {
+      if(data === true) {
+        FB.login(function(response) {
+          if (response.status === 'connected') {
             if (this.getParameterByName("redirectURL"))
               window.location.href = this.getParameterByName("redirectURL");
             else
               window.location.hash =  '/courses';
+          } 
+          else {
+            callback();
+            swal("Hey there again!", "Time to login!!!")
           }
-          callback();
-        }.bind(this));
-      } 
-      else {
-        swal("Oops!", errorString)
+        }.bind(this), {scope: 'public_profile,email'});
       }
-    }, {scope: 'public_profile,email'});
+      callback();
+    }.bind(this));
+
+
     
   }
 
