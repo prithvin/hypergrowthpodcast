@@ -29,11 +29,14 @@
 .hover-img {
     width:100%;
     position:absolute;
-    bottom:0;
+    bottom:20px;
     z-index: 100;
 }
-.hover-img img{
-    width:100%;
+
+.hover-img canvas {
+    width:90%;
+    margin-left: 5%;
+    box-shadow: 0px 0px 10px 4px rgba(15, 43, 94, 0.56);
 }
 .show-fa {
     font: normal normal normal 14px/1 FontAwesome !IMPORTANT;

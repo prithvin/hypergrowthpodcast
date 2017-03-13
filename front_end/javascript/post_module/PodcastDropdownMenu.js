@@ -19,8 +19,29 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         this.generateDropdownForSlides();
         this.updateSlideTextListener();
         this.videoSeekerThumb();
+        this.divOfHoverImage = $(divOfDropdown).prev(".hover-img");
         // Default value
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
+    }
+
+    listenToHoversNow() {
+        $(this.mainDiv).find(".dropdown-item").on({
+            mouseenter: function (ev) {
+                var slideNo = $(ev.target).attr("data-slide");
+                if (!slideNo)
+                    return;
+
+                this.divOfHoverImage.append(this.slideImages[slideNo - 1]);
+                this.divOfHoverImage.show();
+            }.bind(this),
+            mouseleave: function (ev) {
+                this.divOfHoverImage.hide();
+                var slideNo = $(ev.target).attr("data-slide");
+                if (slideNo)
+                    this.divOfHoverImage.find("canvas").remove();
+
+            }.bind(this)
+        });
     }
 
     videoSeekerThumb () { 
@@ -38,6 +59,8 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
             index++;
             if (index < this.slideTimes.length)
                 video.currentTime = this.slideTimes[index];
+            else 
+                this.listenToHoversNow();
         }.bind(this), false);
 
         video.preload = "auto";
@@ -47,9 +70,9 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     generateThumbnail(video) {
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
-        c.width = 320;
-        c.height = 180;
-        ctx.drawImage(video, 0, 0, 320, 180);
+        c.width = 640;
+        c.height = 360;
+        ctx.drawImage(video, 0, 0, 640, 360);
         return c;
     }
 
@@ -100,7 +123,8 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Search Results for \"" + text + "\" ");
     }
     switchToSlide (slideNo) {
-        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(this.slideDropdownItems[slideNo]).html());
+        this.resetslides();
+        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Slide " + slideNo +  " Feed");
     }
 
     switchToAllLecture() {
