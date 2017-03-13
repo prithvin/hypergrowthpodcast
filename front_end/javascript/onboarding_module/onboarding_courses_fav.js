@@ -174,7 +174,7 @@ var OnboardingCourses = class OnboardingCourses {
                 this.table.splice(start, 0, row);
             }
         }
-        console.log(this.table);
+        //console.log(this.table);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
     }  
 }
