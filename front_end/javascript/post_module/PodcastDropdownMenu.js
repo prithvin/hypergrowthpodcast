@@ -19,8 +19,27 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         this.generateDropdownForSlides();
         this.updateSlideTextListener();
         this.videoSeekerThumb();
+        this.divOfHoverImage = $(divOfDropdown).prev(".hover-img");
         // Default value
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
+    }
+
+    listenToHoversNow() {
+        $(this.mainDiv).find(".dropdown-item").on({
+            mouseenter: function (ev) {
+                var slideNo = $(ev.target).attr("data-slide");
+                if (!slideNo)
+                    return;
+
+                this.divOfHoverImage.append(this.slideImages[slideNo - 1]);
+                this.divOfHoverImage.show();
+            
+            }.bind(this),
+            mouseleave: function () {
+                this.divOfHoverImage.html("");
+                this.divOfHoverImage.hide();
+            }
+        });
     }
 
     videoSeekerThumb () { 
@@ -38,6 +57,8 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
             index++;
             if (index < this.slideTimes.length)
                 video.currentTime = this.slideTimes[index];
+            else 
+                this.listenToHoversNow();
         }.bind(this), false);
 
         video.preload = "auto";
