@@ -50,6 +50,7 @@ var PostSearch = class PostSearch {
         this.mainDiv = $(mainDiv).find(".search-module");
         this.doneLoading = callback;
         this.podcastid = podcastid; // ONLY NEEDED FOR POST PAGE
+        //this.videoCurrentSlide = 1;
 
         this.slideTransitionDiv = $(this.mainDiv).parent().find(".rectangle").hide();
         $(this.slideTransitionDiv).hide();
@@ -459,9 +460,18 @@ var PostSearch = class PostSearch {
 
     generateDropdownMenu () {
         if (this.postFetchData["TypeOfFetch"] == "PodcastSearch") {
-            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"));
+            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"), this.parseSlides(this.ocrAudioData["Slides"]));
         }
         
+    }
+
+    parseSlides (slides) {
+        // Note that the slides themselves are indexed starting at 1
+        var slideTimes = [];
+        for (var x = 0; x < slides.length; x++) {
+          slideTimes.push(slides[x]["StartTime"]/1000);
+        }
+        return slideTimes;
     }
 
     loadPostsFromServer (thisClass) {

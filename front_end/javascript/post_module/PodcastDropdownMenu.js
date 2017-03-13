@@ -7,7 +7,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     // Search made (connect this method with the podcast page)
     // By default SHOWS ALL POSTS IN LECTURE
 
-    constructor(numSlides, divOfDropdown) {
+    constructor(numSlides, divOfDropdown, slideTimes) {
         this.mainDiv = divOfDropdown;
         this.numSlides = numSlides;
         this.dropdownMenuOptions = $(this.mainDiv).find(".dropdown-menu");
