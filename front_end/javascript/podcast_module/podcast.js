@@ -92,6 +92,7 @@ var PodcastPage = class PodcastPage {
             callAPI(login_origins.backend + '/getNotesForUser', "GET", {"PodcastId": thisClass.podcastID},  function (notes) {
                 thisClass.audioData["Notes"] = notes["Notes"];
                 thisClass.parseSlides(data['Slides']);
+                thisClass.videoURL = data['VideoURL'];
                 thisClass.loadPosts(thisClass, function () {
                     thisClass.loadVideo(thisClass, data['VideoURL'], 0, data['SRTFile']);
                 });
@@ -142,7 +143,8 @@ var PodcastPage = class PodcastPage {
                     divToLoad,
                     thisClass.audioData,
                     {
-                        "CurrentSlideNum": thisClass.startingSlide
+                        "CurrentSlideNum": thisClass.startingSlide,
+                        "VideoURL": thisClass.videoURL
                     },
                     thisClass.podcastID,
                     function () {

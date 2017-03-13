@@ -38,6 +38,7 @@ var PostSearch = class PostSearch {
                 IF NOT USING, PLEASE PASS AS NULL, DONT PASS EMPTY JSON OBJECT PLZ
                 {
                     CurrentSlideNum:
+                    VideoURL: 
                 }
     
              callback forwhen post page is loaded (only for post page)
@@ -65,6 +66,7 @@ var PostSearch = class PostSearch {
 
         if (videoData != null && videoData['CurrentSlideNum'] != null)  {
             this.videoCurrentSlide = videoData['CurrentSlideNum'];
+            this.videoURL = videoData['VideoURL'];
             this.currentViewData['SlideNo'] = this.videoCurrentSlide;
         }
         
@@ -91,6 +93,7 @@ var PostSearch = class PostSearch {
 
         this.isPodcastPage = false;
         if (ocrAudioData) {
+            this.slideTimes = ocrAudioData["Slides"];
             this.isPodcastPage = true;
             this.ocrModule = new OCRAudioPosts(ocrAudioData, this.mainDiv, function () {
                 this.OCRAudioLoaded = true;
@@ -104,7 +107,8 @@ var PostSearch = class PostSearch {
                 this.showNotes();
             }.bind(this));
         
-        }/*
+        }
+        /*
         else{
            $(this.mainDiv).on("click", ".post-container", function (ev) {
                 var target = ev.currentTarget;
@@ -460,7 +464,7 @@ var PostSearch = class PostSearch {
 
     generateDropdownMenu () {
         if (this.postFetchData["TypeOfFetch"] == "PodcastSearch") {
-            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"), this.parseSlides(this.ocrAudioData["Slides"]));
+            this.dropdownMenu = new PodcastDropdownMenu(this.numberOfSlides, $(this.mainDiv).parent().find(".dropdownOfSlide"), this.parseSlides(this.slideTimes), this.videoURL);
         }
         
     }

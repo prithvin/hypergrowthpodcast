@@ -7,9 +7,12 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     // Search made (connect this method with the podcast page)
     // By default SHOWS ALL POSTS IN LECTURE
 
-    constructor(numSlides, divOfDropdown, slideTimes) {
+    constructor(numSlides, divOfDropdown, slideTimes, videoURL) {
         this.mainDiv = divOfDropdown;
+        this.slideTimes = slideTimes;
+        this.videoURL = videoURL; // TODO 
         this.numSlides = numSlides;
+        this.slideImages = [];
         this.dropdownMenuOptions = $(this.mainDiv).find(".dropdown-menu");
         this.slideDropdownItems = {};
         this.generateNonSlideOptions();
@@ -18,6 +21,35 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
         // Default value
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
+    }
+
+    videoSeekerThumb () { 
+        var index = 0;
+        var video = document.createElement("video");
+
+        video.addEventListener('loadeddata', function() {
+            if (this.slideTimes.length > 0) 
+                video.currentTime = this.slideTimes[0];
+        }, false);
+
+        video.addEventListener('seeked', function() {
+            this.slideImages.push(this.generateThumbnail(video));
+            index++;
+            if (index < this.slideTimes.length)
+                video.currentTime = this.slideTimes[index];
+        }.bind(this), false);
+
+        video.preload = "auto";
+        video.src = this.videoURL;
+    }
+
+    generateThumbnail(video) {
+        var c = document.createElement("canvas");
+        var ctx = c.getContext("2d");
+        c.width = 320;
+        c.height = 180;
+        ctx.drawImage(video, 0, 0, 320, 180);
+        return c;
     }
 
     generateNonSlideOptions () {
@@ -75,3 +107,4 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
 
 }
+
