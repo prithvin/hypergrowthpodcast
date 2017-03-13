@@ -47,15 +47,24 @@ var Onboarding = class Onboarding {
   }
 
   checkUserLogStatus (callback) {
-    callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (data) {
-      if(data === true) {
-        if (this.getParameterByName("redirectURL"))
-          window.location.href = this.getParameterByName("redirectURL");
-        else
-          window.location.hash =  '/courses';
+    var errorString = "Looks like you did not log into Facebook correctly. Try again!";
+    FB.login(function(response) {
+      if (response.status === 'connected') {
+        callAPI(login_origins.backend + '/isUserLoggedIn', 'GET', {}, function (data) {
+          if(data === true) {
+            if (this.getParameterByName("redirectURL"))
+              window.location.href = this.getParameterByName("redirectURL");
+            else
+              window.location.hash =  '/courses';
+          }
+          callback();
+        }.bind(this));
+      } 
+      else {
+        swal("Oops!", errorString)
       }
-      callback();
-    }.bind(this));
+    }, {scope: 'public_profile,email'});
+    
   }
 
   getParameterByName(name, url) {
