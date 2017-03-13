@@ -28,9 +28,11 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         var image = new Image();
         image.src = './images/liquidbooks.gif';
         var canvas = document.createElement("canvas");
-        canvas.width = image.width;
-        canvas.height = image.height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
+        image.onload = function () {
+            canvas.getContext("2d").drawImage(image, 0, 0, 640, 360);
+        };
+        canvas.width = 640;
+        canvas.height = 360;
         return canvas;
     }
     listenToHoversNow() {
@@ -58,20 +60,25 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         var video = document.createElement("video");
         
         video.addEventListener('loadeddata', function() {
-            if (this.slideTimes.length > 0) 
+            if (this.slideTimes.length > 0) {
                 video.currentTime = this.slideTimes[0];
+            }
         }.bind(this), false);
-        for (var x = 0; x < this.slideTimes.length; x++) {
-            this.slideImages[index] = this.getLoadCanvas();
-        }
         this.listenToHoversNow();
+        for (var x = 0; x < this.slideTimes.length; x++) {
+            this.slideImages[x] = this.getLoadCanvas();
+            $(this.slideImages[x]).addClass("hover-img");
+        }
+       
 
         video.addEventListener('seeked', function() {
             this.slideImages[index] = (this.generateThumbnail(video));
+            console.log("Index " + index + " Loaded");
             $(this.slideImages[index]).addClass("hover-img");
             index++;
             if (index < this.slideTimes.length)
                 video.currentTime = this.slideTimes[index];
+
 
         }.bind(this), false);
 
