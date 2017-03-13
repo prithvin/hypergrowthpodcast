@@ -115,7 +115,8 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Search Results for \"" + text + "\" ");
     }
     switchToSlide (slideNo) {
-        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html($(this.slideDropdownItems[slideNo]).html());
+        this.resetslides();
+        $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Slide " + slideNo +  " Feed");
     }
 
     switchToAllLecture() {
