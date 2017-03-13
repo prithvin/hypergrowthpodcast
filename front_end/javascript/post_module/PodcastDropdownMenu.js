@@ -24,6 +24,15 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
     }
 
+    getLoadCanvas(){
+        var image = new Image();
+        image.src = '../../images/liquidbooks.gif';
+        var canvas = document.createElement("canvas");
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        return canvas;
+    }
     listenToHoversNow() {
         $(this.mainDiv).find(".dropdown-item").on({
             mouseenter: function (ev) {
