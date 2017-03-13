@@ -21,7 +21,10 @@ var Onboarding = class Onboarding {
       FB.login(function(response) {
         if (response.status === 'connected') {
           FB.api('/me', function(response) {
-
+            if (response.name == null) {
+              swal("Oops!", errorString);
+              return;
+            }
             callAPI(login_origins.backend + '/loginorcreate', 'GET', response, function (data) {
               if (data == true)
                 window.location.href = self.getCallbackURL();
