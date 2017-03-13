@@ -29,11 +29,15 @@
 .hover-img {
     width:100%;
     position:absolute;
-    bottom:0;
+    bottom:20px;
+    padding-left:40px;
+    padding-right: 40px;
     z-index: 100;
+
 }
 .hover-img img{
     width:100%;
+    box-shadow: 0px 0px 10px 1px #000;
 }
 .show-fa {
     font: normal normal normal 14px/1 FontAwesome !IMPORTANT;

@@ -32,10 +32,10 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
                     return;
 
                 this.divOfHoverImage.append(this.slideImages[slideNo - 1]);
-                this.divOfHoverImage.fadeIn();
+                this.divOfHoverImage.show();
             }.bind(this),
             mouseleave: function (ev) {
-                this.divOfHoverImage.fadeOut();
+                this.divOfHoverImage.hide();
                 var slideNo = $(ev.target).attr("data-slide");
                 if (slideNo)
                     this.divOfHoverImage.find("canvas").remove();
