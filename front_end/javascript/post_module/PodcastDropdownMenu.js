@@ -26,7 +26,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
     getLoadCanvas(){
         var image = new Image();
-        image.src = '../../images/liquidbooks.gif';
+        image.src = './images/liquidbooks.gif';
         var canvas = document.createElement("canvas");
         canvas.width = image.width;
         canvas.height = image.height;
@@ -56,7 +56,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
     videoSeekerThumb () { 
         var index = 0;
         var video = document.createElement("video");
-        this.listenToHoversNow();
+        
         video.addEventListener('loadeddata', function() {
             if (this.slideTimes.length > 0) 
                 video.currentTime = this.slideTimes[0];
@@ -64,6 +64,7 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         for (var x = 0; x < this.slideTimes.length; x++) {
             this.slideImages[index] = this.getLoadCanvas();
         }
+        this.listenToHoversNow();
 
         video.addEventListener('seeked', function() {
             this.slideImages[index] = (this.generateThumbnail(video));
