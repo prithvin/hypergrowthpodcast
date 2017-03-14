@@ -23,7 +23,6 @@ class Notes{
         
         if(this.hour < 12){
             this.ap = "AM";
-x
         }
         else{
             this.ap = "PM";
