@@ -24,10 +24,10 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
         $(this.mainDiv).find("#dropdownSlideSelection").children("span").html("Entire Lecture");
     }
 
-    getLoadCanvas(){
-        var image = new Image();
-        image.src = './images/liquidbooks.gif';
-        return image;
+    getLoadCanvas(slideNo){
+        var img = $("<img />").attr("src", './images/liquidbooks.gif');
+        img.attr("data-slide", slideNo).addClass("slide-thumb-" + slideNo);
+        return img;
     }
     listenToHoversNow() {
         $(this.mainDiv).find(".dropdown-item").on({
@@ -69,18 +69,27 @@ var PodcastDropdownMenu = class PodcastDropdownMenu {
 
         this.listenToHoversNow();
         for (var x = 0; x < this.slideTimes.length; x++) {
-            this.slideImages[x] = this.getLoadCanvas();
+            this.slideImages[x] = this.getLoadCanvas(x);
             $(this.slideImages[x]).addClass("hover-img");
         }
        
 
         video[0].addEventListener('seeked', function() {
             this.slideImages[index] = (this.generateThumbnail(video[0]));
+            var loadingImg = $(this.divOfHoverImage).find(".slide-thumb-" + index);
+            if (loadingImg.length != 0) {
+                var parentContDiv = loadingImg.parent();
+                parentContDiv.find("img").remove();
+                parentContDiv.append(this.slideImages[index]);
+
+            }
 
             $(this.slideImages[index]).addClass("hover-img");
+
             index++;
-            if (index < this.slideTimes.length)
+            if (index < this.slideTimes.length) {
                 video[0].currentTime = this.slideTimes[index];
+            }
 
 
         }.bind(this), false);
