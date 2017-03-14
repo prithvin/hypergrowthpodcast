@@ -38,11 +38,16 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         }.bind(this));
     }
 
+    encode(w){return w.replace(/[^]/g,function(w){return '%'+w.charCodeAt(0).toString(16)})}
+
+
     listenToUserSearch () {
         $(this.mainDiv).find(".main_search_container").on("submit", function (ev) {
             ev.preventDefault();
-            if ($(this.mainDiv).find("#searchBar").val().trim().length > 1)
-                window.location.hash = "#/search/" + this.classID + "/" + encodeURIComponent($(this.mainDiv).find("#searchBar").val());
+            if ($(this.mainDiv).find("#searchBar").val().trim().length > 1) {
+                var searchTerm = this.encode($(this.mainDiv).find("#searchBar").val());
+                window.location.hash = "#/search/" + this.classID + "/" + searchTerm;
+            }
             else
                 swal("No!", "Search for a longer word (2 or more letters) :D")
         }.bind(this));
