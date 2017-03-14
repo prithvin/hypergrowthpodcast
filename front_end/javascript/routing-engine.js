@@ -145,6 +145,7 @@ require(['director', 'components', 'loader', 'config', 'garbageBin', 'alertbox']
     '': loginPage,
     '/courses/:courseId': courseHomepage,
     '/courses': onboardingCoursesPage,
+    '/courses?((\w|.)*)': onboardingCoursesPage,
     '/?((\w|.)*)': otherPages
   };
 
