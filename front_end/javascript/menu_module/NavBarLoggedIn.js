@@ -38,14 +38,15 @@ var NavBarLoggedInCourse = class NavBarLoggedInCourse {
         }.bind(this));
     }
 
-    encode(w){return w.replace(/[^]/g,function(w){return '%'+w.charCodeAt(0).toString(16)})}
-
+    rfc3986EncodeURIComponent (str) {  
+        return encodeURIComponent(str).replace(/[!'()*]/g, escape);  
+    }
 
     listenToUserSearch () {
         $(this.mainDiv).find(".main_search_container").on("submit", function (ev) {
             ev.preventDefault();
             if ($(this.mainDiv).find("#searchBar").val().trim().length > 1) {
-                var searchTerm = this.encode($(this.mainDiv).find("#searchBar").val());
+                var searchTerm = this.rfc3986EncodeURIComponent($(this.mainDiv).find("#searchBar").val());
                 window.location.hash = "#/search/" + this.classID + "/" + searchTerm;
             }
             else
