@@ -258,7 +258,6 @@ var apiFunctions = {
       });
     },
     getNotesForUser : function(req,callback){
-        console.log("The user is inside is" + req.UserId);
         //query commented out, don't remove
         UserModel.findOne({_id : req.UserId, "Notes.PodcastId" : req.PodcastId},'Notes',function(err,notes){
           if(notes == null || err || notes.Notes.length == 0)

@@ -13,6 +13,7 @@ var auth = require('./config/auth.js');
 var UserModel = require("./models/userModel.js");
 var path = require('path');
 var fs = require('fs');
+var bm = require('./BoyerMoore.js')
 
 app.use(session({
     secret: 'cse110secretstring',
@@ -142,7 +143,6 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
     UserId : req.session.user,
     PodcastId : req.query.PodcastId
   };
-  console.log("The user is outside is" + req.session.user);
   apiFunctions.userFunctions.getNotesForUser(request,function(notes){
     res.send(notes);
   });
