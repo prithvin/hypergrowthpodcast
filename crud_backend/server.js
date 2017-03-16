@@ -13,6 +13,7 @@ var auth = require('./config/auth.js');
 var UserModel = require("./models/userModel.js");
 var path = require('path');
 var fs = require('fs');
+var bm = require('./BoyerMoore.js')
 
 app.use(session({
     secret: 'cse110secretstring',
