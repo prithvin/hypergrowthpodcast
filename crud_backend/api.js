@@ -189,7 +189,6 @@ var apiFunctions = {
                 var z;
                 for (z = 0; z < times.length; z++) {
                   if (audioMs < times[z]) break;
-                  if (z == times.length - 1) z++;
                 }
                 matches.push({
                   'Type': 'AUDIO',
