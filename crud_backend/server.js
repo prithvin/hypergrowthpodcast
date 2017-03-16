@@ -142,7 +142,6 @@ app.get('/getNotesForUser',apiFunctions.userFunctions.isLoggedIn,function(req,re
     UserId : req.session.user,
     PodcastId : req.query.PodcastId
   };
-  console.log("The user is outside is" + req.session.user);
   apiFunctions.userFunctions.getNotesForUser(request,function(notes){
     res.send(notes);
   });
