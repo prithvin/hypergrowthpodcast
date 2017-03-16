@@ -202,6 +202,17 @@ app.get('/searchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req
   });
 });
 
+app.get('/deepSearchByKeywordsOpenRoutePrivate' , function(req, res) {
+  var request = {
+    CourseId: req.query.CourseId,
+    Keywords: req.query.Keywords
+  };
+
+  apiFunctions.podcastFunctions.deepSearchByKeywords(request, function(response) {
+    res.send(response);
+  });
+});
+
 app.get('/deepSearchByKeywords', apiFunctions.userFunctions.isLoggedIn, function(req, res) {
   var request = {
     CourseId: req.query.CourseId,

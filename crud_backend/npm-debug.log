@@ -1,0 +1,482 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.4
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData node-base64-image
+20 silly mapToRegistry name node-base64-image
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry data Result {
+23 silly mapToRegistry   raw: 'node-base64-image',
+23 silly mapToRegistry   scope: null,
+23 silly mapToRegistry   escapedName: 'node-base64-image',
+23 silly mapToRegistry   name: 'node-base64-image',
+23 silly mapToRegistry   rawSpec: '',
+23 silly mapToRegistry   spec: 'latest',
+23 silly mapToRegistry   type: 'tag' }
+24 silly mapToRegistry uri https://registry.npmjs.org/node-base64-image
+25 verbose request uri https://registry.npmjs.org/node-base64-image
+26 verbose request no auth needed
+27 info attempt registry request try #1 at 11:27:02 AM
+28 verbose request id aa65da070b50b50f
+29 http request GET https://registry.npmjs.org/node-base64-image
+30 http 200 https://registry.npmjs.org/node-base64-image
+31 verbose headers { server: 'nginx/1.10.1',
+31 verbose headers   'content-type': 'application/json',
+31 verbose headers   'last-modified': 'Wed, 25 Jan 2017 12:38:34 GMT',
+31 verbose headers   etag: 'W/"58889c4a-3b68"',
+31 verbose headers   'content-encoding': 'gzip',
+31 verbose headers   'cache-control': 'max-age=300',
+31 verbose headers   'content-length': '2713',
+31 verbose headers   'accept-ranges': 'bytes',
+31 verbose headers   date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+31 verbose headers   via: '1.1 varnish',
+31 verbose headers   age: '0',
+31 verbose headers   connection: 'keep-alive',
+31 verbose headers   'x-served-by': 'cache-lax8624-LAX',
+31 verbose headers   'x-cache': 'MISS',
+31 verbose headers   'x-cache-hits': '0',
+31 verbose headers   'x-timer': 'S1489688824.046718,VS0,VE31',
+31 verbose headers   vary: 'Accept-Encoding' }
+32 silly get cb [ 200,
+32 silly get   { server: 'nginx/1.10.1',
+32 silly get     'content-type': 'application/json',
+32 silly get     'last-modified': 'Wed, 25 Jan 2017 12:38:34 GMT',
+32 silly get     etag: 'W/"58889c4a-3b68"',
+32 silly get     'content-encoding': 'gzip',
+32 silly get     'cache-control': 'max-age=300',
+32 silly get     'content-length': '2713',
+32 silly get     'accept-ranges': 'bytes',
+32 silly get     date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+32 silly get     via: '1.1 varnish',
+32 silly get     age: '0',
+32 silly get     connection: 'keep-alive',
+32 silly get     'x-served-by': 'cache-lax8624-LAX',
+32 silly get     'x-cache': 'MISS',
+32 silly get     'x-cache-hits': '0',
+32 silly get     'x-timer': 'S1489688824.046718,VS0,VE31',
+32 silly get     vary: 'Accept-Encoding' } ]
+33 verbose get saving node-base64-image to /Users/prithvinarasimhan/.npm/registry.npmjs.org/node-base64-image/.cache.json
+34 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+35 silly resolveWithNewModule node-base64-image@1.0.3 checking installable status
+36 silly cache add args [ 'node-base64-image@1.0.3', null ]
+37 verbose cache add spec node-base64-image@1.0.3
+38 silly cache add parsed spec Result {
+38 silly cache add   raw: 'node-base64-image@1.0.3',
+38 silly cache add   scope: null,
+38 silly cache add   escapedName: 'node-base64-image',
+38 silly cache add   name: 'node-base64-image',
+38 silly cache add   rawSpec: '1.0.3',
+38 silly cache add   spec: '1.0.3',
+38 silly cache add   type: 'version' }
+39 silly addNamed node-base64-image@1.0.3
+40 verbose addNamed "1.0.3" is a plain semver version for node-base64-image
+41 silly mapToRegistry name node-base64-image
+42 silly mapToRegistry using default registry
+43 silly mapToRegistry registry https://registry.npmjs.org/
+44 silly mapToRegistry data Result {
+44 silly mapToRegistry   raw: 'node-base64-image',
+44 silly mapToRegistry   scope: null,
+44 silly mapToRegistry   escapedName: 'node-base64-image',
+44 silly mapToRegistry   name: 'node-base64-image',
+44 silly mapToRegistry   rawSpec: '',
+44 silly mapToRegistry   spec: 'latest',
+44 silly mapToRegistry   type: 'tag' }
+45 silly mapToRegistry uri https://registry.npmjs.org/node-base64-image
+46 verbose addNameVersion registry:https://registry.npmjs.org/node-base64-image not in flight; fetching
+47 verbose get https://registry.npmjs.org/node-base64-image not expired, no request
+48 silly mapToRegistry name node-base64-image
+49 silly mapToRegistry using default registry
+50 silly mapToRegistry registry https://registry.npmjs.org/
+51 silly mapToRegistry data Result {
+51 silly mapToRegistry   raw: 'node-base64-image',
+51 silly mapToRegistry   scope: null,
+51 silly mapToRegistry   escapedName: 'node-base64-image',
+51 silly mapToRegistry   name: 'node-base64-image',
+51 silly mapToRegistry   rawSpec: '',
+51 silly mapToRegistry   spec: 'latest',
+51 silly mapToRegistry   type: 'tag' }
+52 silly mapToRegistry uri https://registry.npmjs.org/node-base64-image
+53 verbose addRemoteTarball https://registry.npmjs.org/node-base64-image/-/node-base64-image-1.0.3.tgz not in flight; adding
+54 verbose addRemoteTarball [ 'https://registry.npmjs.org/node-base64-image/-/node-base64-image-1.0.3.tgz',
+54 verbose addRemoteTarball   'deabafe27b594671944eab9cbeabb225a7c30b07' ]
+55 info retry fetch attempt 1 at 11:27:03 AM
+56 info attempt registry request try #1 at 11:27:03 AM
+57 http fetch GET https://registry.npmjs.org/node-base64-image/-/node-base64-image-1.0.3.tgz
+58 http fetch 200 https://registry.npmjs.org/node-base64-image/-/node-base64-image-1.0.3.tgz
+59 silly fetchAndShaCheck shasum deabafe27b594671944eab9cbeabb225a7c30b07
+60 verbose addTmpTarball /var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/npm-14269-f50c8cf4/registry.npmjs.org/node-base64-image/-/node-base64-image-1.0.3.tgz not in flight; adding
+61 verbose addTmpTarball already have metadata; skipping unpack for node-base64-image@1.0.3
+62 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+63 silly cache afterAdd node-base64-image@1.0.3
+64 verbose afterAdd /Users/prithvinarasimhan/.npm/node-base64-image/1.0.3/package/package.json not in flight; writing
+65 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+66 verbose afterAdd /Users/prithvinarasimhan/.npm/node-base64-image/1.0.3/package/package.json written
+67 silly fetchNamedPackageData lodash
+68 silly mapToRegistry name lodash
+69 silly mapToRegistry using default registry
+70 silly mapToRegistry registry https://registry.npmjs.org/
+71 silly mapToRegistry data Result {
+71 silly mapToRegistry   raw: 'lodash',
+71 silly mapToRegistry   scope: null,
+71 silly mapToRegistry   escapedName: 'lodash',
+71 silly mapToRegistry   name: 'lodash',
+71 silly mapToRegistry   rawSpec: '',
+71 silly mapToRegistry   spec: 'latest',
+71 silly mapToRegistry   type: 'tag' }
+72 silly mapToRegistry uri https://registry.npmjs.org/lodash
+73 silly fetchNamedPackageData polygoat
+74 silly mapToRegistry name polygoat
+75 silly mapToRegistry using default registry
+76 silly mapToRegistry registry https://registry.npmjs.org/
+77 silly mapToRegistry data Result {
+77 silly mapToRegistry   raw: 'polygoat',
+77 silly mapToRegistry   scope: null,
+77 silly mapToRegistry   escapedName: 'polygoat',
+77 silly mapToRegistry   name: 'polygoat',
+77 silly mapToRegistry   rawSpec: '',
+77 silly mapToRegistry   spec: 'latest',
+77 silly mapToRegistry   type: 'tag' }
+78 silly mapToRegistry uri https://registry.npmjs.org/polygoat
+79 silly fetchNamedPackageData request
+80 silly mapToRegistry name request
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry data Result {
+83 silly mapToRegistry   raw: 'request',
+83 silly mapToRegistry   scope: null,
+83 silly mapToRegistry   escapedName: 'request',
+83 silly mapToRegistry   name: 'request',
+83 silly mapToRegistry   rawSpec: '',
+83 silly mapToRegistry   spec: 'latest',
+83 silly mapToRegistry   type: 'tag' }
+84 silly mapToRegistry uri https://registry.npmjs.org/request
+85 verbose request uri https://registry.npmjs.org/polygoat
+86 verbose request no auth needed
+87 info attempt registry request try #1 at 11:27:03 AM
+88 http request GET https://registry.npmjs.org/polygoat
+89 verbose request uri https://registry.npmjs.org/lodash
+90 verbose request no auth needed
+91 info attempt registry request try #1 at 11:27:03 AM
+92 verbose etag W/"58b69c29-28ffd"
+93 verbose lastModified Wed, 01 Mar 2017 10:02:17 GMT
+94 http request GET https://registry.npmjs.org/lodash
+95 verbose request uri https://registry.npmjs.org/request
+96 verbose request no auth needed
+97 info attempt registry request try #1 at 11:27:03 AM
+98 verbose etag W/"5896e4b9-35273"
+99 verbose lastModified Sun, 05 Feb 2017 08:39:21 GMT
+100 http request GET https://registry.npmjs.org/request
+101 http 200 https://registry.npmjs.org/lodash
+102 verbose headers { server: 'nginx/1.10.1',
+102 verbose headers   'content-type': 'application/json',
+102 verbose headers   'last-modified': 'Thu, 16 Mar 2017 06:51:10 GMT',
+102 verbose headers   etag: 'W/"58ca35de-2911f"',
+102 verbose headers   'content-encoding': 'gzip',
+102 verbose headers   'cache-control': 'max-age=300',
+102 verbose headers   'content-length': '17120',
+102 verbose headers   'accept-ranges': 'bytes',
+102 verbose headers   date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+102 verbose headers   via: '1.1 varnish',
+102 verbose headers   age: '117',
+102 verbose headers   connection: 'keep-alive',
+102 verbose headers   'x-served-by': 'cache-lax8632-LAX',
+102 verbose headers   'x-cache': 'HIT',
+102 verbose headers   'x-cache-hits': '7',
+102 verbose headers   'x-timer': 'S1489688824.439045,VS0,VE0',
+102 verbose headers   vary: 'Accept-Encoding' }
+103 silly get cb [ 200,
+103 silly get   { server: 'nginx/1.10.1',
+103 silly get     'content-type': 'application/json',
+103 silly get     'last-modified': 'Thu, 16 Mar 2017 06:51:10 GMT',
+103 silly get     etag: 'W/"58ca35de-2911f"',
+103 silly get     'content-encoding': 'gzip',
+103 silly get     'cache-control': 'max-age=300',
+103 silly get     'content-length': '17120',
+103 silly get     'accept-ranges': 'bytes',
+103 silly get     date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+103 silly get     via: '1.1 varnish',
+103 silly get     age: '117',
+103 silly get     connection: 'keep-alive',
+103 silly get     'x-served-by': 'cache-lax8632-LAX',
+103 silly get     'x-cache': 'HIT',
+103 silly get     'x-cache-hits': '7',
+103 silly get     'x-timer': 'S1489688824.439045,VS0,VE0',
+103 silly get     vary: 'Accept-Encoding' } ]
+104 verbose get saving lodash to /Users/prithvinarasimhan/.npm/registry.npmjs.org/lodash/.cache.json
+105 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+106 http 200 https://registry.npmjs.org/request
+107 verbose headers { server: 'nginx/1.10.1',
+107 verbose headers   'content-type': 'application/json',
+107 verbose headers   'last-modified': 'Thu, 16 Mar 2017 06:52:48 GMT',
+107 verbose headers   etag: 'W/"58ca3640-37120"',
+107 verbose headers   'content-encoding': 'gzip',
+107 verbose headers   'cache-control': 'max-age=300',
+107 verbose headers   'content-length': '33988',
+107 verbose headers   'accept-ranges': 'bytes',
+107 verbose headers   date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+107 verbose headers   via: '1.1 varnish',
+107 verbose headers   age: '91',
+107 verbose headers   connection: 'keep-alive',
+107 verbose headers   'x-served-by': 'cache-lax8642-LAX',
+107 verbose headers   'x-cache': 'HIT',
+107 verbose headers   'x-cache-hits': '1',
+107 verbose headers   'x-timer': 'S1489688824.434212,VS0,VE0',
+107 verbose headers   vary: 'Accept-Encoding' }
+108 silly get cb [ 200,
+108 silly get   { server: 'nginx/1.10.1',
+108 silly get     'content-type': 'application/json',
+108 silly get     'last-modified': 'Thu, 16 Mar 2017 06:52:48 GMT',
+108 silly get     etag: 'W/"58ca3640-37120"',
+108 silly get     'content-encoding': 'gzip',
+108 silly get     'cache-control': 'max-age=300',
+108 silly get     'content-length': '33988',
+108 silly get     'accept-ranges': 'bytes',
+108 silly get     date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+108 silly get     via: '1.1 varnish',
+108 silly get     age: '91',
+108 silly get     connection: 'keep-alive',
+108 silly get     'x-served-by': 'cache-lax8642-LAX',
+108 silly get     'x-cache': 'HIT',
+108 silly get     'x-cache-hits': '1',
+108 silly get     'x-timer': 'S1489688824.434212,VS0,VE0',
+108 silly get     vary: 'Accept-Encoding' } ]
+109 verbose get saving request to /Users/prithvinarasimhan/.npm/registry.npmjs.org/request/.cache.json
+110 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+111 silly resolveWithNewModule lodash@4.11.1 checking installable status
+112 silly cache add args [ 'lodash@4.11.1', null ]
+113 verbose cache add spec lodash@4.11.1
+114 silly cache add parsed spec Result {
+114 silly cache add   raw: 'lodash@4.11.1',
+114 silly cache add   scope: null,
+114 silly cache add   escapedName: 'lodash',
+114 silly cache add   name: 'lodash',
+114 silly cache add   rawSpec: '4.11.1',
+114 silly cache add   spec: '4.11.1',
+114 silly cache add   type: 'version' }
+115 silly addNamed lodash@4.11.1
+116 verbose addNamed "4.11.1" is a plain semver version for lodash
+117 silly mapToRegistry name lodash
+118 silly mapToRegistry using default registry
+119 silly mapToRegistry registry https://registry.npmjs.org/
+120 silly mapToRegistry data Result {
+120 silly mapToRegistry   raw: 'lodash',
+120 silly mapToRegistry   scope: null,
+120 silly mapToRegistry   escapedName: 'lodash',
+120 silly mapToRegistry   name: 'lodash',
+120 silly mapToRegistry   rawSpec: '',
+120 silly mapToRegistry   spec: 'latest',
+120 silly mapToRegistry   type: 'tag' }
+121 silly mapToRegistry uri https://registry.npmjs.org/lodash
+122 verbose addNameVersion registry:https://registry.npmjs.org/lodash not in flight; fetching
+123 verbose get https://registry.npmjs.org/lodash not expired, no request
+124 silly mapToRegistry name lodash
+125 silly mapToRegistry using default registry
+126 silly mapToRegistry registry https://registry.npmjs.org/
+127 silly mapToRegistry data Result {
+127 silly mapToRegistry   raw: 'lodash',
+127 silly mapToRegistry   scope: null,
+127 silly mapToRegistry   escapedName: 'lodash',
+127 silly mapToRegistry   name: 'lodash',
+127 silly mapToRegistry   rawSpec: '',
+127 silly mapToRegistry   spec: 'latest',
+127 silly mapToRegistry   type: 'tag' }
+128 silly mapToRegistry uri https://registry.npmjs.org/lodash
+129 verbose addRemoteTarball https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz not in flight; adding
+130 verbose addRemoteTarball [ 'https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz',
+130 verbose addRemoteTarball   'a32106eb8e2ec8e82c241611414773c9df15f8bc' ]
+131 silly resolveWithNewModule request@2.74.0 checking installable status
+132 silly cache add args [ 'request@2.74.0', null ]
+133 verbose cache add spec request@2.74.0
+134 silly cache add parsed spec Result {
+134 silly cache add   raw: 'request@2.74.0',
+134 silly cache add   scope: null,
+134 silly cache add   escapedName: 'request',
+134 silly cache add   name: 'request',
+134 silly cache add   rawSpec: '2.74.0',
+134 silly cache add   spec: '2.74.0',
+134 silly cache add   type: 'version' }
+135 silly addNamed request@2.74.0
+136 verbose addNamed "2.74.0" is a plain semver version for request
+137 silly mapToRegistry name request
+138 silly mapToRegistry using default registry
+139 silly mapToRegistry registry https://registry.npmjs.org/
+140 silly mapToRegistry data Result {
+140 silly mapToRegistry   raw: 'request',
+140 silly mapToRegistry   scope: null,
+140 silly mapToRegistry   escapedName: 'request',
+140 silly mapToRegistry   name: 'request',
+140 silly mapToRegistry   rawSpec: '',
+140 silly mapToRegistry   spec: 'latest',
+140 silly mapToRegistry   type: 'tag' }
+141 silly mapToRegistry uri https://registry.npmjs.org/request
+142 verbose addNameVersion registry:https://registry.npmjs.org/request not in flight; fetching
+143 info retry fetch attempt 1 at 11:27:03 AM
+144 info attempt registry request try #1 at 11:27:03 AM
+145 http fetch GET https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz
+146 verbose get https://registry.npmjs.org/request not expired, no request
+147 silly mapToRegistry name request
+148 silly mapToRegistry using default registry
+149 silly mapToRegistry registry https://registry.npmjs.org/
+150 silly mapToRegistry data Result {
+150 silly mapToRegistry   raw: 'request',
+150 silly mapToRegistry   scope: null,
+150 silly mapToRegistry   escapedName: 'request',
+150 silly mapToRegistry   name: 'request',
+150 silly mapToRegistry   rawSpec: '',
+150 silly mapToRegistry   spec: 'latest',
+150 silly mapToRegistry   type: 'tag' }
+151 silly mapToRegistry uri https://registry.npmjs.org/request
+152 verbose addRemoteTarball https://registry.npmjs.org/request/-/request-2.74.0.tgz not in flight; adding
+153 verbose addRemoteTarball [ 'https://registry.npmjs.org/request/-/request-2.74.0.tgz',
+153 verbose addRemoteTarball   '7693ca768bbb0ea5c8ce08c084a45efa05b892ab' ]
+154 info retry fetch attempt 1 at 11:27:03 AM
+155 info attempt registry request try #1 at 11:27:03 AM
+156 http fetch GET https://registry.npmjs.org/request/-/request-2.74.0.tgz
+157 http fetch 200 https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz
+158 http fetch 200 https://registry.npmjs.org/request/-/request-2.74.0.tgz
+159 http 200 https://registry.npmjs.org/polygoat
+160 verbose headers { server: 'nginx/1.10.1',
+160 verbose headers   'content-type': 'application/json',
+160 verbose headers   'last-modified': 'Sun, 17 Apr 2016 19:04:45 GMT',
+160 verbose headers   etag: 'W/"5713de4d-2736"',
+160 verbose headers   'content-encoding': 'gzip',
+160 verbose headers   'cache-control': 'max-age=300',
+160 verbose headers   'content-length': '2227',
+160 verbose headers   'accept-ranges': 'bytes',
+160 verbose headers   date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+160 verbose headers   via: '1.1 varnish',
+160 verbose headers   age: '0',
+160 verbose headers   connection: 'keep-alive',
+160 verbose headers   'x-served-by': 'cache-lax8624-LAX',
+160 verbose headers   'x-cache': 'MISS',
+160 verbose headers   'x-cache-hits': '0',
+160 verbose headers   'x-timer': 'S1489688824.383276,VS0,VE160',
+160 verbose headers   vary: 'Accept-Encoding' }
+161 silly get cb [ 200,
+161 silly get   { server: 'nginx/1.10.1',
+161 silly get     'content-type': 'application/json',
+161 silly get     'last-modified': 'Sun, 17 Apr 2016 19:04:45 GMT',
+161 silly get     etag: 'W/"5713de4d-2736"',
+161 silly get     'content-encoding': 'gzip',
+161 silly get     'cache-control': 'max-age=300',
+161 silly get     'content-length': '2227',
+161 silly get     'accept-ranges': 'bytes',
+161 silly get     date: 'Thu, 16 Mar 2017 18:27:04 GMT',
+161 silly get     via: '1.1 varnish',
+161 silly get     age: '0',
+161 silly get     connection: 'keep-alive',
+161 silly get     'x-served-by': 'cache-lax8624-LAX',
+161 silly get     'x-cache': 'MISS',
+161 silly get     'x-cache-hits': '0',
+161 silly get     'x-timer': 'S1489688824.383276,VS0,VE160',
+161 silly get     vary: 'Accept-Encoding' } ]
+162 verbose get saving polygoat to /Users/prithvinarasimhan/.npm/registry.npmjs.org/polygoat/.cache.json
+163 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+164 silly resolveWithNewModule polygoat@1.1.4 checking installable status
+165 silly cache add args [ 'polygoat@1.1.4', null ]
+166 verbose cache add spec polygoat@1.1.4
+167 silly cache add parsed spec Result {
+167 silly cache add   raw: 'polygoat@1.1.4',
+167 silly cache add   scope: null,
+167 silly cache add   escapedName: 'polygoat',
+167 silly cache add   name: 'polygoat',
+167 silly cache add   rawSpec: '1.1.4',
+167 silly cache add   spec: '1.1.4',
+167 silly cache add   type: 'version' }
+168 silly addNamed polygoat@1.1.4
+169 verbose addNamed "1.1.4" is a plain semver version for polygoat
+170 silly mapToRegistry name polygoat
+171 silly mapToRegistry using default registry
+172 silly mapToRegistry registry https://registry.npmjs.org/
+173 silly mapToRegistry data Result {
+173 silly mapToRegistry   raw: 'polygoat',
+173 silly mapToRegistry   scope: null,
+173 silly mapToRegistry   escapedName: 'polygoat',
+173 silly mapToRegistry   name: 'polygoat',
+173 silly mapToRegistry   rawSpec: '',
+173 silly mapToRegistry   spec: 'latest',
+173 silly mapToRegistry   type: 'tag' }
+174 silly mapToRegistry uri https://registry.npmjs.org/polygoat
+175 verbose addNameVersion registry:https://registry.npmjs.org/polygoat not in flight; fetching
+176 verbose get https://registry.npmjs.org/polygoat not expired, no request
+177 silly mapToRegistry name polygoat
+178 silly mapToRegistry using default registry
+179 silly mapToRegistry registry https://registry.npmjs.org/
+180 silly mapToRegistry data Result {
+180 silly mapToRegistry   raw: 'polygoat',
+180 silly mapToRegistry   scope: null,
+180 silly mapToRegistry   escapedName: 'polygoat',
+180 silly mapToRegistry   name: 'polygoat',
+180 silly mapToRegistry   rawSpec: '',
+180 silly mapToRegistry   spec: 'latest',
+180 silly mapToRegistry   type: 'tag' }
+181 silly mapToRegistry uri https://registry.npmjs.org/polygoat
+182 verbose addRemoteTarball https://registry.npmjs.org/polygoat/-/polygoat-1.1.4.tgz not in flight; adding
+183 verbose addRemoteTarball [ 'https://registry.npmjs.org/polygoat/-/polygoat-1.1.4.tgz',
+183 verbose addRemoteTarball   '329f9a0d1b2d4a45149e2539523c6f7dfd850a5f' ]
+184 info retry fetch attempt 1 at 11:27:03 AM
+185 info attempt registry request try #1 at 11:27:03 AM
+186 http fetch GET https://registry.npmjs.org/polygoat/-/polygoat-1.1.4.tgz
+187 silly fetchAndShaCheck shasum 7693ca768bbb0ea5c8ce08c084a45efa05b892ab
+188 verbose addTmpTarball /var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/npm-14269-f50c8cf4/registry.npmjs.org/request/-/request-2.74.0.tgz not in flight; adding
+189 verbose addTmpTarball already have metadata; skipping unpack for request@2.74.0
+190 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+191 silly cache afterAdd request@2.74.0
+192 verbose afterAdd /Users/prithvinarasimhan/.npm/request/2.74.0/package/package.json not in flight; writing
+193 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+194 verbose afterAdd /Users/prithvinarasimhan/.npm/request/2.74.0/package/package.json written
+195 http fetch 200 https://registry.npmjs.org/polygoat/-/polygoat-1.1.4.tgz
+196 silly fetchAndShaCheck shasum 329f9a0d1b2d4a45149e2539523c6f7dfd850a5f
+197 verbose addTmpTarball /var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/npm-14269-f50c8cf4/registry.npmjs.org/polygoat/-/polygoat-1.1.4.tgz not in flight; adding
+198 verbose addTmpTarball already have metadata; skipping unpack for polygoat@1.1.4
+199 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+200 silly cache afterAdd polygoat@1.1.4
+201 verbose afterAdd /Users/prithvinarasimhan/.npm/polygoat/1.1.4/package/package.json not in flight; writing
+202 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+203 verbose afterAdd /Users/prithvinarasimhan/.npm/polygoat/1.1.4/package/package.json written
+204 silly fetchAndShaCheck shasum a32106eb8e2ec8e82c241611414773c9df15f8bc
+205 verbose addTmpTarball /var/folders/f4/8t3z9ffd18x_h_pz5syz875w0000gn/T/npm-14269-f50c8cf4/registry.npmjs.org/lodash/-/lodash-4.11.1.tgz not in flight; adding
+206 verbose addTmpTarball already have metadata; skipping unpack for lodash@4.11.1
+207 verbose correctMkdir /Users/prithvinarasimhan/.npm correctMkdir not in flight; initializing
+208 silly rollbackFailedOptional Starting
+209 silly rollbackFailedOptional Finishing
+210 silly runTopLevelLifecycles Finishing
+211 silly install printInstalled
+212 verbose stack Error: EACCES: permission denied, mkdir '/Users/prithvinarasimhan/.npm/lodash/4.11.1'
+212 verbose stack     at Error (native)
+213 verbose cwd /Users/prithvinarasimhan/Desktop/xampp2/TesseractNew/cse110projectocr/crud_backend
+214 error Darwin 16.5.0
+215 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+216 error node v6.9.4
+217 error npm  v3.10.10
+218 error path /Users/prithvinarasimhan/.npm/lodash/4.11.1
+219 error code EACCES
+220 error errno -13
+221 error syscall mkdir
+222 error Error: EACCES: permission denied, mkdir '/Users/prithvinarasimhan/.npm/lodash/4.11.1'
+222 error     at Error (native)
+222 error  { Error: EACCES: permission denied, mkdir '/Users/prithvinarasimhan/.npm/lodash/4.11.1'
+222 error     at Error (native)
+222 error   errno: -13,
+222 error   code: 'EACCES',
+222 error   syscall: 'mkdir',
+222 error   path: '/Users/prithvinarasimhan/.npm/lodash/4.11.1',
+222 error   parent: 'node-base64-image' }
+223 error Please try running this command again as root/Administrator.
+224 verbose exit [ -13, true ]
