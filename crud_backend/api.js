@@ -139,6 +139,8 @@ var apiFunctions = {
 
     deepSearchByKeywords: function(request, callback) {
       var start = (new Date()).getTime();
+      if (request.Keywords == undefined)
+        return callback([]);
       var keywords = request.Keywords.toLowerCase();
       var results = [];
 
