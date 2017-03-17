@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var srt2vtt = require('srt2vtt');
 var base64 = require('node-base64-image');
+var xss = require('xss');
 
 //API Functions
 var apiFunctions = {
@@ -268,7 +269,7 @@ var apiFunctions = {
               continue;
 
             var response = {
-              "Notes" : notes.Notes[x].Content
+              "Notes" : xss(notes.Notes[x].Content)
             };
             break;
           }
@@ -445,7 +446,7 @@ var apiFunctions = {
     createPost: function(request,callback) {
       PodcastModel.findById(request.PodcastId,"CourseId", function(err,podcast){
         PostModel.create({PodcastId : request.PodcastId, SlideOfPost : request.SlideOfPost, TimeOfPost : request.TimeOfPost,
-        Content : request.Content, CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
+        Content : xss(request.Content), CourseId : podcast.CourseId, Name : request.Name, ProfilePic : request.ProfilePic},function(err,post){
           if(err || post == null)
             return callback(false);
           else {
@@ -460,7 +461,7 @@ var apiFunctions = {
         Pic : request.Pic,
         PosterName : request.PosterName,
         Time  : request.Time,
-        Content : request.Content
+        Content : xss(request.Content)
       };
 
       PostModel.findByIdAndUpdate(
