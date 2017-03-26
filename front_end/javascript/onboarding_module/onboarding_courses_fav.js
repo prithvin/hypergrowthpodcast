@@ -157,7 +157,6 @@ var OnboardingCourses = class OnboardingCourses {
         //console.log(this.table);
         //console.log(this.favorites);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
-        localStorage.setItem("myCourses", this.table);
     }
     
     favorite(index_row, row) {
