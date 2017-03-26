@@ -102,23 +102,15 @@ var OnboardingCourses = class OnboardingCourses {
             cell2.appendChild(sym);
             cell3.appendChild(quarter);
             
+            $("#course--table").append(row);
+            this.table.push(row);
+            
             if (sym.getAttribute('starred') == 'true') {
                 $(sym).css({'opacity': '1'});
                 $(row).css({'background': 'rgba(56, 90, 154, 1)'});
                 row.className = 'table-row';
-                if (i == 0) {
-                    var indexTable = this.table.indexOf(row);
-                    this.table.splice(indexTable, 1);
-                    $("#course--table").append(row);
-                    this.table.unshift(row);
-                    this.favorites.unshift(row);
-                } else {
-                    this.favorite(parseInt(cell2.getAttribute('index')), row);
-                }
-            } else {
-                $("#course--table").append(row);
-                this.table.push(row);
-            }
+                this.initFavorite(parseInt(cell2.getAttribute('index')), row);
+            } 
         }
     }
     
@@ -126,9 +118,6 @@ var OnboardingCourses = class OnboardingCourses {
         var sym = document.getElementById(id_star);
         var row = document.getElementById(index_row);
         row.className = 'table-row';
-        
-        var indexFavorite = this.favorites.indexOf(row);    //index in favorites
-        var indexTable = this.table.indexOf(row);           //index in table
         
         var toggle = sym.getAttribute('starred');
         if (toggle == 'true') sym.setAttribute('starred', 'false');
@@ -138,8 +127,6 @@ var OnboardingCourses = class OnboardingCourses {
             $(sym).css({'opacity': '1'});
             $(row).css({'background': 'rgba(56, 90, 154, 1)'});
             
-            this.table.splice(indexTable, 1);
-            
             // Favorite Row (add to favorites list sorted)
             this.favorite(index_row, row);
         }
@@ -147,19 +134,49 @@ var OnboardingCourses = class OnboardingCourses {
             $(sym).css({'opacity': ""});
             $(row).css({'background': 'rgba(68, 108, 179, 1)'});
             
-            this.favorites.splice(indexFavorite, 1);
-            this.table.splice(indexFavorite, 1);
-            
             // Unfavorite Row (add back to list sorted)
             this.unfavorite(index_row, row);
             
         }
-        //console.log(this.table);
-        //console.log(this.favorites);
+        console.log(this.table);
+        console.log(this.favorites);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
     }
     
+    initFavorite(index_row, row ) {
+        var indexTable = this.table.indexOf(row); //index in table
+        this.table.splice(indexTable, 1);
+        /* Begin Binary Search after favorited courses */
+        var start = 0;
+        var end = this.favorites.length;
+        var mid = 0;
+        var current = 0;
+             
+        /* Binary Search to find the next largest row to insert before*/
+        while(start <= end) {
+            mid = Math.floor((end + start)/2);
+            if (mid == this.favorites.length) break;
+            current = parseInt(this.table[mid].id);
+            if (current < index_row) start = mid + 1;
+            else end = mid - 1;
+        }
+        
+        /* Reinsert row & Update table & favorites Representation */
+       if (this.favorites.length == 0) {
+            $("#course--table").prepend(row);
+            this.table.splice(start, 0, row);
+            this.favorites.splice(start, 0, row);
+        } else {
+            current = parseInt(this.table[--start].id);
+            $(row).insertAfter('#' + current);
+            this.table.splice(start, 0, row);
+            this.favorites.splice(start, 0, row);
+        }
+    }
+    
     favorite(index_row, row) {
+        var indexTable = this.table.indexOf(row); //index in table
+        this.table.splice(indexTable, 1);
         /* Begin Binary Search after favorited courses */
         var start = 0;
         var end = this.favorites.length;
@@ -183,6 +200,9 @@ var OnboardingCourses = class OnboardingCourses {
     }
     
     unfavorite(index_row, row) {
+        var indexFavorite = this.favorites.indexOf(row);    //index in favorites
+        this.favorites.splice(indexFavorite, 1);
+        this.table.splice(indexFavorite, 1);
         /* Begin Binary Search after favorited courses */
         var start = this.favorites.length;
         var end = this.table.length;
