@@ -6,6 +6,7 @@ var OnboardingCourses = class OnboardingCourses {
         this.data = [];
         this.table = [];            /* Current Table Representation */
         this.favorites = [];        /* User's Favorites */
+        this.prev = 0;
         this.fetchCourses();
     }
 
@@ -109,9 +110,11 @@ var OnboardingCourses = class OnboardingCourses {
                 $(sym).css({'opacity': '1'});
                 $(row).css({'background': 'rgba(56, 90, 154, 1)'});
                 row.className = 'table-row';
-                this.initFavorite(parseInt(cell2.getAttribute('index')), row);
+                this.initFavorite(row);
             } 
         }
+        console.log(this.table);
+        console.log(this.favorites);
     }
     
     toggleCourseFavorite(id_star, index_row) {
@@ -138,40 +141,26 @@ var OnboardingCourses = class OnboardingCourses {
             this.unfavorite(index_row, row);
             
         }
-        //console.log(this.table);
-        //console.log(this.favorites);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
     }
     
-    initFavorite(index_row, row ) {
-        var indexTable = this.table.indexOf(row); //index in table
-        this.table.splice(indexTable, 1);
-        /* Begin Binary Search after favorited courses */
-        var start = 0;
-        var end = this.favorites.length;
-        var mid = 0;
-        var current = 0;
-             
-        /* Binary Search to find the next largest row to insert before*/
-        while(start <= end) {
-            mid = Math.floor((end + start)/2);
-            if (mid == this.favorites.length) break;
-            current = parseInt(this.table[mid].id);
-            if (current < index_row) start = mid + 1;
-            else end = mid - 1;
-        }
+    initFavorite(row) {
+       var indexTable = this.table.indexOf(row); //index in table
+       this.table.splice(indexTable, 1);
         
-        /* Reinsert row & Update table & favorites Representation */
-       if (this.favorites.length == 0) {
-            $("#course--table").prepend(row);
-            this.table.splice(start, 0, row);
-            this.favorites.splice(start, 0, row);
-        } else {
-            current = parseInt(this.table[--start].id);
-            $(row).insertAfter('#' + current);
-            this.table.splice(start, 0, row);
-            this.favorites.splice(start, 0, row);
-        }
+       if (this.favorites.length == 0)  {
+           this.prev = 0;
+           $(row).insertBefore('#' + this.prev);
+           this.prev = row.id;
+       } else {
+           $(row).insertAfter('#' + this.prev);
+           this.prev = row.id;
+       }
+       this.favorites.push(row);
+       var indexFavorites = this.favorites.indexOf(row);
+       this.table.splice(indexFavorites, 0, row);
+       //console.log(this.table);
+       //console.log(this.favorites);
     }
     
     favorite(index_row, row) {
