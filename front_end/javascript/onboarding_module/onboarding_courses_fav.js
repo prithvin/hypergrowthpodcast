@@ -72,7 +72,7 @@ var OnboardingCourses = class OnboardingCourses {
             });
             cell2.addEventListener("click", function() {
                 var index = parseInt(this.getAttribute('index'));
-                self.toggleCourseFavorite(self.data[index]['Course'], index);
+                self.toggleCourseFavorite(index + ". " + self.data[index]['Course'], index);
             });
             cell3.addEventListener("click", function() {
                     window.location.hash =  "/courses/" + this.id;
@@ -92,7 +92,7 @@ var OnboardingCourses = class OnboardingCourses {
             var sym = document.createElement('i');
             sym.setAttribute('aria-hidden', 'true');
             sym.className = 'fa fa-graduation-cap sym'; //fa-graduation-cap
-            sym.id = data[i]['Course'];
+            sym.id = i + ". " + data[i]['Course'];
             
             var starred = 'false';
             var starred = localStorage.getItem(sym.id);
@@ -203,7 +203,6 @@ var OnboardingCourses = class OnboardingCourses {
             mid = Math.floor((end + start)/2);
             if (mid == this.table.length) break;
             current = parseInt(this.table[mid].id);
-            ///console.log("Compare with row id #" + current);
             if (current < index_row) start = mid + 1;
             else end = mid - 1;
         }
