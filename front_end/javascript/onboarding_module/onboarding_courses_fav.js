@@ -113,8 +113,8 @@ var OnboardingCourses = class OnboardingCourses {
                 this.initFavorite(row);
             } 
         }
-        console.log(this.table);
-        console.log(this.favorites);
+        //console.log(this.table);
+        //console.log(this.favorites);
     }
     
     toggleCourseFavorite(id_star, index_row) {
