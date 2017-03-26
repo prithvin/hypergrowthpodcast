@@ -49,7 +49,6 @@ var OnboardingCourses = class OnboardingCourses {
             row.className = 'table-row animated fadeInUpBig';
             if ( i < 10) $(row).css({"-webkit-animation-delay": i*10/data.length + "s"});
             row.id = i;
-            this.table.push(row);
             
             var cell = row.insertCell(0);
             cell.className = 'cell cell-end';
@@ -107,13 +106,18 @@ var OnboardingCourses = class OnboardingCourses {
                 $(sym).css({'opacity': '1'});
                 $(row).css({'background': 'rgba(56, 90, 154, 1)'});
                 row.className = 'table-row';
-                $("#course--table").prepend(row);
-                var indexTable = this.table.indexOf(row);
-                this.table.splice(indexTable, 1);
-                this.table.unshift(row);
-                this.favorites.unshift(row);
+                if (i == 0) {
+                    var indexTable = this.table.indexOf(row);
+                    this.table.splice(indexTable, 1);
+                    $("#course--table").append(row);
+                    this.table.unshift(row);
+                    this.favorites.unshift(row);
+                } else {
+                    this.favorite(parseInt(cell2.getAttribute('index')), row);
+                }
             } else {
                 $("#course--table").append(row);
+                this.table.push(row);
             }
         }
     }
@@ -133,50 +137,81 @@ var OnboardingCourses = class OnboardingCourses {
         if (sym.getAttribute('starred') == 'true')  {
             $(sym).css({'opacity': '1'});
             $(row).css({'background': 'rgba(56, 90, 154, 1)'});
-            $("#course--table").prepend(row);
             
-            this.favorites.unshift(row);
             this.table.splice(indexTable, 1);
-            this.table.unshift(row);
+            
+            // Favorite Row (add to favorites list sorted)
+            this.favorite(index_row, row);
         }
         else {
-            $(sym).css({'opacity': '.2'});
+            $(sym).css({'opacity': ""});
             $(row).css({'background': 'rgba(68, 108, 179, 1)'});
             
             this.favorites.splice(indexFavorite, 1);
             this.table.splice(indexFavorite, 1);
             
-            /* Begin Binary Search after favorited courses */
-            var start = this.favorites.length;
-            var end = this.table.length;
-            var mid = 0;
-            var current = 0;
-            //console.log("Row to insert is has id #" + index_row);
+            // Unfavorite Row (add back to list sorted)
+            this.unfavorite(index_row, row);
             
-            /* Binary Search to find the next largest row to insert before*/
-            while(start <= end) {
-                mid = Math.floor((end + start)/2);
-                if (mid == this.table.length) break;
-                current = parseInt(this.table[mid].id);
-                ///console.log("Compare with row id #" + current);
-                if (current < index_row) start = mid + 1;
-                else end = mid - 1;
-            }
-            
-            /* Check if toggling last row */
-            if (start == this.table.length) {
-                current = parseInt(this.table[--start].id);
-                $(row).insertAfter('#' + current);
-                this.table.push(row);
-            } else {
-                current = parseInt(this.table[start].id);
-                $(row).insertBefore('#' + current);
-                this.table.splice(start, 0, row);
-            }
         }
-        //console.log(this.table);
+        console.log(this.table);
+        console.log(this.favorites);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
-    }  
+        localStorage.setItem("myCourses", this.table);
+    }
+    
+    favorite(index_row, row) {
+        /* Begin Binary Search after favorited courses */
+        var start = 0;
+        var end = this.favorites.length;
+        var mid = 0;
+        var current = 0;
+             
+        /* Binary Search to find the next largest row to insert before*/
+        while(start <= end) {
+            mid = Math.floor((end + start)/2);
+            if (mid == this.favorites.length) break;
+            current = parseInt(this.table[mid].id);
+            if (current < index_row) start = mid + 1;
+            else end = mid - 1;
+        }
+        
+        /* Reinsert row & Update table & favorites Representation */
+        current = parseInt(this.table[start].id);
+        $(row).insertBefore('#' + current);
+        this.table.splice(start, 0, row);
+        this.favorites.splice(start, 0, row);
+    }
+    
+    unfavorite(index_row, row) {
+        /* Begin Binary Search after favorited courses */
+        var start = this.favorites.length;
+        var end = this.table.length;
+        var mid = 0;
+        var current = 0;
+            
+        /* Binary Search to find the next largest row to insert before*/
+        while(start <= end) {
+            mid = Math.floor((end + start)/2);
+            if (mid == this.table.length) break;
+            current = parseInt(this.table[mid].id);
+            ///console.log("Compare with row id #" + current);
+            if (current < index_row) start = mid + 1;
+            else end = mid - 1;
+        }
+        
+        /* Reinsert row & Update table & favorites Representation */
+        /* Check if toggling last row */
+        if (start == this.table.length) {
+            current = parseInt(this.table[--start].id);
+            $(row).insertAfter('#' + current);
+            this.table.push(row);
+        } else {
+            current = parseInt(this.table[start].id);
+            $(row).insertBefore('#' + current);
+            this.table.splice(start, 0, row);
+        }
+    }
 }
 
 /* Search Function */
