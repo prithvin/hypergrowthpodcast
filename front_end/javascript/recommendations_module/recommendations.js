@@ -22,7 +22,7 @@ var Recommendations = class Recommendations {
       var title = recommendation['Time'];
 
       var link_anchor = document.createElement('a');
-      link_anchor.href = window.location.hash.substring(0, window.location.hash.lastIndexOf('/') + 1) + id;
+      link_anchor.href = "#/podcast/" + id;
 
       var rec_container = document.createElement('div');
       $(rec_container).addClass('rec-container pure-u-6-24');
