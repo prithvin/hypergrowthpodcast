@@ -138,8 +138,8 @@ var OnboardingCourses = class OnboardingCourses {
             this.unfavorite(index_row, row);
             
         }
-        console.log(this.table);
-        console.log(this.favorites);
+        //console.log(this.table);
+        //console.log(this.favorites);
         localStorage.setItem(sym.id, sym.getAttribute('starred'));
     }
     
