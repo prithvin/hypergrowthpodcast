@@ -11,7 +11,7 @@ module.exports = {
         }
 
         var command = useNew ? './scrape_podcasts.py --new ' : './scrape_podcasts.py ';
-        command += [...keys].join(' ');
+        command += [...keys].join(' ') + ' | sort | uniq';
         console.log('Running scrape command: ' + command);
 
         exec(command, function(error, stdout, stderr) {

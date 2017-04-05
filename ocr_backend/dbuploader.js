@@ -268,19 +268,19 @@ module.exports = {
             obj.PodcastId = chosenPodcast._id;
             obj.CourseId = chosenPodcast.CourseId;
             obj.SlideOfPost = Math.floor(Math.random() * chosenPodcast.Slides.length) + 1;
-            obj.Content += 'Here are some keywords:';
+            obj.Content += ' Here are some keywords:';
             for (let count = 0; count < 3; count++)
               obj.Content += ' ' + table[obj.PodcastId][Math.floor(Math.random() * table[obj.PodcastId].length)];
 
-            var diff = new Date().getTime() - chosenPodcast.Time;
+            var diff = 24*60*60*1000;
 
             obj.TimeOfPost = chosenPodcast.Time + diff * Math.random();
             var last = obj.TimeOfPost;
-            diff = new Date().getTime() - last;
+            diff = diff * Math.random() * 0.5;
             for (let j = 0; j < obj.Comments.length; j++) {
-              obj.Comments[j].Time = last + diff * Math.random();
+              obj.Comments[j].Time = last + diff;
               last = obj.Comments[j].Time;
-              diff = new Date().getTime() - last;
+              diff = diff * Math.random() * 1.5;
             }
 
             PostModel.create(obj, function(err, post) {
@@ -353,6 +353,24 @@ module.exports = {
             PodcastModel.update(
               {_id: podcast._id},
               {$set: {'PodcastUrl': prefix + podcast.PodcastUrl.slice(65)}},
+              function(a, b) {callback(podcast.PodcastUrl);}
+            );
+          }
+        }
+      });
+    });
+  },
+
+  fixWi17: function(callback) {
+    connectMongo(function() {
+      PodcastModel.find({}, '_id PodcastUrl', function(err, podcasts) {
+        var prefix = 'https://podcast.ucsd.edu/Podcasts//WI17/';
+        for (let i = 0; i < podcasts.length; i++) {
+          var podcast = podcasts[i];
+          if (podcast.PodcastUrl.indexOf('wi17') != -1) {
+            PodcastModel.update(
+              {_id: podcast._id},
+              {$set: {'PodcastUrl': prefix + podcast.PodcastUrl.slice(35)}},
               function(a, b) {callback(podcast.PodcastUrl);}
             );
           }

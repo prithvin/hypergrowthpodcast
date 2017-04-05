@@ -33,9 +33,11 @@ if len(argv) > 1 and argv[1] == '--new':
             except:
                 pass
 
+        arr = []
         for video in videos:
             if len(argv) > 2 and 'wi17' in video and any(key == video.split('/')[-2] for key in argv[2:]):
-                print(URL + 'Podcasts//' + video)
+                if 'A0' not in video and 'B0' not in video and 'C0' not in video and 'D0' not in video:
+                    print(URL + 'Podcasts//' + video)
 
 else:
     with open ('./scraped', 'r') as f:
